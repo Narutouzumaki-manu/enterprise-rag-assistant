@@ -1,0 +1,180 @@
+[
+  {
+    "question_id": "q01",
+    "question": "Why did the company's sales measured in rupees go up while the dollar figure slipped slightly?",
+    "category": "fact_lookup",
+    "style": "paraphrase",
+    "evidence": [
+      "reflects a weaker rupee against the dollar through the year"
+    ],
+    "reference_answer": "A weaker rupee against the dollar lifts rupee-reported revenue (+4.6% in rupees vs -0.5% in dollars)."
+  },
+  {
+    "question_id": "q02",
+    "question": "Which two things dragged down the profit that was officially reported for the year?",
+    "category": "fact_lookup",
+    "style": "paraphrase",
+    "evidence": [
+      "restructuring costs linked to the workforce reduction announced in 2025"
+    ],
+    "reference_answer": "Restructuring costs from the 2025 workforce reduction, and a one-time statutory impact from India's new labour codes recorded in Q3."
+  },
+  {
+    "question_id": "q03",
+    "question": "What downside of artificial intelligence for the company's traditional business does the strategy section point out?",
+    "category": "fact_lookup",
+    "style": "paraphrase",
+    "evidence": [
+      "AI can reduce the effort needed for traditional work"
+    ],
+    "reference_answer": "AI can cut the effort needed for traditional work, which pressures revenue per project, while also opening new categories of demand."
+  },
+  {
+    "question_id": "q04",
+    "question": "Was staff turnover higher or lower than the level leadership said it was comfortable with?",
+    "category": "fact_lookup",
+    "style": "paraphrase",
+    "evidence": [
+      "above the 11% to 13% range management described as its comfort zone"
+    ],
+    "reference_answer": "Slightly higher: attrition was 13.3% to 13.8% against a comfort zone of 11% to 13%."
+  },
+  {
+    "question_id": "q05",
+    "question": "What caused sales in the company's home country to fall sharply early in the financial year?",
+    "category": "fact_lookup",
+    "style": "paraphrase",
+    "evidence": [
+      "as a large public-sector telecom programme wound down"
+    ],
+    "reference_answer": "A large public-sector telecom programme wound down (India revenue down 21.7% in Q1)."
+  },
+  {
+    "question_id": "q06",
+    "question": "How did observers react to the size of the last payout to shareholders for the year?",
+    "category": "fact_lookup",
+    "style": "paraphrase",
+    "evidence": [
+      "was below the level some investors had expected"
+    ],
+    "reference_answer": "The proposed final dividend of ₹31 was below what some investors had expected."
+  },
+  {
+    "question_id": "q07",
+    "question": "What is the BSE code for TCS?",
+    "category": "fact_lookup",
+    "style": "exact",
+    "evidence": [
+      "listed on the BSE (code 532540) and the NSE (symbol TCS)"
+    ],
+    "reference_answer": "532540"
+  },
+  {
+    "question_id": "q08",
+    "question": "How much was the special dividend per share?",
+    "category": "fact_lookup",
+    "style": "exact",
+    "evidence": [
+      "a special dividend of ₹46 and a proposed final dividend of ₹31"
+    ],
+    "reference_answer": "₹46 per share"
+  },
+  {
+    "question_id": "q09",
+    "question": "How many clients are in the $100 million and above band?",
+    "category": "fact_lookup",
+    "style": "exact",
+    "evidence": [
+      "139 above $50 million and 66 above $100 million"
+    ],
+    "reference_answer": "66 clients (up 2 year on year)"
+  },
+  {
+    "question_id": "q10",
+    "question": "What was the Q4 FY26 revenue in crore?",
+    "category": "fact_lookup",
+    "style": "exact",
+    "evidence": [
+      "rupee revenue of ₹70,698 crore was up 5.4% from Q3"
+    ],
+    "reference_answer": "₹70,698 crore"
+  },
+  {
+    "question_id": "q11",
+    "question": "What was reported net profit in Q3 FY26 and how much did it fall year on year?",
+    "category": "fact_lookup",
+    "style": "exact",
+    "evidence": [
+      "reported net profit was ₹10,657 crore, down 13.9% year on year"
+    ],
+    "reference_answer": "₹10,657 crore, down 13.9% year on year"
+  },
+  {
+    "question_id": "q12",
+    "question": "How many people worked for the company at the end of September 2025, and by how much had that changed during the quarter?",
+    "category": "table",
+    "style": "paraphrase",
+    "evidence": [
+      "Q2 FY26 (30 Sep 2025) | 593,314 | -19,755"
+    ],
+    "reference_answer": "593,314 employees, a drop of 19,755 in the quarter."
+  },
+  {
+    "question_id": "q13",
+    "question": "In the second quarter of FY25, what portion of revenue came from North America?",
+    "category": "table",
+    "style": "paraphrase",
+    "evidence": [
+      "North America | 47.6% | 48.7% | 48.8% | 48.5% | 48.3%"
+    ],
+    "reference_answer": "47.6%"
+  },
+  {
+    "question_id": "q14",
+    "question": "How much cash and investments did the company hold at the end of June 2025?",
+    "category": "table",
+    "style": "paraphrase",
+    "evidence": [
+      "End of Q1 FY26 (30 Jun 2025) | 48,704"
+    ],
+    "reference_answer": "₹48,704 crore"
+  },
+  {
+    "question_id": "q15",
+    "question": "How many job cuts did the company announce in 2025, and how does that compare with the actual fall in headcount over the following two quarters?",
+    "category": "multi_hop",
+    "style": "paraphrase",
+    "evidence": [
+      "reduce its workforce by about 12,000 employees",
+      "fell by roughly 28,500 over the next two quarters"
+    ],
+    "reference_answer": "About 12,000 cuts (roughly 2%) were announced; headcount actually fell by roughly 28,500 over the next two quarters, more than double."
+  },
+  {
+    "question_id": "q16",
+    "question": "How did the value of new deals from the biggest market change over the year, and roughly what portion of revenue does that market make up?",
+    "category": "multi_hop",
+    "style": "paraphrase",
+    "evidence": [
+      "fell from $21.6 billion to $19.0 billion year on year",
+      "North America is the largest market at roughly 48% of revenue"
+    ],
+    "reference_answer": "North America TCV fell from $21.6B to $19.0B; the market is roughly 48% of revenue."
+  },
+  {
+    "question_id": "q17",
+    "question": "How much money did the company actually spend on community programmes in FY26?",
+    "category": "unanswerable",
+    "style": "paraphrase",
+    "evidence": [],
+    "reference_answer": ""
+  },
+  {
+    "question_id": "q18",
+    "question": "What was the company's share price at close on the last day of the financial year?",
+    "category": "unanswerable",
+    "style": "paraphrase",
+    "evidence": [],
+    "reference_answer": ""
+  }
+]

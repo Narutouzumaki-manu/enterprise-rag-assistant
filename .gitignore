@@ -2,4 +2,7 @@ venv/
 __pycache__/
 *.pyc
 .env
-.pytest_cache/
+.pytest_cache/data/eval/documents/
+data/eval/chunks_dump.txt
+data/eval/documents/
+data/eval/chunks_dump.txt

@@ -1,5 +1,5 @@
 import re
-
+from app.retrieval.filters import validate_filters  
 from rank_bm25 import BM25Okapi
 
 from app.schemas.document import Chunk
@@ -41,6 +41,7 @@ class BM25Index:
                     "source_type": chunk.metadata.source_type.value,
                     "page_number": chunk.metadata.page_number,
                     "section_title": chunk.metadata.section_title,
+                    "content_hash": chunk.metadata.content_hash,
                 },
             }
         self._bm25 = None  # the old index is stale now
@@ -59,6 +60,7 @@ class BM25Index:
         self, query: str, k: int = 5, filters: dict | None = None
     ) -> list[RetrievedChunk]:
         """Return up to k chunks that share words with the query, best first."""
+        filters = validate_filters(filters)
         query_tokens = tokenize(query or "")
         if not query_tokens or not self._entries:
             return []
@@ -107,6 +109,37 @@ class BM25Index:
         if to_remove:
             self._bm25 = None
         return len(to_remove)
+
+    def restore(self, records: list[dict]) -> None:
+        """Re-load chunks from stored records (used to rebuild after a restart).
+        Each record looks like:
+        {"chunk_id": ..., "text": ..., "metadata": {document_id, source_type,
+         page_number, section_title, content_hash}}"""
+        if not records:
+            return
+        for record in records:
+            tokens = tokenize(record["text"])
+            metadata = record["metadata"]
+            self._entries[record["chunk_id"]] = {
+                "text": record["text"],
+                "tokens": tokens,
+                "token_set": set(tokens),
+                "metadata": {
+                    "document_id": metadata["document_id"],
+                    "source_type": metadata.get("source_type"),
+                    "page_number": metadata.get("page_number"),
+                    "section_title": metadata.get("section_title"),
+                    "content_hash": metadata.get("content_hash"),
+                },
+            }
+        self._bm25 = None  # the old index is stale now
+
+    def clear(self) -> None:
+        """Forget everything."""
+        self._entries.clear()
+        self._bm25 = None
+        self._ids = []
+    
 
     def count(self) -> int:
         return len(self._entries)

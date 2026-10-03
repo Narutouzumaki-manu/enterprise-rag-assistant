@@ -3,6 +3,7 @@ import chromadb
 from app.retrieval.embeddings import EmbeddingService
 from app.schemas.document import Chunk
 from app.schemas.retrieval import RetrievedChunk
+from app.retrieval.filters import to_chroma_where
 
 DEFAULT_COLLECTION = "chunks"
 
@@ -71,13 +72,14 @@ class VectorStore:
         self, query: str, k: int = 5, filters: dict | None = None
     ) -> list[RetrievedChunk]:
         """Return the k chunks closest in meaning to the query."""
+        where = to_chroma_where(filters)
         if not query or not query.strip() or self.collection.count() == 0:
             return []
         query_vector = self.embedding_service.embed_query(query)
         result = self.collection.query(
             query_embeddings=[query_vector],
             n_results=min(k, self.collection.count()),
-            where=filters,
+            where=where,
         )
         chunks = []
         for chunk_id, text, metadata, distance in zip(
@@ -105,6 +107,22 @@ class VectorStore:
         before = self.collection.count()
         self.collection.delete(where={"document_id": document_id})
         return before - self.collection.count()
+
+    def export_records(self, batch_size: int = 500) -> list[dict]:
+        """Read every stored chunk back out (text + metadata), in batches."""
+        records = []
+        offset = 0
+        while True:
+            batch = self.collection.get(
+                limit=batch_size, offset=offset, include=["documents", "metadatas"]
+            )
+            ids = batch["ids"]
+            if not ids:
+                break
+            for chunk_id, text, metadata in zip(ids, batch["documents"], batch["metadatas"]):
+                records.append({"chunk_id": chunk_id, "text": text, "metadata": metadata})
+            offset += len(ids)
+        return records
 
     def count(self) -> int:
         return self.collection.count()

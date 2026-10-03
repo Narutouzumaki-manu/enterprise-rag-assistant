@@ -22,6 +22,17 @@ class HybridRetriever:
         self.bm25_index = bm25_index
         self.reranker = reranker
         self.fetch_k = fetch_k  # fetch broad (cheap), then rerank narrow (precise)
+                # After a restart ChromaDB still has its data, but the in-memory keyword index is empty
+        if self.bm25_index.count() == 0 and self.vector_store.count() > 0:
+            self.rebuild_keyword_index()
+
+    def rebuild_keyword_index(self) -> int:
+        """Rebuild the keyword index from what the vector store holds.
+        Returns how many chunks were restored."""
+        self.bm25_index.clear()
+        self.bm25_index.restore(self.vector_store.export_records())
+        return self.bm25_index.count()
+    
 
     def index_chunks(self, chunks: list[Chunk]) -> None:
         """Add chunks to BOTH indexes so they never drift apart."""
