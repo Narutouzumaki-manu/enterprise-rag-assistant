@@ -7,6 +7,7 @@
     "evidence": [
       "reflects a weaker rupee against the dollar through the year"
     ],
+    "alt_evidence": [],
     "reference_answer": "A weaker rupee against the dollar lifts rupee-reported revenue (+4.6% in rupees vs -0.5% in dollars)."
   },
   {
@@ -15,9 +16,12 @@
     "category": "fact_lookup",
     "style": "paraphrase",
     "evidence": [
-      "restructuring costs linked to the workforce reduction announced in 2025"
+      "restructuring costs linked to the workforce reduction announced in 2025",
+      "implementation of India's new labour codes, recorded in Q3"
     ],
-    "reference_answer": "Restructuring costs from the 2025 workforce reduction, and a one-time statutory impact from India's new labour codes recorded in Q3."
+    "alt_evidence": [],
+    "reference_answer": "Restructuring costs from the 2025 workforce reduction, and a one-time statutory impact from India's new labour codes recorded in Q3.",
+    "notes": "Two-fact question: both causes are in chunk 60. Chunk 92 also states both causes in different wording but is not accepted automatically (multi-fact questions carry no alt_evidence); judge it by hand if retrieved."
   },
   {
     "question_id": "q03",
@@ -27,6 +31,7 @@
     "evidence": [
       "AI can reduce the effort needed for traditional work"
     ],
+    "alt_evidence": [],
     "reference_answer": "AI can cut the effort needed for traditional work, which pressures revenue per project, while also opening new categories of demand."
   },
   {
@@ -37,6 +42,7 @@
     "evidence": [
       "above the 11% to 13% range management described as its comfort zone"
     ],
+    "alt_evidence": [],
     "reference_answer": "Slightly higher: attrition was 13.3% to 13.8% against a comfort zone of 11% to 13%."
   },
   {
@@ -47,6 +53,7 @@
     "evidence": [
       "as a large public-sector telecom programme wound down"
     ],
+    "alt_evidence": [],
     "reference_answer": "A large public-sector telecom programme wound down (India revenue down 21.7% in Q1)."
   },
   {
@@ -57,6 +64,7 @@
     "evidence": [
       "was below the level some investors had expected"
     ],
+    "alt_evidence": [],
     "reference_answer": "The proposed final dividend of ₹31 was below what some investors had expected."
   },
   {
@@ -66,6 +74,10 @@
     "style": "exact",
     "evidence": [
       "listed on the BSE (code 532540) and the NSE (symbol TCS)"
+    ],
+    "alt_evidence": [
+      "filings on the BSE (532540) and NSE (TCS) websites",
+      "Listings | BSE: 532540 | NSE: TCS"
     ],
     "reference_answer": "532540"
   },
@@ -77,6 +89,10 @@
     "evidence": [
       "a special dividend of ₹46 and a proposed final dividend of ₹31"
     ],
+    "alt_evidence": [
+      "Total dividends of ₹110 per share, including a ₹46 special dividend",
+      "Special dividend (January 2026) | ₹46"
+    ],
     "reference_answer": "₹46 per share"
   },
   {
@@ -86,6 +102,11 @@
     "style": "exact",
     "evidence": [
       "139 above $50 million and 66 above $100 million"
+    ],
+    "alt_evidence": [
+      "$100 million and above | 66 | +2",
+      "Clients above $100M | 66 | Up 2 year on year",
+      "Broader client base, with 66 clients above $100 million"
     ],
     "reference_answer": "66 clients (up 2 year on year)"
   },
@@ -97,6 +118,9 @@
     "evidence": [
       "rupee revenue of ₹70,698 crore was up 5.4% from Q3"
     ],
+    "alt_evidence": [
+      "Q4 (Jan to Mar) | 64,479 | 70,698 | 7,621"
+    ],
     "reference_answer": "₹70,698 crore"
   },
   {
@@ -107,6 +131,7 @@
     "evidence": [
       "reported net profit was ₹10,657 crore, down 13.9% year on year"
     ],
+    "alt_evidence": [],
     "reference_answer": "₹10,657 crore, down 13.9% year on year"
   },
   {
@@ -117,6 +142,7 @@
     "evidence": [
       "Q2 FY26 (30 Sep 2025) | 593,314 | -19,755"
     ],
+    "alt_evidence": [],
     "reference_answer": "593,314 employees, a drop of 19,755 in the quarter."
   },
   {
@@ -127,6 +153,7 @@
     "evidence": [
       "North America | 47.6% | 48.7% | 48.8% | 48.5% | 48.3%"
     ],
+    "alt_evidence": [],
     "reference_answer": "47.6%"
   },
   {
@@ -137,6 +164,7 @@
     "evidence": [
       "End of Q1 FY26 (30 Jun 2025) | 48,704"
     ],
+    "alt_evidence": [],
     "reference_answer": "₹48,704 crore"
   },
   {
@@ -148,6 +176,7 @@
       "reduce its workforce by about 12,000 employees",
       "fell by roughly 28,500 over the next two quarters"
     ],
+    "alt_evidence": [],
     "reference_answer": "About 12,000 cuts (roughly 2%) were announced; headcount actually fell by roughly 28,500 over the next two quarters, more than double."
   },
   {
@@ -159,6 +188,7 @@
       "fell from $21.6 billion to $19.0 billion year on year",
       "North America is the largest market at roughly 48% of revenue"
     ],
+    "alt_evidence": [],
     "reference_answer": "North America TCV fell from $21.6B to $19.0B; the market is roughly 48% of revenue."
   },
   {
@@ -167,7 +197,9 @@
     "category": "unanswerable",
     "style": "paraphrase",
     "evidence": [],
-    "reference_answer": ""
+    "alt_evidence": [],
+    "reference_answer": "",
+    "notes": "Quoting the 2% legal minimum CSR spend (chunk 108) is NOT a correct answer; no actual FY26 CSR expenditure figure exists in the report. Chunk 108 itself says the figures are not reproduced."
   },
   {
     "question_id": "q18",
@@ -175,6 +207,27 @@
     "category": "unanswerable",
     "style": "paraphrase",
     "evidence": [],
+    "alt_evidence": [],
+    "reference_answer": ""
+  },
+  {
+    "question_id": "q19",
+    "question": "What was the company's profit after tax in the October-to-December quarter of the year before FY26?",
+    "category": "table",
+    "style": "paraphrase",
+    "evidence": [
+      "Net income | 120,400 | 119,090 | 123,800 | 122,240"
+    ],
+    "alt_evidence": [],
+    "reference_answer": "₹123,800 million (₹12,380 crore), Q3 FY25."
+  },
+  {
+    "question_id": "q20",
+    "question": "How many patents did the company file during FY26?",
+    "category": "unanswerable",
+    "style": "paraphrase",
+    "evidence": [],
+    "alt_evidence": [],
     "reference_answer": ""
   }
 ]

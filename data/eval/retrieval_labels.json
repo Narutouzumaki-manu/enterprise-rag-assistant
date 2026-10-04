@@ -1,0 +1,291 @@
+{
+  "document_id": "tcs_annual_report",
+  "chunk_count": 118,
+  "questions": [
+    {
+      "question_id": "q01",
+      "question": "Why did the company's sales measured in rupees go up while the dollar figure slipped slightly?",
+      "category": "fact_lookup",
+      "style": "paraphrase",
+      "needs": [
+        {
+          "phrase": "reflects a weaker rupee against the dollar through the year",
+          "chunk_ids": [
+            "b882276b2f9282eff4da992cde8132823f569e5e12bb4f0277f27e78e459ff46"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "q02",
+      "question": "Which two things dragged down the profit that was officially reported for the year?",
+      "category": "fact_lookup",
+      "style": "paraphrase",
+      "needs": [
+        {
+          "phrase": "restructuring costs linked to the workforce reduction announced in 2025",
+          "chunk_ids": [
+            "f0037a1edb54c5999b13515ce2982d6ee2439ac3f808acd555377fa4f5f6f8e3"
+          ]
+        },
+        {
+          "phrase": "implementation of India's new labour codes, recorded in Q3",
+          "chunk_ids": [
+            "f0037a1edb54c5999b13515ce2982d6ee2439ac3f808acd555377fa4f5f6f8e3"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "q03",
+      "question": "What downside of artificial intelligence for the company's traditional business does the strategy section point out?",
+      "category": "fact_lookup",
+      "style": "paraphrase",
+      "needs": [
+        {
+          "phrase": "AI can reduce the effort needed for traditional work",
+          "chunk_ids": [
+            "50dd3ab00f95d36bbe6d6ba4d666fbc4d051c23183e1078638c47541b2d23514"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "q04",
+      "question": "Was staff turnover higher or lower than the level leadership said it was comfortable with?",
+      "category": "fact_lookup",
+      "style": "paraphrase",
+      "needs": [
+        {
+          "phrase": "above the 11% to 13% range management described as its comfort zone",
+          "chunk_ids": [
+            "bb091f2a599dbfcb6a2c49828c2df27a88993b579e0388a26999e8128149dc71"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "q05",
+      "question": "What caused sales in the company's home country to fall sharply early in the financial year?",
+      "category": "fact_lookup",
+      "style": "paraphrase",
+      "needs": [
+        {
+          "phrase": "as a large public-sector telecom programme wound down",
+          "chunk_ids": [
+            "ad166000ce8d25183fa68cafdc36e4ab9ca78a10d7c88ab768a6b35a5acb8d91"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "q06",
+      "question": "How did observers react to the size of the last payout to shareholders for the year?",
+      "category": "fact_lookup",
+      "style": "paraphrase",
+      "needs": [
+        {
+          "phrase": "was below the level some investors had expected",
+          "chunk_ids": [
+            "d5b71070e29d7d334a6caa4dfa31ea108c838bdff9a99f84698ecbe7354ba19d"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "q07",
+      "question": "What is the BSE code for TCS?",
+      "category": "fact_lookup",
+      "style": "exact",
+      "needs": [
+        {
+          "phrase": "listed on the BSE (code 532540) and the NSE (symbol TCS)",
+          "chunk_ids": [
+            "345cf96c675ae23ae679290f18fc155404029ee9a0723ff3058b15a8498ba4a6",
+            "ada932ef23ed6d926c3dfb1bee242e5eaf2664fc257c1004c9743f9f08cc3756",
+            "5d1394fae474838977d096afc018c4e88c9d93cfc8edbe20430312f4a937d815"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "q08",
+      "question": "How much was the special dividend per share?",
+      "category": "fact_lookup",
+      "style": "exact",
+      "needs": [
+        {
+          "phrase": "a special dividend of ₹46 and a proposed final dividend of ₹31",
+          "chunk_ids": [
+            "d5b71070e29d7d334a6caa4dfa31ea108c838bdff9a99f84698ecbe7354ba19d",
+            "b50e44246a8348144eccd11ff01fcd8a13417328fbc345366b0f2e13f16b85c3",
+            "a3392cc16d643abcdb5ba8b2236aa77d0269d2873d8e16f8a2d1b2b95e1583c0"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "q09",
+      "question": "How many clients are in the $100 million and above band?",
+      "category": "fact_lookup",
+      "style": "exact",
+      "needs": [
+        {
+          "phrase": "139 above $50 million and 66 above $100 million",
+          "chunk_ids": [
+            "44d6441e0dbe53cbcbfde4b7d42e50c5997f28a4310e8593d5a79464edf34de2",
+            "b742c10bb55653b493e176ba5790f6bbfd8a523999787e0f71c7241caa313e55",
+            "3077d12c7762b3cc212cc99b3b0cac19024e1d037631da1e168750dc0c7fcee5",
+            "1832a868cd8d4779ddd90c1901cfe3ef0692dfbf54cd19aade471e761e88a4ed"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "q10",
+      "question": "What was the Q4 FY26 revenue in crore?",
+      "category": "fact_lookup",
+      "style": "exact",
+      "needs": [
+        {
+          "phrase": "rupee revenue of ₹70,698 crore was up 5.4% from Q3",
+          "chunk_ids": [
+            "ff6586f3df5e44515c6544cd80249964679db712ea79eb8fcb3b614abb4f67c2",
+            "15b39ec563daaa4ce29b053ed4b95a88647c0dfecb29308def3de498450830a0"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "q11",
+      "question": "What was reported net profit in Q3 FY26 and how much did it fall year on year?",
+      "category": "fact_lookup",
+      "style": "exact",
+      "needs": [
+        {
+          "phrase": "reported net profit was ₹10,657 crore, down 13.9% year on year",
+          "chunk_ids": [
+            "7830bcee5cb0f12bf1bb40eba24d32381ba523f54dfa6cfddc62f66eee0001a5"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "q12",
+      "question": "How many people worked for the company at the end of September 2025, and by how much had that changed during the quarter?",
+      "category": "table",
+      "style": "paraphrase",
+      "needs": [
+        {
+          "phrase": "Q2 FY26 (30 Sep 2025) | 593,314 | -19,755",
+          "chunk_ids": [
+            "52d56c713a26a9b8df34db9e6c1b36cfaa8438286cd129157d0dad6cbc719e11"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "q13",
+      "question": "In the second quarter of FY25, what portion of revenue came from North America?",
+      "category": "table",
+      "style": "paraphrase",
+      "needs": [
+        {
+          "phrase": "North America | 47.6% | 48.7% | 48.8% | 48.5% | 48.3%",
+          "chunk_ids": [
+            "7c326f579b679d6004e9c7ef086315e0f2888926b084474d42558320544bf261"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "q14",
+      "question": "How much cash and investments did the company hold at the end of June 2025?",
+      "category": "table",
+      "style": "paraphrase",
+      "needs": [
+        {
+          "phrase": "End of Q1 FY26 (30 Jun 2025) | 48,704",
+          "chunk_ids": [
+            "cc54b7b276e079c0f0d1c6480375761de095dfee50410c651e9577838f805bc7"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "q15",
+      "question": "How many job cuts did the company announce in 2025, and how does that compare with the actual fall in headcount over the following two quarters?",
+      "category": "multi_hop",
+      "style": "paraphrase",
+      "needs": [
+        {
+          "phrase": "reduce its workforce by about 12,000 employees",
+          "chunk_ids": [
+            "fc47d94718294a3990f150643a1f9a3cb57e8c1eb822b2015f2543546527e8f4"
+          ]
+        },
+        {
+          "phrase": "fell by roughly 28,500 over the next two quarters",
+          "chunk_ids": [
+            "0fb5349acef4b39f9f0d73a893002c43f16129dbce7a53b57f0ef8e23512e6ac"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "q16",
+      "question": "How did the value of new deals from the biggest market change over the year, and roughly what portion of revenue does that market make up?",
+      "category": "multi_hop",
+      "style": "paraphrase",
+      "needs": [
+        {
+          "phrase": "fell from $21.6 billion to $19.0 billion year on year",
+          "chunk_ids": [
+            "8a6f15fdd950251340eb8467b98e541c2c366ea634ed6faa0b1495353f06fec8"
+          ]
+        },
+        {
+          "phrase": "North America is the largest market at roughly 48% of revenue",
+          "chunk_ids": [
+            "af75026d8de808231f7c08f50a509e1a4fcd05f42008c83c883b8296d09d4852"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "q17",
+      "question": "How much money did the company actually spend on community programmes in FY26?",
+      "category": "unanswerable",
+      "style": "paraphrase",
+      "needs": []
+    },
+    {
+      "question_id": "q18",
+      "question": "What was the company's share price at close on the last day of the financial year?",
+      "category": "unanswerable",
+      "style": "paraphrase",
+      "needs": []
+    },
+    {
+      "question_id": "q19",
+      "question": "What was the company's profit after tax in the October-to-December quarter of the year before FY26?",
+      "category": "table",
+      "style": "paraphrase",
+      "needs": [
+        {
+          "phrase": "Net income | 120,400 | 119,090 | 123,800 | 122,240",
+          "chunk_ids": [
+            "a12690271a0131aa208eca944c8819340379ce87d52738315f6f2195f0dbfea7"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "q20",
+      "question": "How many patents did the company file during FY26?",
+      "category": "unanswerable",
+      "style": "paraphrase",
+      "needs": []
+    }
+  ]
+}
