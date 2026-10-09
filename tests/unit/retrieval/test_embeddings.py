@@ -80,3 +80,33 @@ def test_similar_meaning_scores_higher_than_unrelated(service):
     related = service.embed_query("sales increase")
     unrelated = service.embed_query("a cat sleeping on the sofa")
     assert dot(query, related) > dot(query, unrelated)
+
+@pytest.fixture(scope="module")
+def prefixed_service():
+    return EmbeddingService(query_prefix="query: ")
+
+
+def test_default_query_prefix_is_empty(service):
+    assert service.query_prefix == ""
+
+
+def test_prefix_is_simply_added_in_front_of_the_query(service, prefixed_service):
+    assert prefixed_service.embed_query("revenue growth") == pytest.approx(
+        service.embed_query("query: revenue growth"), abs=1e-6
+    )
+
+
+def test_prefix_changes_the_query_vector(service, prefixed_service):
+    assert dot(service.embed_query("revenue growth"), prefixed_service.embed_query("revenue growth")) < 0.9999
+
+
+def test_prefix_is_not_applied_to_documents(service, prefixed_service):
+    chunks = [make_chunk("first chunk", 0)]
+    assert prefixed_service.embed_documents(chunks)[0] == pytest.approx(
+        service.embed_documents(chunks)[0], abs=1e-6
+    )
+
+
+def test_empty_query_with_a_prefix_still_returns_empty(prefixed_service):
+    assert prefixed_service.embed_query("") == []
+    assert prefixed_service.embed_query("   ") == []

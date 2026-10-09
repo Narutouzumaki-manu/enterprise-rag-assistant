@@ -31,7 +31,7 @@ class EmbeddingService:
         if not query or not query.strip():
             return []
         vector = self.model.encode(
-            query,
+            self.query_prefix + query,
             convert_to_numpy=True,
             normalize_embeddings=True,
         )
