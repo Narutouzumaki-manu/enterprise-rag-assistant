@@ -8,8 +8,9 @@ DEFAULT_MODEL_NAME = "all-MiniLM-L6-v2"
 class EmbeddingService:
     """Turns text into vectors (lists of numbers that capture meaning)."""
 
-    def __init__(self, model_name: str = DEFAULT_MODEL_NAME):
+    def __init__(self, model_name: str = DEFAULT_MODEL_NAME, query_prefix: str = ""):
         self.model_name = model_name
+        self.query_prefix = query_prefix
         self.model = SentenceTransformer(model_name)
         # Measure the dimension from a real output, so we never hard-code it
         self.dimension = len(self.model.encode("dimension probe"))
