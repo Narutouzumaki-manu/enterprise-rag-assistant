@@ -177,7 +177,7 @@
       "style": "paraphrase",
       "needs": [
         {
-          "phrase": "Q2 FY26 (30 Sep 2025) | 593,314 | -19,755",
+          "phrase": "Quarter end: Q2 FY26 (30 Sep 2025); Closing headcount: 593,314; Change in quarter: -19,755",
           "chunk_ids": [
             "52d56c713a26a9b8df34db9e6c1b36cfaa8438286cd129157d0dad6cbc719e11"
           ]
@@ -191,7 +191,7 @@
       "style": "paraphrase",
       "needs": [
         {
-          "phrase": "North America | 47.6% | 48.7% | 48.8% | 48.5% | 48.3%",
+          "phrase": "revenue: North America; Q2 FY25: 47.6%; Q1 FY26: 48.7%; Q2 FY26: 48.8%; Q4 FY26: 48.5%; Q1 FY27: 48.3%",
           "chunk_ids": [
             "7c326f579b679d6004e9c7ef086315e0f2888926b084474d42558320544bf261"
           ]
@@ -205,7 +205,7 @@
       "style": "paraphrase",
       "needs": [
         {
-          "phrase": "End of Q1 FY26 (30 Jun 2025) | 48,704",
+          "phrase": "Date: End of Q1 FY26 (30 Jun 2025); Total cash and investments, ₹ crore: 48,704",
           "chunk_ids": [
             "cc54b7b276e079c0f0d1c6480375761de095dfee50410c651e9577838f805bc7"
           ]
@@ -273,7 +273,7 @@
       "style": "paraphrase",
       "needs": [
         {
-          "phrase": "Net income | 120,400 | 119,090 | 123,800 | 122,240",
+          "phrase": "₹ million: Net income; Q1 FY25: 120,400; Q2 FY25: 119,090; Q3 FY25: 123,800; Q4 FY25: 122,240",
           "chunk_ids": [
             "a12690271a0131aa208eca944c8819340379ce87d52738315f6f2195f0dbfea7"
           ]

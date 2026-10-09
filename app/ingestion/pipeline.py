@@ -5,6 +5,8 @@ from app.ingestion.parsers.csv_parser import parse_csv
 from app.ingestion.parsers.docx_parser import parse_docx
 from app.ingestion.parsers.pdf_parser import parse_pdf
 from app.ingestion.dedupe import is_duplicate, register_document, get_registered_document
+from app.ingestion.table_format import convert_table_chunks
+
 
 
 _PARSERS = {
@@ -83,7 +85,7 @@ def ingest_document(file_path: str) -> IngestionResult:
             error_message=f"Already ingested as '{existing['filename']}' (document_id={existing['document_id']})",
         )
 
-    # 4. Parse
+       # 4. Parse
     parser_fn = _PARSERS[source_type]
     try:
         result = parser_fn(file_path)
@@ -95,6 +97,20 @@ def ingest_document(file_path: str) -> IngestionResult:
             chunks=[],
             error_message=f"Parsing failed: {e}",
         )
+
+    # 4b. Rewrite table chunks as sentences (the retrieval models read these far better than rows)
+    try:
+        result = result.model_copy(update={"chunks": convert_table_chunks(result.chunks)})
+    except Exception as e:
+        return IngestionResult(
+            document_id=document_id,
+            filename=path.name,
+            status="failed",
+            chunks=[],
+            error_message=f"Table formatting failed: {e}",
+        )
+
+
 
     # 5. Register on success
     if result.status == "success":
