@@ -17,11 +17,13 @@ class HybridRetriever:
         bm25_index: BM25Index,
         reranker: Reranker | None = None,
         fetch_k: int = 30,
+         use_keyword: bool = True,
     ):
         self.vector_store = vector_store
         self.bm25_index = bm25_index
         self.reranker = reranker
         self.fetch_k = fetch_k  # fetch broad (cheap), then rerank narrow (precise)
+        self.use_keyword = use_keyword
                 # After a restart ChromaDB still has its data, but the in-memory keyword index is empty
         if self.bm25_index.count() == 0 and self.vector_store.count() > 0:
             self.rebuild_keyword_index()
@@ -53,21 +55,24 @@ class HybridRetriever:
             return self._response(query, [], "none", start)
 
         dense = self.vector_store.search(query, k=self.fetch_k, filters=request.filters)
-        sparse = self.bm25_index.search(query, k=self.fetch_k, filters=request.filters)
-        fused = reciprocal_rank_fusion(dense, sparse, limit=self.fetch_k)
+        if self.use_keyword:
+            sparse = self.bm25_index.search(query, k=self.fetch_k, filters=request.filters)
+            candidates = reciprocal_rank_fusion(dense, sparse, limit=self.fetch_k)
+        else:
+            candidates = dense  # meaning search only, in the vector store's own order
 
         results: list[RetrievedChunk]
         reranker_model = "none"
-        if self.reranker is not None and fused:
+        if self.reranker is not None and candidates:
             try:
-                results = self.reranker.rerank(query, fused, top_k=request.top_k)
+                results = self.reranker.rerank(query, candidates, top_k=request.top_k)
                 reranker_model = self.reranker.model_name
             except Exception:
-                # Reranker broke: fall back to the fused order instead of failing the request
-                results = fused[: request.top_k]
-                reranker_model = "none (reranker failed, fused order used)"
+                # Reranker broke: fall back to the candidate order instead of failing the request
+                results = candidates[: request.top_k]
+                reranker_model = "none (reranker failed, candidate order used)"
         else:
-            results = fused[: request.top_k]
+            results = candidates[: request.top_k]
 
         return self._response(query, results, reranker_model, start)
 

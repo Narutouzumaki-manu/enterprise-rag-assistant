@@ -6,3 +6,4 @@ __pycache__/
 data/eval/chunks_dump.txt
 data/eval/documents/
 data/eval/chunks_dump.txt
+data/chroma/

@@ -178,3 +178,72 @@ def test_page_and_section_metadata_survive_the_whole_pipeline(retriever):
     top = response.results[0]
     assert top.page_number == 12
     assert top.section_title == "Revenue Overview"
+
+class ExplodingBM25(BM25Index):
+    def search(self, *args, **kwargs):
+        raise AssertionError("keyword search must not run in meaning-only mode")
+
+
+def build_meaning_only(embedding_service, reranker=None, bm25=None):
+    return HybridRetriever(
+        VectorStore(embedding_service, collection_name=f"test_{uuid.uuid4().hex}"),
+        bm25 if bm25 is not None else BM25Index(),
+        reranker,
+        use_keyword=False,
+    )
+
+
+def test_meaning_only_returns_the_vector_stores_own_order(embedding_service, chunks):
+    r = build_meaning_only(embedding_service)
+    r.index_chunks(chunks)
+    expected = [c.chunk_id for c in r.vector_store.search("How did sales grow?", k=3)]
+    response = r.retrieve(RetrievalRequest(query="How did sales grow?", top_k=3))
+    assert [c.chunk_id for c in response.results] == expected
+    assert response.reranker_model == "none"
+
+
+def test_meaning_only_results_have_only_a_dense_score(embedding_service, chunks):
+    r = build_meaning_only(embedding_service)
+    r.index_chunks(chunks)
+    response = r.retrieve(RetrievalRequest(query="paid leave", top_k=3))
+    assert response.results
+    for result in response.results:
+        assert result.dense_score is not None
+        assert result.sparse_score is None
+        assert result.fused_score is None
+        assert result.rerank_score is None
+
+
+def test_meaning_only_never_calls_keyword_search(embedding_service, chunks):
+    r = build_meaning_only(embedding_service, bm25=ExplodingBM25())
+    r.index_chunks(chunks)
+    assert len(r.retrieve(RetrievalRequest(query="paid leave", top_k=2)).results) == 2
+
+
+def test_meaning_only_still_fills_both_indexes(embedding_service, chunks):
+    r = build_meaning_only(embedding_service)
+    r.index_chunks(chunks)
+    assert r.vector_store.count() == 6
+    assert r.bm25_index.count() == 6
+
+
+def test_meaning_only_can_still_use_a_reranker(embedding_service, reranker, chunks):
+    r = build_meaning_only(embedding_service, reranker=reranker)
+    r.index_chunks(chunks)
+    response = r.retrieve(RetrievalRequest(query="How did sales grow?", top_k=3))
+    assert response.reranker_model == reranker.model_name
+    assert all(x.rerank_score is not None for x in response.results)
+
+
+def test_meaning_only_respects_filters_and_empty_queries(embedding_service, chunks):
+    r = build_meaning_only(embedding_service)
+    r.index_chunks(chunks)
+    filtered = r.retrieve(RetrievalRequest(query="time off", top_k=5, filters={"document_id": "hr"}))
+    assert filtered.results and all(x.document_id == "hr" for x in filtered.results)
+    assert r.retrieve(RetrievalRequest(query="   ")).results == []
+
+
+def test_default_mode_still_merges_keyword_search(retriever):
+    assert retriever.use_keyword is True
+    response = retriever.retrieve(RetrievalRequest(query="SOC 2 Type II", top_k=3))
+    assert all(x.fused_score is not None for x in response.results)
