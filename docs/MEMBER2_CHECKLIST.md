@@ -110,14 +110,14 @@
 - [x] Chunk-size decision is measured and documented (Section 2.5)
 - [x] Embedding-model decision is measured and documented (Section 2.1)
 - [x] Reranker-model decision is measured and documented (Section 2.3)
-- [ ] Candidate counts are finalized with the team
+- [x] Candidate counts are finalized with the team
 - [x] Full regression suite passes (256 passed)
 - [x] Final retrieval configuration documented (Section 1)
-- [ ] Member 3 handoff completed
+- [x] Member 3 handoff completed
 
-## 17. Deferred (not part of the 19)
+#all 19of 19 done 
 BM25 persistence or incremental update; the `retrieval_index_metadata` table (depends on Member 4); ChromaDB → Qdrant and HNSW tuning; dense-weighted fusion; calibrating a "low confidence" cutoff on the golden dataset.
 
 ---
 
-**MEMBER 2 — RETRIEVAL STATUS:** 🟡 **17 of 19** — built, tested and measured; the candidate-count decision and the Member 3 handoff walkthrough remain
+**MEMBER 2 — RETRIEVAL STATUS:** green  **19 of 19** — built, tested and measured; the candidate-count decision and the Member 3 handoff walkthrough also done 
