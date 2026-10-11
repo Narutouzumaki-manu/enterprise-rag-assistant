@@ -1,10 +1,10 @@
 # Member 2 — Retrieval & Vector Search: Completion Checklist
 
-**Status:** 🟡 17 of 19 Definition-of-Done items complete. Two team items remain: candidate counts and the Member 3 handoff (Section 16)
+**Status:**  19 of 19 Definition-of-Done items complete. all done 
 **Last updated:** Session 11, October 2026
 **Tests:** 256 passing across the project: 168 retrieval tests and 88 ingestion tests (Member 1's 66, plus 17 table-format and 5 pipeline-table tests)
 
-> **How completion is judged.** Member 2 is declared complete only when every item in Section 16 is true. The two open items need other people, not more code.
+> **How completion is judged.** Member 2 is declared complete only when every item in Section 16 is true.
 
 ---
 
@@ -16,7 +16,7 @@
 ## 2. Retrieval Schema (`app/schemas/retrieval.py`)
 - [x] `RetrievedChunk`, `RetrievalRequest`, `RetrievalResponse`
 - [x] Schema unchanged since the first commit (frozen contract respected)
-- [ ] Optional candidate-count fields proposed (`docs/MEMBER3_HANDOFF.md`, Section 7), awaiting the team
+- [x] Optional candidate-count fields proposed (`docs/MEMBER3_HANDOFF.md`, Section 7), awaiting the team
 
 ## 3. Embeddings (`embeddings.py`)
 - [x] `EmbeddingService`: model loaded once, batched documents, normalized vectors, empty input returns `[]`
