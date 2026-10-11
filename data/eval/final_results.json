@@ -1,0 +1,281 @@
+{
+  "run_at": "2026-10-10T06:36:26.017843+00:00",
+  "configuration": {
+    "embedding_model": "BAAI/bge-small-en-v1.5",
+    "use_keyword": false,
+    "reranker": null,
+    "fetch_k": 30
+  },
+  "chunk_count": 118,
+  "scorable_questions": 17,
+  "overall": {
+    "recall@5": 0.8824,
+    "recall@10": 0.9118,
+    "mrr": 0.7529,
+    "ndcg@10": 0.7916
+  },
+  "matches_grid_row": true,
+  "latency_ms": {
+    "p50": 20.0,
+    "p95": 22.8,
+    "max": 23.7,
+    "timings": 100
+  },
+  "by_category": {
+    "fact_lookup": {
+      "recall@5": 1.0,
+      "recall@10": 1.0,
+      "mrr": 0.7909,
+      "ndcg@10": 0.8436
+    },
+    "multi_hop": {
+      "recall@5": 0.5,
+      "recall@10": 0.75,
+      "mrr": 0.55,
+      "ndcg@10": 0.5886
+    },
+    "table": {
+      "recall@5": 0.75,
+      "recall@10": 0.75,
+      "mrr": 0.75,
+      "ndcg@10": 0.75
+    }
+  },
+  "by_style": {
+    "exact": {
+      "recall@5": 1.0,
+      "recall@10": 1.0,
+      "mrr": 0.8,
+      "ndcg@10": 0.8524
+    },
+    "paraphrase": {
+      "recall@5": 0.8333,
+      "recall@10": 0.875,
+      "mrr": 0.7333,
+      "ndcg@10": 0.7663
+    }
+  },
+  "per_question": [
+    {
+      "question_id": "q01",
+      "category": "fact_lookup",
+      "style": "paraphrase",
+      "scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "first": 1,
+      "top1_dense": 0.7434269487857819
+    },
+    {
+      "question_id": "q02",
+      "category": "fact_lookup",
+      "style": "paraphrase",
+      "scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "first": 2,
+      "top1_dense": 0.7086114287376404
+    },
+    {
+      "question_id": "q03",
+      "category": "fact_lookup",
+      "style": "paraphrase",
+      "scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "first": 1,
+      "top1_dense": 0.7069545388221741
+    },
+    {
+      "question_id": "q04",
+      "category": "fact_lookup",
+      "style": "paraphrase",
+      "scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "first": 1,
+      "top1_dense": 0.6332760155200958
+    },
+    {
+      "question_id": "q05",
+      "category": "fact_lookup",
+      "style": "paraphrase",
+      "scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "first": 1,
+      "top1_dense": 0.6432378590106964
+    },
+    {
+      "question_id": "q06",
+      "category": "fact_lookup",
+      "style": "paraphrase",
+      "scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.2,
+        "ndcg@10": 0.38685280723454163
+      },
+      "first": 5,
+      "top1_dense": 0.6580591201782227
+    },
+    {
+      "question_id": "q07",
+      "category": "fact_lookup",
+      "style": "exact",
+      "scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "first": 2,
+      "top1_dense": 0.7032914459705353
+    },
+    {
+      "question_id": "q08",
+      "category": "fact_lookup",
+      "style": "exact",
+      "scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "first": 1,
+      "top1_dense": 0.768527626991272
+    },
+    {
+      "question_id": "q09",
+      "category": "fact_lookup",
+      "style": "exact",
+      "scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "first": 2,
+      "top1_dense": 0.6857188940048218
+    },
+    {
+      "question_id": "q10",
+      "category": "fact_lookup",
+      "style": "exact",
+      "scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "first": 1,
+      "top1_dense": 0.8304951936006546
+    },
+    {
+      "question_id": "q11",
+      "category": "fact_lookup",
+      "style": "exact",
+      "scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "first": 1,
+      "top1_dense": 0.7217268943786621
+    },
+    {
+      "question_id": "q12",
+      "category": "table",
+      "style": "paraphrase",
+      "scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "first": 1,
+      "top1_dense": 0.7054926156997681
+    },
+    {
+      "question_id": "q13",
+      "category": "table",
+      "style": "paraphrase",
+      "scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "first": 1,
+      "top1_dense": 0.8195133805274963
+    },
+    {
+      "question_id": "q14",
+      "category": "table",
+      "style": "paraphrase",
+      "scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "first": 1,
+      "top1_dense": 0.6795417070388794
+    },
+    {
+      "question_id": "q15",
+      "category": "multi_hop",
+      "style": "paraphrase",
+      "scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "first": 1,
+      "top1_dense": 0.7398704886436462
+    },
+    {
+      "question_id": "q16",
+      "category": "multi_hop",
+      "style": "paraphrase",
+      "scores": {
+        "recall@5": 0.0,
+        "recall@10": 0.5,
+        "mrr": 0.1,
+        "ndcg@10": 0.17723928678404774
+      },
+      "first": 10,
+      "top1_dense": 0.6762481331825256
+    },
+    {
+      "question_id": "q19",
+      "category": "table",
+      "style": "paraphrase",
+      "scores": {
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      "first": null,
+      "top1_dense": 0.7090071737766266
+    }
+  ]
+}
