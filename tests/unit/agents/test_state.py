@@ -53,3 +53,12 @@ def test_trace_appends_across_nodes_in_a_graph():
 
     final = graph.compile().invoke(initial_state("q"))
     assert [s.content for s in final["trace"]] == ["a", "b"]
+def test_initial_state_starts_with_no_citations():
+    assert initial_state("q")["citations"] == []
+
+
+def test_two_states_do_not_share_the_citations_list():
+    s1 = initial_state("one")
+    s2 = initial_state("two")
+    s1["citations"].append("x")
+    assert s2["citations"] == []

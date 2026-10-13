@@ -16,6 +16,7 @@ def test_defaults_match_the_trd():
     assert config.coverage_threshold == 0.8
     assert config.use_similarity_hint is False
     assert config.llm_retries == 1
+    assert config.max_confidence == 0.95
 
 
 def test_config_is_frozen():
@@ -84,3 +85,9 @@ def test_negative_retries_is_rejected():
 def test_negative_llm_retries_is_rejected():
     with pytest.raises(ValueError, match="llm_retries"):
         AgentConfig(llm_retries=-1)
+
+
+@pytest.mark.parametrize("bad_confidence", [0.0, 1.1])
+def test_max_confidence_outside_range_is_rejected(bad_confidence):
+    with pytest.raises(ValueError, match="max_confidence"):
+        AgentConfig(max_confidence=bad_confidence)

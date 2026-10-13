@@ -23,6 +23,7 @@ class AgentConfig:
     max_steps: int = 12                # two retries on a complex query need 10 steps
     max_evidence_chunks: int = 20      # cap on merged evidence
     coverage_threshold: float = 0.8    # INITIAL value; calibrate on golden dataset
+    max_confidence: float = 0.95       # never claim certainty (TRD Section 11)
     use_similarity_hint: bool = False  # pass top-1 dense_score to the fact-checker
     llm_retries: int = 1               # retry a failed LLM call once, with backoff
 
@@ -41,6 +42,8 @@ class AgentConfig:
             raise ValueError("max_evidence_chunks must be at least 1")
         if not 0.0 <= self.coverage_threshold <= 1.0:
             raise ValueError("coverage_threshold must be between 0 and 1")
+        if not 0.0 < self.max_confidence <= 1.0:
+            raise ValueError("max_confidence must be above 0 and at most 1")
         if self.llm_retries < 0:
             raise ValueError("llm_retries cannot be negative")
         needed = FIRST_PASS_STEPS + STEPS_PER_RETRY * self.max_retries

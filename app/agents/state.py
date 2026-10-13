@@ -5,7 +5,7 @@ Per request, in memory only. Only the final AgentResponse is persisted.
 import operator
 from typing import Annotated, TypedDict
 
-from app.schemas.agent import AgentStep
+from app.schemas.agent import AgentStep, Citation
 from app.schemas.retrieval import RetrievedChunk
 
 
@@ -17,6 +17,7 @@ class AgentState(TypedDict):
     top_k: int                         # starts at 8; widened on retry 2
     retrieved_chunks: list[RetrievedChunk]  # merged, deduped by chunk_id
     draft_answer: str
+    citations: list[Citation]          # the draft's citations; only retrieved chunks
     claims: list[str]
     verification_results: list[dict]   # per claim: supported, chunk_ids, reason
     unsupported_claims: list[str]
@@ -41,6 +42,7 @@ def initial_state(query: str, top_k: int = 8) -> AgentState:
         top_k=top_k,
         retrieved_chunks=[],
         draft_answer="",
+        citations=[],
         claims=[],
         verification_results=[],
         unsupported_claims=[],
