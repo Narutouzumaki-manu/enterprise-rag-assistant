@@ -17,6 +17,7 @@ def test_defaults_match_the_trd():
     assert config.use_similarity_hint is False
     assert config.llm_retries == 1
     assert config.max_confidence == 0.95
+    assert config.use_rewrites is False
 
 
 def test_config_is_frozen():

@@ -24,6 +24,7 @@ class AgentConfig:
     max_evidence_chunks: int = 20      # cap on merged evidence
     coverage_threshold: float = 0.8    # INITIAL value; calibrate on golden dataset
     max_confidence: float = 0.95       # never claim certainty (TRD Section 11)
+    use_rewrites: bool = False         # also search the planner's rewrites (no measured benefit)
     use_similarity_hint: bool = False  # pass top-1 dense_score to the fact-checker
     llm_retries: int = 1               # retry a failed LLM call once, with backoff
 

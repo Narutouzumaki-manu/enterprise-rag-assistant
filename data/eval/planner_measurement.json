@@ -1,8 +1,8 @@
 {
-  "run_at": "2026-10-13T12:06:14.174306+00:00",
+  "run_at": "2026-10-14T19:42:20.042762+00:00",
   "top_k": 10,
   "questions": 17,
-  "llm_calls_made": 15,
+  "llm_calls_made": 0,
   "per_question": [
     {
       "question_id": "q01",
@@ -10,12 +10,10 @@
       "style": "paraphrase",
       "query_type": "comparison",
       "searches": [
+        "Why did the company's sales measured in rupees go up while the dollar figure slipped slightly?",
         "What were the company's sales measured in rupees?",
-        "What were the company's sales in Indian rupees (INR)?",
         "What were the company's sales measured in dollars?",
-        "What were the company's sales in US dollars (USD)?",
-        "What was the exchange rate (rupees per dollar) during the period?",
-        "What was the average INR/USD exchange rate during the period?"
+        "What was the exchange rate (rupees per dollar) during the period?"
       ],
       "changed": true,
       "fallback": false,
@@ -26,13 +24,13 @@
         "ndcg@10": 1.0
       },
       "plan_scores": {
-        "recall@5": 0.0,
+        "recall@5": 1.0,
         "recall@10": 1.0,
-        "mrr": 0.1111111111111111,
-        "ndcg@10": 0.3010299956639812
+        "mrr": 1.0,
+        "ndcg@10": 1.0
       },
       "base_first": 1,
-      "plan_first": 9,
+      "plan_first": 1,
       "base_found": 1.0,
       "plan_found_full": 1.0,
       "plan_size": 20
@@ -99,10 +97,9 @@
       "style": "paraphrase",
       "query_type": "comparison",
       "searches": [
+        "Was staff turnover higher or lower than the level leadership said it was comfortable with?",
         "What was the staff turnover rate (or number) reported?",
-        "What was the employee turnover rate reported?",
-        "What level of staff turnover did leadership say it was comfortable with?",
-        "What turnover rate did leadership consider acceptable?"
+        "What level of staff turnover did leadership say it was comfortable with?"
       ],
       "changed": true,
       "fallback": false,
@@ -122,7 +119,7 @@
       "plan_first": 1,
       "base_found": 1.0,
       "plan_found_full": 1.0,
-      "plan_size": 14
+      "plan_size": 13
     },
     {
       "question_id": "q05",
@@ -186,10 +183,9 @@
       "style": "exact",
       "query_type": "simple",
       "searches": [
-        "What is the BSE code for TCS?",
-        "What is the BSE scrip code for TCS?"
+        "What is the BSE code for TCS?"
       ],
-      "changed": true,
+      "changed": false,
       "fallback": false,
       "base_scores": {
         "recall@5": 1.0,
@@ -207,7 +203,7 @@
       "plan_first": 2,
       "base_found": 1.0,
       "plan_found_full": 1.0,
-      "plan_size": 13
+      "plan_size": 10
     },
     {
       "question_id": "q08",
@@ -299,6 +295,7 @@
       "style": "exact",
       "query_type": "comparison",
       "searches": [
+        "What was reported net profit in Q3 FY26 and how much did it fall year on year?",
         "What was reported net profit in Q3 FY26?",
         "What was reported net profit in Q3 FY25?"
       ],
@@ -320,7 +317,7 @@
       "plan_first": 1,
       "base_found": 1.0,
       "plan_found_full": 1.0,
-      "plan_size": 12
+      "plan_size": 13
     },
     {
       "question_id": "q12",
@@ -328,10 +325,9 @@
       "style": "paraphrase",
       "query_type": "multi-hop",
       "searches": [
+        "How many people worked for the company at the end of September 2025, and by how much had that changed during the quarter?",
         "What was the number of employees at the end of September 2025?",
-        "What was the headcount as of September 30, 2025?",
-        "What was the number of employees at the end of June 2025?",
-        "What was the headcount as of June 30, 2025?"
+        "What was the number of employees at the end of June 2025?"
       ],
       "changed": true,
       "fallback": false,
@@ -344,14 +340,14 @@
       "plan_scores": {
         "recall@5": 1.0,
         "recall@10": 1.0,
-        "mrr": 0.3333333333333333,
-        "ndcg@10": 0.5
+        "mrr": 1.0,
+        "ndcg@10": 1.0
       },
       "base_first": 1,
-      "plan_first": 3,
+      "plan_first": 1,
       "base_found": 1.0,
       "plan_found_full": 1.0,
-      "plan_size": 17
+      "plan_size": 13
     },
     {
       "question_id": "q13",
@@ -415,9 +411,9 @@
       "style": "paraphrase",
       "query_type": "comparison",
       "searches": [
+        "How many job cuts did the company announce in 2025, and how does that compare with the actual fall in headcount over the following two quarters?",
         "How many job cuts did the company announce in 2025?",
-        "What was the actual fall in headcount over the two quarters following the 2025 announcement?",
-        "What was the headcount decline in the two quarters after the 2025 announcement?"
+        "What was the actual fall in headcount over the two quarters following the 2025 announcement?"
       ],
       "changed": true,
       "fallback": false,
@@ -437,7 +433,7 @@
       "plan_first": 1,
       "base_found": 1.0,
       "plan_found_full": 1.0,
-      "plan_size": 12
+      "plan_size": 13
     },
     {
       "question_id": "q16",
@@ -445,14 +441,11 @@
       "style": "paraphrase",
       "query_type": "multi-hop",
       "searches": [
+        "How did the value of new deals from the biggest market change over the year, and roughly what portion of revenue does that market make up?",
         "What is the biggest market for the company?",
-        "What is the largest market for the company?",
         "What was the value of new deals from the biggest market at the start of the year?",
-        "What was the new deal value from the largest market at the start of the year?",
         "What was the value of new deals from the biggest market at the end of the year?",
-        "What was the new deal value from the largest market at the end of the year?",
-        "What portion of the company's revenue comes from the biggest market?",
-        "What is the revenue share of the largest market?"
+        "What portion of the company's revenue comes from the biggest market?"
       ],
       "changed": true,
       "fallback": false,
@@ -465,11 +458,11 @@
       "plan_scores": {
         "recall@5": 0.5,
         "recall@10": 0.5,
-        "mrr": 1.0,
-        "ndcg@10": 0.6131471927654584
+        "mrr": 0.5,
+        "ndcg@10": 0.38685280723454163
       },
       "base_first": 10,
-      "plan_first": 1,
+      "plan_first": 2,
       "base_found": 0.5,
       "plan_found_full": 1.0,
       "plan_size": 20

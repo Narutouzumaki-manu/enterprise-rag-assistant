@@ -1,0 +1,1572 @@
+{
+  "run_at": "2026-10-14T12:45:48.413566+00:00",
+  "top_k": 10,
+  "evidence_cap": 20,
+  "llm_requests_made": 0,
+  "per_question": [
+    {
+      "question_id": "q01",
+      "category": "fact_lookup",
+      "query_type": "comparison",
+      "changed": true,
+      "variants": {
+        "baseline": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "full planner": {
+          "searches": 6,
+          "scores": {
+            "recall@5": 0.0,
+            "recall@10": 1.0,
+            "mrr": 0.1111111111111111,
+            "ndcg@10": 0.3010299956639812
+          },
+          "first": 9,
+          "found": 1.0,
+          "size": 20
+        },
+        "decomposition only": {
+          "searches": 3,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 0.25,
+            "ndcg@10": 0.43067655807339306
+          },
+          "first": 4,
+          "found": 1.0,
+          "size": 17
+        },
+        "rewrites only": {
+          "searches": 4,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 20
+        },
+        "original first": {
+          "searches": 7,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 20
+        },
+        "orig + decomp": {
+          "searches": 4,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 20
+        },
+        "orig first + decomp": {
+          "searches": 4,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 20
+        }
+      }
+    },
+    {
+      "question_id": "q02",
+      "category": "fact_lookup",
+      "query_type": "ambiguous",
+      "changed": false,
+      "variants": {
+        "baseline": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 0.5,
+            "ndcg@10": 0.6309297535714575
+          },
+          "first": 2,
+          "found": 1.0,
+          "size": 10
+        },
+        "full planner": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 0.5,
+            "ndcg@10": 0.6309297535714575
+          },
+          "first": 2,
+          "found": 1.0,
+          "size": 10
+        },
+        "decomposition only": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 0.5,
+            "ndcg@10": 0.6309297535714575
+          },
+          "first": 2,
+          "found": 1.0,
+          "size": 10
+        },
+        "rewrites only": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 0.5,
+            "ndcg@10": 0.6309297535714575
+          },
+          "first": 2,
+          "found": 1.0,
+          "size": 10
+        },
+        "original first": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 0.5,
+            "ndcg@10": 0.6309297535714575
+          },
+          "first": 2,
+          "found": 1.0,
+          "size": 10
+        },
+        "orig + decomp": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 0.5,
+            "ndcg@10": 0.6309297535714575
+          },
+          "first": 2,
+          "found": 1.0,
+          "size": 10
+        },
+        "orig first + decomp": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 0.5,
+            "ndcg@10": 0.6309297535714575
+          },
+          "first": 2,
+          "found": 1.0,
+          "size": 10
+        }
+      }
+    },
+    {
+      "question_id": "q03",
+      "category": "fact_lookup",
+      "query_type": "simple",
+      "changed": false,
+      "variants": {
+        "baseline": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "full planner": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "decomposition only": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "rewrites only": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "original first": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "orig + decomp": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "orig first + decomp": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        }
+      }
+    },
+    {
+      "question_id": "q04",
+      "category": "fact_lookup",
+      "query_type": "comparison",
+      "changed": true,
+      "variants": {
+        "baseline": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "full planner": {
+          "searches": 4,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 14
+        },
+        "decomposition only": {
+          "searches": 2,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 12
+        },
+        "rewrites only": {
+          "searches": 3,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 13
+        },
+        "original first": {
+          "searches": 5,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 15
+        },
+        "orig + decomp": {
+          "searches": 3,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 13
+        },
+        "orig first + decomp": {
+          "searches": 3,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 13
+        }
+      }
+    },
+    {
+      "question_id": "q05",
+      "category": "fact_lookup",
+      "query_type": "simple",
+      "changed": false,
+      "variants": {
+        "baseline": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "full planner": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "decomposition only": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "rewrites only": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "original first": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "orig + decomp": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "orig first + decomp": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        }
+      }
+    },
+    {
+      "question_id": "q06",
+      "category": "fact_lookup",
+      "query_type": "ambiguous",
+      "changed": false,
+      "variants": {
+        "baseline": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 0.2,
+            "ndcg@10": 0.38685280723454163
+          },
+          "first": 5,
+          "found": 1.0,
+          "size": 10
+        },
+        "full planner": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 0.2,
+            "ndcg@10": 0.38685280723454163
+          },
+          "first": 5,
+          "found": 1.0,
+          "size": 10
+        },
+        "decomposition only": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 0.2,
+            "ndcg@10": 0.38685280723454163
+          },
+          "first": 5,
+          "found": 1.0,
+          "size": 10
+        },
+        "rewrites only": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 0.2,
+            "ndcg@10": 0.38685280723454163
+          },
+          "first": 5,
+          "found": 1.0,
+          "size": 10
+        },
+        "original first": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 0.2,
+            "ndcg@10": 0.38685280723454163
+          },
+          "first": 5,
+          "found": 1.0,
+          "size": 10
+        },
+        "orig + decomp": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 0.2,
+            "ndcg@10": 0.38685280723454163
+          },
+          "first": 5,
+          "found": 1.0,
+          "size": 10
+        },
+        "orig first + decomp": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 0.2,
+            "ndcg@10": 0.38685280723454163
+          },
+          "first": 5,
+          "found": 1.0,
+          "size": 10
+        }
+      }
+    },
+    {
+      "question_id": "q07",
+      "category": "fact_lookup",
+      "query_type": "simple",
+      "changed": true,
+      "variants": {
+        "baseline": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 0.5,
+            "ndcg@10": 0.6309297535714575
+          },
+          "first": 2,
+          "found": 1.0,
+          "size": 10
+        },
+        "full planner": {
+          "searches": 2,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 0.5,
+            "ndcg@10": 0.6309297535714575
+          },
+          "first": 2,
+          "found": 1.0,
+          "size": 13
+        },
+        "decomposition only": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 0.5,
+            "ndcg@10": 0.6309297535714575
+          },
+          "first": 2,
+          "found": 1.0,
+          "size": 10
+        },
+        "rewrites only": {
+          "searches": 2,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 0.5,
+            "ndcg@10": 0.6309297535714575
+          },
+          "first": 2,
+          "found": 1.0,
+          "size": 13
+        },
+        "original first": {
+          "searches": 2,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 0.5,
+            "ndcg@10": 0.6309297535714575
+          },
+          "first": 2,
+          "found": 1.0,
+          "size": 13
+        },
+        "orig + decomp": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 0.5,
+            "ndcg@10": 0.6309297535714575
+          },
+          "first": 2,
+          "found": 1.0,
+          "size": 10
+        },
+        "orig first + decomp": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 0.5,
+            "ndcg@10": 0.6309297535714575
+          },
+          "first": 2,
+          "found": 1.0,
+          "size": 10
+        }
+      }
+    },
+    {
+      "question_id": "q08",
+      "category": "fact_lookup",
+      "query_type": "simple",
+      "changed": false,
+      "variants": {
+        "baseline": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "full planner": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "decomposition only": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "rewrites only": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "original first": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "orig + decomp": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "orig first + decomp": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        }
+      }
+    },
+    {
+      "question_id": "q09",
+      "category": "fact_lookup",
+      "query_type": "simple",
+      "changed": false,
+      "variants": {
+        "baseline": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 0.5,
+            "ndcg@10": 0.6309297535714575
+          },
+          "first": 2,
+          "found": 1.0,
+          "size": 10
+        },
+        "full planner": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 0.5,
+            "ndcg@10": 0.6309297535714575
+          },
+          "first": 2,
+          "found": 1.0,
+          "size": 10
+        },
+        "decomposition only": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 0.5,
+            "ndcg@10": 0.6309297535714575
+          },
+          "first": 2,
+          "found": 1.0,
+          "size": 10
+        },
+        "rewrites only": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 0.5,
+            "ndcg@10": 0.6309297535714575
+          },
+          "first": 2,
+          "found": 1.0,
+          "size": 10
+        },
+        "original first": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 0.5,
+            "ndcg@10": 0.6309297535714575
+          },
+          "first": 2,
+          "found": 1.0,
+          "size": 10
+        },
+        "orig + decomp": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 0.5,
+            "ndcg@10": 0.6309297535714575
+          },
+          "first": 2,
+          "found": 1.0,
+          "size": 10
+        },
+        "orig first + decomp": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 0.5,
+            "ndcg@10": 0.6309297535714575
+          },
+          "first": 2,
+          "found": 1.0,
+          "size": 10
+        }
+      }
+    },
+    {
+      "question_id": "q10",
+      "category": "fact_lookup",
+      "query_type": "simple",
+      "changed": false,
+      "variants": {
+        "baseline": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "full planner": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "decomposition only": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "rewrites only": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "original first": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "orig + decomp": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "orig first + decomp": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        }
+      }
+    },
+    {
+      "question_id": "q11",
+      "category": "fact_lookup",
+      "query_type": "comparison",
+      "changed": true,
+      "variants": {
+        "baseline": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "full planner": {
+          "searches": 2,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 12
+        },
+        "decomposition only": {
+          "searches": 2,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 12
+        },
+        "rewrites only": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "original first": {
+          "searches": 3,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 13
+        },
+        "orig + decomp": {
+          "searches": 3,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 13
+        },
+        "orig first + decomp": {
+          "searches": 3,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 13
+        }
+      }
+    },
+    {
+      "question_id": "q12",
+      "category": "table",
+      "query_type": "multi-hop",
+      "changed": true,
+      "variants": {
+        "baseline": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "full planner": {
+          "searches": 4,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 0.3333333333333333,
+            "ndcg@10": 0.5
+          },
+          "first": 3,
+          "found": 1.0,
+          "size": 17
+        },
+        "decomposition only": {
+          "searches": 2,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 0.3333333333333333,
+            "ndcg@10": 0.5
+          },
+          "first": 3,
+          "found": 1.0,
+          "size": 12
+        },
+        "rewrites only": {
+          "searches": 3,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 18
+        },
+        "original first": {
+          "searches": 5,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 18
+        },
+        "orig + decomp": {
+          "searches": 3,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 13
+        },
+        "orig first + decomp": {
+          "searches": 3,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 13
+        }
+      }
+    },
+    {
+      "question_id": "q13",
+      "category": "table",
+      "query_type": "simple",
+      "changed": false,
+      "variants": {
+        "baseline": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "full planner": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "decomposition only": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "rewrites only": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "original first": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "orig + decomp": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "orig first + decomp": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        }
+      }
+    },
+    {
+      "question_id": "q14",
+      "category": "table",
+      "query_type": "simple",
+      "changed": false,
+      "variants": {
+        "baseline": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "full planner": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "decomposition only": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "rewrites only": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "original first": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "orig + decomp": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "orig first + decomp": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        }
+      }
+    },
+    {
+      "question_id": "q15",
+      "category": "multi_hop",
+      "query_type": "comparison",
+      "changed": true,
+      "variants": {
+        "baseline": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 10
+        },
+        "full planner": {
+          "searches": 3,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 12
+        },
+        "decomposition only": {
+          "searches": 2,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 12
+        },
+        "rewrites only": {
+          "searches": 2,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 12
+        },
+        "original first": {
+          "searches": 4,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 13
+        },
+        "orig + decomp": {
+          "searches": 3,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 13
+        },
+        "orig first + decomp": {
+          "searches": 3,
+          "scores": {
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 1.0
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 13
+        }
+      }
+    },
+    {
+      "question_id": "q16",
+      "category": "multi_hop",
+      "query_type": "multi-hop",
+      "changed": true,
+      "variants": {
+        "baseline": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 0.0,
+            "recall@10": 0.5,
+            "mrr": 0.1,
+            "ndcg@10": 0.17723928678404774
+          },
+          "first": 10,
+          "found": 0.5,
+          "size": 10
+        },
+        "full planner": {
+          "searches": 8,
+          "scores": {
+            "recall@5": 0.5,
+            "recall@10": 0.5,
+            "mrr": 1.0,
+            "ndcg@10": 0.6131471927654584
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 20
+        },
+        "decomposition only": {
+          "searches": 4,
+          "scores": {
+            "recall@5": 0.5,
+            "recall@10": 1.0,
+            "mrr": 1.0,
+            "ndcg@10": 0.7903864795495061
+          },
+          "first": 1,
+          "found": 1.0,
+          "size": 20
+        },
+        "rewrites only": {
+          "searches": 5,
+          "scores": {
+            "recall@5": 0.5,
+            "recall@10": 0.5,
+            "mrr": 0.5,
+            "ndcg@10": 0.38685280723454163
+          },
+          "first": 2,
+          "found": 1.0,
+          "size": 20
+        },
+        "original first": {
+          "searches": 9,
+          "scores": {
+            "recall@5": 0.0,
+            "recall@10": 0.5,
+            "mrr": 0.1,
+            "ndcg@10": 0.17723928678404774
+          },
+          "first": 10,
+          "found": 1.0,
+          "size": 20
+        },
+        "orig + decomp": {
+          "searches": 5,
+          "scores": {
+            "recall@5": 0.5,
+            "recall@10": 0.5,
+            "mrr": 0.5,
+            "ndcg@10": 0.38685280723454163
+          },
+          "first": 2,
+          "found": 1.0,
+          "size": 20
+        },
+        "orig first + decomp": {
+          "searches": 5,
+          "scores": {
+            "recall@5": 0.0,
+            "recall@10": 0.5,
+            "mrr": 0.1,
+            "ndcg@10": 0.17723928678404774
+          },
+          "first": 10,
+          "found": 1.0,
+          "size": 20
+        }
+      }
+    },
+    {
+      "question_id": "q19",
+      "category": "table",
+      "query_type": "simple",
+      "changed": false,
+      "variants": {
+        "baseline": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 0.0,
+            "recall@10": 0.0,
+            "mrr": 0.0,
+            "ndcg@10": 0.0
+          },
+          "first": null,
+          "found": 0.0,
+          "size": 10
+        },
+        "full planner": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 0.0,
+            "recall@10": 0.0,
+            "mrr": 0.0,
+            "ndcg@10": 0.0
+          },
+          "first": null,
+          "found": 0.0,
+          "size": 10
+        },
+        "decomposition only": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 0.0,
+            "recall@10": 0.0,
+            "mrr": 0.0,
+            "ndcg@10": 0.0
+          },
+          "first": null,
+          "found": 0.0,
+          "size": 10
+        },
+        "rewrites only": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 0.0,
+            "recall@10": 0.0,
+            "mrr": 0.0,
+            "ndcg@10": 0.0
+          },
+          "first": null,
+          "found": 0.0,
+          "size": 10
+        },
+        "original first": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 0.0,
+            "recall@10": 0.0,
+            "mrr": 0.0,
+            "ndcg@10": 0.0
+          },
+          "first": null,
+          "found": 0.0,
+          "size": 10
+        },
+        "orig + decomp": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 0.0,
+            "recall@10": 0.0,
+            "mrr": 0.0,
+            "ndcg@10": 0.0
+          },
+          "first": null,
+          "found": 0.0,
+          "size": 10
+        },
+        "orig first + decomp": {
+          "searches": 1,
+          "scores": {
+            "recall@5": 0.0,
+            "recall@10": 0.0,
+            "mrr": 0.0,
+            "ndcg@10": 0.0
+          },
+          "first": null,
+          "found": 0.0,
+          "size": 10
+        }
+      }
+    }
+  ]
+}

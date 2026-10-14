@@ -14,9 +14,9 @@ Q16 = (
 )
 
 
-def show(title, scripted, query):
+def show(title, scripted, query, config=None):
     llm = MockLLM(structured={Plan: [scripted]})
-    update = make_planner_node(llm, AgentConfig())(initial_state(query))
+    update = make_planner_node(llm, config or AgentConfig())(initial_state(query))
     print(f"--- {title}")
     print("type:", update["query_type"])
     print("subqueries:", len(update["subqueries"]))
@@ -30,6 +30,7 @@ show(
     "q19 style: rewrite added next to the original",
     Plan(query_type="simple", subqueries=[Q19], rewrites={Q19: "Net income Q3 FY25"}),
     Q19,
+    AgentConfig(use_rewrites=True),
 )
 show(
     "q16 style: one search per fact",

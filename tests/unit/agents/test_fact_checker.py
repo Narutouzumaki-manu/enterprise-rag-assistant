@@ -520,3 +520,10 @@ def test_two_retries_finish_within_the_step_cap():
     assert final["final_answer"] == NO_EVIDENCE_ANSWER
     assert final["verification_status"] == "unverified"
     assert len(final["trace"]) == 10
+def test_second_retry_never_narrows_a_larger_requested_top_k():
+    update, _ = run(
+        [verdict("ok", True, ["a"]), verdict("bad", False)],
+        retry_count=1,
+        top_k=20,
+    )
+    assert update["top_k"] == 20

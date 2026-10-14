@@ -62,9 +62,12 @@ def _key(text: str) -> str:
 
 
 def normalise_plan(
-    plan: Plan, query: str, max_subqueries: int
+    plan: Plan, query: str, max_subqueries: int, use_rewrites: bool = False
 ) -> tuple[list[str], list[str], int]:
-    """Clean the model's plan. Returns (subqueries, search_queries, rewritten_count)."""
+    """Clean the model's plan. Returns (subqueries, search_queries, rewritten_count).
+
+    The original question is always searched first. Rewrites are only searched
+    when use_rewrites is on (off by default: no measured benefit)."""
     original = query.strip()
 
     if plan.query_type in DECOMPOSED_TYPES:
@@ -85,17 +88,21 @@ def normalise_plan(
 
     search_queries: list[str] = []
     searched: set[str] = set()
+
+    def add(text: str) -> None:
+        if _key(text) not in searched:
+            searched.add(_key(text))
+            search_queries.append(text)
+
+    add(original)
     rewritten = 0
     for subquery in subqueries:
-        candidates = [subquery]
-        rewrite = " ".join(rewrite_by_key.get(_key(subquery), "").split())
-        if rewrite and _key(rewrite) != _key(subquery):
-            candidates.append(rewrite)
-            rewritten += 1
-        for candidate in candidates:
-            if _key(candidate) not in searched:
-                searched.add(_key(candidate))
-                search_queries.append(candidate)
+        add(subquery)
+        if use_rewrites:
+            rewrite = " ".join(rewrite_by_key.get(_key(subquery), "").split())
+            if rewrite and _key(rewrite) != _key(subquery):
+                add(rewrite)
+                rewritten += 1
 
     return subqueries, search_queries, rewritten
 
@@ -143,8 +150,9 @@ def make_planner_node(
             }
 
         subqueries, search_queries, rewritten = normalise_plan(
-            plan, query, config.max_subqueries
+            plan, query, config.max_subqueries, config.use_rewrites
         )
+        
         step = AgentStep(
             step_type=AgentStepType.PLAN,
             content=_describe(plan.query_type, len(subqueries), rewritten),

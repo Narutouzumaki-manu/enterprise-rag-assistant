@@ -13,6 +13,7 @@ Q19 = (
     "quarter of the year before FY26?"
 )
 
+REWRITES_ON = AgentConfig(use_rewrites=True)
 
 def run(scripted, query=Q, config=None):
     llm = MockLLM(structured={Plan: [scripted]})
@@ -31,7 +32,8 @@ def test_decomposed_query_gets_one_subquery_per_fact():
     facts = ["deal value FY26 and FY25", "share of revenue"]
     update, _ = run(Plan(query_type="multi-hop", subqueries=facts))
     assert update["subqueries"] == facts
-    assert update["search_queries"] == facts
+    # the original question is always searched first, then the sub-questions
+    assert update["search_queries"] == [Q] + facts
 
 
 def test_rewrite_adds_a_second_search_after_the_original():
@@ -40,7 +42,7 @@ def test_rewrite_adds_a_second_search_after_the_original():
         subqueries=[Q19],
         rewrites={Q19: "Net income Q3 FY25"},
     )
-    update, _ = run(plan, query=Q19)
+    update, _ = run(plan, query=Q19, config=REWRITES_ON)
     assert update["search_queries"] == [Q19, "Net income Q3 FY25"]
 
 
@@ -50,7 +52,7 @@ def test_rewrite_matching_ignores_case_and_extra_spaces():
         subqueries=[Q],
         rewrites={"  what WAS   revenue? ": "Total revenue"},
     )
-    update, _ = run(plan)
+    update, _ = run(plan, config=REWRITES_ON)
     assert update["search_queries"] == [Q, "Total revenue"]
 
 
@@ -60,7 +62,7 @@ def test_rewrite_identical_to_the_original_is_ignored():
         subqueries=[Q],
         rewrites={Q: "what was  REVENUE?"},
     )
-    update, _ = run(plan)
+    update, _ = run(plan, config=REWRITES_ON)
     assert update["search_queries"] == [Q]
 
 
@@ -70,13 +72,13 @@ def test_rewrite_for_an_unknown_subquery_is_ignored():
         subqueries=[Q],
         rewrites={"another question entirely": "something"},
     )
-    update, _ = run(plan)
+    update, _ = run(plan, config=REWRITES_ON)
     assert update["search_queries"] == [Q]
 
 
 def test_blank_rewrite_is_ignored():
     plan = Plan(query_type="simple", subqueries=[Q], rewrites={Q: "   "})
-    update, _ = run(plan)
+    update, _ = run(plan, config=REWRITES_ON)
     assert update["search_queries"] == [Q]
 
 
@@ -86,15 +88,15 @@ def test_each_subquery_gets_its_own_rewrite_in_order():
         subqueries=["a fact", "b fact"],
         rewrites={"a fact": "A term", "b fact": "B term"},
     )
-    update, _ = run(plan)
-    assert update["search_queries"] == ["a fact", "A term", "b fact", "B term"]
+    update, _ = run(plan, config=REWRITES_ON)
+    assert update["search_queries"] == [Q, "a fact", "A term", "b fact", "B term"]
 
 
 def test_more_than_max_subqueries_is_truncated():
     facts = [f"fact {i}" for i in range(7)]
     update, _ = run(Plan(query_type="multi-hop", subqueries=facts))
     assert update["subqueries"] == facts[:5]
-    assert len(update["search_queries"]) == 5
+    assert update["search_queries"] == [Q] + facts[:5]
 
 
 def test_duplicate_and_blank_subqueries_are_removed():
@@ -174,7 +176,7 @@ def test_trace_wording():
         subqueries=["a fact", "b fact"],
         rewrites={"a fact": "A term"},
     )
-    update, _ = run(plan)
+    update, _ = run(plan, config=REWRITES_ON)
     assert update["trace"][0].content == (
         "Classified as multi-hop; 2 sub-queries; "
         "1 reworded to match the document's terms"
@@ -223,3 +225,15 @@ def test_planner_node_runs_inside_a_langgraph_graph():
     assert final["search_queries"] == [Q]
     assert final["step_count"] == 1
     assert [s.step_type for s in final["trace"]] == [AgentStepType.PLAN]
+
+
+def test_rewrites_are_not_searched_by_default():
+    plan = Plan(
+        query_type="simple",
+        subqueries=[Q19],
+        rewrites={Q19: "Net income Q3 FY25"},
+    )
+    update, _ = run(plan, query=Q19)
+    assert update["search_queries"] == [Q19]
+    assert update["trace"][0].metadata["rewritten"] is False
+    assert update["trace"][0].content == "Classified as simple; 1 sub-query"

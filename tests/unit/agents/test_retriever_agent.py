@@ -230,8 +230,8 @@ def test_planner_and_retriever_run_together_in_a_graph():
     retriever = MockRetriever(
         responses={question: [make_chunk("a")], rewrite: [make_chunk("table")]}
     )
-    config = AgentConfig()
-
+    config = AgentConfig(use_rewrites=True)
+    
     graph = StateGraph(AgentState)
     graph.add_node("planner", make_planner_node(llm, config))
     graph.add_node("retriever", make_retriever_node(retriever, config))

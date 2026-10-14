@@ -249,7 +249,11 @@ def make_fact_checker_node(
             update.update(
                 {
                     "retry_count": retry_count,
-                    "top_k": config.widened_top_k if retry_count >= 2 else state["top_k"],
+                    "top_k": (
+                        max(config.widened_top_k, state["top_k"])
+                        if retry_count >= 2
+                        else state["top_k"]
+                    ),
                     "search_queries": build_retry_queries(
                         results, config.max_subqueries * 2
                     ),
