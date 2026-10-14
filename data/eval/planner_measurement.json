@@ -1,0 +1,506 @@
+{
+  "run_at": "2026-10-13T12:06:14.174306+00:00",
+  "top_k": 10,
+  "questions": 17,
+  "llm_calls_made": 15,
+  "per_question": [
+    {
+      "question_id": "q01",
+      "category": "fact_lookup",
+      "style": "paraphrase",
+      "query_type": "comparison",
+      "searches": [
+        "What were the company's sales measured in rupees?",
+        "What were the company's sales in Indian rupees (INR)?",
+        "What were the company's sales measured in dollars?",
+        "What were the company's sales in US dollars (USD)?",
+        "What was the exchange rate (rupees per dollar) during the period?",
+        "What was the average INR/USD exchange rate during the period?"
+      ],
+      "changed": true,
+      "fallback": false,
+      "base_scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "plan_scores": {
+        "recall@5": 0.0,
+        "recall@10": 1.0,
+        "mrr": 0.1111111111111111,
+        "ndcg@10": 0.3010299956639812
+      },
+      "base_first": 1,
+      "plan_first": 9,
+      "base_found": 1.0,
+      "plan_found_full": 1.0,
+      "plan_size": 20
+    },
+    {
+      "question_id": "q02",
+      "category": "fact_lookup",
+      "style": "paraphrase",
+      "query_type": "ambiguous",
+      "searches": [
+        "Which two things dragged down the profit that was officially reported for the year?"
+      ],
+      "changed": false,
+      "fallback": false,
+      "base_scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "plan_scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "base_first": 2,
+      "plan_first": 2,
+      "base_found": 1.0,
+      "plan_found_full": 1.0,
+      "plan_size": 10
+    },
+    {
+      "question_id": "q03",
+      "category": "fact_lookup",
+      "style": "paraphrase",
+      "query_type": "simple",
+      "searches": [
+        "What downside of artificial intelligence for the company's traditional business does the strategy section point out?"
+      ],
+      "changed": false,
+      "fallback": false,
+      "base_scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "plan_scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "base_first": 1,
+      "plan_first": 1,
+      "base_found": 1.0,
+      "plan_found_full": 1.0,
+      "plan_size": 10
+    },
+    {
+      "question_id": "q04",
+      "category": "fact_lookup",
+      "style": "paraphrase",
+      "query_type": "comparison",
+      "searches": [
+        "What was the staff turnover rate (or number) reported?",
+        "What was the employee turnover rate reported?",
+        "What level of staff turnover did leadership say it was comfortable with?",
+        "What turnover rate did leadership consider acceptable?"
+      ],
+      "changed": true,
+      "fallback": false,
+      "base_scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "plan_scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "base_first": 1,
+      "plan_first": 1,
+      "base_found": 1.0,
+      "plan_found_full": 1.0,
+      "plan_size": 14
+    },
+    {
+      "question_id": "q05",
+      "category": "fact_lookup",
+      "style": "paraphrase",
+      "query_type": "simple",
+      "searches": [
+        "What caused sales in the company's home country to fall sharply early in the financial year?"
+      ],
+      "changed": false,
+      "fallback": false,
+      "base_scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "plan_scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "base_first": 1,
+      "plan_first": 1,
+      "base_found": 1.0,
+      "plan_found_full": 1.0,
+      "plan_size": 10
+    },
+    {
+      "question_id": "q06",
+      "category": "fact_lookup",
+      "style": "paraphrase",
+      "query_type": "ambiguous",
+      "searches": [
+        "How did observers react to the size of the last payout to shareholders for the year?"
+      ],
+      "changed": false,
+      "fallback": false,
+      "base_scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.2,
+        "ndcg@10": 0.38685280723454163
+      },
+      "plan_scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.2,
+        "ndcg@10": 0.38685280723454163
+      },
+      "base_first": 5,
+      "plan_first": 5,
+      "base_found": 1.0,
+      "plan_found_full": 1.0,
+      "plan_size": 10
+    },
+    {
+      "question_id": "q07",
+      "category": "fact_lookup",
+      "style": "exact",
+      "query_type": "simple",
+      "searches": [
+        "What is the BSE code for TCS?",
+        "What is the BSE scrip code for TCS?"
+      ],
+      "changed": true,
+      "fallback": false,
+      "base_scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "plan_scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "base_first": 2,
+      "plan_first": 2,
+      "base_found": 1.0,
+      "plan_found_full": 1.0,
+      "plan_size": 13
+    },
+    {
+      "question_id": "q08",
+      "category": "fact_lookup",
+      "style": "exact",
+      "query_type": "simple",
+      "searches": [
+        "How much was the special dividend per share?"
+      ],
+      "changed": false,
+      "fallback": false,
+      "base_scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "plan_scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "base_first": 1,
+      "plan_first": 1,
+      "base_found": 1.0,
+      "plan_found_full": 1.0,
+      "plan_size": 10
+    },
+    {
+      "question_id": "q09",
+      "category": "fact_lookup",
+      "style": "exact",
+      "query_type": "simple",
+      "searches": [
+        "How many clients are in the $100 million and above band?"
+      ],
+      "changed": false,
+      "fallback": false,
+      "base_scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "plan_scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "base_first": 2,
+      "plan_first": 2,
+      "base_found": 1.0,
+      "plan_found_full": 1.0,
+      "plan_size": 10
+    },
+    {
+      "question_id": "q10",
+      "category": "fact_lookup",
+      "style": "exact",
+      "query_type": "simple",
+      "searches": [
+        "What was the Q4 FY26 revenue in crore?"
+      ],
+      "changed": false,
+      "fallback": false,
+      "base_scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "plan_scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "base_first": 1,
+      "plan_first": 1,
+      "base_found": 1.0,
+      "plan_found_full": 1.0,
+      "plan_size": 10
+    },
+    {
+      "question_id": "q11",
+      "category": "fact_lookup",
+      "style": "exact",
+      "query_type": "comparison",
+      "searches": [
+        "What was reported net profit in Q3 FY26?",
+        "What was reported net profit in Q3 FY25?"
+      ],
+      "changed": true,
+      "fallback": false,
+      "base_scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "plan_scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "base_first": 1,
+      "plan_first": 1,
+      "base_found": 1.0,
+      "plan_found_full": 1.0,
+      "plan_size": 12
+    },
+    {
+      "question_id": "q12",
+      "category": "table",
+      "style": "paraphrase",
+      "query_type": "multi-hop",
+      "searches": [
+        "What was the number of employees at the end of September 2025?",
+        "What was the headcount as of September 30, 2025?",
+        "What was the number of employees at the end of June 2025?",
+        "What was the headcount as of June 30, 2025?"
+      ],
+      "changed": true,
+      "fallback": false,
+      "base_scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "plan_scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.3333333333333333,
+        "ndcg@10": 0.5
+      },
+      "base_first": 1,
+      "plan_first": 3,
+      "base_found": 1.0,
+      "plan_found_full": 1.0,
+      "plan_size": 17
+    },
+    {
+      "question_id": "q13",
+      "category": "table",
+      "style": "paraphrase",
+      "query_type": "simple",
+      "searches": [
+        "In the second quarter of FY25, what portion of revenue came from North America?"
+      ],
+      "changed": false,
+      "fallback": false,
+      "base_scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "plan_scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "base_first": 1,
+      "plan_first": 1,
+      "base_found": 1.0,
+      "plan_found_full": 1.0,
+      "plan_size": 10
+    },
+    {
+      "question_id": "q14",
+      "category": "table",
+      "style": "paraphrase",
+      "query_type": "simple",
+      "searches": [
+        "How much cash and investments did the company hold at the end of June 2025?"
+      ],
+      "changed": false,
+      "fallback": false,
+      "base_scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "plan_scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "base_first": 1,
+      "plan_first": 1,
+      "base_found": 1.0,
+      "plan_found_full": 1.0,
+      "plan_size": 10
+    },
+    {
+      "question_id": "q15",
+      "category": "multi_hop",
+      "style": "paraphrase",
+      "query_type": "comparison",
+      "searches": [
+        "How many job cuts did the company announce in 2025?",
+        "What was the actual fall in headcount over the two quarters following the 2025 announcement?",
+        "What was the headcount decline in the two quarters after the 2025 announcement?"
+      ],
+      "changed": true,
+      "fallback": false,
+      "base_scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "plan_scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "base_first": 1,
+      "plan_first": 1,
+      "base_found": 1.0,
+      "plan_found_full": 1.0,
+      "plan_size": 12
+    },
+    {
+      "question_id": "q16",
+      "category": "multi_hop",
+      "style": "paraphrase",
+      "query_type": "multi-hop",
+      "searches": [
+        "What is the biggest market for the company?",
+        "What is the largest market for the company?",
+        "What was the value of new deals from the biggest market at the start of the year?",
+        "What was the new deal value from the largest market at the start of the year?",
+        "What was the value of new deals from the biggest market at the end of the year?",
+        "What was the new deal value from the largest market at the end of the year?",
+        "What portion of the company's revenue comes from the biggest market?",
+        "What is the revenue share of the largest market?"
+      ],
+      "changed": true,
+      "fallback": false,
+      "base_scores": {
+        "recall@5": 0.0,
+        "recall@10": 0.5,
+        "mrr": 0.1,
+        "ndcg@10": 0.17723928678404774
+      },
+      "plan_scores": {
+        "recall@5": 0.5,
+        "recall@10": 0.5,
+        "mrr": 1.0,
+        "ndcg@10": 0.6131471927654584
+      },
+      "base_first": 10,
+      "plan_first": 1,
+      "base_found": 0.5,
+      "plan_found_full": 1.0,
+      "plan_size": 20
+    },
+    {
+      "question_id": "q19",
+      "category": "table",
+      "style": "paraphrase",
+      "query_type": "simple",
+      "searches": [
+        "What was the company's profit after tax in the October-to-December quarter of the year before FY26?"
+      ],
+      "changed": false,
+      "fallback": false,
+      "base_scores": {
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      "plan_scores": {
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      "base_first": null,
+      "plan_first": null,
+      "base_found": 0.0,
+      "plan_found_full": 0.0,
+      "plan_size": 10
+    }
+  ]
+}

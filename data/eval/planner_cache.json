@@ -1,0 +1,149 @@
+{
+  "62b394e8b6c1a7592a7e066076e2103bc1e316f9c1ef73f822c5e98d27c564a7": {
+    "query_type": "multi-hop",
+    "subqueries": [
+      "What is the biggest market for the company?",
+      "What was the value of new deals from the biggest market at the start of the year?",
+      "What was the value of new deals from the biggest market at the end of the year?",
+      "What portion of the company's revenue comes from the biggest market?"
+    ],
+    "rewrites": {
+      "What is the biggest market for the company?": "What is the largest market for the company?",
+      "What was the value of new deals from the biggest market at the start of the year?": "What was the new deal value from the largest market at the start of the year?",
+      "What was the value of new deals from the biggest market at the end of the year?": "What was the new deal value from the largest market at the end of the year?",
+      "What portion of the company's revenue comes from the biggest market?": "What is the revenue share of the largest market?"
+    }
+  },
+  "ee7653d59b45d63ddd906a849211efdebc26383dfaf78a668d4881e304cffe9b": {
+    "query_type": "simple",
+    "subqueries": [
+      "What was the company's profit after tax in the October-to-December quarter of the year before FY26?"
+    ],
+    "rewrites": {}
+  },
+  "7aad3f008f2ea299bd354ba666fb4486c5ea95a0c7b96d6df6938c96d5dc076b": {
+    "query_type": "comparison",
+    "subqueries": [
+      "What were the company's sales measured in rupees?",
+      "What were the company's sales measured in dollars?",
+      "What was the exchange rate (rupees per dollar) during the period?"
+    ],
+    "rewrites": {
+      "What were the company's sales measured in rupees?": "What were the company's sales in Indian rupees (INR)?",
+      "What were the company's sales measured in dollars?": "What were the company's sales in US dollars (USD)?",
+      "What was the exchange rate (rupees per dollar) during the period?": "What was the average INR/USD exchange rate during the period?"
+    }
+  },
+  "885287c27be4781d5c80fd812d6cf250521c4c3b07b0ea7830bea0eda271b531": {
+    "query_type": "ambiguous",
+    "subqueries": [
+      "Which two things dragged down the profit that was officially reported for the year?"
+    ],
+    "rewrites": {}
+  },
+  "13ce61ca490903bd24b9022dfb278a0cd0cb585ed63cab45079038ff1e8d726f": {
+    "query_type": "simple",
+    "subqueries": [
+      "What downside of artificial intelligence for the company's traditional business does the strategy section point out?"
+    ],
+    "rewrites": {}
+  },
+  "7017530379d747dd8bb8144cfb060ebac31f6c908112cc6aab6b5d87fefbd5fc": {
+    "query_type": "comparison",
+    "subqueries": [
+      "What was the staff turnover rate (or number) reported?",
+      "What level of staff turnover did leadership say it was comfortable with?"
+    ],
+    "rewrites": {
+      "What was the staff turnover rate (or number) reported?": "What was the employee turnover rate reported?",
+      "What level of staff turnover did leadership say it was comfortable with?": "What turnover rate did leadership consider acceptable?"
+    }
+  },
+  "52ddb6aae9075d79b3404ed1b6872e9e3aff2a11ecc169212790a99ad339e7d1": {
+    "query_type": "simple",
+    "subqueries": [
+      "What caused sales in the company's home country to fall sharply early in the financial year?"
+    ],
+    "rewrites": {}
+  },
+  "7d99e60ada7745609e1becaeb28cef29191fc0da13301b21c499ed79b35193fa": {
+    "query_type": "ambiguous",
+    "subqueries": [
+      "How did observers react to the size of the last payout to shareholders for the year?"
+    ],
+    "rewrites": {}
+  },
+  "dd5abe08044eb066e4fa86fb04b03542e4aeff7e20575c53db1e2642c64fb9d2": {
+    "query_type": "simple",
+    "subqueries": [
+      "What is the BSE code for TCS?"
+    ],
+    "rewrites": {
+      "What is the BSE code for TCS?": "What is the BSE scrip code for TCS?"
+    }
+  },
+  "66313e03f67085078a6255a1dc685941400cd5971cb87e573c48753dbaf4ea19": {
+    "query_type": "simple",
+    "subqueries": [
+      "How much was the special dividend per share?"
+    ],
+    "rewrites": {}
+  },
+  "868eabd5e5a8d30d23003766909f569faa21da20a291d737eb9d2861fbbf8001": {
+    "query_type": "simple",
+    "subqueries": [
+      "How many clients are in the $100 million and above band?"
+    ],
+    "rewrites": {}
+  },
+  "3a0ec54855916669cfad3338ac09424064fd230a1d762c4936387eb02b36664a": {
+    "query_type": "simple",
+    "subqueries": [
+      "What was the Q4 FY26 revenue in crore?"
+    ],
+    "rewrites": {}
+  },
+  "5e72745e5bbcb69c8f68c90fb9a378eaa2f9dd3de97cb11d3ed28c5fd1bdbaca": {
+    "query_type": "comparison",
+    "subqueries": [
+      "What was reported net profit in Q3 FY26?",
+      "What was reported net profit in Q3 FY25?"
+    ],
+    "rewrites": {}
+  },
+  "ce57ccfe49dab347a9de818aa4a279e15a9cb9970b665413ef898bd2df3784c5": {
+    "query_type": "multi-hop",
+    "subqueries": [
+      "What was the number of employees at the end of September 2025?",
+      "What was the number of employees at the end of June 2025?"
+    ],
+    "rewrites": {
+      "What was the number of employees at the end of September 2025?": "What was the headcount as of September 30, 2025?",
+      "What was the number of employees at the end of June 2025?": "What was the headcount as of June 30, 2025?"
+    }
+  },
+  "3946f29ba2d58942832862409dd0169a97df6becc8275fb626a28b6a16020b59": {
+    "query_type": "simple",
+    "subqueries": [
+      "In the second quarter of FY25, what portion of revenue came from North America?"
+    ],
+    "rewrites": {}
+  },
+  "5996b327fe4f0712a6597efc137269321c172d2292f474aa12f080760fb33aa9": {
+    "query_type": "simple",
+    "subqueries": [
+      "How much cash and investments did the company hold at the end of June 2025?"
+    ],
+    "rewrites": {}
+  },
+  "47489ab14c63492b08be4aa962837178ae16f94dc90e18fbf5925ec6415dad3d": {
+    "query_type": "comparison",
+    "subqueries": [
+      "How many job cuts did the company announce in 2025?",
+      "What was the actual fall in headcount over the two quarters following the 2025 announcement?"
+    ],
+    "rewrites": {
+      "What was the actual fall in headcount over the two quarters following the 2025 announcement?": "What was the headcount decline in the two quarters after the 2025 announcement?"
+    }
+  }
+}
