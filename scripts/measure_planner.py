@@ -8,7 +8,6 @@ Planner answers are cached in data/eval/planner_cache.json, so a rerun costs
 no requests. Same protocol as final_check.py: top 10, same scoring.
 """
 import argparse
-import hashlib
 import json
 import sys
 import uuid
@@ -24,6 +23,7 @@ from app.retrieval.factory import build_default_retriever
 from app.retrieval.metrics import mean, score_against_needs
 from app.schemas.retrieval import RetrievalRequest
 from scripts.run_comparison import load_labels_and_chunks
+from app.agents.llm_cache import CachingLLM
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -31,37 +31,6 @@ TOP_K = 10
 METRICS = ["recall@5", "recall@10", "mrr", "ndcg@10"]
 CACHE_PATH = Path("data/eval/planner_cache.json")
 RESULTS_PATH = Path("data/eval/planner_measurement.json")
-
-
-class CachingLLM:
-    """Replays saved planner answers; calls the real model only on a miss."""
-
-    def __init__(self, path, make_inner):
-        self.path = path
-        self.make_inner = make_inner
-        self.inner = None
-        self.calls = 0
-        self.cache = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
-
-    def complete(self, system, prompt):
-        raise NotImplementedError("this script only makes structured calls")
-
-    def complete_structured(self, system, prompt, schema):
-        key = hashlib.sha256(
-            f"{schema.__name__}\n{system}\n{prompt}".encode("utf-8")
-        ).hexdigest()
-        if key in self.cache:
-            return schema.model_validate(self.cache[key])
-        if self.inner is None:
-            self.inner = self.make_inner()
-        self.calls += 1
-        result = self.inner.complete_structured(system, prompt, schema)  # failures are not cached
-        self.cache[key] = result.model_dump()
-        self.path.parent.mkdir(parents=True, exist_ok=True)
-        self.path.write_text(
-            json.dumps(self.cache, ensure_ascii=False, indent=2), encoding="utf-8"
-        )
-        return result
 
 
 def first_rank(ranked, wanted):

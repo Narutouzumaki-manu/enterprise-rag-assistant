@@ -13,13 +13,14 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from app.agents.config import AgentConfig
+from app.agents.llm_cache import CachingLLM
 from app.agents.planner import make_planner_node
 from app.agents.retriever_agent import interleave
 from app.agents.state import initial_state
 from app.retrieval.factory import build_default_retriever
 from app.retrieval.metrics import mean, score_against_needs
 from app.schemas.retrieval import RetrievalRequest
-from scripts.measure_planner import CACHE_PATH, CachingLLM, first_rank, found_fraction
+from scripts.measure_planner import CACHE_PATH, first_rank, found_fraction
 from scripts.run_comparison import load_labels_and_chunks
 
 sys.stdout.reconfigure(encoding="utf-8")
@@ -51,6 +52,8 @@ EXPECTED = {
     "decomposition only": [0.912, 0.941, 0.723, 0.765],
     "rewrites only": [0.912, 0.912, 0.776, 0.804],
     "original first": [0.882, 0.912, 0.753, 0.792],
+    "orig + decomp": [0.912, 0.912, 0.776, 0.804],
+    "orig first + decomp": [0.882, 0.912, 0.753, 0.792],
 }
 RESULTS_PATH = Path("data/eval/planner_ablation.json")
 
@@ -81,6 +84,9 @@ def build_variants(text, state, per_query, cap):
     searches = state["search_queries"]
     sub_keys = {norm(s) for s in subs}
     rewrites = [s for s in searches if norm(s) not in sub_keys]
+    # the Session 14 planner searched the sub-questions and rewrites, not the original,
+    # whenever it split a question
+    full = [q for q in searches if norm(original) in sub_keys or norm(q) != norm(original)]
 
     def merged(queries):
         queries = uniq(queries)
@@ -101,7 +107,7 @@ def build_variants(text, state, per_query, cap):
 
     return {
         "baseline": (1, base_ids),
-        "full planner": merged(searches),
+        "full planner": merged(full),
         "decomposition only": merged(subs),
         "rewrites only": merged([original] + rewrites),
         "original first": original_first(searches),
@@ -140,7 +146,9 @@ def main():
     labels, chunks = load_labels_and_chunks()
     questions = [q for q in labels["questions"] if q["needs"]]
 
-    config = AgentConfig(top_k=TOP_K)
+    # rewrites ON here so every variant can be built from the same cached plans;
+    # the production default (rewrites off) is the "orig + decomp" variant
+    config = AgentConfig(top_k=TOP_K, use_rewrites=True)
     cap = config.max_evidence_chunks
     retriever = build_default_retriever(collection_name=f"ablation_{uuid.uuid4().hex}")
     retriever.index_chunks(chunks)
