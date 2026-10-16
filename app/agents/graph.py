@@ -3,6 +3,8 @@
 Routing decisions are plain functions of the state, so they can be tested
 without a model. A set final_answer always means "done".
 
+synthesizer ── retry_search → retriever  (the passages did not contain the answer)
+
 NOTE: routing functions name their settings parameter `agent_config`, never
 `config`. LangGraph injects its own RunnableConfig into any function parameter
 called `config`, which would silently replace ours.
@@ -26,9 +28,9 @@ STEPS_AFTER_RETRIEVE = 2
 RECURSION_MARGIN = 5
 
 
-def _latest_retrieve_step(state: AgentState) -> AgentStep | None:
+def _latest_step(state: AgentState, step_type: AgentStepType) -> AgentStep | None:
     for step in reversed(state["trace"]):
-        if step.step_type == AgentStepType.RETRIEVE:
+        if step.step_type == step_type:
             return step
     return None
 
@@ -38,7 +40,7 @@ def route_after_retrieve(state: AgentState, agent_config: AgentConfig) -> str:
     if state["step_count"] + STEPS_AFTER_RETRIEVE > agent_config.max_steps:
         return "step_limit"
     if state["retry_count"] > 0:
-        step = _latest_retrieve_step(state)
+        step = _latest_step(state, AgentStepType.RETRIEVE)
         if step is not None and step.metadata.get("new_chunks", 0) == 0:
             # A retry found nothing new: another pass would see the same evidence.
             return "finalize"
@@ -46,13 +48,16 @@ def route_after_retrieve(state: AgentState, agent_config: AgentConfig) -> str:
 
 
 def route_after_synthesize(state: AgentState, agent_config: AgentConfig) -> str:
-    """end | fact_check | step_limit"""
+    """end | retry_search | fact_check | step_limit"""
     if state["final_answer"] is not None:
         return "end"
+    step = _latest_step(state, AgentStepType.SYNTHESIZE)
+    if step is not None and step.metadata.get("retry_search"):
+        # the passages did not contain the answer: search again, skip the fact-check
+        return "retry_search"
     if state["step_count"] + 1 > agent_config.max_steps:
         return "step_limit"
     return "fact_check"
-
 
 def route_after_fact_check(state: AgentState) -> str:
     """end | retry"""
@@ -110,7 +115,7 @@ def build_graph(retriever: Retriever, llm: LLMClient, config: AgentConfig):
     graph = StateGraph(AgentState)
     graph.add_node("planner", make_planner_node(llm, config))
     graph.add_node("retriever", make_retriever_node(retriever, config))
-    graph.add_node("synthesizer", make_synthesizer_node(llm))
+    graph.add_node("synthesizer", make_synthesizer_node(llm, config))    
     graph.add_node("fact_checker", make_fact_checker_node(llm, config))
     graph.add_node("finalize", make_finalize_node(config))
     graph.add_node("step_limit", make_step_limit_node())
@@ -129,7 +134,12 @@ def build_graph(retriever: Retriever, llm: LLMClient, config: AgentConfig):
     graph.add_conditional_edges(
         "synthesizer",
         after_synthesize,
-        {"fact_check": "fact_checker", "end": END, "step_limit": "step_limit"},
+        {
+            "fact_check": "fact_checker",
+            "retry_search": "retriever",
+            "end": END,
+            "step_limit": "step_limit",
+        },
     )
     graph.add_conditional_edges(
         "fact_checker",

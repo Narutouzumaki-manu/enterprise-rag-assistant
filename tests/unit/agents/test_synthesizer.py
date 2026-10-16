@@ -300,3 +300,94 @@ def test_empty_search_ends_with_the_no_evidence_answer_in_a_graph():
         AgentStepType.SYNTHESIZE,
     ]
     assert final["step_count"] == 3
+
+# ---- the passages do not contain the answer ---------------------------
+
+def not_found(hint="net income Q3 FY25", answer="The passages do not say."):
+    return Draft(
+        answer=answer,
+        cited_chunk_ids=["a"],
+        answer_found=False,
+        search_query=hint,
+    )
+
+
+def test_not_found_with_searches_left_asks_for_another_search():
+    update, _ = run(not_found())
+    assert "final_answer" not in update
+    assert update["draft_answer"] == ""
+    assert update["citations"] == []
+    assert update["search_queries"] == ["net income Q3 FY25"]
+    assert update["retry_count"] == 1
+    assert update["top_k"] == 8
+    step = update["trace"][0]
+    assert step.content == "The passages do not contain the answer; searching again"
+    assert step.metadata == {
+        "citation_count": 0,
+        "dropped_citations": 0,
+        "generator_called": True,
+        "not_found": True,
+        "retry_search": True,
+    }
+    assert set(update.keys()) == {
+        "draft_answer",
+        "citations",
+        "search_queries",
+        "retry_count",
+        "top_k",
+        "step_count",
+        "trace",
+    }
+
+
+def test_second_not_found_search_widens_top_k():
+    update, _ = run(not_found(), retry_count=1)
+    assert update["retry_count"] == 2
+    assert update["top_k"] == 15
+
+
+def test_not_found_without_a_hint_searches_the_question_with_a_wider_net():
+    update, _ = run(not_found(hint=""))
+    assert update["search_queries"] == [Q]
+    assert update["top_k"] == 15
+
+
+def test_not_found_with_no_searches_left_gives_insufficient_evidence():
+    update, _ = run(not_found(), retry_count=2)
+    assert update["final_answer"] == NO_EVIDENCE_ANSWER
+    assert update["verification_status"] == "unverified"
+    assert update["confidence"] == 0.0
+    assert update["citations"] == []
+    step = update["trace"][0]
+    assert step.content == "The passages do not contain the answer"
+    assert step.metadata["reason"] == "not_found"
+    assert step.metadata["generator_called"] is True
+
+
+def test_not_found_with_no_step_budget_gives_insufficient_evidence():
+    # step 10 + this step = 11; another search needs 2 more = 13, above max_steps 12
+    update, _ = run(not_found(), step_count=10)
+    assert update["final_answer"] == NO_EVIDENCE_ANSWER
+    assert update["trace"][0].metadata["reason"] == "not_found"
+
+
+def test_not_found_with_an_empty_answer_is_still_a_not_found():
+    update, _ = run(not_found(answer=""))
+    assert "final_answer" not in update
+    assert update["retry_count"] == 1
+
+
+def test_prompt_mentions_answer_found_and_no_calculated_values():
+    _, llm = run(Draft(answer="x"))
+    assert "answer_found" in llm.calls[0].system
+    assert "Do not calculate new values" in llm.calls[0].system
+
+
+def test_typographic_characters_are_cleaned():
+    messy = "Revenue was $21.6\u202fbillion, up year\u2011on\u2011year\u00a0now."
+    update, _ = run(Draft(answer=messy, cited_chunk_ids=["a"]))
+    assert update["draft_answer"] == "Revenue was $21.6 billion, up year-on-year now."
+
+def test_search_hint_is_cleaned_of_typographic_characters():
+    update, _ = run(not_found(hint="TCS Q3\u202fFY25 October\u2011December"))
+    assert update["search_queries"] == ["TCS Q3 FY25 October-December"]

@@ -14,6 +14,7 @@ from app.agents.state import AgentState
 from app.agents.synthesizer import (
     NO_EVIDENCE_ANSWER,
     build_citations,
+    clean_text,
     format_passages,
 )
 from app.schemas.agent import AgentStep, AgentStepType
@@ -73,7 +74,7 @@ def clean_verdicts(
     valid_ids = {chunk.chunk_id for chunk in chunks}
     results: list[dict] = []
     for verdict in verification.verdicts:
-        claim = " ".join(verdict.claim.split())
+        claim = clean_text(" ".join(verdict.claim.split()))
         if not claim:
             continue
         ids: list[str] = []
@@ -86,7 +87,7 @@ def clean_verdicts(
                 "claim": claim,
                 "supported": verdict.supported and bool(ids),
                 "supporting_chunk_ids": ids,
-                "search_query": " ".join(verdict.search_query.split()),
+                "search_query": clean_text(" ".join(verdict.search_query.split())),
                 "reason": verdict.reason.strip(),
             }
         )

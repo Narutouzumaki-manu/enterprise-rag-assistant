@@ -365,3 +365,85 @@ def test_planner_failure_still_gets_an_answer():
     assert retriever.calls[0].query == Q
     assert final["verification_status"] == "verified"
     assert final["step_count"] == 4
+
+# ---- the passages do not contain the answer ---------------------------
+
+def synth_step(**metadata):
+    return AgentStep(
+        step_type=AgentStepType.SYNTHESIZE, content="s", metadata=metadata
+    )
+
+
+def test_synthesizer_not_found_goes_back_to_the_retriever():
+    state = state_with(step_count=3, trace=[synth_step(retry_search=True)])
+    assert route_after_synthesize(state, CONFIG) == "retry_search"
+    normal = state_with(step_count=3, trace=[synth_step(citation_count=1)])
+    assert route_after_synthesize(normal, CONFIG) == "fact_check"
+
+
+def test_not_found_draft_triggers_a_new_search_and_recovers():
+    table = make_chunk("table", text="Net income Q3 FY25: 12,380 crore")
+    llm = scripted_llm(
+        drafts=[
+            Draft(
+                answer="The passages do not say.",
+                answer_found=False,
+                search_query="net income Q3 FY25",
+            ),
+            Draft(answer="Profit after tax was 12,380 crore.", cited_chunk_ids=["table"]),
+        ],
+        checks=[
+            Verification(
+                verdicts=[verdict("Profit after tax was 12,380 crore", True, ["table"])]
+            )
+        ],
+    )
+    retriever = MockRetriever(responses={Q: [REV], "net income Q3 FY25": [table]})
+    final = run(llm, retriever)
+    assert final["verification_status"] == "verified"
+    assert final["final_answer"] == "Profit after tax was 12,380 crore."
+    assert [c.query for c in retriever.calls] == [Q, "net income Q3 FY25"]
+    assert final["step_count"] == 6
+    assert final["retry_count"] == 1
+    assert types(final) == [
+        AgentStepType.PLAN,
+        AgentStepType.RETRIEVE,
+        AgentStepType.SYNTHESIZE,
+        AgentStepType.RETRIEVE,
+        AgentStepType.SYNTHESIZE,
+        AgentStepType.FACT_CHECK,
+    ]
+    assert len(llm.structured_calls(Draft)) == 2
+    assert len(llm.structured_calls(Verification)) == 1
+
+
+def test_not_found_twice_ends_with_insufficient_evidence_and_no_fact_check():
+    def missing(hint):
+        return Draft(answer="Not in the passages.", answer_found=False, search_query=hint)
+
+    llm = scripted_llm(drafts=[missing("h1"), missing("h2"), missing("h3")])
+    retriever = MockRetriever(
+        responses={Q: [REV], "h1": [make_chunk("b")], "h2": [make_chunk("c")]}
+    )
+    final = run(llm, retriever)
+    assert final["final_answer"] == NO_EVIDENCE_ANSWER
+    assert final["verification_status"] == "unverified"
+    assert final["step_count"] == 7
+    assert final["retry_count"] == 2
+    assert final["top_k"] == 15
+    assert retriever.calls[-1].top_k == 15
+    assert llm.structured_calls(Verification) == []
+
+
+def test_not_found_and_no_new_passages_stops_early():
+    llm = scripted_llm(
+        drafts=[
+            Draft(answer="Not in the passages.", answer_found=False, search_query="h1")
+        ]
+    )
+    retriever = MockRetriever(responses={Q: [REV]})  # "h1" finds nothing
+    final = run(llm, retriever)
+    assert final["final_answer"] == NO_EVIDENCE_ANSWER
+    assert final["step_count"] == 5
+    assert len(llm.structured_calls(Draft)) == 1
+    assert final["trace"][-1].metadata["stopped_early"] is True

@@ -527,3 +527,13 @@ def test_second_retry_never_narrows_a_larger_requested_top_k():
         top_k=20,
     )
     assert update["top_k"] == 20
+
+def test_claims_and_search_hints_are_cleaned_of_typographic_characters():
+    update, _ = run(
+        [
+            verdict("ok", True, ["a"]),
+            verdict("Net\u00a0income was 9\u2011ish", False, query="net\u202fincome Q3\u2011FY25"),
+        ]
+    )
+    assert update["unsupported_claims"] == ["Net income was 9-ish"]
+    assert update["search_queries"] == ["Net income was 9-ish", "net income Q3-FY25"]
