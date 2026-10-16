@@ -1,9 +1,11 @@
+
 """Fact-checker node (TRD Sections 11, 13 and 15).
 
 One LLM call extracts the draft's claims and judges each against ALL retrieved
 evidence. The code then decides: finish (verified / partially_verified /
 insufficient evidence) or ask for a retry. A set final_answer means "done".
 """
+
 from collections.abc import Callable
 
 from pydantic import BaseModel
@@ -19,6 +21,7 @@ from app.agents.synthesizer import (
 )
 from app.schemas.agent import AgentStep, AgentStepType
 from app.schemas.retrieval import RetrievedChunk
+
 
 SYSTEM_PROMPT = """You check whether a draft answer is supported by passages from the user's documents.
 
@@ -38,7 +41,7 @@ class ClaimVerdict(BaseModel):
     claim: str
     supported: bool
     supporting_chunk_ids: list[str] = []
-    search_query: str = ""   # for unsupported claims: how to look for the missing fact
+    search_query: str = ""
     reason: str = ""
 
 
@@ -48,7 +51,11 @@ class Verification(BaseModel):
     verdicts: list[ClaimVerdict]
 
 
-def build_user_prompt(query: str, draft: str, chunks: list[RetrievedChunk]) -> str:
+def build_user_prompt(
+    query: str,
+    draft: str,
+    chunks: list[RetrievedChunk],
+) -> str:
     return "\n".join(
         [
             f"Question: {query}",
@@ -67,30 +74,39 @@ def _key(text: str) -> str:
 
 
 def clean_verdicts(
-    verification: Verification, chunks: list[RetrievedChunk]
+    verification: Verification,
+    chunks: list[RetrievedChunk],
 ) -> list[dict]:
     """Normalise the model's verdicts. A claim counts as supported only if it
     names at least one passage that was really retrieved."""
     valid_ids = {chunk.chunk_id for chunk in chunks}
     results: list[dict] = []
+
     for verdict in verification.verdicts:
         claim = clean_text(" ".join(verdict.claim.split()))
+
         if not claim:
             continue
+
         ids: list[str] = []
+
         for raw_id in verdict.supporting_chunk_ids:
             chunk_id = raw_id.strip()
             if chunk_id in valid_ids and chunk_id not in ids:
                 ids.append(chunk_id)
+
         results.append(
             {
                 "claim": claim,
                 "supported": verdict.supported and bool(ids),
                 "supporting_chunk_ids": ids,
-                "search_query": clean_text(" ".join(verdict.search_query.split())),
+                "search_query": clean_text(
+                    " ".join(verdict.search_query.split())
+                ),
                 "reason": verdict.reason.strip(),
             }
         )
+
     return results
 
 
@@ -98,19 +114,23 @@ def build_retry_queries(results: list[dict], limit: int) -> list[str]:
     """For each unsupported claim: its own wording, then the model's hint."""
     queries: list[str] = []
     seen: set[str] = set()
+
     for result in results:
         if result["supported"]:
             continue
+
         for text in (result["claim"], result["search_query"]):
             if text and _key(text) not in seen:
                 seen.add(_key(text))
                 queries.append(text)
+
     return queries[:limit]
 
 
 def flag_unsupported(answer: str, unsupported: list[str]) -> str:
     if not unsupported:
         return answer
+
     lines = "\n".join(f"- {claim}" for claim in unsupported)
     return f"{answer}\n\nCould not be verified in the documents:\n{lines}"
 
@@ -135,17 +155,36 @@ def finalize_fields(
             "confidence": 0.0,
             "citations": [],
         }
+
     supporting_ids = [
         chunk_id
         for result in results
         if result["supported"]
         for chunk_id in result["supporting_chunk_ids"]
     ]
-    citations, _ = build_citations(supporting_ids, chunks)
+
+    # Associate each retrieved chunk with the supported claims it backs.
+    claims_by_chunk: dict[str, list[str]] = {}
+
+    for result in results:
+        if result["supported"]:
+            for chunk_id in result["supporting_chunk_ids"]:
+                claims_by_chunk.setdefault(chunk_id, []).append(
+                    result["claim"]
+                )
+
+    citations, _ = build_citations(
+        supporting_ids,
+        chunks,
+        claims_by_chunk,
+    )
+
     return {
         "final_answer": flag_unsupported(draft, unsupported),
         "verification_status": (
-            "verified" if _is_verified(coverage, config) else "partially_verified"
+            "verified"
+            if _is_verified(coverage, config)
+            else "partially_verified"
         ),
         "confidence": min(coverage, config.max_confidence),
         "citations": citations,
@@ -188,6 +227,7 @@ def _checker_failed(state: AgentState, step_count: int) -> dict:
         False,
         checker_failed=True,
     )
+
     return {
         "claims": [],
         "verification_results": [],
@@ -202,8 +242,10 @@ def _checker_failed(state: AgentState, step_count: int) -> dict:
 
 
 def make_fact_checker_node(
-    llm: LLMClient, config: AgentConfig
+    llm: LLMClient,
+    config: AgentConfig,
 ) -> Callable[[AgentState], dict]:
+
     def fact_checker_node(state: AgentState) -> dict:
         step_count = state["step_count"] + 1
         chunks = state["retrieved_chunks"]
@@ -219,16 +261,23 @@ def make_fact_checker_node(
             return _checker_failed(state, step_count)
 
         results = clean_verdicts(verification, chunks)
+
         if not results:
             return _checker_failed(state, step_count)
 
         total = len(results)
-        supported = sum(1 for result in results if result["supported"])
+        supported = sum(
+            1 for result in results if result["supported"]
+        )
         coverage = supported / total
-        unsupported = [r["claim"] for r in results if not r["supported"]]
+        unsupported = [
+            result["claim"]
+            for result in results
+            if not result["supported"]
+        ]
 
         update: dict = {
-            "claims": [r["claim"] for r in results],
+            "claims": [result["claim"] for result in results],
             "verification_results": results,
             "unsupported_claims": unsupported,
             "coverage": coverage,
@@ -243,10 +292,12 @@ def make_fact_checker_node(
         if not _is_verified(coverage, config) and can_retry:
             retry_count = state["retry_count"] + 1
             plural = "claim" if len(unsupported) == 1 else "claims"
+
             content = (
                 f"{_claims_text(supported, total)}; searching again for "
                 f"{len(unsupported)} unsupported {plural}"
             )
+
             update.update(
                 {
                     "retry_count": retry_count,
@@ -256,11 +307,21 @@ def make_fact_checker_node(
                         else state["top_k"]
                     ),
                     "search_queries": build_retry_queries(
-                        results, config.max_subqueries * 2
+                        results,
+                        config.max_subqueries * 2,
                     ),
-                    "trace": [_step(content, total, supported, coverage, True)],
+                    "trace": [
+                        _step(
+                            content,
+                            total,
+                            supported,
+                            coverage,
+                            True,
+                        )
+                    ],
                 }
             )
+
             return update
 
         if coverage <= 0:
@@ -268,21 +329,47 @@ def make_fact_checker_node(
         else:
             content = _claims_text(supported, total)
             if unsupported:
-                content += f"; {len(unsupported)} could not be verified"
-        update.update(finalize_fields(draft, coverage, unsupported, results, chunks, config))
-        update["trace"] = [_step(content, total, supported, coverage, False)]
+                content += (
+                    f"; {len(unsupported)} could not be verified"
+                )
+
+        update.update(
+            finalize_fields(
+                draft,
+                coverage,
+                unsupported,
+                results,
+                chunks,
+                config,
+            )
+        )
+        update["trace"] = [
+            _step(
+                content,
+                total,
+                supported,
+                coverage,
+                False,
+            )
+        ]
+
         return update
 
     return fact_checker_node
 
 
-def make_finalize_node(config: AgentConfig) -> Callable[[AgentState], dict]:
+def make_finalize_node(
+    config: AgentConfig,
+) -> Callable[[AgentState], dict]:
     """Ends the run with the best answer already checked. The graph uses it
     when a retry finds no new passages, because another pass cannot help."""
 
     def finalize_node(state: AgentState) -> dict:
         results = state["verification_results"]
-        supported = sum(1 for result in results if result["supported"])
+        supported = sum(
+            1 for result in results if result["supported"]
+        )
+
         fields = finalize_fields(
             state["draft_answer"],
             state["coverage"],
@@ -291,6 +378,7 @@ def make_finalize_node(config: AgentConfig) -> Callable[[AgentState], dict]:
             state["retrieved_chunks"],
             config,
         )
+
         step = _step(
             "No new passages found; finalising with the best available answer",
             len(results),
@@ -299,6 +387,11 @@ def make_finalize_node(config: AgentConfig) -> Callable[[AgentState], dict]:
             False,
             stopped_early=True,
         )
-        return {**fields, "step_count": state["step_count"] + 1, "trace": [step]}
+
+        return {
+            **fields,
+            "step_count": state["step_count"] + 1,
+            "trace": [step],
+        }
 
     return finalize_node

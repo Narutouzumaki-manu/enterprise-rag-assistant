@@ -25,6 +25,7 @@ class AgentConfig:
     coverage_threshold: float = 0.8    # INITIAL value; calibrate on golden dataset
     max_confidence: float = 0.95       # never claim certainty (TRD Section 11)
     use_rewrites: bool = False         # also search the planner's rewrites (no measured benefit)
+    quarantine_instructions: bool = True  # remove passages that address the AI
     use_similarity_hint: bool = False  # pass top-1 dense_score to the fact-checker
     llm_retries: int = 1               # retry a failed LLM call once, with backoff
 

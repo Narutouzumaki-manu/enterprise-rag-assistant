@@ -11,6 +11,8 @@ from app.agents.synthesizer import (
     SEARCH_FAILED_ANSWER,
     Draft,
     make_synthesizer_node,
+    best_snippet,
+    make_snippet,
 )
 from app.schemas.agent import AgentStep, AgentStepType, Citation
 from tests.unit.agents.mocks import MockLLM, MockRetriever, make_chunk
@@ -391,3 +393,52 @@ def test_typographic_characters_are_cleaned():
 def test_search_hint_is_cleaned_of_typographic_characters():
     update, _ = run(not_found(hint="TCS Q3\u202fFY25 October\u2011December"))
     assert update["search_queries"] == ["TCS Q3 FY25 October-December"]
+
+# ---- citation snippets ------------------------------------------------
+
+HEADCOUNT = (
+    "Quarter end: Q1 FY26 (30 Jun 2025); Closing headcount: 613,069. "
+    "Quarter end: Q2 FY26 (30 Sep 2025); Closing headcount: 593,314. "
+    "Quarter end: Q3 FY26 (31 Dec 2025); Closing headcount: 582,163."
+)
+
+
+def test_snippet_shows_the_sentence_that_matches_the_claim():
+    snippet = best_snippet(
+        HEADCOUNT, ["The closing headcount at the end of Q2 FY26 was 593,314."]
+    )
+    assert snippet.startswith("...Quarter end: Q2 FY26")
+    assert "593,314" in snippet
+    assert "613,069" not in snippet
+
+
+def test_snippet_falls_back_to_the_start_when_nothing_matches():
+    assert best_snippet(HEADCOUNT, ["Something unrelated entirely."]) == make_snippet(
+        HEADCOUNT
+    )
+
+
+def test_snippet_falls_back_to_the_start_without_claims():
+    assert best_snippet(HEADCOUNT, []) == make_snippet(HEADCOUNT)
+
+
+def test_a_long_matching_sentence_is_cut_with_an_ellipsis():
+    text = "Net income was 2 " + "x" * 300 + "."
+    snippet = best_snippet(text, ["Net income was 2"])
+    assert snippet.endswith("...")
+    assert len(snippet) <= 203
+
+
+def test_figures_count_more_than_words():
+    text = "The headcount fell in every region. Q2 FY26 headcount 593,314."
+    snippet = best_snippet(text, ["headcount was 593,314"])
+    assert "593,314" in snippet
+    assert "fell" not in snippet
+
+
+def test_draft_citations_use_the_answer_to_pick_the_snippet():
+    chunk = make_chunk("a", text="Revenue was 5. Net income was 2.")
+    update, _ = run(
+        Draft(answer="Net income was 2.", cited_chunk_ids=["a"]), chunks=[chunk]
+    )
+    assert update["citations"][0].text_snippet == "...Net income was 2."

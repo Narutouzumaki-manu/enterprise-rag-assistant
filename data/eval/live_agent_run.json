@@ -1,0 +1,154 @@
+{
+  "run_at": "2026-10-16T18:16:29.986415+00:00",
+  "model": "nvidia/nemotron-3-super-120b-a12b:free",
+  "replay": true,
+  "results": [
+    {
+      "name": "simple",
+      "question": "What was the closing headcount at the end of Q2 FY26?",
+      "reference_answer": "probably 593,314 (the example in Member 2's handoff; confirm in the report)",
+      "model_calls_live": 0,
+      "model_calls_replayed": 3,
+      "response": {
+        "answer": "593,314",
+        "citations": [
+          {
+            "chunk_id": "52d56c713a26a9b8df34db9e6c1b36cfaa8438286cd129157d0dad6cbc719e11",
+            "document_id": "tcs_annual_report",
+            "page_number": 28,
+            "text_snippet": "...Quarter end: Q2 FY26 (30 Sep 2025); Closing headcount: 593,314; Change in quarter: -19,755."
+          }
+        ],
+        "trace": [
+          {
+            "step_type": "plan",
+            "content": "Classified as simple; 1 sub-query",
+            "metadata": {
+              "query_type": "simple",
+              "subquery_count": 1,
+              "rewritten": false
+            }
+          },
+          {
+            "step_type": "retrieve",
+            "content": "Retrieved 8 passages across 1 sub-query",
+            "metadata": {
+              "search_query_count": 1,
+              "chunks_per_search": [
+                8
+              ],
+              "chunks_after_merge": 8,
+              "new_chunks": 8,
+              "attempt": 0,
+              "errors": 0,
+              "quarantined": 0
+            }
+          },
+          {
+            "step_type": "synthesize",
+            "content": "Draft answer generated with 1 citation",
+            "metadata": {
+              "citation_count": 1,
+              "dropped_citations": 0,
+              "generator_called": true
+            }
+          },
+          {
+            "step_type": "fact_check",
+            "content": "1 of 1 claim verified",
+            "metadata": {
+              "claims_total": 1,
+              "claims_supported": 1,
+              "coverage": 1.0,
+              "retry": false
+            }
+          }
+        ],
+        "verification_status": "verified",
+        "confidence": 0.95,
+        "latency_ms": 60.26439997367561
+      }
+    },
+    {
+      "name": "q16",
+      "question": "How did the value of new deals from the biggest market change over the year, and roughly what portion of revenue does that market make up?",
+      "reference_answer": "North America TCV fell from $21.6B to $19.0B; the market is roughly 48% of revenue.",
+      "model_calls_live": 0,
+      "model_calls_replayed": 3,
+      "response": {
+        "answer": "The value of new deals (TCV) from North America, the biggest market, fell from $21.6 billion to $19.0 billion year-on-year, and North America accounts for roughly 48 % of TCS’s revenue.",
+        "citations": [
+          {
+            "chunk_id": "8a6f15fdd950251340eb8467b98e541c2c366ea634ed6faa0b1495353f06fec8",
+            "document_id": "tcs_annual_report",
+            "page_number": 23,
+            "text_snippet": "Where new business came from North America remains the largest source of bookings but fell from $21.6 billion to $19.0 billion year on year."
+          },
+          {
+            "chunk_id": "af75026d8de808231f7c08f50a509e1a4fcd05f42008c83c883b8296d09d4852",
+            "document_id": "tcs_annual_report",
+            "page_number": 6,
+            "text_snippet": "...North America is the largest market at roughly 48% of revenue, while Banking, Financial Services and Insurance (BFSI) is the largest industry vertical at roughly 32%."
+          },
+          {
+            "chunk_id": "876dfeed72d63a9766a18569c8e64dbf19b062a7af5aa389fba73a608aa6f392",
+            "document_id": "tcs_annual_report",
+            "page_number": 25,
+            "text_snippet": "Revenue by market North America accounts for almost half of TCS revenue. Its share edged up through FY26 as other markets weakened, then eased slightly in Q4 FY26 and Q1 FY27."
+          }
+        ],
+        "trace": [
+          {
+            "step_type": "plan",
+            "content": "Classified as multi-hop; 3 sub-queries",
+            "metadata": {
+              "query_type": "multi-hop",
+              "subquery_count": 3,
+              "rewritten": false
+            }
+          },
+          {
+            "step_type": "retrieve",
+            "content": "Retrieved 18 passages across 3 sub-queries",
+            "metadata": {
+              "search_query_count": 4,
+              "chunks_per_search": [
+                8,
+                8,
+                8,
+                8
+              ],
+              "chunks_after_merge": 18,
+              "new_chunks": 18,
+              "attempt": 0,
+              "errors": 0,
+              "quarantined": 0
+            }
+          },
+          {
+            "step_type": "synthesize",
+            "content": "Draft answer generated with 2 citations",
+            "metadata": {
+              "citation_count": 2,
+              "dropped_citations": 0,
+              "generator_called": true
+            }
+          },
+          {
+            "step_type": "fact_check",
+            "content": "3 of 3 claims verified",
+            "metadata": {
+              "claims_total": 3,
+              "claims_supported": 3,
+              "coverage": 1.0,
+              "retry": false
+            }
+          }
+        ],
+        "verification_status": "verified",
+        "confidence": 0.95,
+        "latency_ms": 170.38949998095632
+      }
+    }
+  ]
+}

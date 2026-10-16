@@ -2,12 +2,14 @@
 
 Chunks are merged by chunk_id, never by score (scores from different queries
 are not comparable). Results are interleaved across searches before the cap is
-applied, so every search stays represented.
+applied, so every search stays represented. Passages that address the AI
+(hidden instructions) are removed before merging.
 """
 from collections.abc import Callable
 from typing import Protocol
 
 from app.agents.config import AgentConfig
+from app.agents.guard import quarantine
 from app.agents.state import AgentState
 from app.schemas.agent import AgentStep, AgentStepType
 from app.schemas.retrieval import (
@@ -48,17 +50,34 @@ def _subqueries(n: int) -> str:
 
 
 def _describe(
-    first_pass: bool, new_kept: int, total: int, subquery_count: int, errors: int
+    first_pass: bool,
+    new_kept: int,
+    total: int,
+    subquery_count: int,
+    errors: int,
+    quarantined: int = 0,
 ) -> str:
     if first_pass:
         if total == 0:
-            if errors:
-                return "Search failed; no passages retrieved"
-            return "No relevant passages found"
-        return f"Retrieved {_passages(total)} across {_subqueries(subquery_count)}"
-    if new_kept == 0:
-        return "No new passages found"
-    return f"Found {new_kept} new passage{'' if new_kept == 1 else 's'} ({total} in total)"
+            text = (
+                "Search failed; no passages retrieved"
+                if errors
+                else "No relevant passages found"
+            )
+        else:
+            text = f"Retrieved {_passages(total)} across {_subqueries(subquery_count)}"
+    elif new_kept == 0:
+        text = "No new passages found"
+    else:
+        text = (
+            f"Found {new_kept} new passage{'' if new_kept == 1 else 's'} "
+            f"({total} in total)"
+        )
+    if quarantined:
+        noun = "passage" if quarantined == 1 else "passages"
+        verb = "it contains" if quarantined == 1 else "they contain"
+        text += f"; {quarantined} {noun} removed because {verb} instructions"
+    return text
 
 
 def make_retriever_node(
@@ -72,12 +91,17 @@ def make_retriever_node(
 
         per_search: list[list[RetrievedChunk]] = []
         errors = 0
+        removed_ids: set[str] = set()
         for query in queries:
             try:
                 response = retriever.retrieve(
                     RetrievalRequest(query=query, top_k=state["top_k"])
                 )
-                per_search.append(list(response.results))
+                results = list(response.results)
+                if config.quarantine_instructions:
+                    results, removed = quarantine(results)
+                    removed_ids.update(chunk.chunk_id for chunk in removed)
+                per_search.append(results)
             except Exception:
                 # Any retriever failure becomes a trace note, never a crash.
                 errors += 1
@@ -99,6 +123,7 @@ def make_retriever_node(
                 total=len(merged),
                 subquery_count=subquery_count,
                 errors=errors,
+                quarantined=len(removed_ids),
             ),
             metadata={
                 "search_query_count": len(queries),
@@ -107,6 +132,7 @@ def make_retriever_node(
                 "new_chunks": new_kept,
                 "attempt": state["retry_count"],
                 "errors": errors,
+                "quarantined": len(removed_ids),
             },
         )
         return {

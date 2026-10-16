@@ -18,6 +18,7 @@ def test_defaults_match_the_trd():
     assert config.llm_retries == 1
     assert config.max_confidence == 0.95
     assert config.use_rewrites is False
+    assert config.quarantine_instructions is True
 
 
 def test_config_is_frozen():
