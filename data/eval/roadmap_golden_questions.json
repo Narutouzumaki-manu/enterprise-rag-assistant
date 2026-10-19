@@ -1,0 +1,125 @@
+[
+  {
+    "question_id": "roadmap-gold-01",
+    "question": "Why does the roadmap recommend hybrid retrieval instead of relying only on dense vector search?",
+    "category": "fact_lookup",
+    "style": "paraphrase",
+    "evidence": [
+      "Dense vectors miss exact keyword/entity/acronym matches (e.g., product codes, legal clause numbers); BM25 catches those. Hybrid gets both semantic and lexical recall."
+    ],
+    "alt_evidence": [
+      "Hybrid search combining dense + sparse via Reciprocal Rank Fusion (RRF)"
+    ],
+    "reference_answer": "Dense search can miss exact keyword, entity, acronym, product-code, or legal-clause matches. BM25 catches lexical matches, so combining dense and sparse retrieval improves semantic and lexical recall."
+  },
+  {
+    "question_id": "roadmap-gold-02",
+    "question": "Which agents are in the proposed Member 3 orchestration flow, and what happens when the fact-checker rejects an answer?",
+    "category": "fact_lookup",
+    "style": "paraphrase",
+    "evidence": [
+      "LangGraph StateGraph wiring Planner → Retriever Agent → Fact-Checker → Synthesizer with conditional edges (e.g., re-retrieve if fact-checker rejects)",
+      "Fact-checker agent that verifies each generated claim is grounded in retrieved chunks (entailment-style check), with a loop-back edge for re-generation on failure"
+    ],
+    "alt_evidence": [],
+    "reference_answer": "The flow contains a Planner, Retriever Agent, Fact-Checker, and Synthesizer. If the fact-checker rejects an answer, conditional control flow can loop back to retrieve again and regenerate the answer."
+  },
+  {
+    "question_id": "roadmap-gold-03",
+    "question": "In the hybrid-search sketch, how many candidates are fetched before reranking, and how many results are returned afterward?",
+    "category": "fact_lookup",
+    "style": "exact",
+    "evidence": [
+      "def hybrid_search(query: str, top_k: int = 5, fetch_k: int = 30):",
+      "candidates = [chunk_store[cid] for cid, _ in fused[:fetch_k]]",
+      "return reranked[:top_k]"
+    ],
+    "alt_evidence": [
+      "Retrieve broad (top-30) cheaply, rerank narrow (top-5) precisely."
+    ],
+    "reference_answer": "The sketch fetches 30 candidates before reranking and returns the top 5 reranked results."
+  },
+  {
+    "question_id": "roadmap-gold-04",
+    "question": "Which four RAGAS evaluation metrics does the roadmap say the project should report?",
+    "category": "fact_lookup",
+    "style": "exact",
+    "evidence": [
+      "producing Faithfulness, Answer Relevance, Context Precision, and Context Recall scores"
+    ],
+    "alt_evidence": [
+      "Report the standard RAG quadrant, before and after each major upgrade"
+    ],
+    "reference_answer": "Faithfulness, Answer Relevance, Context Precision, and Context Recall."
+  },
+  {
+    "question_id": "roadmap-gold-05",
+    "question": "How large should the curated golden Q&A dataset be according to the Member 5 deliverables?",
+    "category": "fact_lookup",
+    "style": "exact",
+    "evidence": [
+      "RAGAS evaluation harness with a curated golden Q&A dataset (30–50 questions across the doc corpus)"
+    ],
+    "alt_evidence": [],
+    "reference_answer": "The roadmap recommends 30–50 questions across the document corpus."
+  },
+  {
+    "question_id": "roadmap-gold-06",
+    "question": "Which retrieval approach combines dense and sparse results, and what fusion method is named in the roadmap?",
+    "category": "fact_lookup",
+    "style": "paraphrase",
+    "evidence": [
+      "Hybrid search combining dense + sparse via Reciprocal Rank Fusion (RRF)"
+    ],
+    "alt_evidence": [
+      "Use dense vector retrieval and BM25 sparse retrieval together, then fuse their rankings with RRF."
+    ],
+    "reference_answer": "The roadmap proposes hybrid retrieval that combines dense vector search and sparse/BM25 search using Reciprocal Rank Fusion (RRF)."
+  },
+  {
+    "question_id": "roadmap-gold-07",
+    "question": "What is the purpose of the fact-checker agent in the proposed RAG workflow?",
+    "category": "fact_lookup",
+    "style": "paraphrase",
+    "evidence": [
+      "Fact-checker agent that verifies each generated claim is grounded in retrieved chunks (entailment-style check), with a loop-back edge for re-generation on failure"
+    ],
+    "alt_evidence": [
+      "The fact-checker checks whether generated claims are supported by retrieved evidence and routes failures back for another attempt."
+    ],
+    "reference_answer": "It checks that each generated claim is grounded in the retrieved chunks, using an entailment-style check; if the check fails, the workflow loops back for another attempt."
+  },
+  {
+    "question_id": "roadmap-gold-08",
+    "question": "Which document formats does the roadmap identify for ingestion by the assistant?",
+    "category": "fact_lookup",
+    "style": "paraphrase",
+    "evidence": [
+      "PDF, DOCX, and CSV document ingestion"
+    ],
+    "alt_evidence": [
+      "The ingestion pipeline supports PDF, Word DOCX, and CSV files."
+    ],
+    "reference_answer": "The roadmap identifies PDF, DOCX, and CSV as document formats for ingestion."
+  },
+  {
+    "question_id": "roadmap-gold-09",
+    "question": "What exact numerical faithfulness-regression tolerance is currently configured in the team's CI pipeline?",
+    "category": "unanswerable",
+    "style": "paraphrase",
+    "evidence": [],
+    "alt_evidence": [],
+    "reference_answer": "",
+    "notes": "The roadmap says evaluation regressions should be gated using a threshold or tolerance band, but it does not specify the currently configured numerical tolerance."
+  },
+  {
+    "question_id": "roadmap-gold-10",
+    "question": "How many simultaneous production users were verified in an end-to-end test, and on what date was that test run?",
+    "category": "unanswerable",
+    "style": "paraphrase",
+    "evidence": [],
+    "alt_evidence": [],
+    "reference_answer": "",
+    "notes": "The roadmap describes planned integration and testing work but does not provide a verified concurrent-user count or a date for such a test."
+  }
+]

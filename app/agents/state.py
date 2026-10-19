@@ -14,6 +14,7 @@ class AgentState(TypedDict):
     query_type: str                    # simple | multi-hop | comparison | aggregation | ambiguous
     subqueries: list[str]              # max 5
     search_queries: list[str]          # originals + rewrites sent to retrieve()
+    tried_queries: list[str]           # searches that actually ran, in order, no duplicates
     top_k: int                         # starts at 8; widened on retry 2
     retrieved_chunks: list[RetrievedChunk]  # merged, deduped by chunk_id
     draft_answer: str
@@ -39,6 +40,7 @@ def initial_state(query: str, top_k: int = 8) -> AgentState:
         query_type="",
         subqueries=[],
         search_queries=[],
+        tried_queries=[],
         top_k=top_k,
         retrieved_chunks=[],
         draft_answer="",

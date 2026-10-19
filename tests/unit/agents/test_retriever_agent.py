@@ -206,11 +206,16 @@ def test_step_count_goes_up_by_one():
 
 def test_only_retriever_fields_are_updated():
     update = run(MockRetriever())
-    assert set(update.keys()) == {"retrieved_chunks", "step_count", "trace"}
+    assert set(update.keys()) == {
+        "retrieved_chunks",
+        "tried_queries",
+        "step_count",
+        "trace",
+    }
 
 def test_only_retriever_fields_are_updated():
     update = run(MockRetriever())
-    assert set(update.keys()) == {"retrieved_chunks", "step_count", "trace"}
+    assert set(update.keys()) == {"retrieved_chunks", "tried_queries", "step_count", "trace"}
 
 def test_existing_evidence_list_is_not_modified():
     existing = [make_chunk("x")]
@@ -300,3 +305,19 @@ def test_all_passages_removed_gives_the_no_relevant_message():
     assert update["trace"][0].content == (
         "No relevant passages found; 1 passage removed because it contains instructions"
     )
+
+def test_tried_queries_records_the_searches_that_ran():
+    update = run(MockRetriever(), make_state(["s1", "s2"]))
+    assert update["tried_queries"] == ["s1", "s2"]
+
+
+def test_tried_queries_keep_earlier_searches_without_duplicates():
+    state = make_state(["S2", "s3"], tried_queries=["s1", "s2"])
+    update = run(MockRetriever(), state)
+    assert update["tried_queries"] == ["s1", "s2", "s3"]
+
+
+def test_failed_searches_are_not_recorded_as_tried():
+    retriever = FlakyRetriever("bad", responses={"good": [make_chunk("a")]})
+    update = run(retriever, make_state(["bad", "good"]))
+    assert update["tried_queries"] == ["good"]

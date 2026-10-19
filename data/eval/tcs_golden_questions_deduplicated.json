@@ -1,0 +1,120 @@
+[
+  {
+    "question_id": "tcs-gold-01",
+    "question": "What were TCS's two stated FY26 AI-related priorities: one focused on changing internal delivery and one focused on clients?",
+    "category": "fact_lookup",
+    "style": "paraphrase",
+    "evidence": [
+      "Embed AI in delivery. Using AI tools to improve developer productivity, testing, operations and support.",
+      "Sell AI-led transformation. Helping clients redesign processes, build data foundations and deploy AI at scale."
+    ],
+    "alt_evidence": [],
+    "reference_answer": "TCS aimed to embed AI in internal delivery to improve productivity, testing, operations and support, while selling AI-led transformation services to help clients redesign processes, build data foundations and deploy AI at scale."
+  },
+  {
+    "question_id": "tcs-gold-02",
+    "question": "What were TCS's FY26 operating margin and net margin?",
+    "category": "table",
+    "style": "exact",
+    "evidence": [
+      "FY26 operating margin 25%",
+      "FY26 net margin 19.8%"
+    ],
+    "alt_evidence": [],
+    "reference_answer": "FY26 operating margin was 25% and net margin was 19.8%."
+  },
+  {
+    "question_id": "tcs-gold-03",
+    "question": "What did TCS's annualised AI revenue exceed in FY26?",
+    "category": "fact_lookup",
+    "style": "paraphrase",
+    "evidence": [
+      "annualised AI revenue above $2.3B"
+    ],
+    "alt_evidence": [],
+    "reference_answer": "TCS's annualised AI revenue exceeded $2.3 billion in FY26."
+  },
+  {
+    "question_id": "tcs-gold-04",
+    "question": "In the TCV-by-market-and-vertical table, what were FY26 total TCV, North America TCV, and Consumer Business TCV?",
+    "category": "table",
+    "style": "paraphrase",
+    "evidence": [
+      "Total TCV                      39.4                           40.7         12.0",
+      "North America                  21.6                           19.0         5.4",
+      "Consumer Business              5.3                            7.6          2.8"
+    ],
+    "alt_evidence": [],
+    "reference_answer": "FY26 total TCV was $40.7 billion, North America TCV was $19.0 billion, and Consumer Business TCV was $7.6 billion."
+  },
+  {
+    "question_id": "tcs-gold-05",
+    "question": "By how much did quarterly rupee revenue increase from Q1 FY26 to Q4 FY26?",
+    "category": "numerical_comparison",
+    "style": "paraphrase",
+    "evidence": [
+      "Q1 (Apr to Jun)                62,613                         63,437",
+      "Q4 (Jan to Mar)                64,479                         70,698"
+    ],
+    "alt_evidence": [],
+    "reference_answer": "Revenue increased by ₹7,261 crore, from ₹63,437 crore in Q1 FY26 to ₹70,698 crore in Q4 FY26."
+  },
+  {
+    "question_id": "tcs-gold-06",
+    "question": "What was TCS's total deal value (TCV) in Q4 FY26?",
+    "category": "table",
+    "style": "exact",
+    "evidence": [
+      "TCV by market/vertical: FY25/FY26/Q4: total 39.4/40.7/12.0"
+    ],
+    "alt_evidence": [],
+    "reference_answer": "TCS's total TCV in Q4 FY26 was $12.0 billion."
+  },
+  {
+    "question_id": "tcs-gold-07",
+    "question": "What was TCS's FY26 revenue in US dollars?",
+    "category": "fact_lookup",
+    "style": "exact",
+    "evidence": [
+      "US$ revenue $30,017 million"
+    ],
+    "alt_evidence": [],
+    "reference_answer": "TCS's FY26 revenue was US$30,017 million."
+  },
+  {
+    "question_id": "tcs-gold-08",
+    "question": "How does the report connect TCS's AI strategy with employee development, and what two FY26 training figures support that connection?",
+    "category": "cross_section",
+    "style": "paraphrase",
+    "evidence": [
+      "Reskill the workforce. More than 270,000 employees have higher proficiency in AI and machine learning, and the company logged 69 million learning hours in the year.",
+      "Learning hours                                                69 million, up 23% year on year",
+      "Employees with higher proficiency in AI/ML                    270,000+"
+    ],
+    "alt_evidence": [
+      "Foundational and advanced AI skills, including generative and agentic AI."
+    ],
+    "reference_answer": "The report says TCS's AI-first strategy includes reskilling employees. In FY26, it recorded 69 million learning hours (up 23% year on year) and more than 270,000 employees with higher proficiency in AI/ML."
+  },
+  {
+    "question_id": "tcs-gold-09",
+    "question": "What was TCS's exact cash-and-investments balance at the end of Q3 FY26?",
+    "category": "unanswerable",
+    "style": "paraphrase",
+    "evidence": [],
+    "alt_evidence": [],
+    "reference_answer": "",
+    "notes": "Unanswerable from this report: it explicitly says the Q3 balance was not captured in the sources used for the compilation. Do not infer the value from Q2 and Q4."
+  },
+  {
+    "question_id": "tcs-gold-10",
+    "question": "What was the FY26 total contract value for TCS's Banking, Financial Services and Insurance (BFSI) vertical?",
+    "category": "table",
+    "style": "exact",
+    "evidence": [
+      "BFSI 12.8/13.4/3.9"
+    ],
+    "alt_evidence": [],
+    "reference_answer": "FY26 TCV for the BFSI vertical was $13.4 billion."
+  }
+]

@@ -442,3 +442,40 @@ def test_draft_citations_use_the_answer_to_pick_the_snippet():
         Draft(answer="Net income was 2.", cited_chunk_ids=["a"]), chunks=[chunk]
     )
     assert update["citations"][0].text_snippet == "...Net income was 2."
+
+# ---- retries that must not repeat themselves --------------------------
+
+def test_tried_searches_are_listed_on_a_retry():
+    _, llm = run(
+        Draft(answer="x"), retry_count=1, tried_queries=["first search", "second search"]
+    )
+    prompt = llm.calls[0].prompt
+    assert "Searches already tried" in prompt
+    assert "- first search" in prompt
+    assert "DIFFERENT wording" in prompt
+
+
+def test_tried_searches_are_not_listed_on_the_first_pass():
+    _, llm = run(Draft(answer="x"), tried_queries=["first search"])
+    assert "Searches already tried" not in llm.calls[0].prompt
+
+
+def test_a_repeated_search_hint_searches_the_question_with_a_wider_net():
+    update, _ = run(not_found(hint="First  Search"), tried_queries=["first search"])
+    assert update["search_queries"] == [Q]
+    assert update["top_k"] == 15
+
+
+def test_a_new_search_hint_is_used_as_it_is():
+    update, _ = run(not_found(hint="brand new wording"), tried_queries=["first search"])
+    assert update["search_queries"] == ["brand new wording"]
+    assert update["top_k"] == 8
+
+def test_snippet_splits_before_a_row_that_starts_with_a_currency_symbol():
+    text = (
+        "₹ million: Revenue; Q1 FY25: 626,130; Q3 FY25: 639,730. "
+        "₹ million: Net income; Q1 FY25: 120,400; Q3 FY25: 123,800."
+    )
+    snippet = best_snippet(text, ["Profit after tax in Q3 FY25 was ₹123,800 million."])
+    assert snippet.startswith("...₹ million: Net income")
+    assert "626,130" not in snippet

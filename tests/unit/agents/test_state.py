@@ -62,3 +62,13 @@ def test_two_states_do_not_share_the_citations_list():
     s2 = initial_state("two")
     s1["citations"].append("x")
     assert s2["citations"] == []
+
+def test_initial_state_starts_with_no_tried_queries():
+    assert initial_state("q")["tried_queries"] == []
+
+
+def test_two_states_do_not_share_the_tried_queries_list():
+    s1 = initial_state("one")
+    s2 = initial_state("two")
+    s1["tried_queries"].append("x")
+    assert s2["tried_queries"] == []

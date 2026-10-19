@@ -2,28 +2,29 @@
 ## Module: Agentic Orchestration (LangGraph)
 ### Owner: Member 3 — Agentic Orchestration Engineer
 ### Project: Enterprise RAG Assistant
-### Version: v0.2 (revised Session 12, October 2026; supersedes the September v0.1)
+### Version: v0.3 (Session 19, October 2026; written to match the implementation; supersedes v0.2)
 
 ---
 
-## 0. What changed from v0.1
+## 0. What changed from v0.2
 
 | # | Change | Section |
 |---|---|---|
-| 1 | `AgentState` extended: `query_type`, `search_queries`, `top_k`, `unsupported_claims`, `coverage`, `trace`, `verification_status` | 3 |
-| 2 | New internal models for the planner and fact-checker (`Plan`, `ClaimVerdict`, `Verification`) | 4 |
-| 3 | New `AgentConfig` (all caps and thresholds in one place) | 5 |
-| 4 | Persistent tables: **unchanged**; notes added on what goes into `agent_traces.metadata` | 6 |
-| 5 | Data flow redrawn: rewrite step, evidence merge, no-evidence shortcut, retry loop | 7 |
-| 6 | Open items updated; two cross-module gaps added | 8 |
+| 1 | `AgentState` gains `tried_queries` and `citations`; `trace` is documented as append-only | 3 |
+| 2 | New internal model `Draft` (`answer_found`, `search_query`); `ClaimVerdict` gains `search_query` | 4 |
+| 3 | `AgentConfig` documented in full: `max_confidence`, `use_rewrites`, `quarantine_instructions`, `llm_retries` | 5 |
+| 4 | New: `LLMError` and the `CachingLLM` file format | 6 |
+| 5 | Persistent tables: **unchanged**; the full list of `agent_traces.metadata` keys is now documented | 7 |
+| 6 | Data flow redrawn: the "not found" search, the early stop and the step guard | 8 |
+| 7 | Open items updated | 9 |
 
-The frozen output contract (`AgentResponse`, `AgentStep`, `Citation`) is **unchanged**.
+The frozen output contract (`AgentResponse`, `AgentStep`, `Citation`) is **unchanged**. The code blocks in Sections 3 to 5 are checked against the real code by `scripts/check_docs_against_code.py`.
 
 ---
 
 ## 1. Purpose
 
-This document defines the data schemas owned by the Agentic Orchestration module: the Pydantic contracts for the agent's final response, the internal models used between LangGraph nodes, and the shared in-memory state structure.
+This document defines the data schemas owned by the Agentic Orchestration module: the Pydantic contracts for the agent's final response, the internal models used between LangGraph nodes, the configuration, and the shared in-memory state structure.
 
 ---
 
@@ -70,14 +71,14 @@ class AgentResponse(BaseModel):
 
 | Field | Type | Notes |
 |---|---|---|
-| `trace` | `list[AgentStep]` | Full ordered sequence of reasoning steps; Member 5 renders it progressively in the agent-status UI |
-| `citations` | `list[Citation]` | Each citation traces back to a `chunk_id` / `document_id` from Member 2's `RetrievedChunk`, always tied to actual retrieved evidence and **limited to chunks that support a surviving claim**. Never fabricated |
-| `verification_status` | `str` | `"verified"` (coverage at or above threshold), `"partially_verified"` (some claims supported, retries exhausted), `"unverified"` (no claim supported, no evidence, or the checker failed). Should become an Enum (open item, Section 8) |
-| `confidence` | `float` | 0–1, derived from fact-checker claim coverage. Never hard-coded to 1.0 |
-| `text_snippet` | `str` | Short excerpt of the cited chunk's text, so users can verify the claim without opening the source |
+| `trace` | `list[AgentStep]` | Full ordered sequence of reasoning steps; Member 5 renders it progressively |
+| `citations` | `list[Citation]` | Each traces back to a `chunk_id` / `document_id` from Member 2's `RetrievedChunk`, always tied to actual retrieved evidence and **limited to chunks that support a surviving claim** |
+| `text_snippet` | `str` | At most 200 characters: the chunk sentence that best matches the claim (a leading "..." means it starts mid-chunk); the start of the chunk when nothing matches |
+| `verification_status` | `str` | `"verified"` (coverage at or above the threshold), `"partially_verified"` (some claims supported, retries exhausted), `"unverified"` (no claim supported, no evidence, the check failed, the step cap was hit, or an error). Optional improvement: a `str` Enum, identical JSON |
+| `confidence` | `float` | 0 to 1, derived from coverage, **capped at `max_confidence` (0.95)**, always 0 for `unverified` |
 | `latency_ms` | `float` | End to end, including retries |
 
-**Not in the contract (so nobody assumes otherwise):** there is no filename on `Citation`, only `document_id`. The UI must resolve the name (open item, Section 8).
+**Not in the contract (so nobody assumes otherwise):** there is no filename on `Citation`, only `document_id`. Member 4 resolves the name from the documents table when building the response. "Verified" means faithful to the retrieved passages, not true.
 
 ---
 
@@ -86,101 +87,127 @@ class AgentResponse(BaseModel):
 Location: `app/agents/state.py`
 
 ```python
-from typing import TypedDict
-
 class AgentState(TypedDict):
     query: str
     query_type: str                  # simple | multi-hop | comparison | aggregation | ambiguous
     subqueries: list[str]            # max 5
-    search_queries: list[str]        # originals + rewrites actually sent to retrieve()
-    top_k: int                       # starts at config.top_k (8); widened on retry 2
-    retrieved_chunks: list           # RetrievedChunk objects (Member 2), merged, deduped by chunk_id
+    search_queries: list[str]        # what the retriever node searches this pass
+    tried_queries: list[str]         # searches that actually ran, in order, no duplicates
+    top_k: int                       # starts at the request or config value; widened on retry 2
+    retrieved_chunks: list[RetrievedChunk]   # merged, deduped by chunk_id
     draft_answer: str
+    citations: list[Citation]        # the draft's citations; rebuilt after verification
     claims: list[str]
-    verification_results: list[dict] # per claim: supported, supporting chunk_ids, reason
+    verification_results: list[dict] # per claim: claim, supported, supporting_chunk_ids, search_query, reason
     unsupported_claims: list[str]
     coverage: float                  # supported claims / total claims
     confidence: float
     retry_count: int
     step_count: int
-    trace: list                      # AgentStep objects, in order
+    trace: Annotated[list[AgentStep], operator.add]   # each node APPENDS; every other field is overwritten
     final_answer: str | None
     verification_status: str
 ```
 
-This `TypedDict` is the object LangGraph passes between nodes. It is **not** written to a database directly: only the final `AgentResponse` and its trace are persisted by Member 4 (Section 6).
+This `TypedDict` is the object LangGraph passes between nodes. It is **not** written to a database directly: only the final `AgentResponse` and its trace are persisted by Member 4 (Section 7). `initial_state()` starts it fail-safe (`unverified`, confidence 0) with fresh lists, so questions never share state.
 
 ### Field Notes
 
 | Field | Notes |
 |---|---|
-| `search_queries` | Includes the **original** wording of each sub-query plus, when different, its rewrite. A bad rewrite therefore cannot hide a good original match |
-| `retrieved_chunks` | Merged by `chunk_id` (first occurrence wins). **Never read `sparse_score`, `fused_score` or `rerank_score`:** with Member 2's shipped configuration they are `None`. Scores from different queries are not comparable |
-| `top_k` | 8 by default; widened (default 15, never above 20) on the second retry |
-| `unsupported_claims` | Input to the retry step: each one drives a new search query |
-| `step_count` | One step = one node execution. Cap is `max_steps = 12` (Section 5) |
-| `verification_status` | Set once, at the end; mapping rules are in TRD Section 11 |
+| `search_queries` | The original question first, then the sub-queries (and rewrites only when `use_rewrites` is on). On a retry it is replaced by the retry searches |
+| `tried_queries` | Filled by the retriever node with every search that actually ran (a failed search is not recorded); listed in the next draft's prompt so retries do not repeat themselves |
+| `retrieved_chunks` | Merged by `chunk_id`, interleaved across searches before the cap of 20; **never read `sparse_score`, `fused_score` or `rerank_score`** (they are `None` with Member 2's shipped configuration) |
+| `top_k` | The request value or 8; becomes `max(widened_top_k, current)` on the second retry or a wider search |
+| `verification_results` | One dict per claim: `claim`, `supported`, `supporting_chunk_ids`, `search_query`, `reason` |
+| `unsupported_claims` | Input to the retry step and to the next draft's prompt |
+| `step_count` | One step = one node execution; cap `max_steps` (12) |
+| `final_answer` | Set by any node that ends the run; a set value always means "done" |
 
 ---
 
 ## 4. Internal Models (not part of the cross-module contract)
 
-Location: `app/agents/` (used between nodes and for structured LLM output; not consumed by Members 4 or 5)
+Location: `app/agents/` (used between nodes and as structured LLM output; not consumed by Members 4 or 5)
 
 ```python
-from typing import Literal
-from pydantic import BaseModel
-
-
 class Plan(BaseModel):
-    """Structured output of the planner's single LLM call."""
+    """Structured output of the planner's single LLM call (planner.py)."""
     query_type: Literal["simple", "multi-hop", "comparison", "aggregation", "ambiguous"]
-    subqueries: list[str]          # one per fact; [original query] for simple queries
-    rewrites: dict[str, str] = {}  # subquery -> rewritten form; omit when no rewrite is needed
+    subqueries: list[str]          # one per fact; ignored for simple and ambiguous queries
+    rewrites: dict[str, str] = {}  # subquery -> rewritten form; searched only when use_rewrites is on
+
+
+class Draft(BaseModel):
+    """Structured output of the generator's LLM call (synthesizer.py)."""
+    answer: str
+    cited_chunk_ids: list[str] = []
+    answer_found: bool = True      # false when the passages do not contain the answer
+    search_query: str = ""         # then: a short search likely to find the missing information
 
 
 class ClaimVerdict(BaseModel):
+    """One claim of the draft and its verdict (fact_checker.py)."""
     claim: str
     supported: bool
     supporting_chunk_ids: list[str] = []
-    reason: str = ""               # short, human-readable; not shown to end users by default
+    search_query: str = ""         # for an unsupported claim: how to look for the missing fact
+    reason: str = ""
 
 
 class Verification(BaseModel):
-    """Structured output of the fact-checker's LLM call."""
+    """Structured output of the fact-checker's single LLM call."""
     verdicts: list[ClaimVerdict]
 ```
 
-- `coverage = sum(v.supported for v in verdicts) / len(verdicts)`; an empty `verdicts` list means the draft is treated as unverified
-- A claim with a specific figure, name or date is `supported` only if that value appears in the evidence (TRD Section 11)
-- `supporting_chunk_ids` is used to correct the final citation list after verification
+- `coverage = supported / total` over the cleaned verdicts; an empty list means the check failed and the draft is returned `unverified`
+- A verdict counts as supported only if it names at least one passage that was really retrieved; a claim with a figure, name or date is supported only if that value appears in the evidence
+- `Draft.cited_chunk_ids` is advisory: citations are built in code from the retrieved chunks, and unknown ids are dropped and counted
+- `Draft.answer_found` false never reaches the fact-checker: the agent searches again with `search_query`, or ends with the insufficient-evidence answer
 
 ---
 
 ## 5. Agent Configuration
 
-Location: `app/agents/config.py`. All caps and thresholds live here, with no magic numbers inside nodes.
+Location: `app/agents/config.py`. All caps and thresholds live here, with no magic numbers inside nodes. The config is frozen and validates itself when created.
 
 ```python
-from dataclasses import dataclass
+FIRST_PASS_STEPS = 4      # planner, retrieve, synthesize, fact-check
+STEPS_PER_RETRY = 3       # retrieve, synthesize, fact-check
+TOP_K_LIMIT = 20          # the backend's ChatRequest limit
+
 
 @dataclass(frozen=True)
 class AgentConfig:
-    top_k: int = 8                    # per search query; matches the backend default
-    widened_top_k: int = 15           # used on retry 2; never above 20
+    top_k: int = 8                     # per search query; matches the backend default
+    widened_top_k: int = 15            # used on retry 2; never above TOP_K_LIMIT
     max_subqueries: int = 5
     max_retries: int = 2
-    max_steps: int = 12               # two retries on a complex query need 10 steps
-    max_evidence_chunks: int = 20     # cap on merged evidence
-    coverage_threshold: float = 0.8   # INITIAL value; calibrate on Member 5's golden dataset
-    use_similarity_hint: bool = False # pass top-1 dense_score to the fact-checker; off until calibrated
+    max_steps: int = 12                # two retries on a complex query need 10 steps
+    max_evidence_chunks: int = 20      # cap on merged evidence
+    coverage_threshold: float = 0.8    # INITIAL value; not calibrated
+    max_confidence: float = 0.95       # never claim certainty
+    use_rewrites: bool = False         # also search the planner's rewrites (no measured benefit)
+    quarantine_instructions: bool = True   # remove passages that address the AI
+    use_similarity_hint: bool = False  # reserved; unused
+    llm_retries: int = 1               # retry a failed LLM call once, with backoff
 ```
 
-`coverage_threshold`, `widened_top_k` and `use_similarity_hint` are starting guesses, not measured values.
+Validation (raises `ValueError`): `top_k` between 1 and 20; `widened_top_k` between `top_k` and 20; `max_subqueries` at least 1; `max_retries` at least 0; `max_evidence_chunks` at least 1; `coverage_threshold` between 0 and 1; `max_confidence` above 0 and at most 1; `llm_retries` at least 0; and **`max_steps >= FIRST_PASS_STEPS + STEPS_PER_RETRY * max_retries`**.
+
+`coverage_threshold`, `widened_top_k` and `max_confidence` are starting guesses, not measured values.
 
 ---
 
-## 6. Persistent Database Schema (co-owned with Member 4, unchanged)
+## 6. LLM Errors and the Cache File
+
+**`LLMError`** (`app/agents/llm.py`) is the one error type for any failed model call: timeout, rate limit, output that does not fit the requested schema, a replay-only cache miss. Nodes catch only this.
+
+**`CachingLLM` file** (`app/agents/llm_cache.py`, default location `data/llm_cache/`, git-ignored): a JSON object whose keys are SHA-256 hashes of `[namespace\n]kind\nsystem\nprompt` (`kind` is `complete` or the schema's class name) and whose values are the saved answer (text, or the schema object as JSON). An entry that no longer fits the current schema is a miss. Failures are never saved. The planner cache written by the early measurement scripts (`data/eval/planner_cache.json`) uses the same format.
+
+---
+
+## 7. Persistent Database Schema (co-owned with Member 4, unchanged)
 
 Member 4 owns the FastAPI/Postgres implementation. This module defines the **data it needs persisted** so chat history and traces survive across requests.
 
@@ -219,16 +246,14 @@ Member 4 owns the FastAPI/Postgres implementation. This module defines the **dat
 | `content` | `text` | |
 | `metadata` | `dict` (JSON column) | See below |
 
-**What goes into `AgentStep.metadata`** (kept in the existing JSON column, so no table change is needed):
+**`AgentStep.metadata` keys** (kept in the existing JSON column, so no table change is needed; counts and labels only, never prompts, completions or chunk text):
 
-| step_type | Suggested metadata keys |
+| step_type | Keys |
 |---|---|
-| `plan` | `query_type`, `subquery_count`, `rewritten` (bool) |
-| `retrieve` | `search_query_count`, `chunks_per_subquery`, `chunks_after_merge`, `attempt` (0 = first pass) |
-| `synthesize` | `citation_count`, `dropped_citations` |
-| `fact_check` | `claims_total`, `claims_supported`, `coverage`, `retry` (bool) |
-
-Keep metadata to counts and labels. **Do not store raw prompts, completions or chunk text** in it.
+| `plan` | `query_type`, `subquery_count`, `rewritten` (bool); `fallback` (true when planning failed) |
+| `retrieve` | `search_query_count`, `chunks_per_search` (list), `chunks_after_merge`, `new_chunks`, `attempt` (0 = first pass), `errors`, `quarantined` |
+| `synthesize` | `citation_count`, `dropped_citations`, `generator_called`; `not_found` and `retry_search` (the passages lack the answer and another search follows); `reason` (`no_evidence`, `search_failed`, `llm_failed` or `not_found` on a terminal answer) |
+| `fact_check` | `claims_total`, `claims_supported`, `coverage`, `retry` (bool); `checker_failed`, `stopped_early`, `step_limit`, `agent_error` (the error's type name only) |
 
 **Indexing recommendations:**
 - Index `citations.message_id` and `agent_traces.message_id`: both are looked up every time a past message is re-rendered
@@ -236,41 +261,41 @@ Keep metadata to counts and labels. **Do not store raw prompts, completions or c
 
 ---
 
-## 7. Data Flow: One Query, End to End
+## 8. Data Flow: One Query, End to End
 
 ```
 User query arrives (from Member 4's API)
       |
       v
-AgentState initialised (query set, top_k = config.top_k, everything else empty/zero)
+AgentState initialised (query set, top_k from the request or config, everything else empty / zero)
       |
       v
-planner.py -> ONE structured LLM call -> Plan: query_type, subqueries, rewrites
-      |          search_queries = originals + rewrites;   trace: "plan"
+planner node -> ONE structured LLM call -> Plan; search_queries = original question first, then the sub-queries
+      |          trace: "plan"        (LLM failure -> one simple search, fallback)
       v
-retriever_agent.py -> retrieve() per search query -> merge by chunk_id (cap max_evidence_chunks)
-      |          trace: "retrieve"
+retriever node -> retrieve() per search query -> instruction filter -> merge by chunk_id (interleaved, cap 20)
+      |          tried_queries updated;   trace: "retrieve"
       |
-      +-- evidence empty ----------------------------> no-evidence answer (generator NOT called)
-      |                                                  status "unverified", trace noted
+      +-- a retry found no new passages --------------> finalize node -> final answer (best checked so far)
+      +-- no room for synthesize + check --------------> step_limit node
       v
-synthesizer.py -> draft_answer + citations,  trace: "synthesize"
+synthesizer node -> ONE structured call -> Draft;  trace: "synthesize"
+      |
+      +-- no passages / search failed / model failed ---> final answer set (insufficient evidence or error text), END
+      +-- answer_found = false:
+      |       searches left -> search_queries = [hint], retry_count + 1  -> back to the retriever node
+      |       none left ------> insufficient-evidence answer, END
+      v
+fact-checker node -> ONE structured call -> verdicts -> coverage;  trace: "fact_check"
+      |
+ coverage >= threshold ---------------------------> final_answer set, status "verified", END
+      |
+ below, retries and steps left -> unsupported claims drive new search_queries (retry 2 widens top_k) -> retriever node
+      |
+ below, none left ---------------> "partially_verified" (some supported) or insufficient evidence (none supported), END
       |
       v
-fact_checker.py -> claims -> verify against ALL evidence -> coverage,  trace: "fact_check"
-      |
- coverage >= threshold ---------------------> final_answer set, status "verified"
-      |
- coverage <  threshold, retry_count < max_retries
-      |        -> new search_queries from unsupported_claims (retry 2 also widens top_k)
-      |        -> back to retriever_agent.py, merge into existing evidence
-      |        -> stop early if no new chunk_id arrived
-      |
- retries exhausted ---------------> status "partially_verified" (some supported)
-                                      or "unverified" (none supported -> insufficient-evidence answer)
-      |
-      v
-AgentResponse built (answer, citations, trace, verification_status, confidence, latency_ms)
+Agent builds AgentResponse (answer, citations, trace, verification_status, confidence, latency_ms)
       |
       v
 Returned to Member 4 -> persisted (messages / citations / agent_traces) -> streamed to Member 5's UI
@@ -280,12 +305,12 @@ Every path, including failures and cap hits, ends in a valid `AgentResponse`.
 
 ---
 
-## 8. Open Items for Future Iteration
+## 9. Open Items for Future Iteration
 
-- Replace `verification_status: str` with `class VerificationStatus(str, Enum)`. JSON on the wire is identical, so consumers keep working; matches the same flagged improvement in Member 1's `IngestionResult.status`. Needs a team sync
+- Replace `verification_status: str` with a `str` Enum. JSON on the wire is identical; needs a team sync
 - **Cross-module gap:** Member 4's synchronous `ChatResponse` has no `verification_status` (the streaming path has the `verification` event). The UI must show the trust level, so the synchronous response should carry it too
-- **Cross-module gap:** `Citation` has `document_id` but no filename; the UI wants "[Finance Report, p.12]". Decide who resolves it (for example Member 5 via `/documents`)
-- Candidate counts on `RetrievalResponse` (Member 2's proposal) are undecided; `agent_traces.metadata` above deliberately uses counts this module can compute itself
+- **Cross-module gap:** `Citation` has `document_id` but no filename; Member 4 adds `source_file` when building the response (recommended)
+- `session_context` is accepted by the agent and unused; reserved for chat history
 - Consider persisting the full `AgentState` for debugging and replay, once storage cost is evaluated
-- Add a `model_version` field to `AgentResponse` once multiple LLM configurations are supported, so past answers can be traced to the model that produced them
-- Calibrate `coverage_threshold`, `widened_top_k` and the optional similarity hint on Member 5's golden dataset, and record the measured values here
+- Add a `model_version` field to `AgentResponse` once multiple LLM configurations are supported
+- Calibrate `coverage_threshold`, `widened_top_k` and `max_confidence` on Member 5's golden dataset, or keep them recorded as uncalibrated

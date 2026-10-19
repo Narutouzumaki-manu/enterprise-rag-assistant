@@ -1,3 +1,4 @@
+
 """Retriever node (TRD Section 9): one search per search query, merged by chunk_id.
 
 Chunks are merged by chunk_id, never by score (scores from different queries
@@ -5,6 +6,7 @@ are not comparable). Results are interleaved across searches before the cap is
 applied, so every search stays represented. Passages that address the AI
 (hidden instructions) are removed before merging.
 """
+
 from collections.abc import Callable
 from typing import Protocol
 
@@ -31,6 +33,7 @@ def interleave(per_search: list[list[RetrievedChunk]]) -> list[RetrievedChunk]:
     merged: list[RetrievedChunk] = []
     seen: set[str] = set()
     longest = max((len(results) for results in per_search), default=0)
+
     for rank in range(longest):
         for results in per_search:
             if rank < len(results):
@@ -38,6 +41,7 @@ def interleave(per_search: list[list[RetrievedChunk]]) -> list[RetrievedChunk]:
                 if chunk.chunk_id not in seen:
                     seen.add(chunk.chunk_id)
                     merged.append(chunk)
+
     return merged
 
 
@@ -65,7 +69,10 @@ def _describe(
                 else "No relevant passages found"
             )
         else:
-            text = f"Retrieved {_passages(total)} across {_subqueries(subquery_count)}"
+            text = (
+                f"Retrieved {_passages(total)} "
+                f"across {_subqueries(subquery_count)}"
+            )
     elif new_kept == 0:
         text = "No new passages found"
     else:
@@ -73,10 +80,14 @@ def _describe(
             f"Found {new_kept} new passage{'' if new_kept == 1 else 's'} "
             f"({total} in total)"
         )
+
     if quarantined:
         noun = "passage" if quarantined == 1 else "passages"
         verb = "it contains" if quarantined == 1 else "they contain"
-        text += f"; {quarantined} {noun} removed because {verb} instructions"
+        text += (
+            f"; {quarantined} {noun} removed because {verb} instructions"
+        )
+
     return text
 
 
@@ -90,31 +101,54 @@ def make_retriever_node(
         queries = state["search_queries"] or [state["query"]]
 
         per_search: list[list[RetrievedChunk]] = []
+        ran: list[str] = []  # searches that actually ran
         errors = 0
         removed_ids: set[str] = set()
+
         for query in queries:
             try:
                 response = retriever.retrieve(
                     RetrievalRequest(query=query, top_k=state["top_k"])
                 )
                 results = list(response.results)
+
                 if config.quarantine_instructions:
                     results, removed = quarantine(results)
                     removed_ids.update(chunk.chunk_id for chunk in removed)
+
                 per_search.append(results)
+                ran.append(query)
+
             except Exception:
                 # Any retriever failure becomes a trace note, never a crash.
                 errors += 1
                 per_search.append([])
 
+        tried = list(state["tried_queries"])
+        tried_keys = {" ".join(q.lower().split()) for q in tried}
+
+        for query in ran:
+            key = " ".join(query.lower().split())
+            if key not in tried_keys:
+                tried_keys.add(key)
+                tried.append(query)
+
         existing = state["retrieved_chunks"]
         existing_ids = {c.chunk_id for c in existing}
-        new = [c for c in interleave(per_search) if c.chunk_id not in existing_ids]
+
+        new = [
+            c for c in interleave(per_search)
+            if c.chunk_id not in existing_ids
+        ]
+
         # New evidence first, then what we already had; the cap cuts the old tail.
         merged = (new + existing)[: config.max_evidence_chunks]
-        new_kept = sum(1 for c in merged if c.chunk_id not in existing_ids)
+        new_kept = sum(
+            1 for c in merged if c.chunk_id not in existing_ids
+        )
 
         subquery_count = len(state["subqueries"]) or len(queries)
+
         step = AgentStep(
             step_type=AgentStepType.RETRIEVE,
             content=_describe(
@@ -127,7 +161,9 @@ def make_retriever_node(
             ),
             metadata={
                 "search_query_count": len(queries),
-                "chunks_per_search": [len(results) for results in per_search],
+                "chunks_per_search": [
+                    len(results) for results in per_search
+                ],
                 "chunks_after_merge": len(merged),
                 "new_chunks": new_kept,
                 "attempt": state["retry_count"],
@@ -135,8 +171,10 @@ def make_retriever_node(
                 "quarantined": len(removed_ids),
             },
         )
+
         return {
             "retrieved_chunks": merged,
+            "tried_queries": tried,
             "step_count": state["step_count"] + 1,
             "trace": [step],
         }

@@ -97,13 +97,9 @@ def build_user_prompt(
     query: str,
     chunks: list[RetrievedChunk],
     unsupported_claims: list[str],
+    tried_queries: list[str] | None = None,
 ) -> str:
-    parts = [
-        f"Question: {query}",
-        "",
-        "Passages:",
-        format_passages(chunks),
-    ]
+    parts = [f"Question: {query}", "", "Passages:", format_passages(chunks)]
 
     if unsupported_claims:
         lines = "\n".join(f"- {claim}" for claim in unsupported_claims)
@@ -112,6 +108,19 @@ def build_user_prompt(
             "A previous draft contained statements that could not be verified in "
             "the passages. Do not repeat them unless the passages support them:",
             lines,
+        ]
+
+    if tried_queries:
+        lines = "\n".join(f"- {q}" for q in tried_queries)
+        parts += [
+            "",
+            "Searches already tried, which did not give a complete answer:",
+            lines,
+            "If the passages still do not contain the answer, write a search_query "
+            "with DIFFERENT wording from every search above: a shorter phrase, or "
+            "the label a statement or table row would use (for example 'Capital "
+            "expenditure' instead of 'money spent on equipment'). Do not repeat a "
+            "search.",
         ]
 
     return "\n".join(parts)
@@ -126,8 +135,7 @@ def make_snippet(text: str) -> str:
     return flat[:SNIPPET_CHARS].rstrip() + "..."
 
 
-_SENTENCE_SPLIT = re.compile(r"(?<=[.!?])\s+(?=[A-Z0-9])")
-
+_SENTENCE_SPLIT = re.compile(r"(?<=[.!?])\s+(?=[^\sa-z])")
 
 def _norm(token: str) -> str:
     """Lower case; keep letters, digits and decimal points; drop commas,
@@ -328,8 +336,9 @@ def _not_found(
 
     new_retry = retry_count + 1
     hint = clean_text(" ".join(draft.search_query.split()))
+    tried = {" ".join(q.lower().split()) for q in state["tried_queries"]}
 
-    if hint:
+    if hint and " ".join(hint.lower().split()) not in tried:
         queries = [hint]
         top_k = (
             max(config.widened_top_k, state["top_k"])
@@ -337,7 +346,8 @@ def _not_found(
             else state["top_k"]
         )
     else:
-        # No hint: search the question again, with a wider net.
+        # No hint, or a search that was already tried: search the question
+        # again with a wider net.
         queries = [state["query"].strip()]
         top_k = max(config.widened_top_k, state["top_k"])
 
@@ -382,6 +392,8 @@ def make_synthesizer_node(
             )
             return _terminal(reason, step_count)
 
+        tried = state["tried_queries"] if state["retry_count"] > 0 else []
+
         try:
             draft = llm.complete_structured(
                 SYSTEM_PROMPT,
@@ -389,6 +401,7 @@ def make_synthesizer_node(
                     state["query"],
                     chunks,
                     state["unsupported_claims"],
+                    tried,
                 ),
                 Draft,
             )

@@ -447,3 +447,21 @@ def test_not_found_and_no_new_passages_stops_early():
     assert final["step_count"] == 5
     assert len(llm.structured_calls(Draft)) == 1
     assert final["trace"][-1].metadata["stopped_early"] is True
+
+def test_a_repeated_search_hint_triggers_a_wider_search_of_the_question():
+    def missing(hint):
+        return Draft(answer="Not in the passages.", answer_found=False, search_query=hint)
+
+    llm = scripted_llm(drafts=[missing("h1"), missing("h1"), missing("h3")])
+    retriever = MockRetriever(
+        responses={
+            Q: [make_chunk(f"c{i}") for i in range(12)],
+            "h1": [make_chunk("x")],
+        }
+    )
+    final = run(llm, retriever)
+    assert [c.query for c in retriever.calls] == [Q, "h1", Q]
+    assert [c.top_k for c in retriever.calls] == [8, 8, 15]
+    assert final["final_answer"] == NO_EVIDENCE_ANSWER
+    assert final["step_count"] == 7
+    assert final["tried_queries"] == [Q, "h1"]
