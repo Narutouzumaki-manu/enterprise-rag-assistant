@@ -1,0 +1,2065 @@
+{
+  "run_at": "2026-10-20T04:53:25.806432+00:00",
+  "model": "nvidia/nemotron-3-super-120b-a12b:free",
+  "namespace": "s20-eval-v1",
+  "replay": false,
+  "config": {
+    "top_k": 8,
+    "widened_top_k": 15,
+    "max_subqueries": 5,
+    "max_retries": 2,
+    "max_steps": 12,
+    "max_evidence_chunks": 20,
+    "coverage_threshold": 0.8,
+    "max_confidence": 0.95,
+    "use_rewrites": false,
+    "quarantine_instructions": true,
+    "use_similarity_hint": false,
+    "llm_retries": 1
+  },
+  "results": [
+    {
+      "question_id": "tcs-gold-01",
+      "category": "fact_lookup",
+      "question": "What were TCS's two stated FY26 AI-related priorities: one focused on changing internal delivery and one focused on clients?",
+      "reference_answer": "TCS aimed to embed AI in internal delivery to improve productivity, testing, operations and support, while selling AI-led transformation services to help clients redesign processes, build data foundations and deploy AI at scale.",
+      "model_calls_live": 3,
+      "model_calls_replayed": 0,
+      "searches": [
+        {
+          "query": "What were TCS's two stated FY26 AI-related priorities: one focused on changing internal delivery and one focused on clients?",
+          "top_k": 8,
+          "chunks": [
+            {
+              "chunk_id": "add61afb3c3b7efaa3ca1a2f001dbd1161748c726a4527dfa2efb75d1cab9573",
+              "page_number": 10,
+              "text": "Repositioning for a changing services market Through FY26 TCS framed its strategy around artificial intelligence, both as something it sells and as a way of changing how it delivers work. Management stated that the company had moved from building capabilities to executing on revenue, citing annualised AI revenue above $2.3 billion in Q4."
+            },
+            {
+              "chunk_id": "77df90f599f4d571fe5f3297b82fef861c29800fbb8496924da49cb111cf2485",
+              "page_number": 27,
+              "text": "From capability to revenue AI was the central theme of TCS's FY26 messaging. By Q4, the company reported annualised AI-related revenue above $2.3 billion, equal to more than 6% of total revenue. Where AI shows up in the business • Client engagements. Data foundations, model deployment, agent-based automation and AI-enabled process redesign for clients. • Internal delivery. AI coding assistants, automated testing and AI-supported operations to raise productivity. • People. More than 270,000 employees have higher proficiency in AI and machine learning. • Deal wins. Several of the mega deals signed during the year were described as including AI-led transformation components. Questions to watch • How much AI revenue is new versus relabelled existing work. • Whether productivity gains are passed on to clients through lower prices. • Whether AI revenue growth can offset slower growth in traditional application services. The definition of AI revenue is TCS's own. Figures are annualised run-rate, not full-year recognised revenue."
+            },
+            {
+              "chunk_id": "c0dd478ae23bbaecc5162679ad29698bb3df31d14f2c51ee9c346f7b48a884c4",
+              "page_number": 8,
+              "text": "What TCS sells to its clients TCS organises its offerings around the full lifecycle of enterprise technology change. In broad terms the portfolio covers the following areas. • Consulting and strategy. Business and technology advisory to help clients plan large transformations. • Cloud and infrastructure. Migration, modernisation and managed operations across public, private and hybrid clouds. • Enterprise applications. Implementation and support of core platforms in finance, supply chain, human resources and customer management. • Data and artificial intelligence. Data engineering, analytics, machine learning and, increasingly, generative and agentic AI solutions. • Cybersecurity. Security strategy, monitoring, identity and response services. • Engineering and industrial technology. Product engineering, embedded systems, IoT and digital twins for manufacturing and other industries. • Business process services. Operations that combine automation with human expertise, such as finance and procurement operations. • Products and platforms. Industry platforms, notably in banking and financial services, education and retail. Clients typically engage TCS through multi-year programmes. Large deals are tracked as total contract value (TCV), which TCS reports each quarter."
+            },
+            {
+              "chunk_id": "53b780efb605bc388d8fe978815bdc80e99fbfabc821aedac39f7167e4016af1",
+              "page_number": 11,
+              "text": "Conditions shaping FY26 The global environment for technology services remained uncertain through FY26. In July 2025, TCS's CEO said continued macroeconomic and geopolitical uncertainty had caused a demand contraction. Clients delayed or scaled back discretionary projects while continuing to commit to cost-saving and modernisation work."
+            },
+            {
+              "chunk_id": "fc47d94718294a3990f150643a1f9a3cb57e8c1eb822b2015f2543546527e8f4",
+              "page_number": 31,
+              "text": "Restructuring in FY26 In 2025 TCS announced plans to reduce its workforce by about 12,000 employees, roughly 2% of the total, as part of a programme to realign skills with AI-led delivery and changing client demand. The headcount decline in Q2 and Q3 FY26 reflects this programme."
+            },
+            {
+              "chunk_id": "ceca0659c21efb32364c5b76e0857cc2543e4c3c2176c853be2352e0fc9ab612",
+              "page_number": 29,
+              "text": "Investing in skills The scale of training is central to the TCS model: with more than half a million employees, even small changes in skills mix have large effects on productivity and revenue per person. Learning hours rose 23% in a year when headcount fell, so hours per employee rose sharply. Focus areas • Foundational and advanced AI skills, including generative and agentic AI. • Cloud, data and cybersecurity certifications. • Domain knowledge in banking, retail, manufacturing and life sciences. • Leadership development for mid-level managers."
+            },
+            {
+              "chunk_id": "1832a868cd8d4779ddd90c1901cfe3ef0692dfbf54cd19aade471e761e88a4ed",
+              "page_number": 39,
+              "text": "• $40.7 billion of FY26 TCV provides revenue visibility. • Margins at a four-year high with room for further productivity gains. • AI revenue above a $2.3 billion annualised run rate. • Broader client base, with 66 clients above $100 million."
+            },
+            {
+              "chunk_id": "50dd3ab00f95d36bbe6d6ba4d666fbc4d051c23183e1078638c47541b2d23514",
+              "page_number": 10,
+              "text": "• Embed AI in delivery. Using AI tools to improve developer productivity, testing, operations and support. • Sell AI-led transformation. Helping clients redesign processes, build data foundations and deploy AI at scale. • Reskill the workforce. More than 270,000 employees have higher proficiency in AI and machine learning, and the company logged 69 million learning hours in the year. • Invest in infrastructure and partnerships. Building AI-ready capacity and alliances with technology providers. • Protect margins while investing. Delivering a 25% operating margin while funding new capabilities. The strategic trade-off is clear: AI can reduce the effort needed for traditional work, which pressures revenue per project, while opening new categories of demand. FY26 results suggest margin benefits are arriving earlier than top-line benefits."
+            }
+          ]
+        },
+        {
+          "query": "What was TCS's FY26 AI-related priority focused on changing internal delivery?",
+          "top_k": 8,
+          "chunks": [
+            {
+              "chunk_id": "add61afb3c3b7efaa3ca1a2f001dbd1161748c726a4527dfa2efb75d1cab9573",
+              "page_number": 10,
+              "text": "Repositioning for a changing services market Through FY26 TCS framed its strategy around artificial intelligence, both as something it sells and as a way of changing how it delivers work. Management stated that the company had moved from building capabilities to executing on revenue, citing annualised AI revenue above $2.3 billion in Q4."
+            },
+            {
+              "chunk_id": "77df90f599f4d571fe5f3297b82fef861c29800fbb8496924da49cb111cf2485",
+              "page_number": 27,
+              "text": "From capability to revenue AI was the central theme of TCS's FY26 messaging. By Q4, the company reported annualised AI-related revenue above $2.3 billion, equal to more than 6% of total revenue. Where AI shows up in the business • Client engagements. Data foundations, model deployment, agent-based automation and AI-enabled process redesign for clients. • Internal delivery. AI coding assistants, automated testing and AI-supported operations to raise productivity. • People. More than 270,000 employees have higher proficiency in AI and machine learning. • Deal wins. Several of the mega deals signed during the year were described as including AI-led transformation components. Questions to watch • How much AI revenue is new versus relabelled existing work. • Whether productivity gains are passed on to clients through lower prices. • Whether AI revenue growth can offset slower growth in traditional application services. The definition of AI revenue is TCS's own. Figures are annualised run-rate, not full-year recognised revenue."
+            },
+            {
+              "chunk_id": "53b780efb605bc388d8fe978815bdc80e99fbfabc821aedac39f7167e4016af1",
+              "page_number": 11,
+              "text": "Conditions shaping FY26 The global environment for technology services remained uncertain through FY26. In July 2025, TCS's CEO said continued macroeconomic and geopolitical uncertainty had caused a demand contraction. Clients delayed or scaled back discretionary projects while continuing to commit to cost-saving and modernisation work."
+            },
+            {
+              "chunk_id": "d8a1ab3b42c6f43a6aed221b870ad64fd3cf836860d0855549b59cd367b51cb9",
+              "page_number": 15,
+              "text": "Operating and net margin trends TCS reported an operating margin of 25% for FY26, up 70 basis points year on year and the highest in four years. In Q3, the operating margin was 25.2%. The net margin excluding exceptional items was 19.8%, up 80 basis points. Why margins improved • Lower cost of revenue. Cost of revenue fell from 60.9% of revenue in Q1 to 59.3% in Q4. • Productivity and automation. AI-assisted delivery reduced effort on parts of the work. • Workforce actions. Headcount was reduced through the middle of the year, lowering employee costs relative to revenue. • Currency. A weaker rupee raised the rupee value of dollar billings against largely rupee-denominated delivery costs. What could erode them • Wage increases and higher attrition. • Investment in AI infrastructure and training. • Pricing concessions on large renewals and vendor consolidation deals. • A reversal in the rupee."
+            },
+            {
+              "chunk_id": "5b513b8a0ced85c2c04663250bff80d36b2a3fc3559f4c7b19569bb340e3452c",
+              "page_number": 32,
+              "text": "Principal risks facing TCS (compiler's assessment) The risks below are the compiler's summary of themes visible in FY26 results and commentary. They are not TCS's own risk register. • Demand and macro risk. A prolonged slowdown in North America or Europe would weigh on discretionary projects. • Concentration risk. Nearly half of revenue comes from North America and about a third from BFSI. • AI disruption risk. AI may reduce the effort needed for traditional services faster than new demand arrives. • Talent risk. Attrition near 13.7% and the need to reskill a very large workforce. • Currency risk. Rupee strength would reduce rupee revenue and margins. • Regulatory and trade risk. Changes to visa rules, taxes on outsourcing, data-localisation requirements or tariffs. • Cybersecurity and data risk. Incidents affecting TCS or its clients carry legal and reputational costs. • Competition risk. Global consulting firms, other Indian IT providers, technology vendors and clients' own captive centres."
+            },
+            {
+              "chunk_id": "fc47d94718294a3990f150643a1f9a3cb57e8c1eb822b2015f2543546527e8f4",
+              "page_number": 31,
+              "text": "Restructuring in FY26 In 2025 TCS announced plans to reduce its workforce by about 12,000 employees, roughly 2% of the total, as part of a programme to realign skills with AI-led delivery and changing client demand. The headcount decline in Q2 and Q3 FY26 reflects this programme."
+            },
+            {
+              "chunk_id": "50dd3ab00f95d36bbe6d6ba4d666fbc4d051c23183e1078638c47541b2d23514",
+              "page_number": 10,
+              "text": "• Embed AI in delivery. Using AI tools to improve developer productivity, testing, operations and support. • Sell AI-led transformation. Helping clients redesign processes, build data foundations and deploy AI at scale. • Reskill the workforce. More than 270,000 employees have higher proficiency in AI and machine learning, and the company logged 69 million learning hours in the year. • Invest in infrastructure and partnerships. Building AI-ready capacity and alliances with technology providers. • Protect margins while investing. Delivering a 25% operating margin while funding new capabilities. The strategic trade-off is clear: AI can reduce the effort needed for traditional work, which pressures revenue per project, while opening new categories of demand. FY26 results suggest margin benefits are arriving earlier than top-line benefits."
+            },
+            {
+              "chunk_id": "1832a868cd8d4779ddd90c1901cfe3ef0692dfbf54cd19aade471e761e88a4ed",
+              "page_number": 39,
+              "text": "• $40.7 billion of FY26 TCV provides revenue visibility. • Margins at a four-year high with room for further productivity gains. • AI revenue above a $2.3 billion annualised run rate. • Broader client base, with 66 clients above $100 million."
+            }
+          ]
+        },
+        {
+          "query": "What was TCS's FY26 AI-related priority focused on clients?",
+          "top_k": 8,
+          "chunks": [
+            {
+              "chunk_id": "77df90f599f4d571fe5f3297b82fef861c29800fbb8496924da49cb111cf2485",
+              "page_number": 27,
+              "text": "From capability to revenue AI was the central theme of TCS's FY26 messaging. By Q4, the company reported annualised AI-related revenue above $2.3 billion, equal to more than 6% of total revenue. Where AI shows up in the business • Client engagements. Data foundations, model deployment, agent-based automation and AI-enabled process redesign for clients. • Internal delivery. AI coding assistants, automated testing and AI-supported operations to raise productivity. • People. More than 270,000 employees have higher proficiency in AI and machine learning. • Deal wins. Several of the mega deals signed during the year were described as including AI-led transformation components. Questions to watch • How much AI revenue is new versus relabelled existing work. • Whether productivity gains are passed on to clients through lower prices. • Whether AI revenue growth can offset slower growth in traditional application services. The definition of AI revenue is TCS's own. Figures are annualised run-rate, not full-year recognised revenue."
+            },
+            {
+              "chunk_id": "add61afb3c3b7efaa3ca1a2f001dbd1161748c726a4527dfa2efb75d1cab9573",
+              "page_number": 10,
+              "text": "Repositioning for a changing services market Through FY26 TCS framed its strategy around artificial intelligence, both as something it sells and as a way of changing how it delivers work. Management stated that the company had moved from building capabilities to executing on revenue, citing annualised AI revenue above $2.3 billion in Q4."
+            },
+            {
+              "chunk_id": "1832a868cd8d4779ddd90c1901cfe3ef0692dfbf54cd19aade471e761e88a4ed",
+              "page_number": 39,
+              "text": "• $40.7 billion of FY26 TCV provides revenue visibility. • Margins at a four-year high with room for further productivity gains. • AI revenue above a $2.3 billion annualised run rate. • Broader client base, with 66 clients above $100 million."
+            },
+            {
+              "chunk_id": "53b780efb605bc388d8fe978815bdc80e99fbfabc821aedac39f7167e4016af1",
+              "page_number": 11,
+              "text": "Conditions shaping FY26 The global environment for technology services remained uncertain through FY26. In July 2025, TCS's CEO said continued macroeconomic and geopolitical uncertainty had caused a demand contraction. Clients delayed or scaled back discretionary projects while continuing to commit to cost-saving and modernisation work."
+            },
+            {
+              "chunk_id": "c0dd478ae23bbaecc5162679ad29698bb3df31d14f2c51ee9c346f7b48a884c4",
+              "page_number": 8,
+              "text": "What TCS sells to its clients TCS organises its offerings around the full lifecycle of enterprise technology change. In broad terms the portfolio covers the following areas. • Consulting and strategy. Business and technology advisory to help clients plan large transformations. • Cloud and infrastructure. Migration, modernisation and managed operations across public, private and hybrid clouds. • Enterprise applications. Implementation and support of core platforms in finance, supply chain, human resources and customer management. • Data and artificial intelligence. Data engineering, analytics, machine learning and, increasingly, generative and agentic AI solutions. • Cybersecurity. Security strategy, monitoring, identity and response services. • Engineering and industrial technology. Product engineering, embedded systems, IoT and digital twins for manufacturing and other industries. • Business process services. Operations that combine automation with human expertise, such as finance and procurement operations. • Products and platforms. Industry platforms, notably in banking and financial services, education and retail. Clients typically engage TCS through multi-year programmes. Large deals are tracked as total contract value (TCV), which TCS reports each quarter."
+            },
+            {
+              "chunk_id": "fc47d94718294a3990f150643a1f9a3cb57e8c1eb822b2015f2543546527e8f4",
+              "page_number": 31,
+              "text": "Restructuring in FY26 In 2025 TCS announced plans to reduce its workforce by about 12,000 employees, roughly 2% of the total, as part of a programme to realign skills with AI-led delivery and changing client demand. The headcount decline in Q2 and Q3 FY26 reflects this programme."
+            },
+            {
+              "chunk_id": "50dd3ab00f95d36bbe6d6ba4d666fbc4d051c23183e1078638c47541b2d23514",
+              "page_number": 10,
+              "text": "• Embed AI in delivery. Using AI tools to improve developer productivity, testing, operations and support. • Sell AI-led transformation. Helping clients redesign processes, build data foundations and deploy AI at scale. • Reskill the workforce. More than 270,000 employees have higher proficiency in AI and machine learning, and the company logged 69 million learning hours in the year. • Invest in infrastructure and partnerships. Building AI-ready capacity and alliances with technology providers. • Protect margins while investing. Delivering a 25% operating margin while funding new capabilities. The strategic trade-off is clear: AI can reduce the effort needed for traditional work, which pressures revenue per project, while opening new categories of demand. FY26 results suggest margin benefits are arriving earlier than top-line benefits."
+            },
+            {
+              "chunk_id": "ceca0659c21efb32364c5b76e0857cc2543e4c3c2176c853be2352e0fc9ab612",
+              "page_number": 29,
+              "text": "Investing in skills The scale of training is central to the TCS model: with more than half a million employees, even small changes in skills mix have large effects on productivity and revenue per person. Learning hours rose 23% in a year when headcount fell, so hours per employee rose sharply. Focus areas • Foundational and advanced AI skills, including generative and agentic AI. • Cloud, data and cybersecurity certifications. • Domain knowledge in banking, retail, manufacturing and life sciences. • Leadership development for mid-level managers."
+            }
+          ]
+        }
+      ],
+      "response": {
+        "answer": "The two stated FY26 AI-related priorities were to embed AI in delivery (to improve internal productivity) and to sell AI-led transformation to clients.",
+        "citations": [
+          {
+            "chunk_id": "50dd3ab00f95d36bbe6d6ba4d666fbc4d051c23183e1078638c47541b2d23514",
+            "document_id": "tcs_annual_report",
+            "page_number": 10,
+            "text_snippet": "...• Sell AI-led transformation. Helping clients redesign processes, build data foundations and deploy AI at scale."
+          }
+        ],
+        "trace": [
+          {
+            "step_type": "plan",
+            "content": "Classified as multi-hop; 2 sub-queries",
+            "metadata": {
+              "query_type": "multi-hop",
+              "subquery_count": 2,
+              "rewritten": false
+            }
+          },
+          {
+            "step_type": "retrieve",
+            "content": "Retrieved 10 passages across 2 sub-queries",
+            "metadata": {
+              "search_query_count": 3,
+              "chunks_per_search": [
+                8,
+                8,
+                8
+              ],
+              "chunks_after_merge": 10,
+              "new_chunks": 10,
+              "attempt": 0,
+              "errors": 0,
+              "quarantined": 0
+            }
+          },
+          {
+            "step_type": "synthesize",
+            "content": "Draft answer generated with 1 citation",
+            "metadata": {
+              "citation_count": 1,
+              "dropped_citations": 0,
+              "generator_called": true
+            }
+          },
+          {
+            "step_type": "fact_check",
+            "content": "2 of 2 claims verified",
+            "metadata": {
+              "claims_total": 2,
+              "claims_supported": 2,
+              "coverage": 1.0,
+              "retry": false
+            }
+          }
+        ],
+        "verification_status": "verified",
+        "confidence": 0.95,
+        "latency_ms": 31508.69360001525
+      }
+    },
+    {
+      "question_id": "tcs-gold-02",
+      "category": "table",
+      "question": "What were TCS's FY26 operating margin and net margin?",
+      "reference_answer": "FY26 operating margin was 25% and net margin was 19.8%.",
+      "model_calls_live": 0,
+      "model_calls_replayed": 3,
+      "searches": [
+        {
+          "query": "What were TCS's FY26 operating margin and net margin?",
+          "top_k": 8,
+          "chunks": [
+            {
+              "chunk_id": "d8a1ab3b42c6f43a6aed221b870ad64fd3cf836860d0855549b59cd367b51cb9",
+              "page_number": 15,
+              "text": "Operating and net margin trends TCS reported an operating margin of 25% for FY26, up 70 basis points year on year and the highest in four years. In Q3, the operating margin was 25.2%. The net margin excluding exceptional items was 19.8%, up 80 basis points. Why margins improved • Lower cost of revenue. Cost of revenue fell from 60.9% of revenue in Q1 to 59.3% in Q4. • Productivity and automation. AI-assisted delivery reduced effort on parts of the work. • Workforce actions. Headcount was reduced through the middle of the year, lowering employee costs relative to revenue. • Currency. A weaker rupee raised the rupee value of dollar billings against largely rupee-denominated delivery costs. What could erode them • Wage increases and higher attrition. • Investment in AI infrastructure and training. • Pricing concessions on large renewals and vendor consolidation deals. • A reversal in the rupee."
+            },
+            {
+              "chunk_id": "7c6edd4d55625dfe3131b99f3f971139eca2477fd012ef102ff284645b8a7977",
+              "page_number": 5,
+              "text": "A year of margin gains, record deal wins and workforce reset FY26 was a year of contrasts for TCS. Top-line growth in US dollar terms was flat to slightly negative, reflecting cautious discretionary technology spending among clients, particularly in banking and financial services and in North America. In rupee terms revenue still grew 4.6% to ₹267,021 crore, helped by currency. Profitability improved even as growth stayed muted. The operating margin reached 25%, the highest in four years, and the net margin excluding exceptional items rose to 19.8%. Management cited productivity from automation and AI-led delivery, tighter cost control and a more favourable mix."
+            },
+            {
+              "chunk_id": "8d031b20ba67329796efac41171ed43784572d7a34b9b6b202f9af4b2c5b2a9a",
+              "page_number": 39,
+              "text": "What to follow in FY27 TCS ended FY26 with record deal momentum, a 25% operating margin and a workforce that had stopped shrinking. The main questions for FY27 concern how quickly that momentum turns into revenue growth."
+            },
+            {
+              "chunk_id": "4275a701d913a7a3460d00a2c6fac6fb1026186cfa24a6c51b4952b57c81cf35",
+              "page_number": 1,
+              "text": "For the financial year ended 31 March 2026 Revenue ₹267,021 crore | $30.0 billion Net margin 19.8% | Operating margin 25% TCV $40.7 billion | 584,519 employees Unofficial compilation prepared from TCS public results disclosures. Not the statutory annual report of TCS."
+            },
+            {
+              "chunk_id": "53b780efb605bc388d8fe978815bdc80e99fbfabc821aedac39f7167e4016af1",
+              "page_number": 11,
+              "text": "Conditions shaping FY26 The global environment for technology services remained uncertain through FY26. In July 2025, TCS's CEO said continued macroeconomic and geopolitical uncertainty had caused a demand contraction. Clients delayed or scaled back discretionary projects while continuing to commit to cost-saving and modernisation work."
+            },
+            {
+              "chunk_id": "5ce13dfb4ce9901078a1e63788a34b987963a7900f846c3fb4ecd12845a0ee01",
+              "page_number": 38,
+              "text": "Snapshot of the quarter ended 30 June 2026 After the close of FY26, TCS published its first-quarter FY27 results. A few data points from that fact sheet give an early read on how the new year started. Order intake of $9.5 billion is lower than Q4 FY26's exceptional $12 billion but comparable to the $9.3 to $10.0 billion range of the first three quarters of FY26. Attrition was stable, and the mix of revenue by market and vertical was little changed. Revenue and profit for Q1 FY27 are not shown here because the column layout in the extracted source was ambiguous; see the official release."
+            },
+            {
+              "chunk_id": "f64d507c6d270cb4ebedf921710385d3a9b98ffd40b26ecd18d5c5724243bec9",
+              "page_number": 20,
+              "text": "Quarterly results, ₹ million (IFRS, as published) * Q2 and Q3 FY26 exclude exceptional items, as presented by TCS. Full-year net income on this basis is ₹528,200 million (₹52,820 crore), a net margin of 19.8%."
+            },
+            {
+              "chunk_id": "b88ccce8cd90a10e3b7b92b80ad05f6429443441ad4571b5f5432eebc839cac1",
+              "page_number": 22,
+              "text": "Total contract value (TCV) for FY26 TCS booked $40.7 billion of TCV in FY26, ahead of $39.4 billion in FY25. Q4 FY26 TCV of $12 billion was among the highest the company has recorded. The company signed three mega deals in Q4 and five over the year. TCV is the total value of contracts signed in a period and is not the same as revenue; deals are delivered over several years. A strong order book therefore supports future revenue visibility, but the timing of conversion depends on client ramp-up schedules. Q3 FY26 TCV is derived as the annual total less Q1, Q2 and Q4 as published; it may differ slightly from the figure TCS reported because of rounding."
+            }
+          ]
+        }
+      ],
+      "response": {
+        "answer": "TCS's FY26 operating margin was 25% and net margin was 19.8%.",
+        "citations": [
+          {
+            "chunk_id": "d8a1ab3b42c6f43a6aed221b870ad64fd3cf836860d0855549b59cd367b51cb9",
+            "document_id": "tcs_annual_report",
+            "page_number": 15,
+            "text_snippet": "Operating and net margin trends TCS reported an operating margin of 25% for FY26, up 70 basis points year on year and the highest in four years."
+          },
+          {
+            "chunk_id": "7c6edd4d55625dfe3131b99f3f971139eca2477fd012ef102ff284645b8a7977",
+            "document_id": "tcs_annual_report",
+            "page_number": 5,
+            "text_snippet": "...The operating margin reached 25%, the highest in four years, and the net margin excluding exceptional items rose to 19.8%."
+          },
+          {
+            "chunk_id": "4275a701d913a7a3460d00a2c6fac6fb1026186cfa24a6c51b4952b57c81cf35",
+            "document_id": "tcs_annual_report",
+            "page_number": 1,
+            "text_snippet": "For the financial year ended 31 March 2026 Revenue ₹267,021 crore | $30.0 billion Net margin 19.8% | Operating margin 25% TCV $40.7 billion | 584,519 employees Unofficial compilation prepared from TCS..."
+          },
+          {
+            "chunk_id": "f64d507c6d270cb4ebedf921710385d3a9b98ffd40b26ecd18d5c5724243bec9",
+            "document_id": "tcs_annual_report",
+            "page_number": 20,
+            "text_snippet": "...Full-year net income on this basis is ₹528,200 million (₹52,820 crore), a net margin of 19.8%."
+          }
+        ],
+        "trace": [
+          {
+            "step_type": "plan",
+            "content": "Classified as simple; 1 sub-query",
+            "metadata": {
+              "query_type": "simple",
+              "subquery_count": 1,
+              "rewritten": false
+            }
+          },
+          {
+            "step_type": "retrieve",
+            "content": "Retrieved 8 passages across 1 sub-query",
+            "metadata": {
+              "search_query_count": 1,
+              "chunks_per_search": [
+                8
+              ],
+              "chunks_after_merge": 8,
+              "new_chunks": 8,
+              "attempt": 0,
+              "errors": 0,
+              "quarantined": 0
+            }
+          },
+          {
+            "step_type": "synthesize",
+            "content": "Draft answer generated with 4 citations",
+            "metadata": {
+              "citation_count": 4,
+              "dropped_citations": 0,
+              "generator_called": true
+            }
+          },
+          {
+            "step_type": "fact_check",
+            "content": "2 of 2 claims verified",
+            "metadata": {
+              "claims_total": 2,
+              "claims_supported": 2,
+              "coverage": 1.0,
+              "retry": false
+            }
+          }
+        ],
+        "verification_status": "verified",
+        "confidence": 0.95,
+        "latency_ms": 27.32079999987036
+      }
+    },
+    {
+      "question_id": "tcs-gold-03",
+      "category": "fact_lookup",
+      "question": "What did TCS's annualised AI revenue exceed in FY26?",
+      "reference_answer": "TCS's annualised AI revenue exceeded $2.3 billion in FY26.",
+      "model_calls_live": 3,
+      "model_calls_replayed": 0,
+      "searches": [
+        {
+          "query": "What did TCS's annualised AI revenue exceed in FY26?",
+          "top_k": 8,
+          "chunks": [
+            {
+              "chunk_id": "77df90f599f4d571fe5f3297b82fef861c29800fbb8496924da49cb111cf2485",
+              "page_number": 27,
+              "text": "From capability to revenue AI was the central theme of TCS's FY26 messaging. By Q4, the company reported annualised AI-related revenue above $2.3 billion, equal to more than 6% of total revenue. Where AI shows up in the business • Client engagements. Data foundations, model deployment, agent-based automation and AI-enabled process redesign for clients. • Internal delivery. AI coding assistants, automated testing and AI-supported operations to raise productivity. • People. More than 270,000 employees have higher proficiency in AI and machine learning. • Deal wins. Several of the mega deals signed during the year were described as including AI-led transformation components. Questions to watch • How much AI revenue is new versus relabelled existing work. • Whether productivity gains are passed on to clients through lower prices. • Whether AI revenue growth can offset slower growth in traditional application services. The definition of AI revenue is TCS's own. Figures are annualised run-rate, not full-year recognised revenue."
+            },
+            {
+              "chunk_id": "add61afb3c3b7efaa3ca1a2f001dbd1161748c726a4527dfa2efb75d1cab9573",
+              "page_number": 10,
+              "text": "Repositioning for a changing services market Through FY26 TCS framed its strategy around artificial intelligence, both as something it sells and as a way of changing how it delivers work. Management stated that the company had moved from building capabilities to executing on revenue, citing annualised AI revenue above $2.3 billion in Q4."
+            },
+            {
+              "chunk_id": "1832a868cd8d4779ddd90c1901cfe3ef0692dfbf54cd19aade471e761e88a4ed",
+              "page_number": 39,
+              "text": "• $40.7 billion of FY26 TCV provides revenue visibility. • Margins at a four-year high with room for further productivity gains. • AI revenue above a $2.3 billion annualised run rate. • Broader client base, with 66 clients above $100 million."
+            },
+            {
+              "chunk_id": "7c6edd4d55625dfe3131b99f3f971139eca2477fd012ef102ff284645b8a7977",
+              "page_number": 5,
+              "text": "A year of margin gains, record deal wins and workforce reset FY26 was a year of contrasts for TCS. Top-line growth in US dollar terms was flat to slightly negative, reflecting cautious discretionary technology spending among clients, particularly in banking and financial services and in North America. In rupee terms revenue still grew 4.6% to ₹267,021 crore, helped by currency. Profitability improved even as growth stayed muted. The operating margin reached 25%, the highest in four years, and the net margin excluding exceptional items rose to 19.8%. Management cited productivity from automation and AI-led delivery, tighter cost control and a more favourable mix."
+            },
+            {
+              "chunk_id": "d8a1ab3b42c6f43a6aed221b870ad64fd3cf836860d0855549b59cd367b51cb9",
+              "page_number": 15,
+              "text": "Operating and net margin trends TCS reported an operating margin of 25% for FY26, up 70 basis points year on year and the highest in four years. In Q3, the operating margin was 25.2%. The net margin excluding exceptional items was 19.8%, up 80 basis points. Why margins improved • Lower cost of revenue. Cost of revenue fell from 60.9% of revenue in Q1 to 59.3% in Q4. • Productivity and automation. AI-assisted delivery reduced effort on parts of the work. • Workforce actions. Headcount was reduced through the middle of the year, lowering employee costs relative to revenue. • Currency. A weaker rupee raised the rupee value of dollar billings against largely rupee-denominated delivery costs. What could erode them • Wage increases and higher attrition. • Investment in AI infrastructure and training. • Pricing concessions on large renewals and vendor consolidation deals. • A reversal in the rupee."
+            },
+            {
+              "chunk_id": "b50e44246a8348144eccd11ff01fcd8a13417328fbc345366b0f2e13f16b85c3",
+              "page_number": 5,
+              "text": "• Demand recovery in stages. Constant-currency revenue fell year on year in the first three quarters but turned sequentially positive, and Q4 revenue grew 5.4% in rupee terms from Q3. • Record order book momentum. TCV of $40.7 billion for the year, with $12 billion in Q4 alone. • AI as a revenue line. TCS disclosed annualised AI revenue above $2.3 billion by Q4. • Workforce restructuring. Headcount fell through the middle of the year and began to recover in Q4. • Generous capital return. Total dividends of ₹110 per share, including a ₹46 special dividend. The sections that follow set out the detail behind each theme, followed by a view of risks, governance and the outlook."
+            },
+            {
+              "chunk_id": "4275a701d913a7a3460d00a2c6fac6fb1026186cfa24a6c51b4952b57c81cf35",
+              "page_number": 1,
+              "text": "For the financial year ended 31 March 2026 Revenue ₹267,021 crore | $30.0 billion Net margin 19.8% | Operating margin 25% TCV $40.7 billion | 584,519 employees Unofficial compilation prepared from TCS public results disclosures. Not the statutory annual report of TCS."
+            },
+            {
+              "chunk_id": "5010144dbdc5fd73382c3e6c94030d554b082480b76548bb3dc4ad36be557838",
+              "page_number": 18,
+              "text": "Tata Consultancy Services | FY2025-26 | Unofficial compiled annual report Page 18 TCS ANNUAL REPORT 2025-26 (UNOFFICIAL)"
+            }
+          ]
+        }
+      ],
+      "response": {
+        "answer": "TCS's annualised AI revenue exceeded $2.3 billion.",
+        "citations": [
+          {
+            "chunk_id": "77df90f599f4d571fe5f3297b82fef861c29800fbb8496924da49cb111cf2485",
+            "document_id": "tcs_annual_report",
+            "page_number": 27,
+            "text_snippet": "...By Q4, the company reported annualised AI-related revenue above $2.3 billion, equal to more than 6% of total revenue."
+          },
+          {
+            "chunk_id": "add61afb3c3b7efaa3ca1a2f001dbd1161748c726a4527dfa2efb75d1cab9573",
+            "document_id": "tcs_annual_report",
+            "page_number": 10,
+            "text_snippet": "...Management stated that the company had moved from building capabilities to executing on revenue, citing annualised AI revenue above $2.3 billion in Q4."
+          },
+          {
+            "chunk_id": "1832a868cd8d4779ddd90c1901cfe3ef0692dfbf54cd19aade471e761e88a4ed",
+            "document_id": "tcs_annual_report",
+            "page_number": 39,
+            "text_snippet": "...• AI revenue above a $2.3 billion annualised run rate. • Broader client base, with 66 clients above $100 million."
+          },
+          {
+            "chunk_id": "b50e44246a8348144eccd11ff01fcd8a13417328fbc345366b0f2e13f16b85c3",
+            "document_id": "tcs_annual_report",
+            "page_number": 5,
+            "text_snippet": "...TCS disclosed annualised AI revenue above $2.3 billion by Q4. • Workforce restructuring."
+          }
+        ],
+        "trace": [
+          {
+            "step_type": "plan",
+            "content": "Classified as simple; 1 sub-query",
+            "metadata": {
+              "query_type": "simple",
+              "subquery_count": 1,
+              "rewritten": false
+            }
+          },
+          {
+            "step_type": "retrieve",
+            "content": "Retrieved 8 passages across 1 sub-query",
+            "metadata": {
+              "search_query_count": 1,
+              "chunks_per_search": [
+                8
+              ],
+              "chunks_after_merge": 8,
+              "new_chunks": 8,
+              "attempt": 0,
+              "errors": 0,
+              "quarantined": 0
+            }
+          },
+          {
+            "step_type": "synthesize",
+            "content": "Draft answer generated with 4 citations",
+            "metadata": {
+              "citation_count": 4,
+              "dropped_citations": 0,
+              "generator_called": true
+            }
+          },
+          {
+            "step_type": "fact_check",
+            "content": "1 of 1 claim verified",
+            "metadata": {
+              "claims_total": 1,
+              "claims_supported": 1,
+              "coverage": 1.0,
+              "retry": false
+            }
+          }
+        ],
+        "verification_status": "verified",
+        "confidence": 0.95,
+        "latency_ms": 35179.46089996258
+      }
+    },
+    {
+      "question_id": "tcs-gold-04",
+      "category": "table",
+      "question": "In the TCV-by-market-and-vertical table, what were FY26 total TCV, North America TCV, and Consumer Business TCV?",
+      "reference_answer": "FY26 total TCV was $40.7 billion, North America TCV was $19.0 billion, and Consumer Business TCV was $7.6 billion.",
+      "model_calls_live": 3,
+      "model_calls_replayed": 0,
+      "searches": [
+        {
+          "query": "In the TCV-by-market-and-vertical table, what were FY26 total TCV, North America TCV, and Consumer Business TCV?",
+          "top_k": 8,
+          "chunks": [
+            {
+              "chunk_id": "a02985505213ccc504b1cb6476b05fa21c39dd8648e85f953daf5b7a1b864f76",
+              "page_number": 23,
+              "text": "US$ billion: Total TCV; FY25: 39.4; FY26: 40.7; Q4 FY26: 12.0. US$ billion: North America; FY25: 21.6; FY26: 19.0; Q4 FY26: 5.4. US$ billion: BFSI; FY25: 12.8; FY26: 13.4; Q4 FY26: 3.9. US$ billion: Consumer Business; FY25: 5.3; FY26: 7.6; Q4 FY26: 2.8."
+            },
+            {
+              "chunk_id": "b88ccce8cd90a10e3b7b92b80ad05f6429443441ad4571b5f5432eebc839cac1",
+              "page_number": 22,
+              "text": "Total contract value (TCV) for FY26 TCS booked $40.7 billion of TCV in FY26, ahead of $39.4 billion in FY25. Q4 FY26 TCV of $12 billion was among the highest the company has recorded. The company signed three mega deals in Q4 and five over the year. TCV is the total value of contracts signed in a period and is not the same as revenue; deals are delivered over several years. A strong order book therefore supports future revenue visibility, but the timing of conversion depends on client ramp-up schedules. Q3 FY26 TCV is derived as the annual total less Q1, Q2 and Q4 as published; it may differ slightly from the figure TCS reported because of rounding."
+            },
+            {
+              "chunk_id": "6c16a69e84aa3cf38296f9f869ac65c520566330abdf2984423af24a0c0a6ed5",
+              "page_number": 38,
+              "text": "Indicator: Order book TCV; Q1 FY27: $9.5 billion. Indicator: North America TCV; Q1 FY27: $4.7 billion. Indicator: BFSI TCV; Q1 FY27: $2.5 billion. Indicator: Consumer Business TCV; Q1 FY27: $1.4 billion. Indicator: Voluntary attrition, IT services (LTM); Q1 FY27: 13.6%. Indicator: North America share of revenue; Q1 FY27: 48.3%. Indicator: BFSI share of revenue; Q1 FY27: 32.1%. Indicator: Total cash and investments; Q1 FY27: ₹50,232 crore."
+            },
+            {
+              "chunk_id": "64cafb4259ec870a7628c5b946bd0bff41e3600fd4441c1f824ae5044dfd8d61",
+              "page_number": 3,
+              "text": "Section: About this report; Page: 2; Section: Order book; Page: 22. Section: FY26 at a glance; Page: 4; Section: TCV by market and vertical; Page: 23. Section: Executive overview; Page: 5; Section: Client franchise; Page: 24. Section: Company profile; Page: 6; Section: Geographic mix; Page: 25. Section: Journey and milestones; Page: 7; Section: Industry verticals; Page: 26. Section: Service portfolio; Page: 8; Section: Artificial intelligence; Page: 27. Section: Business model; Page: 9; Section: Workforce; Page: 28. Section: Strategy: AI-first transformation; Page: 10; Section: Learning and talent; Page: 29. Section: Operating environment; Page: 11; Section: Attrition and diversity; Page: 30. Section: Revenue performance; Page: 12; Section: Workforce transition; Page: 31. Section: Quarterly revenue; Page: 13; Section: Risk landscape; Page: 32. Section: Profitability; Page: 14; Section: Risk summary matrix; Page: 33. Section: Margins; Page: 15; Section: Corporate governance; Page: 34. Section: Cost structure; Page: 16; Section: Leadership; Page: 35. Section: Cash flow; Page: 17; Section: Sustainability; Page: 36. Section: Liquidity; Page: 18; Section: Community and CSR; Page: 37. Section: Shareholder returns; Page: 19; Section: Subsequent period: Q1 FY27; Page: 38. Section: Condensed income statement; Page: 20; Section: Outlook and watch-list; Page: 39. Section: Reported versus adjusted profit; Page: 21; Section: Glossary and sources; Page: 40."
+            },
+            {
+              "chunk_id": "3eb15600db45e63e15ef0ab76bce805e15e3b5a19bd60365a25a06da79eced13",
+              "page_number": 22,
+              "text": "Period: Q1 FY26; TCV, US$ billion: 9.4. Period: Q2 FY26; TCV, US$ billion: 10.0. Period: Q3 FY26 (derived); TCV, US$ billion: 9.3. Period: Q4 FY26; TCV, US$ billion: 12.0. Period: FY26; TCV, US$ billion: 40.7. Period: FY25; TCV, US$ billion: 39.4."
+            },
+            {
+              "chunk_id": "5ce13dfb4ce9901078a1e63788a34b987963a7900f846c3fb4ecd12845a0ee01",
+              "page_number": 38,
+              "text": "Snapshot of the quarter ended 30 June 2026 After the close of FY26, TCS published its first-quarter FY27 results. A few data points from that fact sheet give an early read on how the new year started. Order intake of $9.5 billion is lower than Q4 FY26's exceptional $12 billion but comparable to the $9.3 to $10.0 billion range of the first three quarters of FY26. Attrition was stable, and the mix of revenue by market and vertical was little changed. Revenue and profit for Q1 FY27 are not shown here because the column layout in the extracted source was ambiguous; see the official release."
+            },
+            {
+              "chunk_id": "1832a868cd8d4779ddd90c1901cfe3ef0692dfbf54cd19aade471e761e88a4ed",
+              "page_number": 39,
+              "text": "• $40.7 billion of FY26 TCV provides revenue visibility. • Margins at a four-year high with room for further productivity gains. • AI revenue above a $2.3 billion annualised run rate. • Broader client base, with 66 clients above $100 million."
+            },
+            {
+              "chunk_id": "af75026d8de808231f7c08f50a509e1a4fcd05f42008c83c883b8296d09d4852",
+              "page_number": 6,
+              "text": "TCS serves clients across North America, Latin America, the United Kingdom, Continental Europe, India, Asia Pacific, and the Middle East and Africa. North America is the largest market at roughly 48% of revenue, while Banking, Financial Services and Insurance (BFSI) is the largest industry vertical at roughly 32%."
+            }
+          ]
+        },
+        {
+          "query": "What is the FY26 total TCV in the TCV-by-market-and-vertical table?",
+          "top_k": 8,
+          "chunks": [
+            {
+              "chunk_id": "b88ccce8cd90a10e3b7b92b80ad05f6429443441ad4571b5f5432eebc839cac1",
+              "page_number": 22,
+              "text": "Total contract value (TCV) for FY26 TCS booked $40.7 billion of TCV in FY26, ahead of $39.4 billion in FY25. Q4 FY26 TCV of $12 billion was among the highest the company has recorded. The company signed three mega deals in Q4 and five over the year. TCV is the total value of contracts signed in a period and is not the same as revenue; deals are delivered over several years. A strong order book therefore supports future revenue visibility, but the timing of conversion depends on client ramp-up schedules. Q3 FY26 TCV is derived as the annual total less Q1, Q2 and Q4 as published; it may differ slightly from the figure TCS reported because of rounding."
+            },
+            {
+              "chunk_id": "5ce13dfb4ce9901078a1e63788a34b987963a7900f846c3fb4ecd12845a0ee01",
+              "page_number": 38,
+              "text": "Snapshot of the quarter ended 30 June 2026 After the close of FY26, TCS published its first-quarter FY27 results. A few data points from that fact sheet give an early read on how the new year started. Order intake of $9.5 billion is lower than Q4 FY26's exceptional $12 billion but comparable to the $9.3 to $10.0 billion range of the first three quarters of FY26. Attrition was stable, and the mix of revenue by market and vertical was little changed. Revenue and profit for Q1 FY27 are not shown here because the column layout in the extracted source was ambiguous; see the official release."
+            },
+            {
+              "chunk_id": "a02985505213ccc504b1cb6476b05fa21c39dd8648e85f953daf5b7a1b864f76",
+              "page_number": 23,
+              "text": "US$ billion: Total TCV; FY25: 39.4; FY26: 40.7; Q4 FY26: 12.0. US$ billion: North America; FY25: 21.6; FY26: 19.0; Q4 FY26: 5.4. US$ billion: BFSI; FY25: 12.8; FY26: 13.4; Q4 FY26: 3.9. US$ billion: Consumer Business; FY25: 5.3; FY26: 7.6; Q4 FY26: 2.8."
+            },
+            {
+              "chunk_id": "6c16a69e84aa3cf38296f9f869ac65c520566330abdf2984423af24a0c0a6ed5",
+              "page_number": 38,
+              "text": "Indicator: Order book TCV; Q1 FY27: $9.5 billion. Indicator: North America TCV; Q1 FY27: $4.7 billion. Indicator: BFSI TCV; Q1 FY27: $2.5 billion. Indicator: Consumer Business TCV; Q1 FY27: $1.4 billion. Indicator: Voluntary attrition, IT services (LTM); Q1 FY27: 13.6%. Indicator: North America share of revenue; Q1 FY27: 48.3%. Indicator: BFSI share of revenue; Q1 FY27: 32.1%. Indicator: Total cash and investments; Q1 FY27: ₹50,232 crore."
+            },
+            {
+              "chunk_id": "8bffb4a9d6c43c73eca7b4f4e67a8fe48145172cad010600ec4a154e6bb30fc1",
+              "page_number": 40,
+              "text": "Terms used and where the data came from Glossary • Constant currency (CC): growth measured with exchange rates held constant to remove currency effects. • TCV: total contract value of deals signed in a period. • Mega deal: a very large contract; TCS reported five in FY26. • BFSI: Banking, Financial Services and Insurance. • LTM attrition: voluntary attrition over the last twelve months. • Exceptional items: one-off charges or gains excluded from underlying profit. • bp (basis point): one hundredth of a percentage point. • Crore: ten million (10,000,000). Sources • TCS Financial Results fact sheets, Q1 to Q4 FY2025-26 and Q1 FY2026-27 (tcs.com investor relations). • TCS press release, \"TCS closes FY26 with improving sequential growth momentum and strong deal wins\", 9 April 2026. • Press coverage of the Q1, Q3 and Q4 FY26 results (Outlook Business, The Quint, PTI via TaxTMI, and market commentary on dividends and attrition). Unofficial compilation prepared for informational purposes. Refer to TCS filings for authoritative data."
+            },
+            {
+              "chunk_id": "1832a868cd8d4779ddd90c1901cfe3ef0692dfbf54cd19aade471e761e88a4ed",
+              "page_number": 39,
+              "text": "• $40.7 billion of FY26 TCV provides revenue visibility. • Margins at a four-year high with room for further productivity gains. • AI revenue above a $2.3 billion annualised run rate. • Broader client base, with 66 clients above $100 million."
+            },
+            {
+              "chunk_id": "3eb15600db45e63e15ef0ab76bce805e15e3b5a19bd60365a25a06da79eced13",
+              "page_number": 22,
+              "text": "Period: Q1 FY26; TCV, US$ billion: 9.4. Period: Q2 FY26; TCV, US$ billion: 10.0. Period: Q3 FY26 (derived); TCV, US$ billion: 9.3. Period: Q4 FY26; TCV, US$ billion: 12.0. Period: FY26; TCV, US$ billion: 40.7. Period: FY25; TCV, US$ billion: 39.4."
+            },
+            {
+              "chunk_id": "d5b71070e29d7d334a6caa4dfa31ea108c838bdff9a99f84698ecbe7354ba19d",
+              "page_number": 19,
+              "text": "Dividends declared for FY26 The total of ₹110 per share is made up of three interim dividends of ₹11 each (₹33), a special dividend of ₹46 and a proposed final dividend of ₹31. Market commentary noted that the final dividend of ₹31 was below the level some investors had expected. The proposed final dividend is subject to approval by shareholders at the Annual General Meeting. TCS has historically returned a large share of its free cash flow to shareholders through dividends and, in earlier years, share buybacks. Dividend components as reported in market coverage of the Q4 FY26 results; confirm in the official dividend notice."
+            }
+          ]
+        },
+        {
+          "query": "What is the FY26 North America TCV in the TCV-by-market-and-vertical table?",
+          "top_k": 8,
+          "chunks": [
+            {
+              "chunk_id": "b88ccce8cd90a10e3b7b92b80ad05f6429443441ad4571b5f5432eebc839cac1",
+              "page_number": 22,
+              "text": "Total contract value (TCV) for FY26 TCS booked $40.7 billion of TCV in FY26, ahead of $39.4 billion in FY25. Q4 FY26 TCV of $12 billion was among the highest the company has recorded. The company signed three mega deals in Q4 and five over the year. TCV is the total value of contracts signed in a period and is not the same as revenue; deals are delivered over several years. A strong order book therefore supports future revenue visibility, but the timing of conversion depends on client ramp-up schedules. Q3 FY26 TCV is derived as the annual total less Q1, Q2 and Q4 as published; it may differ slightly from the figure TCS reported because of rounding."
+            },
+            {
+              "chunk_id": "a02985505213ccc504b1cb6476b05fa21c39dd8648e85f953daf5b7a1b864f76",
+              "page_number": 23,
+              "text": "US$ billion: Total TCV; FY25: 39.4; FY26: 40.7; Q4 FY26: 12.0. US$ billion: North America; FY25: 21.6; FY26: 19.0; Q4 FY26: 5.4. US$ billion: BFSI; FY25: 12.8; FY26: 13.4; Q4 FY26: 3.9. US$ billion: Consumer Business; FY25: 5.3; FY26: 7.6; Q4 FY26: 2.8."
+            },
+            {
+              "chunk_id": "5ce13dfb4ce9901078a1e63788a34b987963a7900f846c3fb4ecd12845a0ee01",
+              "page_number": 38,
+              "text": "Snapshot of the quarter ended 30 June 2026 After the close of FY26, TCS published its first-quarter FY27 results. A few data points from that fact sheet give an early read on how the new year started. Order intake of $9.5 billion is lower than Q4 FY26's exceptional $12 billion but comparable to the $9.3 to $10.0 billion range of the first three quarters of FY26. Attrition was stable, and the mix of revenue by market and vertical was little changed. Revenue and profit for Q1 FY27 are not shown here because the column layout in the extracted source was ambiguous; see the official release."
+            },
+            {
+              "chunk_id": "6c16a69e84aa3cf38296f9f869ac65c520566330abdf2984423af24a0c0a6ed5",
+              "page_number": 38,
+              "text": "Indicator: Order book TCV; Q1 FY27: $9.5 billion. Indicator: North America TCV; Q1 FY27: $4.7 billion. Indicator: BFSI TCV; Q1 FY27: $2.5 billion. Indicator: Consumer Business TCV; Q1 FY27: $1.4 billion. Indicator: Voluntary attrition, IT services (LTM); Q1 FY27: 13.6%. Indicator: North America share of revenue; Q1 FY27: 48.3%. Indicator: BFSI share of revenue; Q1 FY27: 32.1%. Indicator: Total cash and investments; Q1 FY27: ₹50,232 crore."
+            },
+            {
+              "chunk_id": "3eb15600db45e63e15ef0ab76bce805e15e3b5a19bd60365a25a06da79eced13",
+              "page_number": 22,
+              "text": "Period: Q1 FY26; TCV, US$ billion: 9.4. Period: Q2 FY26; TCV, US$ billion: 10.0. Period: Q3 FY26 (derived); TCV, US$ billion: 9.3. Period: Q4 FY26; TCV, US$ billion: 12.0. Period: FY26; TCV, US$ billion: 40.7. Period: FY25; TCV, US$ billion: 39.4."
+            },
+            {
+              "chunk_id": "64cafb4259ec870a7628c5b946bd0bff41e3600fd4441c1f824ae5044dfd8d61",
+              "page_number": 3,
+              "text": "Section: About this report; Page: 2; Section: Order book; Page: 22. Section: FY26 at a glance; Page: 4; Section: TCV by market and vertical; Page: 23. Section: Executive overview; Page: 5; Section: Client franchise; Page: 24. Section: Company profile; Page: 6; Section: Geographic mix; Page: 25. Section: Journey and milestones; Page: 7; Section: Industry verticals; Page: 26. Section: Service portfolio; Page: 8; Section: Artificial intelligence; Page: 27. Section: Business model; Page: 9; Section: Workforce; Page: 28. Section: Strategy: AI-first transformation; Page: 10; Section: Learning and talent; Page: 29. Section: Operating environment; Page: 11; Section: Attrition and diversity; Page: 30. Section: Revenue performance; Page: 12; Section: Workforce transition; Page: 31. Section: Quarterly revenue; Page: 13; Section: Risk landscape; Page: 32. Section: Profitability; Page: 14; Section: Risk summary matrix; Page: 33. Section: Margins; Page: 15; Section: Corporate governance; Page: 34. Section: Cost structure; Page: 16; Section: Leadership; Page: 35. Section: Cash flow; Page: 17; Section: Sustainability; Page: 36. Section: Liquidity; Page: 18; Section: Community and CSR; Page: 37. Section: Shareholder returns; Page: 19; Section: Subsequent period: Q1 FY27; Page: 38. Section: Condensed income statement; Page: 20; Section: Outlook and watch-list; Page: 39. Section: Reported versus adjusted profit; Page: 21; Section: Glossary and sources; Page: 40."
+            },
+            {
+              "chunk_id": "af75026d8de808231f7c08f50a509e1a4fcd05f42008c83c883b8296d09d4852",
+              "page_number": 6,
+              "text": "TCS serves clients across North America, Latin America, the United Kingdom, Continental Europe, India, Asia Pacific, and the Middle East and Africa. North America is the largest market at roughly 48% of revenue, while Banking, Financial Services and Insurance (BFSI) is the largest industry vertical at roughly 32%."
+            },
+            {
+              "chunk_id": "8bffb4a9d6c43c73eca7b4f4e67a8fe48145172cad010600ec4a154e6bb30fc1",
+              "page_number": 40,
+              "text": "Terms used and where the data came from Glossary • Constant currency (CC): growth measured with exchange rates held constant to remove currency effects. • TCV: total contract value of deals signed in a period. • Mega deal: a very large contract; TCS reported five in FY26. • BFSI: Banking, Financial Services and Insurance. • LTM attrition: voluntary attrition over the last twelve months. • Exceptional items: one-off charges or gains excluded from underlying profit. • bp (basis point): one hundredth of a percentage point. • Crore: ten million (10,000,000). Sources • TCS Financial Results fact sheets, Q1 to Q4 FY2025-26 and Q1 FY2026-27 (tcs.com investor relations). • TCS press release, \"TCS closes FY26 with improving sequential growth momentum and strong deal wins\", 9 April 2026. • Press coverage of the Q1, Q3 and Q4 FY26 results (Outlook Business, The Quint, PTI via TaxTMI, and market commentary on dividends and attrition). Unofficial compilation prepared for informational purposes. Refer to TCS filings for authoritative data."
+            }
+          ]
+        },
+        {
+          "query": "What is the FY26 Consumer Business TCV in the TCV-by-market-and-vertical table?",
+          "top_k": 8,
+          "chunks": [
+            {
+              "chunk_id": "b88ccce8cd90a10e3b7b92b80ad05f6429443441ad4571b5f5432eebc839cac1",
+              "page_number": 22,
+              "text": "Total contract value (TCV) for FY26 TCS booked $40.7 billion of TCV in FY26, ahead of $39.4 billion in FY25. Q4 FY26 TCV of $12 billion was among the highest the company has recorded. The company signed three mega deals in Q4 and five over the year. TCV is the total value of contracts signed in a period and is not the same as revenue; deals are delivered over several years. A strong order book therefore supports future revenue visibility, but the timing of conversion depends on client ramp-up schedules. Q3 FY26 TCV is derived as the annual total less Q1, Q2 and Q4 as published; it may differ slightly from the figure TCS reported because of rounding."
+            },
+            {
+              "chunk_id": "a02985505213ccc504b1cb6476b05fa21c39dd8648e85f953daf5b7a1b864f76",
+              "page_number": 23,
+              "text": "US$ billion: Total TCV; FY25: 39.4; FY26: 40.7; Q4 FY26: 12.0. US$ billion: North America; FY25: 21.6; FY26: 19.0; Q4 FY26: 5.4. US$ billion: BFSI; FY25: 12.8; FY26: 13.4; Q4 FY26: 3.9. US$ billion: Consumer Business; FY25: 5.3; FY26: 7.6; Q4 FY26: 2.8."
+            },
+            {
+              "chunk_id": "1832a868cd8d4779ddd90c1901cfe3ef0692dfbf54cd19aade471e761e88a4ed",
+              "page_number": 39,
+              "text": "• $40.7 billion of FY26 TCV provides revenue visibility. • Margins at a four-year high with room for further productivity gains. • AI revenue above a $2.3 billion annualised run rate. • Broader client base, with 66 clients above $100 million."
+            },
+            {
+              "chunk_id": "6c16a69e84aa3cf38296f9f869ac65c520566330abdf2984423af24a0c0a6ed5",
+              "page_number": 38,
+              "text": "Indicator: Order book TCV; Q1 FY27: $9.5 billion. Indicator: North America TCV; Q1 FY27: $4.7 billion. Indicator: BFSI TCV; Q1 FY27: $2.5 billion. Indicator: Consumer Business TCV; Q1 FY27: $1.4 billion. Indicator: Voluntary attrition, IT services (LTM); Q1 FY27: 13.6%. Indicator: North America share of revenue; Q1 FY27: 48.3%. Indicator: BFSI share of revenue; Q1 FY27: 32.1%. Indicator: Total cash and investments; Q1 FY27: ₹50,232 crore."
+            },
+            {
+              "chunk_id": "64cafb4259ec870a7628c5b946bd0bff41e3600fd4441c1f824ae5044dfd8d61",
+              "page_number": 3,
+              "text": "Section: About this report; Page: 2; Section: Order book; Page: 22. Section: FY26 at a glance; Page: 4; Section: TCV by market and vertical; Page: 23. Section: Executive overview; Page: 5; Section: Client franchise; Page: 24. Section: Company profile; Page: 6; Section: Geographic mix; Page: 25. Section: Journey and milestones; Page: 7; Section: Industry verticals; Page: 26. Section: Service portfolio; Page: 8; Section: Artificial intelligence; Page: 27. Section: Business model; Page: 9; Section: Workforce; Page: 28. Section: Strategy: AI-first transformation; Page: 10; Section: Learning and talent; Page: 29. Section: Operating environment; Page: 11; Section: Attrition and diversity; Page: 30. Section: Revenue performance; Page: 12; Section: Workforce transition; Page: 31. Section: Quarterly revenue; Page: 13; Section: Risk landscape; Page: 32. Section: Profitability; Page: 14; Section: Risk summary matrix; Page: 33. Section: Margins; Page: 15; Section: Corporate governance; Page: 34. Section: Cost structure; Page: 16; Section: Leadership; Page: 35. Section: Cash flow; Page: 17; Section: Sustainability; Page: 36. Section: Liquidity; Page: 18; Section: Community and CSR; Page: 37. Section: Shareholder returns; Page: 19; Section: Subsequent period: Q1 FY27; Page: 38. Section: Condensed income statement; Page: 20; Section: Outlook and watch-list; Page: 39. Section: Reported versus adjusted profit; Page: 21; Section: Glossary and sources; Page: 40."
+            },
+            {
+              "chunk_id": "5ce13dfb4ce9901078a1e63788a34b987963a7900f846c3fb4ecd12845a0ee01",
+              "page_number": 38,
+              "text": "Snapshot of the quarter ended 30 June 2026 After the close of FY26, TCS published its first-quarter FY27 results. A few data points from that fact sheet give an early read on how the new year started. Order intake of $9.5 billion is lower than Q4 FY26's exceptional $12 billion but comparable to the $9.3 to $10.0 billion range of the first three quarters of FY26. Attrition was stable, and the mix of revenue by market and vertical was little changed. Revenue and profit for Q1 FY27 are not shown here because the column layout in the extracted source was ambiguous; see the official release."
+            },
+            {
+              "chunk_id": "8bffb4a9d6c43c73eca7b4f4e67a8fe48145172cad010600ec4a154e6bb30fc1",
+              "page_number": 40,
+              "text": "Terms used and where the data came from Glossary • Constant currency (CC): growth measured with exchange rates held constant to remove currency effects. • TCV: total contract value of deals signed in a period. • Mega deal: a very large contract; TCS reported five in FY26. • BFSI: Banking, Financial Services and Insurance. • LTM attrition: voluntary attrition over the last twelve months. • Exceptional items: one-off charges or gains excluded from underlying profit. • bp (basis point): one hundredth of a percentage point. • Crore: ten million (10,000,000). Sources • TCS Financial Results fact sheets, Q1 to Q4 FY2025-26 and Q1 FY2026-27 (tcs.com investor relations). • TCS press release, \"TCS closes FY26 with improving sequential growth momentum and strong deal wins\", 9 April 2026. • Press coverage of the Q1, Q3 and Q4 FY26 results (Outlook Business, The Quint, PTI via TaxTMI, and market commentary on dividends and attrition). Unofficial compilation prepared for informational purposes. Refer to TCS filings for authoritative data."
+            },
+            {
+              "chunk_id": "3eb15600db45e63e15ef0ab76bce805e15e3b5a19bd60365a25a06da79eced13",
+              "page_number": 22,
+              "text": "Period: Q1 FY26; TCV, US$ billion: 9.4. Period: Q2 FY26; TCV, US$ billion: 10.0. Period: Q3 FY26 (derived); TCV, US$ billion: 9.3. Period: Q4 FY26; TCV, US$ billion: 12.0. Period: FY26; TCV, US$ billion: 40.7. Period: FY25; TCV, US$ billion: 39.4."
+            }
+          ]
+        }
+      ],
+      "response": {
+        "answer": "FY26 total TCV: $40.7 billion; North America TCV: $19.0 billion; Consumer Business TCV: $7.6 billion.",
+        "citations": [
+          {
+            "chunk_id": "a02985505213ccc504b1cb6476b05fa21c39dd8648e85f953daf5b7a1b864f76",
+            "document_id": "tcs_annual_report",
+            "page_number": 23,
+            "text_snippet": "...US$ billion: North America; FY25: 21.6; FY26: 19.0; Q4 FY26: 5.4. US$ billion: BFSI; FY25: 12.8; FY26: 13.4; Q4 FY26: 3.9."
+          },
+          {
+            "chunk_id": "3eb15600db45e63e15ef0ab76bce805e15e3b5a19bd60365a25a06da79eced13",
+            "document_id": "tcs_annual_report",
+            "page_number": 22,
+            "text_snippet": "...Period: FY26; TCV, US$ billion: 40.7. Period: FY25; TCV, US$ billion: 39.4."
+          }
+        ],
+        "trace": [
+          {
+            "step_type": "plan",
+            "content": "Classified as multi-hop; 3 sub-queries",
+            "metadata": {
+              "query_type": "multi-hop",
+              "subquery_count": 3,
+              "rewritten": false
+            }
+          },
+          {
+            "step_type": "retrieve",
+            "content": "Retrieved 10 passages across 3 sub-queries",
+            "metadata": {
+              "search_query_count": 4,
+              "chunks_per_search": [
+                8,
+                8,
+                8,
+                8
+              ],
+              "chunks_after_merge": 10,
+              "new_chunks": 10,
+              "attempt": 0,
+              "errors": 0,
+              "quarantined": 0
+            }
+          },
+          {
+            "step_type": "synthesize",
+            "content": "Draft answer generated with 1 citation",
+            "metadata": {
+              "citation_count": 1,
+              "dropped_citations": 0,
+              "generator_called": true
+            }
+          },
+          {
+            "step_type": "fact_check",
+            "content": "3 of 3 claims verified",
+            "metadata": {
+              "claims_total": 3,
+              "claims_supported": 3,
+              "coverage": 1.0,
+              "retry": false
+            }
+          }
+        ],
+        "verification_status": "verified",
+        "confidence": 0.95,
+        "latency_ms": 60521.58929995494
+      }
+    },
+    {
+      "question_id": "tcs-gold-05",
+      "category": "numerical_comparison",
+      "question": "By how much did quarterly rupee revenue increase from Q1 FY26 to Q4 FY26?",
+      "reference_answer": "Revenue increased by ₹7,261 crore, from ₹63,437 crore in Q1 FY26 to ₹70,698 crore in Q4 FY26.",
+      "model_calls_live": 3,
+      "model_calls_replayed": 0,
+      "searches": [
+        {
+          "query": "By how much did quarterly rupee revenue increase from Q1 FY26 to Q4 FY26?",
+          "top_k": 8,
+          "chunks": [
+            {
+              "chunk_id": "ff6586f3df5e44515c6544cd80249964679db712ea79eb8fcb3b614abb4f67c2",
+              "page_number": 12,
+              "text": "In Q4 FY26, rupee revenue of ₹70,698 crore was up 5.4% from Q3 and 9.6% from Q4 FY25. US dollar revenue of $7,621 million was up 1.5% sequentially and 2.1% year on year. In constant currency, revenue grew 1.2% sequentially and declined 0.6% year on year. FY25 revenue was about ₹255,324 crore (derived from the quarterly figures published in the FY26 fact sheets), so FY26 added roughly ₹11,700 crore in rupee terms."
+            },
+            {
+              "chunk_id": "e2b3105097fe62078169693855a3f2a8ee76df4385fe3254b43385749e2e9607",
+              "page_number": 13,
+              "text": "Four quarters of FY26 against FY25 Every quarter of FY26 recorded higher rupee revenue than the year-earlier quarter, and revenue stepped up in each successive quarter. The Q4 step of 5.4% was the largest of the year and was supported by currency as well as business growth: in constant currency the sequential gain was 1.2%."
+            },
+            {
+              "chunk_id": "67f7fa55a7cea9c2febf9cc5d190da7b7390fb35f3b13b82b7683a65ad0f5dae",
+              "page_number": 13,
+              "text": "• Q1: +1.3% • Q2: +2.4% • Q3: +4.9% • Q4: +9.6% Quarterly rupee figures converted from ₹ million in TCS fact sheets. FY25 quarterly values taken from the comparative columns of the FY26 fact sheets."
+            },
+            {
+              "chunk_id": "a12690271a0131aa208eca944c8819340379ce87d52738315f6f2195f0dbfea7",
+              "page_number": 20,
+              "text": "₹ million: Revenue; Q1 FY25: 626,130; Q2 FY25: 642,590; Q3 FY25: 639,730; Q4 FY25: 644,790. ₹ million: Net income; Q1 FY25: 120,400; Q2 FY25: 119,090; Q3 FY25: 123,800; Q4 FY25: 122,240."
+            },
+            {
+              "chunk_id": "b882276b2f9282eff4da992cde8132823f569e5e12bb4f0277f27e78e459ff46",
+              "page_number": 12,
+              "text": "FY26 revenue in rupees and US dollars The difference between rupee growth (4.6%) and dollar growth (-0.5%) reflects a weaker rupee against the dollar through the year, which lifts rupee-reported revenue. Constant-currency growth of -2.4% is the cleanest read of underlying demand, and it shows a year of modest contraction in the first three quarters followed by improvement."
+            },
+            {
+              "chunk_id": "17b67a3c53da7c55e411b943c69626f22c74e05917b62b6582be19dbae121f61",
+              "page_number": 12,
+              "text": "Measure: Revenue, ₹ crore; FY26: 267,021; Change vs FY25: +4.6%. Measure: Revenue, US$ million; FY26: 30,017; Change vs FY25: -0.5%. Measure: Revenue, constant currency; FY26: n/a; Change vs FY25: -2.4%."
+            },
+            {
+              "chunk_id": "4fb4613caa87e49f613919e3e3708115c54521cc3796d9eaffab5ed9e677b347",
+              "page_number": 20,
+              "text": "Income before ₹ million: Revenue; Q1 FY26: 634,370; Q2 FY26: 657,990; Q3 FY26: 670,870; Q4 FY26: 706,980. ₹ million: Cost of revenue; Q1 FY26: 386,120; Q2 FY26: 397,580; Q3 FY26: 397,040; Q4 FY26: 419,150. ₹ million: Other income, net; Q1 FY26: 14,650; Q2 FY26: 6,380; Q3 FY26: 9,220; Q4 FY26: 4,920. ₹ million: taxes; Q1 FY26: 169,790; Q2 FY26: 172,030; Q3 FY26: 178,110; Q4 FY26: 183,620. ₹ million: Net income*; Q1 FY26: 127,600; Q2 FY26: 129,040; Q3 FY26: 134,380; Q4 FY26: 137,180. ₹ million: Net margin; Q1 FY26: 20.1%; Q2 FY26: 19.6%; Q3 FY26: 20.0%; Q4 FY26: 19.4%."
+            },
+            {
+              "chunk_id": "7c6edd4d55625dfe3131b99f3f971139eca2477fd012ef102ff284645b8a7977",
+              "page_number": 5,
+              "text": "A year of margin gains, record deal wins and workforce reset FY26 was a year of contrasts for TCS. Top-line growth in US dollar terms was flat to slightly negative, reflecting cautious discretionary technology spending among clients, particularly in banking and financial services and in North America. In rupee terms revenue still grew 4.6% to ₹267,021 crore, helped by currency. Profitability improved even as growth stayed muted. The operating margin reached 25%, the highest in four years, and the net margin excluding exceptional items rose to 19.8%. Management cited productivity from automation and AI-led delivery, tighter cost control and a more favourable mix."
+            }
+          ]
+        },
+        {
+          "query": "What was the quarterly rupee revenue for Q1 FY26?",
+          "top_k": 8,
+          "chunks": [
+            {
+              "chunk_id": "ff6586f3df5e44515c6544cd80249964679db712ea79eb8fcb3b614abb4f67c2",
+              "page_number": 12,
+              "text": "In Q4 FY26, rupee revenue of ₹70,698 crore was up 5.4% from Q3 and 9.6% from Q4 FY25. US dollar revenue of $7,621 million was up 1.5% sequentially and 2.1% year on year. In constant currency, revenue grew 1.2% sequentially and declined 0.6% year on year. FY25 revenue was about ₹255,324 crore (derived from the quarterly figures published in the FY26 fact sheets), so FY26 added roughly ₹11,700 crore in rupee terms."
+            },
+            {
+              "chunk_id": "e2b3105097fe62078169693855a3f2a8ee76df4385fe3254b43385749e2e9607",
+              "page_number": 13,
+              "text": "Four quarters of FY26 against FY25 Every quarter of FY26 recorded higher rupee revenue than the year-earlier quarter, and revenue stepped up in each successive quarter. The Q4 step of 5.4% was the largest of the year and was supported by currency as well as business growth: in constant currency the sequential gain was 1.2%."
+            },
+            {
+              "chunk_id": "a12690271a0131aa208eca944c8819340379ce87d52738315f6f2195f0dbfea7",
+              "page_number": 20,
+              "text": "₹ million: Revenue; Q1 FY25: 626,130; Q2 FY25: 642,590; Q3 FY25: 639,730; Q4 FY25: 644,790. ₹ million: Net income; Q1 FY25: 120,400; Q2 FY25: 119,090; Q3 FY25: 123,800; Q4 FY25: 122,240."
+            },
+            {
+              "chunk_id": "f2c17ee21fdab6796e5105b7409828ea169a9efb5f0df2cca09e8eaab332ec97",
+              "page_number": 20,
+              "text": "FY25 net income totals ₹485,530 million (₹48,553 crore) on revenue of ₹2,553,240 million (₹255,324 crore)."
+            },
+            {
+              "chunk_id": "4fb4613caa87e49f613919e3e3708115c54521cc3796d9eaffab5ed9e677b347",
+              "page_number": 20,
+              "text": "Income before ₹ million: Revenue; Q1 FY26: 634,370; Q2 FY26: 657,990; Q3 FY26: 670,870; Q4 FY26: 706,980. ₹ million: Cost of revenue; Q1 FY26: 386,120; Q2 FY26: 397,580; Q3 FY26: 397,040; Q4 FY26: 419,150. ₹ million: Other income, net; Q1 FY26: 14,650; Q2 FY26: 6,380; Q3 FY26: 9,220; Q4 FY26: 4,920. ₹ million: taxes; Q1 FY26: 169,790; Q2 FY26: 172,030; Q3 FY26: 178,110; Q4 FY26: 183,620. ₹ million: Net income*; Q1 FY26: 127,600; Q2 FY26: 129,040; Q3 FY26: 134,380; Q4 FY26: 137,180. ₹ million: Net margin; Q1 FY26: 20.1%; Q2 FY26: 19.6%; Q3 FY26: 20.0%; Q4 FY26: 19.4%."
+            },
+            {
+              "chunk_id": "67f7fa55a7cea9c2febf9cc5d190da7b7390fb35f3b13b82b7683a65ad0f5dae",
+              "page_number": 13,
+              "text": "• Q1: +1.3% • Q2: +2.4% • Q3: +4.9% • Q4: +9.6% Quarterly rupee figures converted from ₹ million in TCS fact sheets. FY25 quarterly values taken from the comparative columns of the FY26 fact sheets."
+            },
+            {
+              "chunk_id": "17b67a3c53da7c55e411b943c69626f22c74e05917b62b6582be19dbae121f61",
+              "page_number": 12,
+              "text": "Measure: Revenue, ₹ crore; FY26: 267,021; Change vs FY25: +4.6%. Measure: Revenue, US$ million; FY26: 30,017; Change vs FY25: -0.5%. Measure: Revenue, constant currency; FY26: n/a; Change vs FY25: -2.4%."
+            },
+            {
+              "chunk_id": "15b39ec563daaa4ce29b053ed4b95a88647c0dfecb29308def3de498450830a0",
+              "page_number": 13,
+              "text": "Quarter: Q1 (Apr to Jun); FY25, ₹ crore: 62,613; FY26, ₹ crore: 63,437; FY26, US$ million: 7,421. Quarter: Q2 (Jul to Sep); FY25, ₹ crore: 64,259; FY26, ₹ crore: 65,799; FY26, US$ million: 7,466. Quarter: Q3 (Oct to Dec); FY25, ₹ crore: 63,973; FY26, ₹ crore: 67,087; FY26, US$ million: 7,509. Quarter: Q4 (Jan to Mar); FY25, ₹ crore: 64,479; FY26, ₹ crore: 70,698; FY26, US$ million: 7,621. Quarter: Full year; FY25, ₹ crore: 255,324; FY26, ₹ crore: 267,021; FY26, US$ million: 30,017."
+            }
+          ]
+        },
+        {
+          "query": "What was the quarterly rupee revenue for Q4 FY26?",
+          "top_k": 8,
+          "chunks": [
+            {
+              "chunk_id": "ff6586f3df5e44515c6544cd80249964679db712ea79eb8fcb3b614abb4f67c2",
+              "page_number": 12,
+              "text": "In Q4 FY26, rupee revenue of ₹70,698 crore was up 5.4% from Q3 and 9.6% from Q4 FY25. US dollar revenue of $7,621 million was up 1.5% sequentially and 2.1% year on year. In constant currency, revenue grew 1.2% sequentially and declined 0.6% year on year. FY25 revenue was about ₹255,324 crore (derived from the quarterly figures published in the FY26 fact sheets), so FY26 added roughly ₹11,700 crore in rupee terms."
+            },
+            {
+              "chunk_id": "e2b3105097fe62078169693855a3f2a8ee76df4385fe3254b43385749e2e9607",
+              "page_number": 13,
+              "text": "Four quarters of FY26 against FY25 Every quarter of FY26 recorded higher rupee revenue than the year-earlier quarter, and revenue stepped up in each successive quarter. The Q4 step of 5.4% was the largest of the year and was supported by currency as well as business growth: in constant currency the sequential gain was 1.2%."
+            },
+            {
+              "chunk_id": "f2c17ee21fdab6796e5105b7409828ea169a9efb5f0df2cca09e8eaab332ec97",
+              "page_number": 20,
+              "text": "FY25 net income totals ₹485,530 million (₹48,553 crore) on revenue of ₹2,553,240 million (₹255,324 crore)."
+            },
+            {
+              "chunk_id": "67f7fa55a7cea9c2febf9cc5d190da7b7390fb35f3b13b82b7683a65ad0f5dae",
+              "page_number": 13,
+              "text": "• Q1: +1.3% • Q2: +2.4% • Q3: +4.9% • Q4: +9.6% Quarterly rupee figures converted from ₹ million in TCS fact sheets. FY25 quarterly values taken from the comparative columns of the FY26 fact sheets."
+            },
+            {
+              "chunk_id": "a12690271a0131aa208eca944c8819340379ce87d52738315f6f2195f0dbfea7",
+              "page_number": 20,
+              "text": "₹ million: Revenue; Q1 FY25: 626,130; Q2 FY25: 642,590; Q3 FY25: 639,730; Q4 FY25: 644,790. ₹ million: Net income; Q1 FY25: 120,400; Q2 FY25: 119,090; Q3 FY25: 123,800; Q4 FY25: 122,240."
+            },
+            {
+              "chunk_id": "17b67a3c53da7c55e411b943c69626f22c74e05917b62b6582be19dbae121f61",
+              "page_number": 12,
+              "text": "Measure: Revenue, ₹ crore; FY26: 267,021; Change vs FY25: +4.6%. Measure: Revenue, US$ million; FY26: 30,017; Change vs FY25: -0.5%. Measure: Revenue, constant currency; FY26: n/a; Change vs FY25: -2.4%."
+            },
+            {
+              "chunk_id": "7c6edd4d55625dfe3131b99f3f971139eca2477fd012ef102ff284645b8a7977",
+              "page_number": 5,
+              "text": "A year of margin gains, record deal wins and workforce reset FY26 was a year of contrasts for TCS. Top-line growth in US dollar terms was flat to slightly negative, reflecting cautious discretionary technology spending among clients, particularly in banking and financial services and in North America. In rupee terms revenue still grew 4.6% to ₹267,021 crore, helped by currency. Profitability improved even as growth stayed muted. The operating margin reached 25%, the highest in four years, and the net margin excluding exceptional items rose to 19.8%. Management cited productivity from automation and AI-led delivery, tighter cost control and a more favourable mix."
+            },
+            {
+              "chunk_id": "4fb4613caa87e49f613919e3e3708115c54521cc3796d9eaffab5ed9e677b347",
+              "page_number": 20,
+              "text": "Income before ₹ million: Revenue; Q1 FY26: 634,370; Q2 FY26: 657,990; Q3 FY26: 670,870; Q4 FY26: 706,980. ₹ million: Cost of revenue; Q1 FY26: 386,120; Q2 FY26: 397,580; Q3 FY26: 397,040; Q4 FY26: 419,150. ₹ million: Other income, net; Q1 FY26: 14,650; Q2 FY26: 6,380; Q3 FY26: 9,220; Q4 FY26: 4,920. ₹ million: taxes; Q1 FY26: 169,790; Q2 FY26: 172,030; Q3 FY26: 178,110; Q4 FY26: 183,620. ₹ million: Net income*; Q1 FY26: 127,600; Q2 FY26: 129,040; Q3 FY26: 134,380; Q4 FY26: 137,180. ₹ million: Net margin; Q1 FY26: 20.1%; Q2 FY26: 19.6%; Q3 FY26: 20.0%; Q4 FY26: 19.4%."
+            }
+          ]
+        }
+      ],
+      "response": {
+        "answer": "The quarterly rupee revenue increased by ₹7,261 crore (₹72,610 million) from Q1 FY26 to Q4 FY26.",
+        "citations": [
+          {
+            "chunk_id": "15b39ec563daaa4ce29b053ed4b95a88647c0dfecb29308def3de498450830a0",
+            "document_id": "tcs_annual_report",
+            "page_number": 13,
+            "text_snippet": "Quarter: Q1 (Apr to Jun); FY25, ₹ crore: 62,613; FY26, ₹ crore: 63,437; FY26, US$ million: 7,421."
+          }
+        ],
+        "trace": [
+          {
+            "step_type": "plan",
+            "content": "Classified as comparison; 2 sub-queries",
+            "metadata": {
+              "query_type": "comparison",
+              "subquery_count": 2,
+              "rewritten": false
+            }
+          },
+          {
+            "step_type": "retrieve",
+            "content": "Retrieved 10 passages across 2 sub-queries",
+            "metadata": {
+              "search_query_count": 3,
+              "chunks_per_search": [
+                8,
+                8,
+                8
+              ],
+              "chunks_after_merge": 10,
+              "new_chunks": 10,
+              "attempt": 0,
+              "errors": 0,
+              "quarantined": 0
+            }
+          },
+          {
+            "step_type": "synthesize",
+            "content": "Draft answer generated with 2 citations",
+            "metadata": {
+              "citation_count": 2,
+              "dropped_citations": 0,
+              "generator_called": true
+            }
+          },
+          {
+            "step_type": "fact_check",
+            "content": "1 of 1 claim verified",
+            "metadata": {
+              "claims_total": 1,
+              "claims_supported": 1,
+              "coverage": 1.0,
+              "retry": false
+            }
+          }
+        ],
+        "verification_status": "verified",
+        "confidence": 0.95,
+        "latency_ms": 80106.70369997388
+      }
+    },
+    {
+      "question_id": "tcs-gold-06",
+      "category": "table",
+      "question": "What was TCS's total deal value (TCV) in Q4 FY26?",
+      "reference_answer": "TCS's total TCV in Q4 FY26 was $12.0 billion.",
+      "model_calls_live": 3,
+      "model_calls_replayed": 0,
+      "searches": [
+        {
+          "query": "What was TCS's total deal value (TCV) in Q4 FY26?",
+          "top_k": 8,
+          "chunks": [
+            {
+              "chunk_id": "b88ccce8cd90a10e3b7b92b80ad05f6429443441ad4571b5f5432eebc839cac1",
+              "page_number": 22,
+              "text": "Total contract value (TCV) for FY26 TCS booked $40.7 billion of TCV in FY26, ahead of $39.4 billion in FY25. Q4 FY26 TCV of $12 billion was among the highest the company has recorded. The company signed three mega deals in Q4 and five over the year. TCV is the total value of contracts signed in a period and is not the same as revenue; deals are delivered over several years. A strong order book therefore supports future revenue visibility, but the timing of conversion depends on client ramp-up schedules. Q3 FY26 TCV is derived as the annual total less Q1, Q2 and Q4 as published; it may differ slightly from the figure TCS reported because of rounding."
+            },
+            {
+              "chunk_id": "8bffb4a9d6c43c73eca7b4f4e67a8fe48145172cad010600ec4a154e6bb30fc1",
+              "page_number": 40,
+              "text": "Terms used and where the data came from Glossary • Constant currency (CC): growth measured with exchange rates held constant to remove currency effects. • TCV: total contract value of deals signed in a period. • Mega deal: a very large contract; TCS reported five in FY26. • BFSI: Banking, Financial Services and Insurance. • LTM attrition: voluntary attrition over the last twelve months. • Exceptional items: one-off charges or gains excluded from underlying profit. • bp (basis point): one hundredth of a percentage point. • Crore: ten million (10,000,000). Sources • TCS Financial Results fact sheets, Q1 to Q4 FY2025-26 and Q1 FY2026-27 (tcs.com investor relations). • TCS press release, \"TCS closes FY26 with improving sequential growth momentum and strong deal wins\", 9 April 2026. • Press coverage of the Q1, Q3 and Q4 FY26 results (Outlook Business, The Quint, PTI via TaxTMI, and market commentary on dividends and attrition). Unofficial compilation prepared for informational purposes. Refer to TCS filings for authoritative data."
+            },
+            {
+              "chunk_id": "8d031b20ba67329796efac41171ed43784572d7a34b9b6b202f9af4b2c5b2a9a",
+              "page_number": 39,
+              "text": "What to follow in FY27 TCS ended FY26 with record deal momentum, a 25% operating margin and a workforce that had stopped shrinking. The main questions for FY27 concern how quickly that momentum turns into revenue growth."
+            },
+            {
+              "chunk_id": "7c6edd4d55625dfe3131b99f3f971139eca2477fd012ef102ff284645b8a7977",
+              "page_number": 5,
+              "text": "A year of margin gains, record deal wins and workforce reset FY26 was a year of contrasts for TCS. Top-line growth in US dollar terms was flat to slightly negative, reflecting cautious discretionary technology spending among clients, particularly in banking and financial services and in North America. In rupee terms revenue still grew 4.6% to ₹267,021 crore, helped by currency. Profitability improved even as growth stayed muted. The operating margin reached 25%, the highest in four years, and the net margin excluding exceptional items rose to 19.8%. Management cited productivity from automation and AI-led delivery, tighter cost control and a more favourable mix."
+            },
+            {
+              "chunk_id": "a02985505213ccc504b1cb6476b05fa21c39dd8648e85f953daf5b7a1b864f76",
+              "page_number": 23,
+              "text": "US$ billion: Total TCV; FY25: 39.4; FY26: 40.7; Q4 FY26: 12.0. US$ billion: North America; FY25: 21.6; FY26: 19.0; Q4 FY26: 5.4. US$ billion: BFSI; FY25: 12.8; FY26: 13.4; Q4 FY26: 3.9. US$ billion: Consumer Business; FY25: 5.3; FY26: 7.6; Q4 FY26: 2.8."
+            },
+            {
+              "chunk_id": "4275a701d913a7a3460d00a2c6fac6fb1026186cfa24a6c51b4952b57c81cf35",
+              "page_number": 1,
+              "text": "For the financial year ended 31 March 2026 Revenue ₹267,021 crore | $30.0 billion Net margin 19.8% | Operating margin 25% TCV $40.7 billion | 584,519 employees Unofficial compilation prepared from TCS public results disclosures. Not the statutory annual report of TCS."
+            },
+            {
+              "chunk_id": "5ce13dfb4ce9901078a1e63788a34b987963a7900f846c3fb4ecd12845a0ee01",
+              "page_number": 38,
+              "text": "Snapshot of the quarter ended 30 June 2026 After the close of FY26, TCS published its first-quarter FY27 results. A few data points from that fact sheet give an early read on how the new year started. Order intake of $9.5 billion is lower than Q4 FY26's exceptional $12 billion but comparable to the $9.3 to $10.0 billion range of the first three quarters of FY26. Attrition was stable, and the mix of revenue by market and vertical was little changed. Revenue and profit for Q1 FY27 are not shown here because the column layout in the extracted source was ambiguous; see the official release."
+            },
+            {
+              "chunk_id": "9aa3eb0a8741d34ce66c5e30d48a4bd759e34235d7a48eadd258251318f45003",
+              "page_number": 18,
+              "text": "Cash and investments TCS ended FY26 with about ₹50,020 crore in cash and investments. The balance rose to about ₹55,950 crore at the end of Q2 and then fell as the company paid out an interim dividend and a special dividend in the third quarter and an additional interim dividend in the second half, among other uses. The company carries limited financial debt relative to its size, and its liquidity is large relative to annual dividends. For a services business with modest capital needs, this allows investment in people, acquisitions and infrastructure without external funding. Cash and investment balances are taken from the quarterly fact sheets (₹ million converted to crore). The Q3 balance was not captured in the sources used for this compilation. Explanations of the movements are the compiler's interpretation."
+            }
+          ]
+        }
+      ],
+      "response": {
+        "answer": "TCS's total contract value (TCV) in Q4 FY26 was $12 billion.",
+        "citations": [
+          {
+            "chunk_id": "b88ccce8cd90a10e3b7b92b80ad05f6429443441ad4571b5f5432eebc839cac1",
+            "document_id": "tcs_annual_report",
+            "page_number": 22,
+            "text_snippet": "...Q4 FY26 TCV of $12 billion was among the highest the company has recorded. The company signed three mega deals in Q4 and five over the year."
+          },
+          {
+            "chunk_id": "a02985505213ccc504b1cb6476b05fa21c39dd8648e85f953daf5b7a1b864f76",
+            "document_id": "tcs_annual_report",
+            "page_number": 23,
+            "text_snippet": "US$ billion: Total TCV; FY25: 39.4; FY26: 40.7; Q4 FY26: 12.0. US$ billion: North America; FY25: 21.6; FY26: 19.0; Q4 FY26: 5.4."
+          }
+        ],
+        "trace": [
+          {
+            "step_type": "plan",
+            "content": "Classified as simple; 1 sub-query",
+            "metadata": {
+              "query_type": "simple",
+              "subquery_count": 1,
+              "rewritten": false
+            }
+          },
+          {
+            "step_type": "retrieve",
+            "content": "Retrieved 8 passages across 1 sub-query",
+            "metadata": {
+              "search_query_count": 1,
+              "chunks_per_search": [
+                8
+              ],
+              "chunks_after_merge": 8,
+              "new_chunks": 8,
+              "attempt": 0,
+              "errors": 0,
+              "quarantined": 0
+            }
+          },
+          {
+            "step_type": "synthesize",
+            "content": "Draft answer generated with 2 citations",
+            "metadata": {
+              "citation_count": 2,
+              "dropped_citations": 0,
+              "generator_called": true
+            }
+          },
+          {
+            "step_type": "fact_check",
+            "content": "1 of 1 claim verified",
+            "metadata": {
+              "claims_total": 1,
+              "claims_supported": 1,
+              "coverage": 1.0,
+              "retry": false
+            }
+          }
+        ],
+        "verification_status": "verified",
+        "confidence": 0.95,
+        "latency_ms": 22520.452399970964
+      }
+    },
+    {
+      "question_id": "tcs-gold-07",
+      "category": "fact_lookup",
+      "question": "What was TCS's FY26 revenue in US dollars?",
+      "reference_answer": "TCS's FY26 revenue was US$30,017 million.",
+      "model_calls_live": 3,
+      "model_calls_replayed": 0,
+      "searches": [
+        {
+          "query": "What was TCS's FY26 revenue in US dollars?",
+          "top_k": 8,
+          "chunks": [
+            {
+              "chunk_id": "b88ccce8cd90a10e3b7b92b80ad05f6429443441ad4571b5f5432eebc839cac1",
+              "page_number": 22,
+              "text": "Total contract value (TCV) for FY26 TCS booked $40.7 billion of TCV in FY26, ahead of $39.4 billion in FY25. Q4 FY26 TCV of $12 billion was among the highest the company has recorded. The company signed three mega deals in Q4 and five over the year. TCV is the total value of contracts signed in a period and is not the same as revenue; deals are delivered over several years. A strong order book therefore supports future revenue visibility, but the timing of conversion depends on client ramp-up schedules. Q3 FY26 TCV is derived as the annual total less Q1, Q2 and Q4 as published; it may differ slightly from the figure TCS reported because of rounding."
+            },
+            {
+              "chunk_id": "7c6edd4d55625dfe3131b99f3f971139eca2477fd012ef102ff284645b8a7977",
+              "page_number": 5,
+              "text": "A year of margin gains, record deal wins and workforce reset FY26 was a year of contrasts for TCS. Top-line growth in US dollar terms was flat to slightly negative, reflecting cautious discretionary technology spending among clients, particularly in banking and financial services and in North America. In rupee terms revenue still grew 4.6% to ₹267,021 crore, helped by currency. Profitability improved even as growth stayed muted. The operating margin reached 25%, the highest in four years, and the net margin excluding exceptional items rose to 19.8%. Management cited productivity from automation and AI-led delivery, tighter cost control and a more favourable mix."
+            },
+            {
+              "chunk_id": "5ce13dfb4ce9901078a1e63788a34b987963a7900f846c3fb4ecd12845a0ee01",
+              "page_number": 38,
+              "text": "Snapshot of the quarter ended 30 June 2026 After the close of FY26, TCS published its first-quarter FY27 results. A few data points from that fact sheet give an early read on how the new year started. Order intake of $9.5 billion is lower than Q4 FY26's exceptional $12 billion but comparable to the $9.3 to $10.0 billion range of the first three quarters of FY26. Attrition was stable, and the mix of revenue by market and vertical was little changed. Revenue and profit for Q1 FY27 are not shown here because the column layout in the extracted source was ambiguous; see the official release."
+            },
+            {
+              "chunk_id": "ff6586f3df5e44515c6544cd80249964679db712ea79eb8fcb3b614abb4f67c2",
+              "page_number": 12,
+              "text": "In Q4 FY26, rupee revenue of ₹70,698 crore was up 5.4% from Q3 and 9.6% from Q4 FY25. US dollar revenue of $7,621 million was up 1.5% sequentially and 2.1% year on year. In constant currency, revenue grew 1.2% sequentially and declined 0.6% year on year. FY25 revenue was about ₹255,324 crore (derived from the quarterly figures published in the FY26 fact sheets), so FY26 added roughly ₹11,700 crore in rupee terms."
+            },
+            {
+              "chunk_id": "77df90f599f4d571fe5f3297b82fef861c29800fbb8496924da49cb111cf2485",
+              "page_number": 27,
+              "text": "From capability to revenue AI was the central theme of TCS's FY26 messaging. By Q4, the company reported annualised AI-related revenue above $2.3 billion, equal to more than 6% of total revenue. Where AI shows up in the business • Client engagements. Data foundations, model deployment, agent-based automation and AI-enabled process redesign for clients. • Internal delivery. AI coding assistants, automated testing and AI-supported operations to raise productivity. • People. More than 270,000 employees have higher proficiency in AI and machine learning. • Deal wins. Several of the mega deals signed during the year were described as including AI-led transformation components. Questions to watch • How much AI revenue is new versus relabelled existing work. • Whether productivity gains are passed on to clients through lower prices. • Whether AI revenue growth can offset slower growth in traditional application services. The definition of AI revenue is TCS's own. Figures are annualised run-rate, not full-year recognised revenue."
+            },
+            {
+              "chunk_id": "add61afb3c3b7efaa3ca1a2f001dbd1161748c726a4527dfa2efb75d1cab9573",
+              "page_number": 10,
+              "text": "Repositioning for a changing services market Through FY26 TCS framed its strategy around artificial intelligence, both as something it sells and as a way of changing how it delivers work. Management stated that the company had moved from building capabilities to executing on revenue, citing annualised AI revenue above $2.3 billion in Q4."
+            },
+            {
+              "chunk_id": "4275a701d913a7a3460d00a2c6fac6fb1026186cfa24a6c51b4952b57c81cf35",
+              "page_number": 1,
+              "text": "For the financial year ended 31 March 2026 Revenue ₹267,021 crore | $30.0 billion Net margin 19.8% | Operating margin 25% TCV $40.7 billion | 584,519 employees Unofficial compilation prepared from TCS public results disclosures. Not the statutory annual report of TCS."
+            },
+            {
+              "chunk_id": "1832a868cd8d4779ddd90c1901cfe3ef0692dfbf54cd19aade471e761e88a4ed",
+              "page_number": 39,
+              "text": "• $40.7 billion of FY26 TCV provides revenue visibility. • Margins at a four-year high with room for further productivity gains. • AI revenue above a $2.3 billion annualised run rate. • Broader client base, with 66 clients above $100 million."
+            }
+          ]
+        }
+      ],
+      "response": {
+        "answer": "$30.0 billion",
+        "citations": [
+          {
+            "chunk_id": "4275a701d913a7a3460d00a2c6fac6fb1026186cfa24a6c51b4952b57c81cf35",
+            "document_id": "tcs_annual_report",
+            "page_number": 1,
+            "text_snippet": "For the financial year ended 31 March 2026 Revenue ₹267,021 crore | $30.0 billion Net margin 19.8% | Operating margin 25% TCV $40.7 billion | 584,519 employees Unofficial compilation prepared from TCS..."
+          }
+        ],
+        "trace": [
+          {
+            "step_type": "plan",
+            "content": "Classified as simple; 1 sub-query",
+            "metadata": {
+              "query_type": "simple",
+              "subquery_count": 1,
+              "rewritten": false
+            }
+          },
+          {
+            "step_type": "retrieve",
+            "content": "Retrieved 8 passages across 1 sub-query",
+            "metadata": {
+              "search_query_count": 1,
+              "chunks_per_search": [
+                8
+              ],
+              "chunks_after_merge": 8,
+              "new_chunks": 8,
+              "attempt": 0,
+              "errors": 0,
+              "quarantined": 0
+            }
+          },
+          {
+            "step_type": "synthesize",
+            "content": "Draft answer generated with 1 citation",
+            "metadata": {
+              "citation_count": 1,
+              "dropped_citations": 0,
+              "generator_called": true
+            }
+          },
+          {
+            "step_type": "fact_check",
+            "content": "1 of 1 claim verified",
+            "metadata": {
+              "claims_total": 1,
+              "claims_supported": 1,
+              "coverage": 1.0,
+              "retry": false
+            }
+          }
+        ],
+        "verification_status": "verified",
+        "confidence": 0.95,
+        "latency_ms": 26059.952299983706
+      }
+    },
+    {
+      "question_id": "tcs-gold-08",
+      "category": "cross_section",
+      "question": "How does the report connect TCS's AI strategy with employee development, and what two FY26 training figures support that connection?",
+      "reference_answer": "The report says TCS's AI-first strategy includes reskilling employees. In FY26, it recorded 69 million learning hours (up 23% year on year) and more than 270,000 employees with higher proficiency in AI/ML.",
+      "model_calls_live": 5,
+      "model_calls_replayed": 0,
+      "searches": [
+        {
+          "query": "How does the report connect TCS's AI strategy with employee development, and what two FY26 training figures support that connection?",
+          "top_k": 8,
+          "chunks": [
+            {
+              "chunk_id": "77df90f599f4d571fe5f3297b82fef861c29800fbb8496924da49cb111cf2485",
+              "page_number": 27,
+              "text": "From capability to revenue AI was the central theme of TCS's FY26 messaging. By Q4, the company reported annualised AI-related revenue above $2.3 billion, equal to more than 6% of total revenue. Where AI shows up in the business • Client engagements. Data foundations, model deployment, agent-based automation and AI-enabled process redesign for clients. • Internal delivery. AI coding assistants, automated testing and AI-supported operations to raise productivity. • People. More than 270,000 employees have higher proficiency in AI and machine learning. • Deal wins. Several of the mega deals signed during the year were described as including AI-led transformation components. Questions to watch • How much AI revenue is new versus relabelled existing work. • Whether productivity gains are passed on to clients through lower prices. • Whether AI revenue growth can offset slower growth in traditional application services. The definition of AI revenue is TCS's own. Figures are annualised run-rate, not full-year recognised revenue."
+            },
+            {
+              "chunk_id": "add61afb3c3b7efaa3ca1a2f001dbd1161748c726a4527dfa2efb75d1cab9573",
+              "page_number": 10,
+              "text": "Repositioning for a changing services market Through FY26 TCS framed its strategy around artificial intelligence, both as something it sells and as a way of changing how it delivers work. Management stated that the company had moved from building capabilities to executing on revenue, citing annualised AI revenue above $2.3 billion in Q4."
+            },
+            {
+              "chunk_id": "ceca0659c21efb32364c5b76e0857cc2543e4c3c2176c853be2352e0fc9ab612",
+              "page_number": 29,
+              "text": "Investing in skills The scale of training is central to the TCS model: with more than half a million employees, even small changes in skills mix have large effects on productivity and revenue per person. Learning hours rose 23% in a year when headcount fell, so hours per employee rose sharply. Focus areas • Foundational and advanced AI skills, including generative and agentic AI. • Cloud, data and cybersecurity certifications. • Domain knowledge in banking, retail, manufacturing and life sciences. • Leadership development for mid-level managers."
+            },
+            {
+              "chunk_id": "fc47d94718294a3990f150643a1f9a3cb57e8c1eb822b2015f2543546527e8f4",
+              "page_number": 31,
+              "text": "Restructuring in FY26 In 2025 TCS announced plans to reduce its workforce by about 12,000 employees, roughly 2% of the total, as part of a programme to realign skills with AI-led delivery and changing client demand. The headcount decline in Q2 and Q3 FY26 reflects this programme."
+            },
+            {
+              "chunk_id": "50dd3ab00f95d36bbe6d6ba4d666fbc4d051c23183e1078638c47541b2d23514",
+              "page_number": 10,
+              "text": "• Embed AI in delivery. Using AI tools to improve developer productivity, testing, operations and support. • Sell AI-led transformation. Helping clients redesign processes, build data foundations and deploy AI at scale. • Reskill the workforce. More than 270,000 employees have higher proficiency in AI and machine learning, and the company logged 69 million learning hours in the year. • Invest in infrastructure and partnerships. Building AI-ready capacity and alliances with technology providers. • Protect margins while investing. Delivering a 25% operating margin while funding new capabilities. The strategic trade-off is clear: AI can reduce the effort needed for traditional work, which pressures revenue per project, while opening new categories of demand. FY26 results suggest margin benefits are arriving earlier than top-line benefits."
+            },
+            {
+              "chunk_id": "8d031b20ba67329796efac41171ed43784572d7a34b9b6b202f9af4b2c5b2a9a",
+              "page_number": 39,
+              "text": "What to follow in FY27 TCS ended FY26 with record deal momentum, a 25% operating margin and a workforce that had stopped shrinking. The main questions for FY27 concern how quickly that momentum turns into revenue growth."
+            },
+            {
+              "chunk_id": "64cafb4259ec870a7628c5b946bd0bff41e3600fd4441c1f824ae5044dfd8d61",
+              "page_number": 3,
+              "text": "Section: About this report; Page: 2; Section: Order book; Page: 22. Section: FY26 at a glance; Page: 4; Section: TCV by market and vertical; Page: 23. Section: Executive overview; Page: 5; Section: Client franchise; Page: 24. Section: Company profile; Page: 6; Section: Geographic mix; Page: 25. Section: Journey and milestones; Page: 7; Section: Industry verticals; Page: 26. Section: Service portfolio; Page: 8; Section: Artificial intelligence; Page: 27. Section: Business model; Page: 9; Section: Workforce; Page: 28. Section: Strategy: AI-first transformation; Page: 10; Section: Learning and talent; Page: 29. Section: Operating environment; Page: 11; Section: Attrition and diversity; Page: 30. Section: Revenue performance; Page: 12; Section: Workforce transition; Page: 31. Section: Quarterly revenue; Page: 13; Section: Risk landscape; Page: 32. Section: Profitability; Page: 14; Section: Risk summary matrix; Page: 33. Section: Margins; Page: 15; Section: Corporate governance; Page: 34. Section: Cost structure; Page: 16; Section: Leadership; Page: 35. Section: Cash flow; Page: 17; Section: Sustainability; Page: 36. Section: Liquidity; Page: 18; Section: Community and CSR; Page: 37. Section: Shareholder returns; Page: 19; Section: Subsequent period: Q1 FY27; Page: 38. Section: Condensed income statement; Page: 20; Section: Outlook and watch-list; Page: 39. Section: Reported versus adjusted profit; Page: 21; Section: Glossary and sources; Page: 40."
+            },
+            {
+              "chunk_id": "bfed04b886f0bc93a03aa1633f88399e2a19b8d02903b0522fb3955cac9600ea",
+              "page_number": 29,
+              "text": "Indicator (FY26): Learning hours; Value: 69 million, up 23% year on year. Indicator (FY26): Competencies acquired; Value: 5.2 million. Indicator (FY26): Employees with higher proficiency in AI/ML; Value: 270,000+."
+            }
+          ]
+        },
+        {
+          "query": "How does the report connect TCS's AI strategy with employee development?",
+          "top_k": 8,
+          "chunks": [
+            {
+              "chunk_id": "add61afb3c3b7efaa3ca1a2f001dbd1161748c726a4527dfa2efb75d1cab9573",
+              "page_number": 10,
+              "text": "Repositioning for a changing services market Through FY26 TCS framed its strategy around artificial intelligence, both as something it sells and as a way of changing how it delivers work. Management stated that the company had moved from building capabilities to executing on revenue, citing annualised AI revenue above $2.3 billion in Q4."
+            },
+            {
+              "chunk_id": "77df90f599f4d571fe5f3297b82fef861c29800fbb8496924da49cb111cf2485",
+              "page_number": 27,
+              "text": "From capability to revenue AI was the central theme of TCS's FY26 messaging. By Q4, the company reported annualised AI-related revenue above $2.3 billion, equal to more than 6% of total revenue. Where AI shows up in the business • Client engagements. Data foundations, model deployment, agent-based automation and AI-enabled process redesign for clients. • Internal delivery. AI coding assistants, automated testing and AI-supported operations to raise productivity. • People. More than 270,000 employees have higher proficiency in AI and machine learning. • Deal wins. Several of the mega deals signed during the year were described as including AI-led transformation components. Questions to watch • How much AI revenue is new versus relabelled existing work. • Whether productivity gains are passed on to clients through lower prices. • Whether AI revenue growth can offset slower growth in traditional application services. The definition of AI revenue is TCS's own. Figures are annualised run-rate, not full-year recognised revenue."
+            },
+            {
+              "chunk_id": "ceca0659c21efb32364c5b76e0857cc2543e4c3c2176c853be2352e0fc9ab612",
+              "page_number": 29,
+              "text": "Investing in skills The scale of training is central to the TCS model: with more than half a million employees, even small changes in skills mix have large effects on productivity and revenue per person. Learning hours rose 23% in a year when headcount fell, so hours per employee rose sharply. Focus areas • Foundational and advanced AI skills, including generative and agentic AI. • Cloud, data and cybersecurity certifications. • Domain knowledge in banking, retail, manufacturing and life sciences. • Leadership development for mid-level managers."
+            },
+            {
+              "chunk_id": "50dd3ab00f95d36bbe6d6ba4d666fbc4d051c23183e1078638c47541b2d23514",
+              "page_number": 10,
+              "text": "• Embed AI in delivery. Using AI tools to improve developer productivity, testing, operations and support. • Sell AI-led transformation. Helping clients redesign processes, build data foundations and deploy AI at scale. • Reskill the workforce. More than 270,000 employees have higher proficiency in AI and machine learning, and the company logged 69 million learning hours in the year. • Invest in infrastructure and partnerships. Building AI-ready capacity and alliances with technology providers. • Protect margins while investing. Delivering a 25% operating margin while funding new capabilities. The strategic trade-off is clear: AI can reduce the effort needed for traditional work, which pressures revenue per project, while opening new categories of demand. FY26 results suggest margin benefits are arriving earlier than top-line benefits."
+            },
+            {
+              "chunk_id": "c0dd478ae23bbaecc5162679ad29698bb3df31d14f2c51ee9c346f7b48a884c4",
+              "page_number": 8,
+              "text": "What TCS sells to its clients TCS organises its offerings around the full lifecycle of enterprise technology change. In broad terms the portfolio covers the following areas. • Consulting and strategy. Business and technology advisory to help clients plan large transformations. • Cloud and infrastructure. Migration, modernisation and managed operations across public, private and hybrid clouds. • Enterprise applications. Implementation and support of core platforms in finance, supply chain, human resources and customer management. • Data and artificial intelligence. Data engineering, analytics, machine learning and, increasingly, generative and agentic AI solutions. • Cybersecurity. Security strategy, monitoring, identity and response services. • Engineering and industrial technology. Product engineering, embedded systems, IoT and digital twins for manufacturing and other industries. • Business process services. Operations that combine automation with human expertise, such as finance and procurement operations. • Products and platforms. Industry platforms, notably in banking and financial services, education and retail. Clients typically engage TCS through multi-year programmes. Large deals are tracked as total contract value (TCV), which TCS reports each quarter."
+            },
+            {
+              "chunk_id": "fc47d94718294a3990f150643a1f9a3cb57e8c1eb822b2015f2543546527e8f4",
+              "page_number": 31,
+              "text": "Restructuring in FY26 In 2025 TCS announced plans to reduce its workforce by about 12,000 employees, roughly 2% of the total, as part of a programme to realign skills with AI-led delivery and changing client demand. The headcount decline in Q2 and Q3 FY26 reflects this programme."
+            },
+            {
+              "chunk_id": "b50e44246a8348144eccd11ff01fcd8a13417328fbc345366b0f2e13f16b85c3",
+              "page_number": 5,
+              "text": "• Demand recovery in stages. Constant-currency revenue fell year on year in the first three quarters but turned sequentially positive, and Q4 revenue grew 5.4% in rupee terms from Q3. • Record order book momentum. TCV of $40.7 billion for the year, with $12 billion in Q4 alone. • AI as a revenue line. TCS disclosed annualised AI revenue above $2.3 billion by Q4. • Workforce restructuring. Headcount fell through the middle of the year and began to recover in Q4. • Generous capital return. Total dividends of ₹110 per share, including a ₹46 special dividend. The sections that follow set out the detail behind each theme, followed by a view of risks, governance and the outlook."
+            },
+            {
+              "chunk_id": "44d6441e0dbe53cbcbfde4b7d42e50c5997f28a4310e8593d5a79464edf34de2",
+              "page_number": 9,
+              "text": "How the company earns revenue and converts it to cash TCS earns the large majority of its revenue from long-term service contracts, billed on time-and-materials, fixed-price or managed-service terms. Revenue is therefore driven by three variables: the number of billable people, the price and mix of the work, and client demand cycles. Sources of resilience • Long contracts and recurring work. Run-and-maintain engagements provide a base of steady revenue. • Client breadth. At year end TCS served 1,397 clients that each generate more than $1 million, 139 above $50 million and 66 above $100 million. • Offshore delivery. A large Indian delivery base keeps costs competitive relative to onshore work. • Low capital intensity. Operating cash flow was 111.0% of net profit in FY26, meaning profits converted fully to cash. Sources of pressure • Client discretionary spend rises and falls with the economy, particularly in BFSI. • Pricing pressure on commodity work as AI reduces effort. • Wage inflation and attrition affect delivery cost. • Rupee movements affect reported rupee revenue versus US dollar revenue."
+            }
+          ]
+        },
+        {
+          "query": "What is the FY26 figure for AI-related training hours per employee at TCS?",
+          "top_k": 8,
+          "chunks": [
+            {
+              "chunk_id": "77df90f599f4d571fe5f3297b82fef861c29800fbb8496924da49cb111cf2485",
+              "page_number": 27,
+              "text": "From capability to revenue AI was the central theme of TCS's FY26 messaging. By Q4, the company reported annualised AI-related revenue above $2.3 billion, equal to more than 6% of total revenue. Where AI shows up in the business • Client engagements. Data foundations, model deployment, agent-based automation and AI-enabled process redesign for clients. • Internal delivery. AI coding assistants, automated testing and AI-supported operations to raise productivity. • People. More than 270,000 employees have higher proficiency in AI and machine learning. • Deal wins. Several of the mega deals signed during the year were described as including AI-led transformation components. Questions to watch • How much AI revenue is new versus relabelled existing work. • Whether productivity gains are passed on to clients through lower prices. • Whether AI revenue growth can offset slower growth in traditional application services. The definition of AI revenue is TCS's own. Figures are annualised run-rate, not full-year recognised revenue."
+            },
+            {
+              "chunk_id": "bfed04b886f0bc93a03aa1633f88399e2a19b8d02903b0522fb3955cac9600ea",
+              "page_number": 29,
+              "text": "Indicator (FY26): Learning hours; Value: 69 million, up 23% year on year. Indicator (FY26): Competencies acquired; Value: 5.2 million. Indicator (FY26): Employees with higher proficiency in AI/ML; Value: 270,000+."
+            },
+            {
+              "chunk_id": "fc47d94718294a3990f150643a1f9a3cb57e8c1eb822b2015f2543546527e8f4",
+              "page_number": 31,
+              "text": "Restructuring in FY26 In 2025 TCS announced plans to reduce its workforce by about 12,000 employees, roughly 2% of the total, as part of a programme to realign skills with AI-led delivery and changing client demand. The headcount decline in Q2 and Q3 FY26 reflects this programme."
+            },
+            {
+              "chunk_id": "ceca0659c21efb32364c5b76e0857cc2543e4c3c2176c853be2352e0fc9ab612",
+              "page_number": 29,
+              "text": "Investing in skills The scale of training is central to the TCS model: with more than half a million employees, even small changes in skills mix have large effects on productivity and revenue per person. Learning hours rose 23% in a year when headcount fell, so hours per employee rose sharply. Focus areas • Foundational and advanced AI skills, including generative and agentic AI. • Cloud, data and cybersecurity certifications. • Domain knowledge in banking, retail, manufacturing and life sciences. • Leadership development for mid-level managers."
+            },
+            {
+              "chunk_id": "add61afb3c3b7efaa3ca1a2f001dbd1161748c726a4527dfa2efb75d1cab9573",
+              "page_number": 10,
+              "text": "Repositioning for a changing services market Through FY26 TCS framed its strategy around artificial intelligence, both as something it sells and as a way of changing how it delivers work. Management stated that the company had moved from building capabilities to executing on revenue, citing annualised AI revenue above $2.3 billion in Q4."
+            },
+            {
+              "chunk_id": "1832a868cd8d4779ddd90c1901cfe3ef0692dfbf54cd19aade471e761e88a4ed",
+              "page_number": 39,
+              "text": "• $40.7 billion of FY26 TCV provides revenue visibility. • Margins at a four-year high with room for further productivity gains. • AI revenue above a $2.3 billion annualised run rate. • Broader client base, with 66 clients above $100 million."
+            },
+            {
+              "chunk_id": "5010144dbdc5fd73382c3e6c94030d554b082480b76548bb3dc4ad36be557838",
+              "page_number": 18,
+              "text": "Tata Consultancy Services | FY2025-26 | Unofficial compiled annual report Page 18 TCS ANNUAL REPORT 2025-26 (UNOFFICIAL)"
+            },
+            {
+              "chunk_id": "50dd3ab00f95d36bbe6d6ba4d666fbc4d051c23183e1078638c47541b2d23514",
+              "page_number": 10,
+              "text": "• Embed AI in delivery. Using AI tools to improve developer productivity, testing, operations and support. • Sell AI-led transformation. Helping clients redesign processes, build data foundations and deploy AI at scale. • Reskill the workforce. More than 270,000 employees have higher proficiency in AI and machine learning, and the company logged 69 million learning hours in the year. • Invest in infrastructure and partnerships. Building AI-ready capacity and alliances with technology providers. • Protect margins while investing. Delivering a 25% operating margin while funding new capabilities. The strategic trade-off is clear: AI can reduce the effort needed for traditional work, which pressures revenue per project, while opening new categories of demand. FY26 results suggest margin benefits are arriving earlier than top-line benefits."
+            }
+          ]
+        },
+        {
+          "query": "What is the FY26 figure for total AI training investment at TCS?",
+          "top_k": 8,
+          "chunks": [
+            {
+              "chunk_id": "77df90f599f4d571fe5f3297b82fef861c29800fbb8496924da49cb111cf2485",
+              "page_number": 27,
+              "text": "From capability to revenue AI was the central theme of TCS's FY26 messaging. By Q4, the company reported annualised AI-related revenue above $2.3 billion, equal to more than 6% of total revenue. Where AI shows up in the business • Client engagements. Data foundations, model deployment, agent-based automation and AI-enabled process redesign for clients. • Internal delivery. AI coding assistants, automated testing and AI-supported operations to raise productivity. • People. More than 270,000 employees have higher proficiency in AI and machine learning. • Deal wins. Several of the mega deals signed during the year were described as including AI-led transformation components. Questions to watch • How much AI revenue is new versus relabelled existing work. • Whether productivity gains are passed on to clients through lower prices. • Whether AI revenue growth can offset slower growth in traditional application services. The definition of AI revenue is TCS's own. Figures are annualised run-rate, not full-year recognised revenue."
+            },
+            {
+              "chunk_id": "add61afb3c3b7efaa3ca1a2f001dbd1161748c726a4527dfa2efb75d1cab9573",
+              "page_number": 10,
+              "text": "Repositioning for a changing services market Through FY26 TCS framed its strategy around artificial intelligence, both as something it sells and as a way of changing how it delivers work. Management stated that the company had moved from building capabilities to executing on revenue, citing annualised AI revenue above $2.3 billion in Q4."
+            },
+            {
+              "chunk_id": "bfed04b886f0bc93a03aa1633f88399e2a19b8d02903b0522fb3955cac9600ea",
+              "page_number": 29,
+              "text": "Indicator (FY26): Learning hours; Value: 69 million, up 23% year on year. Indicator (FY26): Competencies acquired; Value: 5.2 million. Indicator (FY26): Employees with higher proficiency in AI/ML; Value: 270,000+."
+            },
+            {
+              "chunk_id": "1832a868cd8d4779ddd90c1901cfe3ef0692dfbf54cd19aade471e761e88a4ed",
+              "page_number": 39,
+              "text": "• $40.7 billion of FY26 TCV provides revenue visibility. • Margins at a four-year high with room for further productivity gains. • AI revenue above a $2.3 billion annualised run rate. • Broader client base, with 66 clients above $100 million."
+            },
+            {
+              "chunk_id": "fc47d94718294a3990f150643a1f9a3cb57e8c1eb822b2015f2543546527e8f4",
+              "page_number": 31,
+              "text": "Restructuring in FY26 In 2025 TCS announced plans to reduce its workforce by about 12,000 employees, roughly 2% of the total, as part of a programme to realign skills with AI-led delivery and changing client demand. The headcount decline in Q2 and Q3 FY26 reflects this programme."
+            },
+            {
+              "chunk_id": "b88ccce8cd90a10e3b7b92b80ad05f6429443441ad4571b5f5432eebc839cac1",
+              "page_number": 22,
+              "text": "Total contract value (TCV) for FY26 TCS booked $40.7 billion of TCV in FY26, ahead of $39.4 billion in FY25. Q4 FY26 TCV of $12 billion was among the highest the company has recorded. The company signed three mega deals in Q4 and five over the year. TCV is the total value of contracts signed in a period and is not the same as revenue; deals are delivered over several years. A strong order book therefore supports future revenue visibility, but the timing of conversion depends on client ramp-up schedules. Q3 FY26 TCV is derived as the annual total less Q1, Q2 and Q4 as published; it may differ slightly from the figure TCS reported because of rounding."
+            },
+            {
+              "chunk_id": "7c6edd4d55625dfe3131b99f3f971139eca2477fd012ef102ff284645b8a7977",
+              "page_number": 5,
+              "text": "A year of margin gains, record deal wins and workforce reset FY26 was a year of contrasts for TCS. Top-line growth in US dollar terms was flat to slightly negative, reflecting cautious discretionary technology spending among clients, particularly in banking and financial services and in North America. In rupee terms revenue still grew 4.6% to ₹267,021 crore, helped by currency. Profitability improved even as growth stayed muted. The operating margin reached 25%, the highest in four years, and the net margin excluding exceptional items rose to 19.8%. Management cited productivity from automation and AI-led delivery, tighter cost control and a more favourable mix."
+            },
+            {
+              "chunk_id": "ceca0659c21efb32364c5b76e0857cc2543e4c3c2176c853be2352e0fc9ab612",
+              "page_number": 29,
+              "text": "Investing in skills The scale of training is central to the TCS model: with more than half a million employees, even small changes in skills mix have large effects on productivity and revenue per person. Learning hours rose 23% in a year when headcount fell, so hours per employee rose sharply. Focus areas • Foundational and advanced AI skills, including generative and agentic AI. • Cloud, data and cybersecurity certifications. • Domain knowledge in banking, retail, manufacturing and life sciences. • Leadership development for mid-level managers."
+            }
+          ]
+        },
+        {
+          "query": "AI proficiency and learning hours are outcomes of its AI-led transformation.",
+          "top_k": 8,
+          "chunks": [
+            {
+              "chunk_id": "bfed04b886f0bc93a03aa1633f88399e2a19b8d02903b0522fb3955cac9600ea",
+              "page_number": 29,
+              "text": "Indicator (FY26): Learning hours; Value: 69 million, up 23% year on year. Indicator (FY26): Competencies acquired; Value: 5.2 million. Indicator (FY26): Employees with higher proficiency in AI/ML; Value: 270,000+."
+            },
+            {
+              "chunk_id": "ceca0659c21efb32364c5b76e0857cc2543e4c3c2176c853be2352e0fc9ab612",
+              "page_number": 29,
+              "text": "Investing in skills The scale of training is central to the TCS model: with more than half a million employees, even small changes in skills mix have large effects on productivity and revenue per person. Learning hours rose 23% in a year when headcount fell, so hours per employee rose sharply. Focus areas • Foundational and advanced AI skills, including generative and agentic AI. • Cloud, data and cybersecurity certifications. • Domain knowledge in banking, retail, manufacturing and life sciences. • Leadership development for mid-level managers."
+            },
+            {
+              "chunk_id": "50dd3ab00f95d36bbe6d6ba4d666fbc4d051c23183e1078638c47541b2d23514",
+              "page_number": 10,
+              "text": "• Embed AI in delivery. Using AI tools to improve developer productivity, testing, operations and support. • Sell AI-led transformation. Helping clients redesign processes, build data foundations and deploy AI at scale. • Reskill the workforce. More than 270,000 employees have higher proficiency in AI and machine learning, and the company logged 69 million learning hours in the year. • Invest in infrastructure and partnerships. Building AI-ready capacity and alliances with technology providers. • Protect margins while investing. Delivering a 25% operating margin while funding new capabilities. The strategic trade-off is clear: AI can reduce the effort needed for traditional work, which pressures revenue per project, while opening new categories of demand. FY26 results suggest margin benefits are arriving earlier than top-line benefits."
+            },
+            {
+              "chunk_id": "77df90f599f4d571fe5f3297b82fef861c29800fbb8496924da49cb111cf2485",
+              "page_number": 27,
+              "text": "From capability to revenue AI was the central theme of TCS's FY26 messaging. By Q4, the company reported annualised AI-related revenue above $2.3 billion, equal to more than 6% of total revenue. Where AI shows up in the business • Client engagements. Data foundations, model deployment, agent-based automation and AI-enabled process redesign for clients. • Internal delivery. AI coding assistants, automated testing and AI-supported operations to raise productivity. • People. More than 270,000 employees have higher proficiency in AI and machine learning. • Deal wins. Several of the mega deals signed during the year were described as including AI-led transformation components. Questions to watch • How much AI revenue is new versus relabelled existing work. • Whether productivity gains are passed on to clients through lower prices. • Whether AI revenue growth can offset slower growth in traditional application services. The definition of AI revenue is TCS's own. Figures are annualised run-rate, not full-year recognised revenue."
+            },
+            {
+              "chunk_id": "add61afb3c3b7efaa3ca1a2f001dbd1161748c726a4527dfa2efb75d1cab9573",
+              "page_number": 10,
+              "text": "Repositioning for a changing services market Through FY26 TCS framed its strategy around artificial intelligence, both as something it sells and as a way of changing how it delivers work. Management stated that the company had moved from building capabilities to executing on revenue, citing annualised AI revenue above $2.3 billion in Q4."
+            },
+            {
+              "chunk_id": "e38be39a23c9a027e5a56e47763d3a4576eb710d2020104dffbbd9554e5b9949",
+              "page_number": 39,
+              "text": "• Recovery in BFSI discretionary spend. • Constant-currency growth turning consistently positive year on year. • Pricing effects of AI on traditional work. • Attrition and wage costs, given a 13.7% rate and the need for hiring. • Rupee movements. • Dividend policy and capital allocation after a year with a large special dividend. This outlook is the compiler's analytical view and is not company guidance. Forward-looking statements involve uncertainty."
+            },
+            {
+              "chunk_id": "fc47d94718294a3990f150643a1f9a3cb57e8c1eb822b2015f2543546527e8f4",
+              "page_number": 31,
+              "text": "Restructuring in FY26 In 2025 TCS announced plans to reduce its workforce by about 12,000 employees, roughly 2% of the total, as part of a programme to realign skills with AI-led delivery and changing client demand. The headcount decline in Q2 and Q3 FY26 reflects this programme."
+            },
+            {
+              "chunk_id": "ad166000ce8d25183fa68cafdc36e4ab9ca78a10d7c88ab768a6b35a5acb8d91",
+              "page_number": 11,
+              "text": "• Cautious client spending in North America and Europe, with decisions slowed by tariffs, interest-rate uncertainty and geopolitics. • Weak BFSI discretionary spend, the single biggest vertical, throughout the year. • Pressure in specific sectors in Q1, including life sciences and healthcare, and communication and media, each down about 9.6% in constant currency. • Sharp decline in India revenue in Q1 (down 21.7%) as a large public-sector telecom programme wound down. • Pockets of growth in the Middle East and Africa (up 9.4% in Q1), Asia Pacific and Latin America, and in energy, resources and utilities. • Rapid AI adoption, which is reshaping both demand and delivery models for IT services. Within the year, momentum improved: constant-currency revenue turned sequentially positive from Q2, and Q4 brought the strongest sequential rupee revenue growth of the year."
+            }
+          ]
+        },
+        {
+          "query": "AI proficiency learning hours outcomes of AI-led transformation TCS",
+          "top_k": 8,
+          "chunks": [
+            {
+              "chunk_id": "ceca0659c21efb32364c5b76e0857cc2543e4c3c2176c853be2352e0fc9ab612",
+              "page_number": 29,
+              "text": "Investing in skills The scale of training is central to the TCS model: with more than half a million employees, even small changes in skills mix have large effects on productivity and revenue per person. Learning hours rose 23% in a year when headcount fell, so hours per employee rose sharply. Focus areas • Foundational and advanced AI skills, including generative and agentic AI. • Cloud, data and cybersecurity certifications. • Domain knowledge in banking, retail, manufacturing and life sciences. • Leadership development for mid-level managers."
+            },
+            {
+              "chunk_id": "77df90f599f4d571fe5f3297b82fef861c29800fbb8496924da49cb111cf2485",
+              "page_number": 27,
+              "text": "From capability to revenue AI was the central theme of TCS's FY26 messaging. By Q4, the company reported annualised AI-related revenue above $2.3 billion, equal to more than 6% of total revenue. Where AI shows up in the business • Client engagements. Data foundations, model deployment, agent-based automation and AI-enabled process redesign for clients. • Internal delivery. AI coding assistants, automated testing and AI-supported operations to raise productivity. • People. More than 270,000 employees have higher proficiency in AI and machine learning. • Deal wins. Several of the mega deals signed during the year were described as including AI-led transformation components. Questions to watch • How much AI revenue is new versus relabelled existing work. • Whether productivity gains are passed on to clients through lower prices. • Whether AI revenue growth can offset slower growth in traditional application services. The definition of AI revenue is TCS's own. Figures are annualised run-rate, not full-year recognised revenue."
+            },
+            {
+              "chunk_id": "bfed04b886f0bc93a03aa1633f88399e2a19b8d02903b0522fb3955cac9600ea",
+              "page_number": 29,
+              "text": "Indicator (FY26): Learning hours; Value: 69 million, up 23% year on year. Indicator (FY26): Competencies acquired; Value: 5.2 million. Indicator (FY26): Employees with higher proficiency in AI/ML; Value: 270,000+."
+            },
+            {
+              "chunk_id": "50dd3ab00f95d36bbe6d6ba4d666fbc4d051c23183e1078638c47541b2d23514",
+              "page_number": 10,
+              "text": "• Embed AI in delivery. Using AI tools to improve developer productivity, testing, operations and support. • Sell AI-led transformation. Helping clients redesign processes, build data foundations and deploy AI at scale. • Reskill the workforce. More than 270,000 employees have higher proficiency in AI and machine learning, and the company logged 69 million learning hours in the year. • Invest in infrastructure and partnerships. Building AI-ready capacity and alliances with technology providers. • Protect margins while investing. Delivering a 25% operating margin while funding new capabilities. The strategic trade-off is clear: AI can reduce the effort needed for traditional work, which pressures revenue per project, while opening new categories of demand. FY26 results suggest margin benefits are arriving earlier than top-line benefits."
+            },
+            {
+              "chunk_id": "add61afb3c3b7efaa3ca1a2f001dbd1161748c726a4527dfa2efb75d1cab9573",
+              "page_number": 10,
+              "text": "Repositioning for a changing services market Through FY26 TCS framed its strategy around artificial intelligence, both as something it sells and as a way of changing how it delivers work. Management stated that the company had moved from building capabilities to executing on revenue, citing annualised AI revenue above $2.3 billion in Q4."
+            },
+            {
+              "chunk_id": "fc47d94718294a3990f150643a1f9a3cb57e8c1eb822b2015f2543546527e8f4",
+              "page_number": 31,
+              "text": "Restructuring in FY26 In 2025 TCS announced plans to reduce its workforce by about 12,000 employees, roughly 2% of the total, as part of a programme to realign skills with AI-led delivery and changing client demand. The headcount decline in Q2 and Q3 FY26 reflects this programme."
+            },
+            {
+              "chunk_id": "b50e44246a8348144eccd11ff01fcd8a13417328fbc345366b0f2e13f16b85c3",
+              "page_number": 5,
+              "text": "• Demand recovery in stages. Constant-currency revenue fell year on year in the first three quarters but turned sequentially positive, and Q4 revenue grew 5.4% in rupee terms from Q3. • Record order book momentum. TCV of $40.7 billion for the year, with $12 billion in Q4 alone. • AI as a revenue line. TCS disclosed annualised AI revenue above $2.3 billion by Q4. • Workforce restructuring. Headcount fell through the middle of the year and began to recover in Q4. • Generous capital return. Total dividends of ₹110 per share, including a ₹46 special dividend. The sections that follow set out the detail behind each theme, followed by a view of risks, governance and the outlook."
+            },
+            {
+              "chunk_id": "c0dd478ae23bbaecc5162679ad29698bb3df31d14f2c51ee9c346f7b48a884c4",
+              "page_number": 8,
+              "text": "What TCS sells to its clients TCS organises its offerings around the full lifecycle of enterprise technology change. In broad terms the portfolio covers the following areas. • Consulting and strategy. Business and technology advisory to help clients plan large transformations. • Cloud and infrastructure. Migration, modernisation and managed operations across public, private and hybrid clouds. • Enterprise applications. Implementation and support of core platforms in finance, supply chain, human resources and customer management. • Data and artificial intelligence. Data engineering, analytics, machine learning and, increasingly, generative and agentic AI solutions. • Cybersecurity. Security strategy, monitoring, identity and response services. • Engineering and industrial technology. Product engineering, embedded systems, IoT and digital twins for manufacturing and other industries. • Business process services. Operations that combine automation with human expertise, such as finance and procurement operations. • Products and platforms. Industry platforms, notably in banking and financial services, education and retail. Clients typically engage TCS through multi-year programmes. Large deals are tracked as total contract value (TCV), which TCS reports each quarter."
+            }
+          ]
+        }
+      ],
+      "response": {
+        "answer": "The report connects TCS's AI strategy to employee development by positioning workforce reskilling as a strategic priority, stating that more than 270,000 employees have higher proficiency in AI/ML and that the company logged 69 million learning hours in FY26.",
+        "citations": [
+          {
+            "chunk_id": "50dd3ab00f95d36bbe6d6ba4d666fbc4d051c23183e1078638c47541b2d23514",
+            "document_id": "tcs_annual_report",
+            "page_number": 10,
+            "text_snippet": "...• Reskill the workforce. More than 270,000 employees have higher proficiency in AI and machine learning, and the company logged 69 million learning hours in the year."
+          },
+          {
+            "chunk_id": "77df90f599f4d571fe5f3297b82fef861c29800fbb8496924da49cb111cf2485",
+            "document_id": "tcs_annual_report",
+            "page_number": 27,
+            "text_snippet": "...More than 270,000 employees have higher proficiency in AI and machine learning."
+          },
+          {
+            "chunk_id": "bfed04b886f0bc93a03aa1633f88399e2a19b8d02903b0522fb3955cac9600ea",
+            "document_id": "tcs_annual_report",
+            "page_number": 29,
+            "text_snippet": "...Indicator (FY26): Employees with higher proficiency in AI/ML; Value: 270,000+."
+          }
+        ],
+        "trace": [
+          {
+            "step_type": "plan",
+            "content": "Classified as multi-hop; 3 sub-queries",
+            "metadata": {
+              "query_type": "multi-hop",
+              "subquery_count": 3,
+              "rewritten": false
+            }
+          },
+          {
+            "step_type": "retrieve",
+            "content": "Retrieved 15 passages across 3 sub-queries",
+            "metadata": {
+              "search_query_count": 4,
+              "chunks_per_search": [
+                8,
+                8,
+                8,
+                8
+              ],
+              "chunks_after_merge": 15,
+              "new_chunks": 15,
+              "attempt": 0,
+              "errors": 0,
+              "quarantined": 0
+            }
+          },
+          {
+            "step_type": "synthesize",
+            "content": "Draft answer generated with 3 citations",
+            "metadata": {
+              "citation_count": 3,
+              "dropped_citations": 0,
+              "generator_called": true
+            }
+          },
+          {
+            "step_type": "fact_check",
+            "content": "2 of 3 claims verified; searching again for 1 unsupported claim",
+            "metadata": {
+              "claims_total": 3,
+              "claims_supported": 2,
+              "coverage": 0.6666666666666666,
+              "retry": true
+            }
+          },
+          {
+            "step_type": "retrieve",
+            "content": "Found 2 new passages (17 in total)",
+            "metadata": {
+              "search_query_count": 2,
+              "chunks_per_search": [
+                8,
+                8
+              ],
+              "chunks_after_merge": 17,
+              "new_chunks": 2,
+              "attempt": 1,
+              "errors": 0,
+              "quarantined": 0
+            }
+          },
+          {
+            "step_type": "synthesize",
+            "content": "Draft answer generated with 3 citations",
+            "metadata": {
+              "citation_count": 3,
+              "dropped_citations": 0,
+              "generator_called": true
+            }
+          },
+          {
+            "step_type": "fact_check",
+            "content": "3 of 3 claims verified",
+            "metadata": {
+              "claims_total": 3,
+              "claims_supported": 3,
+              "coverage": 1.0,
+              "retry": false
+            }
+          }
+        ],
+        "verification_status": "verified",
+        "confidence": 0.95,
+        "latency_ms": 158170.62839999562
+      }
+    },
+    {
+      "question_id": "tcs-gold-09",
+      "category": "unanswerable",
+      "question": "What was TCS's exact cash-and-investments balance at the end of Q3 FY26?",
+      "reference_answer": "",
+      "model_calls_live": 2,
+      "model_calls_replayed": 0,
+      "searches": [
+        {
+          "query": "What was TCS's exact cash-and-investments balance at the end of Q3 FY26?",
+          "top_k": 8,
+          "chunks": [
+            {
+              "chunk_id": "9aa3eb0a8741d34ce66c5e30d48a4bd759e34235d7a48eadd258251318f45003",
+              "page_number": 18,
+              "text": "Cash and investments TCS ended FY26 with about ₹50,020 crore in cash and investments. The balance rose to about ₹55,950 crore at the end of Q2 and then fell as the company paid out an interim dividend and a special dividend in the third quarter and an additional interim dividend in the second half, among other uses. The company carries limited financial debt relative to its size, and its liquidity is large relative to annual dividends. For a services business with modest capital needs, this allows investment in people, acquisitions and infrastructure without external funding. Cash and investment balances are taken from the quarterly fact sheets (₹ million converted to crore). The Q3 balance was not captured in the sources used for this compilation. Explanations of the movements are the compiler's interpretation."
+            },
+            {
+              "chunk_id": "f445707ef6a7c7a50908fdeecd94136d312ee8a9ba16e9623b817de5fa0b52a9",
+              "page_number": 17,
+              "text": "Cash conversion remained strong TCS generated cash flow from operations equal to 111.0% of net profit in FY26. Quarterly conversion was strong in each period. Conversion above 100% indicates that cash collections and working-capital management outpaced accounting profit. The Q3 figure of 130.4% reflects the effect of non-cash exceptional charges in that quarter, which reduced reported profit but not cash. Strong cash generation underpinned both ongoing dividends and the special dividend declared in January 2026, while leaving the company with substantial cash and investments (see the next page)."
+            },
+            {
+              "chunk_id": "d5b71070e29d7d334a6caa4dfa31ea108c838bdff9a99f84698ecbe7354ba19d",
+              "page_number": 19,
+              "text": "Dividends declared for FY26 The total of ₹110 per share is made up of three interim dividends of ₹11 each (₹33), a special dividend of ₹46 and a proposed final dividend of ₹31. Market commentary noted that the final dividend of ₹31 was below the level some investors had expected. The proposed final dividend is subject to approval by shareholders at the Annual General Meeting. TCS has historically returned a large share of its free cash flow to shareholders through dividends and, in earlier years, share buybacks. Dividend components as reported in market coverage of the Q4 FY26 results; confirm in the official dividend notice."
+            },
+            {
+              "chunk_id": "8bffb4a9d6c43c73eca7b4f4e67a8fe48145172cad010600ec4a154e6bb30fc1",
+              "page_number": 40,
+              "text": "Terms used and where the data came from Glossary • Constant currency (CC): growth measured with exchange rates held constant to remove currency effects. • TCV: total contract value of deals signed in a period. • Mega deal: a very large contract; TCS reported five in FY26. • BFSI: Banking, Financial Services and Insurance. • LTM attrition: voluntary attrition over the last twelve months. • Exceptional items: one-off charges or gains excluded from underlying profit. • bp (basis point): one hundredth of a percentage point. • Crore: ten million (10,000,000). Sources • TCS Financial Results fact sheets, Q1 to Q4 FY2025-26 and Q1 FY2026-27 (tcs.com investor relations). • TCS press release, \"TCS closes FY26 with improving sequential growth momentum and strong deal wins\", 9 April 2026. • Press coverage of the Q1, Q3 and Q4 FY26 results (Outlook Business, The Quint, PTI via TaxTMI, and market commentary on dividends and attrition). Unofficial compilation prepared for informational purposes. Refer to TCS filings for authoritative data."
+            },
+            {
+              "chunk_id": "5ce13dfb4ce9901078a1e63788a34b987963a7900f846c3fb4ecd12845a0ee01",
+              "page_number": 38,
+              "text": "Snapshot of the quarter ended 30 June 2026 After the close of FY26, TCS published its first-quarter FY27 results. A few data points from that fact sheet give an early read on how the new year started. Order intake of $9.5 billion is lower than Q4 FY26's exceptional $12 billion but comparable to the $9.3 to $10.0 billion range of the first three quarters of FY26. Attrition was stable, and the mix of revenue by market and vertical was little changed. Revenue and profit for Q1 FY27 are not shown here because the column layout in the extracted source was ambiguous; see the official release."
+            },
+            {
+              "chunk_id": "7c6edd4d55625dfe3131b99f3f971139eca2477fd012ef102ff284645b8a7977",
+              "page_number": 5,
+              "text": "A year of margin gains, record deal wins and workforce reset FY26 was a year of contrasts for TCS. Top-line growth in US dollar terms was flat to slightly negative, reflecting cautious discretionary technology spending among clients, particularly in banking and financial services and in North America. In rupee terms revenue still grew 4.6% to ₹267,021 crore, helped by currency. Profitability improved even as growth stayed muted. The operating margin reached 25%, the highest in four years, and the net margin excluding exceptional items rose to 19.8%. Management cited productivity from automation and AI-led delivery, tighter cost control and a more favourable mix."
+            },
+            {
+              "chunk_id": "8d031b20ba67329796efac41171ed43784572d7a34b9b6b202f9af4b2c5b2a9a",
+              "page_number": 39,
+              "text": "What to follow in FY27 TCS ended FY26 with record deal momentum, a 25% operating margin and a workforce that had stopped shrinking. The main questions for FY27 concern how quickly that momentum turns into revenue growth."
+            },
+            {
+              "chunk_id": "b88ccce8cd90a10e3b7b92b80ad05f6429443441ad4571b5f5432eebc839cac1",
+              "page_number": 22,
+              "text": "Total contract value (TCV) for FY26 TCS booked $40.7 billion of TCV in FY26, ahead of $39.4 billion in FY25. Q4 FY26 TCV of $12 billion was among the highest the company has recorded. The company signed three mega deals in Q4 and five over the year. TCV is the total value of contracts signed in a period and is not the same as revenue; deals are delivered over several years. A strong order book therefore supports future revenue visibility, but the timing of conversion depends on client ramp-up schedules. Q3 FY26 TCV is derived as the annual total less Q1, Q2 and Q4 as published; it may differ slightly from the figure TCS reported because of rounding."
+            }
+          ]
+        },
+        {
+          "query": "TCS cash and investments balance end of Q3 FY26",
+          "top_k": 8,
+          "chunks": [
+            {
+              "chunk_id": "9aa3eb0a8741d34ce66c5e30d48a4bd759e34235d7a48eadd258251318f45003",
+              "page_number": 18,
+              "text": "Cash and investments TCS ended FY26 with about ₹50,020 crore in cash and investments. The balance rose to about ₹55,950 crore at the end of Q2 and then fell as the company paid out an interim dividend and a special dividend in the third quarter and an additional interim dividend in the second half, among other uses. The company carries limited financial debt relative to its size, and its liquidity is large relative to annual dividends. For a services business with modest capital needs, this allows investment in people, acquisitions and infrastructure without external funding. Cash and investment balances are taken from the quarterly fact sheets (₹ million converted to crore). The Q3 balance was not captured in the sources used for this compilation. Explanations of the movements are the compiler's interpretation."
+            },
+            {
+              "chunk_id": "5ce13dfb4ce9901078a1e63788a34b987963a7900f846c3fb4ecd12845a0ee01",
+              "page_number": 38,
+              "text": "Snapshot of the quarter ended 30 June 2026 After the close of FY26, TCS published its first-quarter FY27 results. A few data points from that fact sheet give an early read on how the new year started. Order intake of $9.5 billion is lower than Q4 FY26's exceptional $12 billion but comparable to the $9.3 to $10.0 billion range of the first three quarters of FY26. Attrition was stable, and the mix of revenue by market and vertical was little changed. Revenue and profit for Q1 FY27 are not shown here because the column layout in the extracted source was ambiguous; see the official release."
+            },
+            {
+              "chunk_id": "f445707ef6a7c7a50908fdeecd94136d312ee8a9ba16e9623b817de5fa0b52a9",
+              "page_number": 17,
+              "text": "Cash conversion remained strong TCS generated cash flow from operations equal to 111.0% of net profit in FY26. Quarterly conversion was strong in each period. Conversion above 100% indicates that cash collections and working-capital management outpaced accounting profit. The Q3 figure of 130.4% reflects the effect of non-cash exceptional charges in that quarter, which reduced reported profit but not cash. Strong cash generation underpinned both ongoing dividends and the special dividend declared in January 2026, while leaving the company with substantial cash and investments (see the next page)."
+            },
+            {
+              "chunk_id": "d5b71070e29d7d334a6caa4dfa31ea108c838bdff9a99f84698ecbe7354ba19d",
+              "page_number": 19,
+              "text": "Dividends declared for FY26 The total of ₹110 per share is made up of three interim dividends of ₹11 each (₹33), a special dividend of ₹46 and a proposed final dividend of ₹31. Market commentary noted that the final dividend of ₹31 was below the level some investors had expected. The proposed final dividend is subject to approval by shareholders at the Annual General Meeting. TCS has historically returned a large share of its free cash flow to shareholders through dividends and, in earlier years, share buybacks. Dividend components as reported in market coverage of the Q4 FY26 results; confirm in the official dividend notice."
+            },
+            {
+              "chunk_id": "8d031b20ba67329796efac41171ed43784572d7a34b9b6b202f9af4b2c5b2a9a",
+              "page_number": 39,
+              "text": "What to follow in FY27 TCS ended FY26 with record deal momentum, a 25% operating margin and a workforce that had stopped shrinking. The main questions for FY27 concern how quickly that momentum turns into revenue growth."
+            },
+            {
+              "chunk_id": "8bffb4a9d6c43c73eca7b4f4e67a8fe48145172cad010600ec4a154e6bb30fc1",
+              "page_number": 40,
+              "text": "Terms used and where the data came from Glossary • Constant currency (CC): growth measured with exchange rates held constant to remove currency effects. • TCV: total contract value of deals signed in a period. • Mega deal: a very large contract; TCS reported five in FY26. • BFSI: Banking, Financial Services and Insurance. • LTM attrition: voluntary attrition over the last twelve months. • Exceptional items: one-off charges or gains excluded from underlying profit. • bp (basis point): one hundredth of a percentage point. • Crore: ten million (10,000,000). Sources • TCS Financial Results fact sheets, Q1 to Q4 FY2025-26 and Q1 FY2026-27 (tcs.com investor relations). • TCS press release, \"TCS closes FY26 with improving sequential growth momentum and strong deal wins\", 9 April 2026. • Press coverage of the Q1, Q3 and Q4 FY26 results (Outlook Business, The Quint, PTI via TaxTMI, and market commentary on dividends and attrition). Unofficial compilation prepared for informational purposes. Refer to TCS filings for authoritative data."
+            },
+            {
+              "chunk_id": "b88ccce8cd90a10e3b7b92b80ad05f6429443441ad4571b5f5432eebc839cac1",
+              "page_number": 22,
+              "text": "Total contract value (TCV) for FY26 TCS booked $40.7 billion of TCV in FY26, ahead of $39.4 billion in FY25. Q4 FY26 TCV of $12 billion was among the highest the company has recorded. The company signed three mega deals in Q4 and five over the year. TCV is the total value of contracts signed in a period and is not the same as revenue; deals are delivered over several years. A strong order book therefore supports future revenue visibility, but the timing of conversion depends on client ramp-up schedules. Q3 FY26 TCV is derived as the annual total less Q1, Q2 and Q4 as published; it may differ slightly from the figure TCS reported because of rounding."
+            },
+            {
+              "chunk_id": "7c6edd4d55625dfe3131b99f3f971139eca2477fd012ef102ff284645b8a7977",
+              "page_number": 5,
+              "text": "A year of margin gains, record deal wins and workforce reset FY26 was a year of contrasts for TCS. Top-line growth in US dollar terms was flat to slightly negative, reflecting cautious discretionary technology spending among clients, particularly in banking and financial services and in North America. In rupee terms revenue still grew 4.6% to ₹267,021 crore, helped by currency. Profitability improved even as growth stayed muted. The operating margin reached 25%, the highest in four years, and the net margin excluding exceptional items rose to 19.8%. Management cited productivity from automation and AI-led delivery, tighter cost control and a more favourable mix."
+            }
+          ]
+        }
+      ],
+      "response": {
+        "answer": "I don't have sufficient evidence in the provided documents.",
+        "citations": [],
+        "trace": [
+          {
+            "step_type": "plan",
+            "content": "Classified as simple; 1 sub-query",
+            "metadata": {
+              "query_type": "simple",
+              "subquery_count": 1,
+              "rewritten": false
+            }
+          },
+          {
+            "step_type": "retrieve",
+            "content": "Retrieved 8 passages across 1 sub-query",
+            "metadata": {
+              "search_query_count": 1,
+              "chunks_per_search": [
+                8
+              ],
+              "chunks_after_merge": 8,
+              "new_chunks": 8,
+              "attempt": 0,
+              "errors": 0,
+              "quarantined": 0
+            }
+          },
+          {
+            "step_type": "synthesize",
+            "content": "The passages do not contain the answer; searching again",
+            "metadata": {
+              "citation_count": 0,
+              "dropped_citations": 0,
+              "generator_called": true,
+              "not_found": true,
+              "retry_search": true
+            }
+          },
+          {
+            "step_type": "retrieve",
+            "content": "No new passages found",
+            "metadata": {
+              "search_query_count": 1,
+              "chunks_per_search": [
+                8
+              ],
+              "chunks_after_merge": 8,
+              "new_chunks": 0,
+              "attempt": 1,
+              "errors": 0,
+              "quarantined": 0
+            }
+          },
+          {
+            "step_type": "fact_check",
+            "content": "No new passages found; finalising with the best available answer",
+            "metadata": {
+              "claims_total": 0,
+              "claims_supported": 0,
+              "coverage": 0.0,
+              "retry": false,
+              "stopped_early": true
+            }
+          }
+        ],
+        "verification_status": "unverified",
+        "confidence": 0.0,
+        "latency_ms": 38471.23130003456
+      }
+    },
+    {
+      "question_id": "tcs-gold-10",
+      "category": "table",
+      "question": "What was the FY26 total contract value for TCS's Banking, Financial Services and Insurance (BFSI) vertical?",
+      "reference_answer": "FY26 TCV for the BFSI vertical was $13.4 billion.",
+      "model_calls_live": 5,
+      "model_calls_replayed": 0,
+      "searches": [
+        {
+          "query": "What was the FY26 total contract value for TCS's Banking, Financial Services and Insurance (BFSI) vertical?",
+          "top_k": 8,
+          "chunks": [
+            {
+              "chunk_id": "b88ccce8cd90a10e3b7b92b80ad05f6429443441ad4571b5f5432eebc839cac1",
+              "page_number": 22,
+              "text": "Total contract value (TCV) for FY26 TCS booked $40.7 billion of TCV in FY26, ahead of $39.4 billion in FY25. Q4 FY26 TCV of $12 billion was among the highest the company has recorded. The company signed three mega deals in Q4 and five over the year. TCV is the total value of contracts signed in a period and is not the same as revenue; deals are delivered over several years. A strong order book therefore supports future revenue visibility, but the timing of conversion depends on client ramp-up schedules. Q3 FY26 TCV is derived as the annual total less Q1, Q2 and Q4 as published; it may differ slightly from the figure TCS reported because of rounding."
+            },
+            {
+              "chunk_id": "af75026d8de808231f7c08f50a509e1a4fcd05f42008c83c883b8296d09d4852",
+              "page_number": 6,
+              "text": "TCS serves clients across North America, Latin America, the United Kingdom, Continental Europe, India, Asia Pacific, and the Middle East and Africa. North America is the largest market at roughly 48% of revenue, while Banking, Financial Services and Insurance (BFSI) is the largest industry vertical at roughly 32%."
+            },
+            {
+              "chunk_id": "8bffb4a9d6c43c73eca7b4f4e67a8fe48145172cad010600ec4a154e6bb30fc1",
+              "page_number": 40,
+              "text": "Terms used and where the data came from Glossary • Constant currency (CC): growth measured with exchange rates held constant to remove currency effects. • TCV: total contract value of deals signed in a period. • Mega deal: a very large contract; TCS reported five in FY26. • BFSI: Banking, Financial Services and Insurance. • LTM attrition: voluntary attrition over the last twelve months. • Exceptional items: one-off charges or gains excluded from underlying profit. • bp (basis point): one hundredth of a percentage point. • Crore: ten million (10,000,000). Sources • TCS Financial Results fact sheets, Q1 to Q4 FY2025-26 and Q1 FY2026-27 (tcs.com investor relations). • TCS press release, \"TCS closes FY26 with improving sequential growth momentum and strong deal wins\", 9 April 2026. • Press coverage of the Q1, Q3 and Q4 FY26 results (Outlook Business, The Quint, PTI via TaxTMI, and market commentary on dividends and attrition). Unofficial compilation prepared for informational purposes. Refer to TCS filings for authoritative data."
+            },
+            {
+              "chunk_id": "5440d6cd0176a6892121179d25e5d6983b08954a3979968a8d298d525bc88998",
+              "page_number": 26,
+              "text": "Revenue by industry BFSI is the largest vertical at roughly 32% of revenue. Growth in the vertical was weak through FY26: it grew just 1.0% year on year in constant currency in Q1, and market commentary on the Q4 results described BFSI as a continuing drag even as BFSI bookings improved. Other verticals in Q1 FY26 (constant currency, year on year) • Technology and Services: +1.8% • Energy, Resources and Utilities: +2.8% (5.9% of revenue) • Life Sciences and Healthcare: -9.6% • Communication and Media: -9.6% A recovery in BFSI discretionary spending is the single most important swing factor for TCS growth in FY27, because of the vertical's weight in the revenue base."
+            },
+            {
+              "chunk_id": "7c6edd4d55625dfe3131b99f3f971139eca2477fd012ef102ff284645b8a7977",
+              "page_number": 5,
+              "text": "A year of margin gains, record deal wins and workforce reset FY26 was a year of contrasts for TCS. Top-line growth in US dollar terms was flat to slightly negative, reflecting cautious discretionary technology spending among clients, particularly in banking and financial services and in North America. In rupee terms revenue still grew 4.6% to ₹267,021 crore, helped by currency. Profitability improved even as growth stayed muted. The operating margin reached 25%, the highest in four years, and the net margin excluding exceptional items rose to 19.8%. Management cited productivity from automation and AI-led delivery, tighter cost control and a more favourable mix."
+            },
+            {
+              "chunk_id": "9aa3eb0a8741d34ce66c5e30d48a4bd759e34235d7a48eadd258251318f45003",
+              "page_number": 18,
+              "text": "Cash and investments TCS ended FY26 with about ₹50,020 crore in cash and investments. The balance rose to about ₹55,950 crore at the end of Q2 and then fell as the company paid out an interim dividend and a special dividend in the third quarter and an additional interim dividend in the second half, among other uses. The company carries limited financial debt relative to its size, and its liquidity is large relative to annual dividends. For a services business with modest capital needs, this allows investment in people, acquisitions and infrastructure without external funding. Cash and investment balances are taken from the quarterly fact sheets (₹ million converted to crore). The Q3 balance was not captured in the sources used for this compilation. Explanations of the movements are the compiler's interpretation."
+            },
+            {
+              "chunk_id": "6c16a69e84aa3cf38296f9f869ac65c520566330abdf2984423af24a0c0a6ed5",
+              "page_number": 38,
+              "text": "Indicator: Order book TCV; Q1 FY27: $9.5 billion. Indicator: North America TCV; Q1 FY27: $4.7 billion. Indicator: BFSI TCV; Q1 FY27: $2.5 billion. Indicator: Consumer Business TCV; Q1 FY27: $1.4 billion. Indicator: Voluntary attrition, IT services (LTM); Q1 FY27: 13.6%. Indicator: North America share of revenue; Q1 FY27: 48.3%. Indicator: BFSI share of revenue; Q1 FY27: 32.1%. Indicator: Total cash and investments; Q1 FY27: ₹50,232 crore."
+            },
+            {
+              "chunk_id": "5ce13dfb4ce9901078a1e63788a34b987963a7900f846c3fb4ecd12845a0ee01",
+              "page_number": 38,
+              "text": "Snapshot of the quarter ended 30 June 2026 After the close of FY26, TCS published its first-quarter FY27 results. A few data points from that fact sheet give an early read on how the new year started. Order intake of $9.5 billion is lower than Q4 FY26's exceptional $12 billion but comparable to the $9.3 to $10.0 billion range of the first three quarters of FY26. Attrition was stable, and the mix of revenue by market and vertical was little changed. Revenue and profit for Q1 FY27 are not shown here because the column layout in the extracted source was ambiguous; see the official release."
+            }
+          ]
+        },
+        {
+          "query": "FY26 total contract value Banking Financial Services and Insurance BFSI vertical TCS",
+          "top_k": 8,
+          "chunks": [
+            {
+              "chunk_id": "b88ccce8cd90a10e3b7b92b80ad05f6429443441ad4571b5f5432eebc839cac1",
+              "page_number": 22,
+              "text": "Total contract value (TCV) for FY26 TCS booked $40.7 billion of TCV in FY26, ahead of $39.4 billion in FY25. Q4 FY26 TCV of $12 billion was among the highest the company has recorded. The company signed three mega deals in Q4 and five over the year. TCV is the total value of contracts signed in a period and is not the same as revenue; deals are delivered over several years. A strong order book therefore supports future revenue visibility, but the timing of conversion depends on client ramp-up schedules. Q3 FY26 TCV is derived as the annual total less Q1, Q2 and Q4 as published; it may differ slightly from the figure TCS reported because of rounding."
+            },
+            {
+              "chunk_id": "8bffb4a9d6c43c73eca7b4f4e67a8fe48145172cad010600ec4a154e6bb30fc1",
+              "page_number": 40,
+              "text": "Terms used and where the data came from Glossary • Constant currency (CC): growth measured with exchange rates held constant to remove currency effects. • TCV: total contract value of deals signed in a period. • Mega deal: a very large contract; TCS reported five in FY26. • BFSI: Banking, Financial Services and Insurance. • LTM attrition: voluntary attrition over the last twelve months. • Exceptional items: one-off charges or gains excluded from underlying profit. • bp (basis point): one hundredth of a percentage point. • Crore: ten million (10,000,000). Sources • TCS Financial Results fact sheets, Q1 to Q4 FY2025-26 and Q1 FY2026-27 (tcs.com investor relations). • TCS press release, \"TCS closes FY26 with improving sequential growth momentum and strong deal wins\", 9 April 2026. • Press coverage of the Q1, Q3 and Q4 FY26 results (Outlook Business, The Quint, PTI via TaxTMI, and market commentary on dividends and attrition). Unofficial compilation prepared for informational purposes. Refer to TCS filings for authoritative data."
+            },
+            {
+              "chunk_id": "5440d6cd0176a6892121179d25e5d6983b08954a3979968a8d298d525bc88998",
+              "page_number": 26,
+              "text": "Revenue by industry BFSI is the largest vertical at roughly 32% of revenue. Growth in the vertical was weak through FY26: it grew just 1.0% year on year in constant currency in Q1, and market commentary on the Q4 results described BFSI as a continuing drag even as BFSI bookings improved. Other verticals in Q1 FY26 (constant currency, year on year) • Technology and Services: +1.8% • Energy, Resources and Utilities: +2.8% (5.9% of revenue) • Life Sciences and Healthcare: -9.6% • Communication and Media: -9.6% A recovery in BFSI discretionary spending is the single most important swing factor for TCS growth in FY27, because of the vertical's weight in the revenue base."
+            },
+            {
+              "chunk_id": "af75026d8de808231f7c08f50a509e1a4fcd05f42008c83c883b8296d09d4852",
+              "page_number": 6,
+              "text": "TCS serves clients across North America, Latin America, the United Kingdom, Continental Europe, India, Asia Pacific, and the Middle East and Africa. North America is the largest market at roughly 48% of revenue, while Banking, Financial Services and Insurance (BFSI) is the largest industry vertical at roughly 32%."
+            },
+            {
+              "chunk_id": "5ce13dfb4ce9901078a1e63788a34b987963a7900f846c3fb4ecd12845a0ee01",
+              "page_number": 38,
+              "text": "Snapshot of the quarter ended 30 June 2026 After the close of FY26, TCS published its first-quarter FY27 results. A few data points from that fact sheet give an early read on how the new year started. Order intake of $9.5 billion is lower than Q4 FY26's exceptional $12 billion but comparable to the $9.3 to $10.0 billion range of the first three quarters of FY26. Attrition was stable, and the mix of revenue by market and vertical was little changed. Revenue and profit for Q1 FY27 are not shown here because the column layout in the extracted source was ambiguous; see the official release."
+            },
+            {
+              "chunk_id": "a505499e0ef5dc7ce38c3586a22bf957339f98ae57f3bc30898911da52a7bbbc",
+              "page_number": 33,
+              "text": "Weak discretionary offerings Risk: demand; FY26 evidence: Constant-currency revenue fell. Risk: 2.4%; FY26 evidence: Large multi-year deals; cost-saving. Risk: BFSI weakness; FY26 evidence: BFSI revenue growth about 1% in. Risk: Q1; FY26 evidence: Rising BFSI TCV ($13.4B). Risk: Talent and attrition; FY26 evidence: Attrition 13.3% to 13.8%; Typical mitigant: Reskilling: 69M learning hours. Risk: AI deflation; FY26 evidence: Annualised AI revenue $2.3B+; Typical mitigant: New AI-led service lines. Risk: Rupee volatility; FY26 evidence: Rupee growth 4.6% vs dollar -0.5%; Typical mitigant: Hedging; cost base in rupees. Risk: Restructuring execution; FY26 evidence: Headcount down ~28,500 in Q2-Q3; Typical mitigant: Rehiring began in Q4. Risk: Regulatory change; FY26 evidence: New labour codes charge in Q3; Typical mitigant: Compliance programmes."
+            },
+            {
+              "chunk_id": "6c16a69e84aa3cf38296f9f869ac65c520566330abdf2984423af24a0c0a6ed5",
+              "page_number": 38,
+              "text": "Indicator: Order book TCV; Q1 FY27: $9.5 billion. Indicator: North America TCV; Q1 FY27: $4.7 billion. Indicator: BFSI TCV; Q1 FY27: $2.5 billion. Indicator: Consumer Business TCV; Q1 FY27: $1.4 billion. Indicator: Voluntary attrition, IT services (LTM); Q1 FY27: 13.6%. Indicator: North America share of revenue; Q1 FY27: 48.3%. Indicator: BFSI share of revenue; Q1 FY27: 32.1%. Indicator: Total cash and investments; Q1 FY27: ₹50,232 crore."
+            },
+            {
+              "chunk_id": "67df9ca97833c48b5c3dc68d34db45512ac1e6849bc2ed48f8bc59e95e22bf91",
+              "page_number": 29,
+              "text": "Tata Consultancy Services | FY2025-26 | Unofficial compiled annual report Page 29 TCS ANNUAL REPORT 2025-26 (UNOFFICIAL)"
+            }
+          ]
+        },
+        {
+          "query": "TCS BFSI TCV FY26",
+          "top_k": 15,
+          "chunks": [
+            {
+              "chunk_id": "b88ccce8cd90a10e3b7b92b80ad05f6429443441ad4571b5f5432eebc839cac1",
+              "page_number": 22,
+              "text": "Total contract value (TCV) for FY26 TCS booked $40.7 billion of TCV in FY26, ahead of $39.4 billion in FY25. Q4 FY26 TCV of $12 billion was among the highest the company has recorded. The company signed three mega deals in Q4 and five over the year. TCV is the total value of contracts signed in a period and is not the same as revenue; deals are delivered over several years. A strong order book therefore supports future revenue visibility, but the timing of conversion depends on client ramp-up schedules. Q3 FY26 TCV is derived as the annual total less Q1, Q2 and Q4 as published; it may differ slightly from the figure TCS reported because of rounding."
+            },
+            {
+              "chunk_id": "a02985505213ccc504b1cb6476b05fa21c39dd8648e85f953daf5b7a1b864f76",
+              "page_number": 23,
+              "text": "US$ billion: Total TCV; FY25: 39.4; FY26: 40.7; Q4 FY26: 12.0. US$ billion: North America; FY25: 21.6; FY26: 19.0; Q4 FY26: 5.4. US$ billion: BFSI; FY25: 12.8; FY26: 13.4; Q4 FY26: 3.9. US$ billion: Consumer Business; FY25: 5.3; FY26: 7.6; Q4 FY26: 2.8."
+            },
+            {
+              "chunk_id": "6c16a69e84aa3cf38296f9f869ac65c520566330abdf2984423af24a0c0a6ed5",
+              "page_number": 38,
+              "text": "Indicator: Order book TCV; Q1 FY27: $9.5 billion. Indicator: North America TCV; Q1 FY27: $4.7 billion. Indicator: BFSI TCV; Q1 FY27: $2.5 billion. Indicator: Consumer Business TCV; Q1 FY27: $1.4 billion. Indicator: Voluntary attrition, IT services (LTM); Q1 FY27: 13.6%. Indicator: North America share of revenue; Q1 FY27: 48.3%. Indicator: BFSI share of revenue; Q1 FY27: 32.1%. Indicator: Total cash and investments; Q1 FY27: ₹50,232 crore."
+            },
+            {
+              "chunk_id": "53b780efb605bc388d8fe978815bdc80e99fbfabc821aedac39f7167e4016af1",
+              "page_number": 11,
+              "text": "Conditions shaping FY26 The global environment for technology services remained uncertain through FY26. In July 2025, TCS's CEO said continued macroeconomic and geopolitical uncertainty had caused a demand contraction. Clients delayed or scaled back discretionary projects while continuing to commit to cost-saving and modernisation work."
+            },
+            {
+              "chunk_id": "8bffb4a9d6c43c73eca7b4f4e67a8fe48145172cad010600ec4a154e6bb30fc1",
+              "page_number": 40,
+              "text": "Terms used and where the data came from Glossary • Constant currency (CC): growth measured with exchange rates held constant to remove currency effects. • TCV: total contract value of deals signed in a period. • Mega deal: a very large contract; TCS reported five in FY26. • BFSI: Banking, Financial Services and Insurance. • LTM attrition: voluntary attrition over the last twelve months. • Exceptional items: one-off charges or gains excluded from underlying profit. • bp (basis point): one hundredth of a percentage point. • Crore: ten million (10,000,000). Sources • TCS Financial Results fact sheets, Q1 to Q4 FY2025-26 and Q1 FY2026-27 (tcs.com investor relations). • TCS press release, \"TCS closes FY26 with improving sequential growth momentum and strong deal wins\", 9 April 2026. • Press coverage of the Q1, Q3 and Q4 FY26 results (Outlook Business, The Quint, PTI via TaxTMI, and market commentary on dividends and attrition). Unofficial compilation prepared for informational purposes. Refer to TCS filings for authoritative data."
+            },
+            {
+              "chunk_id": "5ce13dfb4ce9901078a1e63788a34b987963a7900f846c3fb4ecd12845a0ee01",
+              "page_number": 38,
+              "text": "Snapshot of the quarter ended 30 June 2026 After the close of FY26, TCS published its first-quarter FY27 results. A few data points from that fact sheet give an early read on how the new year started. Order intake of $9.5 billion is lower than Q4 FY26's exceptional $12 billion but comparable to the $9.3 to $10.0 billion range of the first three quarters of FY26. Attrition was stable, and the mix of revenue by market and vertical was little changed. Revenue and profit for Q1 FY27 are not shown here because the column layout in the extracted source was ambiguous; see the official release."
+            },
+            {
+              "chunk_id": "8891cefa6a8e0abfde1988e4f4b07ba88ef39e1c207b6b5d732e3c33f57bc71d",
+              "page_number": 26,
+              "text": "Tata Consultancy Services | FY2025-26 | Unofficial compiled annual report Page 26 TCS ANNUAL REPORT 2025-26 (UNOFFICIAL)"
+            },
+            {
+              "chunk_id": "93e1cf281114939a615f1f124fb82aecdbf59187eeaf5061a38b9b6dbb433827",
+              "page_number": 24,
+              "text": "Tata Consultancy Services | FY2025-26 | Unofficial compiled annual report Page 24 TCS ANNUAL REPORT 2025-26 (UNOFFICIAL)"
+            },
+            {
+              "chunk_id": "3eb15600db45e63e15ef0ab76bce805e15e3b5a19bd60365a25a06da79eced13",
+              "page_number": 22,
+              "text": "Period: Q1 FY26; TCV, US$ billion: 9.4. Period: Q2 FY26; TCV, US$ billion: 10.0. Period: Q3 FY26 (derived); TCV, US$ billion: 9.3. Period: Q4 FY26; TCV, US$ billion: 12.0. Period: FY26; TCV, US$ billion: 40.7. Period: FY25; TCV, US$ billion: 39.4."
+            },
+            {
+              "chunk_id": "8d031b20ba67329796efac41171ed43784572d7a34b9b6b202f9af4b2c5b2a9a",
+              "page_number": 39,
+              "text": "What to follow in FY27 TCS ended FY26 with record deal momentum, a 25% operating margin and a workforce that had stopped shrinking. The main questions for FY27 concern how quickly that momentum turns into revenue growth."
+            },
+            {
+              "chunk_id": "1832a868cd8d4779ddd90c1901cfe3ef0692dfbf54cd19aade471e761e88a4ed",
+              "page_number": 39,
+              "text": "• $40.7 billion of FY26 TCV provides revenue visibility. • Margins at a four-year high with room for further productivity gains. • AI revenue above a $2.3 billion annualised run rate. • Broader client base, with 66 clients above $100 million."
+            },
+            {
+              "chunk_id": "637fc324813fae1215f19ca2102ff524634bc1aa2ea9220a169077f7868d4dc1",
+              "page_number": 4,
+              "text": "Tata Consultancy Services | FY2025-26 | Unofficial compiled annual report Page 4 TCS ANNUAL REPORT 2025-26 (UNOFFICIAL)"
+            },
+            {
+              "chunk_id": "d1d3895775ec397b8dc80d482d9d58e08d85b4311e69d0810916ca9dbb3cc753",
+              "page_number": 25,
+              "text": "Tata Consultancy Services | FY2025-26 | Unofficial compiled annual report Page 25 TCS ANNUAL REPORT 2025-26 (UNOFFICIAL)"
+            },
+            {
+              "chunk_id": "a505499e0ef5dc7ce38c3586a22bf957339f98ae57f3bc30898911da52a7bbbc",
+              "page_number": 33,
+              "text": "Weak discretionary offerings Risk: demand; FY26 evidence: Constant-currency revenue fell. Risk: 2.4%; FY26 evidence: Large multi-year deals; cost-saving. Risk: BFSI weakness; FY26 evidence: BFSI revenue growth about 1% in. Risk: Q1; FY26 evidence: Rising BFSI TCV ($13.4B). Risk: Talent and attrition; FY26 evidence: Attrition 13.3% to 13.8%; Typical mitigant: Reskilling: 69M learning hours. Risk: AI deflation; FY26 evidence: Annualised AI revenue $2.3B+; Typical mitigant: New AI-led service lines. Risk: Rupee volatility; FY26 evidence: Rupee growth 4.6% vs dollar -0.5%; Typical mitigant: Hedging; cost base in rupees. Risk: Restructuring execution; FY26 evidence: Headcount down ~28,500 in Q2-Q3; Typical mitigant: Rehiring began in Q4. Risk: Regulatory change; FY26 evidence: New labour codes charge in Q3; Typical mitigant: Compliance programmes."
+            },
+            {
+              "chunk_id": "ed506f7cf37294b5d4b3a5c26066098417795749b717c2ea9f0bf757ce28c1fa",
+              "page_number": 32,
+              "text": "Tata Consultancy Services | FY2025-26 | Unofficial compiled annual report Page 32 TCS ANNUAL REPORT 2025-26 (UNOFFICIAL)"
+            }
+          ]
+        }
+      ],
+      "response": {
+        "answer": "13.4 US$ billion",
+        "citations": [
+          {
+            "chunk_id": "a02985505213ccc504b1cb6476b05fa21c39dd8648e85f953daf5b7a1b864f76",
+            "document_id": "tcs_annual_report",
+            "page_number": 23,
+            "text_snippet": "...US$ billion: BFSI; FY25: 12.8; FY26: 13.4; Q4 FY26: 3.9. US$ billion: Consumer Business; FY25: 5.3; FY26: 7.6; Q4 FY26: 2.8."
+          }
+        ],
+        "trace": [
+          {
+            "step_type": "plan",
+            "content": "Classified as simple; 1 sub-query",
+            "metadata": {
+              "query_type": "simple",
+              "subquery_count": 1,
+              "rewritten": false
+            }
+          },
+          {
+            "step_type": "retrieve",
+            "content": "Retrieved 8 passages across 1 sub-query",
+            "metadata": {
+              "search_query_count": 1,
+              "chunks_per_search": [
+                8
+              ],
+              "chunks_after_merge": 8,
+              "new_chunks": 8,
+              "attempt": 0,
+              "errors": 0,
+              "quarantined": 0
+            }
+          },
+          {
+            "step_type": "synthesize",
+            "content": "The passages do not contain the answer; searching again",
+            "metadata": {
+              "citation_count": 0,
+              "dropped_citations": 0,
+              "generator_called": true,
+              "not_found": true,
+              "retry_search": true
+            }
+          },
+          {
+            "step_type": "retrieve",
+            "content": "Found 2 new passages (10 in total)",
+            "metadata": {
+              "search_query_count": 1,
+              "chunks_per_search": [
+                8
+              ],
+              "chunks_after_merge": 10,
+              "new_chunks": 2,
+              "attempt": 1,
+              "errors": 0,
+              "quarantined": 0
+            }
+          },
+          {
+            "step_type": "synthesize",
+            "content": "The passages do not contain the answer; searching again",
+            "metadata": {
+              "citation_count": 0,
+              "dropped_citations": 0,
+              "generator_called": true,
+              "not_found": true,
+              "retry_search": true
+            }
+          },
+          {
+            "step_type": "retrieve",
+            "content": "Found 10 new passages (20 in total)",
+            "metadata": {
+              "search_query_count": 1,
+              "chunks_per_search": [
+                15
+              ],
+              "chunks_after_merge": 20,
+              "new_chunks": 10,
+              "attempt": 2,
+              "errors": 0,
+              "quarantined": 0
+            }
+          },
+          {
+            "step_type": "synthesize",
+            "content": "Draft answer generated with 1 citation",
+            "metadata": {
+              "citation_count": 1,
+              "dropped_citations": 0,
+              "generator_called": true
+            }
+          },
+          {
+            "step_type": "fact_check",
+            "content": "1 of 1 claim verified",
+            "metadata": {
+              "claims_total": 1,
+              "claims_supported": 1,
+              "coverage": 1.0,
+              "retry": false
+            }
+          }
+        ],
+        "verification_status": "verified",
+        "confidence": 0.95,
+        "latency_ms": 64146.32639999036
+      }
+    }
+  ]
+}

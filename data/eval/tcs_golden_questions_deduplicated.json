@@ -17,8 +17,8 @@
     "category": "table",
     "style": "exact",
     "evidence": [
-      "FY26 operating margin 25%",
-      "FY26 net margin 19.8%"
+      "reported an operating margin of 25% for fy26",
+      "net margin excluding exceptional items was 19.8%"
     ],
     "alt_evidence": [],
     "reference_answer": "FY26 operating margin was 25% and net margin was 19.8%."
@@ -29,9 +29,12 @@
     "category": "fact_lookup",
     "style": "paraphrase",
     "evidence": [
-      "annualised AI revenue above $2.3B"
+      "annualised ai revenue above $2.3 billion"
     ],
-    "alt_evidence": [],
+    "alt_evidence": [
+      "annualised ai-related revenue above $2.3 billion",
+      "annualised ai revenue; fy26: above $2.3 billion"
+    ],
     "reference_answer": "TCS's annualised AI revenue exceeded $2.3 billion in FY26."
   },
   {
@@ -40,9 +43,9 @@
     "category": "table",
     "style": "paraphrase",
     "evidence": [
-      "Total TCV                      39.4                           40.7         12.0",
-      "North America                  21.6                           19.0         5.4",
-      "Consumer Business              5.3                            7.6          2.8"
+      "total tcv; fy25: 39.4; fy26: 40.7",
+      "north america; fy25: 21.6; fy26: 19.0",
+      "consumer business; fy25: 5.3; fy26: 7.6"
     ],
     "alt_evidence": [],
     "reference_answer": "FY26 total TCV was $40.7 billion, North America TCV was $19.0 billion, and Consumer Business TCV was $7.6 billion."
@@ -53,8 +56,8 @@
     "category": "numerical_comparison",
     "style": "paraphrase",
     "evidence": [
-      "Q1 (Apr to Jun)                62,613                         63,437",
-      "Q4 (Jan to Mar)                64,479                         70,698"
+      "63,437; fy26, us$ million: 7,421",
+      "70,698; fy26, us$ million: 7,621"
     ],
     "alt_evidence": [],
     "reference_answer": "Revenue increased by ₹7,261 crore, from ₹63,437 crore in Q1 FY26 to ₹70,698 crore in Q4 FY26."
@@ -65,9 +68,11 @@
     "category": "table",
     "style": "exact",
     "evidence": [
-      "TCV by market/vertical: FY25/FY26/Q4: total 39.4/40.7/12.0"
+      "q4 fy26; tcv, us$ billion: 12.0"
     ],
-    "alt_evidence": [],
+    "alt_evidence": [
+      "q4 fy26 tcv of $12 billion"
+    ],
     "reference_answer": "TCS's total TCV in Q4 FY26 was $12.0 billion."
   },
   {
@@ -76,9 +81,11 @@
     "category": "fact_lookup",
     "style": "exact",
     "evidence": [
-      "US$ revenue $30,017 million"
+      "revenue (us$); fy26: $30,017 million"
     ],
-    "alt_evidence": [],
+    "alt_evidence": [
+      "revenue, us$ million; fy26: 30,017"
+    ],
     "reference_answer": "TCS's FY26 revenue was US$30,017 million."
   },
   {
@@ -88,12 +95,10 @@
     "style": "paraphrase",
     "evidence": [
       "Reskill the workforce. More than 270,000 employees have higher proficiency in AI and machine learning, and the company logged 69 million learning hours in the year.",
-      "Learning hours                                                69 million, up 23% year on year",
-      "Employees with higher proficiency in AI/ML                    270,000+"
+      "learning hours; value: 69 million, up 23% year on year",
+      "employees with higher proficiency in ai/ml; value: 270,000+"
     ],
-    "alt_evidence": [
-      "Foundational and advanced AI skills, including generative and agentic AI."
-    ],
+    "alt_evidence": [],
     "reference_answer": "The report says TCS's AI-first strategy includes reskilling employees. In FY26, it recorded 69 million learning hours (up 23% year on year) and more than 270,000 employees with higher proficiency in AI/ML."
   },
   {
@@ -112,9 +117,11 @@
     "category": "table",
     "style": "exact",
     "evidence": [
-      "BFSI 12.8/13.4/3.9"
+      "bfsi; fy25: 12.8; fy26: 13.4"
     ],
-    "alt_evidence": [],
+    "alt_evidence": [
+      "bfsi bookings rose to $13.4 billion"
+    ],
     "reference_answer": "FY26 TCV for the BFSI vertical was $13.4 billion."
   }
 ]
