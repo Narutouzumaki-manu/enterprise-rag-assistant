@@ -1,0 +1,266 @@
+{
+  "94dd709fc5cfb98ef8bbac11144a718fa2128c37c624f1769be90a5d3f451f1c": {
+    "statements": [
+      {
+        "statement": "The report positions workforce reskilling as a strategic priority connecting TCS's AI strategy with employee development.",
+        "supported": true,
+        "reason": "The AI-first strategy explicitly includes “Reskill the workforce” alongside embedding AI in delivery and selling AI-led transformation."
+      },
+      {
+        "statement": "More than 270,000 employees have higher proficiency in AI and machine learning.",
+        "supported": true,
+        "reason": "Both the strategy section and FY26 indicator table report 270,000+ employees with higher AI/ML proficiency."
+      },
+      {
+        "statement": "TCS logged 69 million learning hours in FY26.",
+        "supported": true,
+        "reason": "The strategy section and FY26 indicator table both report 69 million learning hours."
+      }
+    ]
+  },
+  "8dba595b6fd3f0b3734577cb2ce7aa230cc5af0450faa99563e19868f4f22288": {
+    "statements": [
+      {
+        "statement": "Reskilling the workforce is a strategic priority in TCS's AI-first transformation.",
+        "supported": true,
+        "reason": "The strategy section explicitly lists “Reskill the workforce” as a strategic priority."
+      },
+      {
+        "statement": "Building employee AI/ML proficiency supports AI-led delivery.",
+        "supported": true,
+        "reason": "The report identifies AI skills as a training focus and links workforce realignment to AI-led delivery."
+      },
+      {
+        "statement": "Workforce skills development is connected to productivity and revenue growth.",
+        "supported": true,
+        "reason": "The report says changes in the workforce's skills mix have large effects on productivity and revenue per employee."
+      },
+      {
+        "statement": "TCS recorded 69 million learning hours in FY26.",
+        "supported": true,
+        "reason": "The FY26 learning-hours indicator gives a value of 69 million."
+      },
+      {
+        "statement": "FY26 learning hours increased 23% year on year.",
+        "supported": true,
+        "reason": "The report states that learning hours rose 23% in a year."
+      },
+      {
+        "statement": "More than 270,000 employees had higher proficiency in AI/ML in FY26.",
+        "supported": true,
+        "reason": "The FY26 competency indicator and strategy section both report 270,000-plus employees with higher AI/ML proficiency."
+      }
+    ]
+  },
+  "7b8b927131bbac161e340562c5a26b2bac2b6e0493a3b07a661acafbd374208d": {
+    "statements": [
+      {
+        "statement": "One of TCS's stated FY26 AI-related priorities was to embed AI in delivery.",
+        "supported": true,
+        "reason": "The passage explicitly lists “Embed AI in delivery” as a strategic priority."
+      },
+      {
+        "statement": "Embedding AI in delivery was intended to improve internal productivity.",
+        "supported": true,
+        "reason": "The passage says AI tools would improve developer productivity, testing, operations, and support."
+      },
+      {
+        "statement": "The other stated FY26 AI-related priority was to sell AI-led transformation to clients.",
+        "supported": true,
+        "reason": "The passage explicitly lists “Sell AI-led transformation” as a priority."
+      }
+    ]
+  },
+  "9a8053be123525687b52ab524b69a461fa16197611b80ebc52f73db786f0edc2": {
+    "statements": [
+      {
+        "statement": "TCS's FY26 operating margin was 25%.",
+        "supported": true,
+        "reason": "The passages explicitly report a 25% operating margin for FY26."
+      },
+      {
+        "statement": "TCS's FY26 net margin was 19.8%.",
+        "supported": true,
+        "reason": "The passages explicitly report a 19.8% net margin for FY26, noting that it excludes exceptional items."
+      }
+    ]
+  },
+  "017983673b8dadaf38aaac7609b7217b79a6de6cdcf25e8ebefba275851da28f": {
+    "statements": [
+      {
+        "statement": "TCS's annualised AI revenue exceeded $2.3 billion in FY26.",
+        "supported": true,
+        "reason": "The passages state that TCS reported annualised AI revenue above $2.3 billion by Q4 FY26."
+      }
+    ]
+  },
+  "90dff9a2e5e1c9281c2170f9464c7b5c8cf74d2d5b2a45ee6a129c53a66a0156": {
+    "statements": [
+      {
+        "statement": "FY26 total TCV was $40.7 billion.",
+        "supported": true,
+        "reason": "The TCV-by-market-and-vertical table lists FY26 total TCV as $40.7 billion."
+      },
+      {
+        "statement": "FY26 North America TCV was $19.0 billion.",
+        "supported": true,
+        "reason": "The table lists FY26 North America TCV as $19.0 billion."
+      },
+      {
+        "statement": "FY26 Consumer Business TCV was $7.6 billion.",
+        "supported": true,
+        "reason": "The table lists FY26 Consumer Business TCV as $7.6 billion."
+      }
+    ]
+  },
+  "b1c19e291b0fc275ffab81252b0f28b536d1b17f521859161446a8c2f2c8cd68": {
+    "statements": [
+      {
+        "statement": "Quarterly rupee revenue increased by ₹7,261 crore from Q1 FY26 to Q4 FY26.",
+        "supported": true,
+        "reason": "Q4 FY26 revenue was ₹70,698 crore and Q1 FY26 revenue was ₹63,437 crore, a difference of ₹7,261 crore."
+      },
+      {
+        "statement": "The increase from Q1 FY26 to Q4 FY26 was ₹72,610 million.",
+        "supported": true,
+        "reason": "The revenue figures of 706,980 million and 634,370 million differ by 72,610 million."
+      }
+    ]
+  },
+  "76edc17c84042e6db5b652f2f427c3e6b4c5ec2c06e77603da37c5ff3f0a05a6": {
+    "statements": [
+      {
+        "statement": "TCS's total contract value (TCV) in Q4 FY26 was $12 billion.",
+        "supported": true,
+        "reason": "The passages explicitly state that Q4 FY26 TCV was $12 billion."
+      }
+    ]
+  },
+  "81b5656432c4aa64020be1963362c57693a896acd1f082a701d068bf8c27d14a": {
+    "statements": [
+      {
+        "statement": "TCS's FY26 Banking, Financial Services and Insurance (BFSI) total contract value was US$13.4 billion.",
+        "supported": true,
+        "reason": "The FY26 BFSI TCV is listed as US$13.4 billion."
+      }
+    ]
+  },
+  "7eff4057c444470faf5638325ad6918fe21e10a361e3ac3a130ff5b666a30317": {
+    "statements": [
+      {
+        "statement": "TCS's FY26 revenue was $30.0 billion.",
+        "supported": true,
+        "reason": "The passages explicitly state that revenue for the financial year ended March 31, 2026 was $30.0 billion."
+      }
+    ]
+  },
+  "17babe184a01abca943752f7f7f642bcdcc96424f52013b22f79febc8dda96f4": {
+    "statements": [
+      {
+        "statement": "TCS's internal delivery AI priority was to use AI coding assistants, automated testing, and AI-supported operations to raise productivity.",
+        "supported": true,
+        "reason": "The passage explicitly lists these initiatives under “Internal delivery.”"
+      },
+      {
+        "statement": "TCS's client-focused AI priority was data foundations, model deployment, agent-based automation, and AI-enabled process redesign for clients.",
+        "supported": true,
+        "reason": "The passage explicitly lists these initiatives under “Client engagements.”"
+      }
+    ]
+  },
+  "259d15c7067af86334ada4643e36945e1cb6d10a6c90296baddbccb35a034dc3": {
+    "statements": [
+      {
+        "statement": "FY26 total TCV was US$40.7 billion.",
+        "supported": true,
+        "reason": "The TCV table lists FY26 Total TCV as US$40.7 billion."
+      },
+      {
+        "statement": "FY26 North America TCV was US$19.0 billion.",
+        "supported": true,
+        "reason": "The TCV table lists FY26 North America TCV as US$19.0 billion."
+      },
+      {
+        "statement": "FY26 Consumer Business TCV was US$7.6 billion.",
+        "supported": true,
+        "reason": "The TCV table lists FY26 Consumer Business TCV as US$7.6 billion."
+      }
+    ]
+  },
+  "a8d6bb8d82dd43bd4fb8bd2fbbddb16c4f991528bac810ed0a1f36952b9097c5": {
+    "statements": [
+      {
+        "statement": "TCS's FY26 operating margin was 27%.",
+        "supported": false,
+        "reason": "The passages state that TCS's FY26 operating margin was 25%."
+      },
+      {
+        "statement": "TCS's FY26 net margin was 19.8%.",
+        "supported": true,
+        "reason": "The passages report a FY26 net margin of 19.8%, including a figure excluding exceptional items."
+      }
+    ]
+  },
+  "e6c4485dc73e8f3654f11ccf59df4f361ebeac7636886ea754f3c316347d8ffb": {
+    "statements": [
+      {
+        "statement": "FY26 total TCV was $40.7 billion.",
+        "supported": true,
+        "reason": "The table lists FY26 total TCV as $40.7 billion."
+      },
+      {
+        "statement": "FY26 North America TCV was $21.6 billion.",
+        "supported": false,
+        "reason": "The table lists FY26 North America TCV as $19.0 billion, while $21.6 billion is the FY25 figure."
+      },
+      {
+        "statement": "FY26 Consumer Business TCV was $5.3 billion.",
+        "supported": false,
+        "reason": "The table lists FY26 Consumer Business TCV as $7.6 billion, while $5.3 billion is the FY25 figure."
+      }
+    ]
+  },
+  "5d9db7e4aa539b5a2181359e0e366ce76b9d59c06dee777d432f0913e0e806c5": {
+    "statements": [
+      {
+        "statement": "TCS's total contract value in Q4 FY26 was $12 billion.",
+        "supported": true,
+        "reason": "The passages explicitly report Q4 FY26 TCV of $12.0 billion."
+      },
+      {
+        "statement": "The Q4 FY26 TCV was driven mainly by a record order from a European bank.",
+        "supported": false,
+        "reason": "The passages do not identify a record European-bank order or state that it drove Q4 TCV."
+      }
+    ]
+  },
+  "5234e72b0824680c2c3f30f2f069928a3300271b0aa5de6cb45e2e82174e5a43": {
+    "statements": [
+      {
+        "statement": "The report presents workforce reskilling as a strategic priority within TCS's AI-first transformation strategy.",
+        "supported": true,
+        "reason": "The strategy section explicitly lists \"Reskill the workforce\" as a core priority."
+      },
+      {
+        "statement": "The report connects employee development to AI-led delivery through skills realignment, AI and machine-learning proficiency, and workforce training.",
+        "supported": true,
+        "reason": "The passages state that skills were realigned with AI-led delivery and that training is central to TCS's model."
+      },
+      {
+        "statement": "TCS recorded 69 million learning hours in FY26.",
+        "supported": true,
+        "reason": "The FY26 learning and talent indicators state learning hours were 69 million."
+      },
+      {
+        "statement": "TCS's learning hours increased 23% year on year in FY26.",
+        "supported": true,
+        "reason": "The learning-hours indicator states a 23% year-on-year increase."
+      },
+      {
+        "statement": "More than 270,000 employees had higher proficiency in AI and machine learning.",
+        "supported": true,
+        "reason": "Both the strategy passage and the FY26 indicator state that more than 270,000 employees achieved higher AI/ML proficiency."
+      }
+    ]
+  }
+}

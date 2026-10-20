@@ -1,0 +1,187 @@
+{
+  "document_id": "tcs_annual_report",
+  "chunk_count": 118,
+  "questions": [
+    {
+      "question_id": "tcs-gold-01",
+      "question": "What were TCS's two stated FY26 AI-related priorities: one focused on changing internal delivery and one focused on clients?",
+      "category": "fact_lookup",
+      "style": "paraphrase",
+      "needs": [
+        {
+          "phrase": "Embed AI in delivery. Using AI tools to improve developer productivity, testing, operations and support.",
+          "chunk_ids": [
+            "50dd3ab00f95d36bbe6d6ba4d666fbc4d051c23183e1078638c47541b2d23514"
+          ]
+        },
+        {
+          "phrase": "Sell AI-led transformation. Helping clients redesign processes, build data foundations and deploy AI at scale.",
+          "chunk_ids": [
+            "50dd3ab00f95d36bbe6d6ba4d666fbc4d051c23183e1078638c47541b2d23514"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "tcs-gold-02",
+      "question": "What were TCS's FY26 operating margin and net margin?",
+      "category": "table",
+      "style": "exact",
+      "needs": [
+        {
+          "phrase": "reported an operating margin of 25% for fy26",
+          "chunk_ids": [
+            "d8a1ab3b42c6f43a6aed221b870ad64fd3cf836860d0855549b59cd367b51cb9"
+          ]
+        },
+        {
+          "phrase": "net margin excluding exceptional items was 19.8%",
+          "chunk_ids": [
+            "d8a1ab3b42c6f43a6aed221b870ad64fd3cf836860d0855549b59cd367b51cb9"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "tcs-gold-03",
+      "question": "What did TCS's annualised AI revenue exceed in FY26?",
+      "category": "fact_lookup",
+      "style": "paraphrase",
+      "needs": [
+        {
+          "phrase": "annualised ai revenue above $2.3 billion",
+          "chunk_ids": [
+            "b50e44246a8348144eccd11ff01fcd8a13417328fbc345366b0f2e13f16b85c3",
+            "add61afb3c3b7efaa3ca1a2f001dbd1161748c726a4527dfa2efb75d1cab9573",
+            "77df90f599f4d571fe5f3297b82fef861c29800fbb8496924da49cb111cf2485",
+            "3077d12c7762b3cc212cc99b3b0cac19024e1d037631da1e168750dc0c7fcee5"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "tcs-gold-04",
+      "question": "In the TCV-by-market-and-vertical table, what were FY26 total TCV, North America TCV, and Consumer Business TCV?",
+      "category": "table",
+      "style": "paraphrase",
+      "needs": [
+        {
+          "phrase": "total tcv; fy25: 39.4; fy26: 40.7",
+          "chunk_ids": [
+            "a02985505213ccc504b1cb6476b05fa21c39dd8648e85f953daf5b7a1b864f76"
+          ]
+        },
+        {
+          "phrase": "north america; fy25: 21.6; fy26: 19.0",
+          "chunk_ids": [
+            "a02985505213ccc504b1cb6476b05fa21c39dd8648e85f953daf5b7a1b864f76"
+          ]
+        },
+        {
+          "phrase": "consumer business; fy25: 5.3; fy26: 7.6",
+          "chunk_ids": [
+            "a02985505213ccc504b1cb6476b05fa21c39dd8648e85f953daf5b7a1b864f76"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "tcs-gold-05",
+      "question": "By how much did quarterly rupee revenue increase from Q1 FY26 to Q4 FY26?",
+      "category": "numerical_comparison",
+      "style": "paraphrase",
+      "needs": [
+        {
+          "phrase": "63,437; fy26, us$ million: 7,421",
+          "chunk_ids": [
+            "15b39ec563daaa4ce29b053ed4b95a88647c0dfecb29308def3de498450830a0"
+          ]
+        },
+        {
+          "phrase": "70,698; fy26, us$ million: 7,621",
+          "chunk_ids": [
+            "15b39ec563daaa4ce29b053ed4b95a88647c0dfecb29308def3de498450830a0"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "tcs-gold-06",
+      "question": "What was TCS's total deal value (TCV) in Q4 FY26?",
+      "category": "table",
+      "style": "exact",
+      "needs": [
+        {
+          "phrase": "q4 fy26; tcv, us$ billion: 12.0",
+          "chunk_ids": [
+            "3eb15600db45e63e15ef0ab76bce805e15e3b5a19bd60365a25a06da79eced13",
+            "b88ccce8cd90a10e3b7b92b80ad05f6429443441ad4571b5f5432eebc839cac1"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "tcs-gold-07",
+      "question": "What was TCS's FY26 revenue in US dollars?",
+      "category": "fact_lookup",
+      "style": "exact",
+      "needs": [
+        {
+          "phrase": "revenue (us$); fy26: $30,017 million",
+          "chunk_ids": [
+            "3077d12c7762b3cc212cc99b3b0cac19024e1d037631da1e168750dc0c7fcee5",
+            "17b67a3c53da7c55e411b943c69626f22c74e05917b62b6582be19dbae121f61"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "tcs-gold-08",
+      "question": "How does the report connect TCS's AI strategy with employee development, and what two FY26 training figures support that connection?",
+      "category": "cross_section",
+      "style": "paraphrase",
+      "needs": [
+        {
+          "phrase": "Reskill the workforce. More than 270,000 employees have higher proficiency in AI and machine learning, and the company logged 69 million learning hours in the year.",
+          "chunk_ids": [
+            "50dd3ab00f95d36bbe6d6ba4d666fbc4d051c23183e1078638c47541b2d23514"
+          ]
+        },
+        {
+          "phrase": "learning hours; value: 69 million, up 23% year on year",
+          "chunk_ids": [
+            "bfed04b886f0bc93a03aa1633f88399e2a19b8d02903b0522fb3955cac9600ea"
+          ]
+        },
+        {
+          "phrase": "employees with higher proficiency in ai/ml; value: 270,000+",
+          "chunk_ids": [
+            "bfed04b886f0bc93a03aa1633f88399e2a19b8d02903b0522fb3955cac9600ea"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "tcs-gold-09",
+      "question": "What was TCS's exact cash-and-investments balance at the end of Q3 FY26?",
+      "category": "unanswerable",
+      "style": "paraphrase",
+      "needs": []
+    },
+    {
+      "question_id": "tcs-gold-10",
+      "question": "What was the FY26 total contract value for TCS's Banking, Financial Services and Insurance (BFSI) vertical?",
+      "category": "table",
+      "style": "exact",
+      "needs": [
+        {
+          "phrase": "bfsi; fy25: 12.8; fy26: 13.4",
+          "chunk_ids": [
+            "a02985505213ccc504b1cb6476b05fa21c39dd8648e85f953daf5b7a1b864f76",
+            "8a6f15fdd950251340eb8467b98e541c2c366ea634ed6faa0b1495353f06fec8"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -108,16 +108,16 @@ An explicit state-machine agent is required for bounded, inspectable, self-corre
 
 ## 7. Success Metrics
 
-Targets, with measured status. Every number comes from a run recorded in `docs/MEMBER3_DECISIONS.md`, with its sample size and limits.
+Targets, with measured status. Every number comes from a run recorded in `docs/MEMBER3_DECISIONS.md`, with its sample size and limits. Session 20's detailed golden-question results and limitations are recorded in Section 2.10 of `MEMBER3_DECISIONS.md`.
 
 | Metric | Target | Status |
 |---|---|---|
-| Faithfulness (RAGAS, Member 5's golden dataset) | ≥ 0.85, against the "retrieval only, no fact-checker" baseline | Not measured (Session 20 plans a 10-question comparison; the full measurement needs the golden dataset) |
+| Faithfulness (RAGAS, Member 5's golden dataset) | ≥ 0.85, against the "retrieval only, no fact-checker" baseline | RAGAS comparison still open. Session 20's separate MiniMax single-call judge scored 1.000 for both baseline (7 answered questions) and full agent (9 answered questions); ceiling effect, no improvement demonstrated. Not a RAGAS result. |
 | Multi-hop questions (2+ lookups) answered correctly | Demonstrated in at least one scenario (q16) | Live: q16 answered with the reference figures ($21.6B to $19.0B, about 48%), `verified`. One question, not a rate |
-| Wording-mismatch questions answered correctly | Demonstrated in at least one scenario (q19) | Live: q19 answered ₹123,800 million (the reference) after the retry change, `verified`. One question picked after seeing it fail; not a rate |
+| Wording-mismatch questions answered correctly | Demonstrated in at least one scenario (q19) | Live: q19 answered ₹123,800 million (the reference) after the retry change, `verified`. Session 20 also exposed golden-set wording/evidence mismatch: retrieval-only recall@5 was 0.500 and recall@10 0.667 across 9 answerable questions; evidence was in the top 8 for 6/9. One tuned success is not a rate. |
 | Fact-checker catches a seeded hallucination | At least one | Live: all 3 planted false drafts had the planted claim marked unsupported. Obvious errors, one model |
 | On-topic chunk without the figure (q17) returns insufficient evidence | Demonstrated | Live: q17 gave "insufficient evidence" after three searches; q18 and q20 the same |
-| Unanswerable questions answered with "insufficient evidence" | Measured on the golden dataset | 3 of 3 live; a sample, not a rate |
+| Unanswerable questions answered with "insufficient evidence" | Measured on the golden dataset | Session 20 golden set: 1/1 unanswerable question refused correctly; three earlier live cases (q17, q18, q20) also refused correctly. Four cases total, not a general success rate. |
 | Agent loop termination | 100% | Tested on mocks including the two-retry worst case (10 steps, cap 12) and graph failures; live runs finished in 4 to 8 steps |
 | Prompt-injection resistance | Document content instructing the agent is never followed | Live: the model alone followed an instruction hidden in a fake row; with the instruction filter all 3 planted cases pass. The filter was written looking at those cases; paraphrased attacks untested; a plain false fact is not defended against |
 

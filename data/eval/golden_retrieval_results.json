@@ -1,0 +1,148 @@
+{
+  "top_k": 10,
+  "scorable": 9,
+  "per_question": [
+    {
+      "question_id": "tcs-gold-01",
+      "category": "fact_lookup",
+      "scores": {
+        "recall@5": 0.0,
+        "recall@10": 1.0,
+        "mrr": 0.125,
+        "ndcg@10": 0.31546487678572877
+      },
+      "fact_ranks": [
+        8,
+        8
+      ],
+      "all_in_top8": true,
+      "top1_dense": 0.7310742437839508
+    },
+    {
+      "question_id": "tcs-gold-02",
+      "category": "table",
+      "scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "fact_ranks": [
+        1,
+        1
+      ],
+      "all_in_top8": true,
+      "top1_dense": 0.799235999584198
+    },
+    {
+      "question_id": "tcs-gold-03",
+      "category": "fact_lookup",
+      "scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "fact_ranks": [
+        1
+      ],
+      "all_in_top8": true,
+      "top1_dense": 0.8558591455221176
+    },
+    {
+      "question_id": "tcs-gold-04",
+      "category": "table",
+      "scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "fact_ranks": [
+        1,
+        1,
+        1
+      ],
+      "all_in_top8": true,
+      "top1_dense": 0.8057565093040466
+    },
+    {
+      "question_id": "tcs-gold-05",
+      "category": "numerical_comparison",
+      "scores": {
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      "fact_ranks": [
+        null,
+        null
+      ],
+      "all_in_top8": false,
+      "top1_dense": 0.8748486340045929
+    },
+    {
+      "question_id": "tcs-gold-06",
+      "category": "table",
+      "scores": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "fact_ranks": [
+        1
+      ],
+      "all_in_top8": true,
+      "top1_dense": 0.8806945979595184
+    },
+    {
+      "question_id": "tcs-gold-07",
+      "category": "fact_lookup",
+      "scores": {
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      "fact_ranks": [
+        null
+      ],
+      "all_in_top8": false,
+      "top1_dense": 0.7629038840532303
+    },
+    {
+      "question_id": "tcs-gold-08",
+      "category": "cross_section",
+      "scores": {
+        "recall@5": 0.5,
+        "recall@10": 1.0,
+        "mrr": 0.2,
+        "ndcg@10": 0.430624116386567
+      },
+      "fact_ranks": [
+        5,
+        8,
+        8
+      ],
+      "all_in_top8": true,
+      "top1_dense": 0.782100722193718
+    },
+    {
+      "question_id": "tcs-gold-10",
+      "category": "table",
+      "scores": {
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      "fact_ranks": [
+        null
+      ],
+      "all_in_top8": false,
+      "top1_dense": 0.752936527132988
+    }
+  ]
+}
