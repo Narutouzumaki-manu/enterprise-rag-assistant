@@ -22,9 +22,9 @@ def test_run_streaming_yields_steps_then_one_final_response():
 
 
 def test_delay_really_blocks():
-    start = time.monotonic()
+    start = time.perf_counter()
     MockAgent(delay=0.1).run("hello")
-    assert time.monotonic() - start >= 0.1
+    assert time.perf_counter() - start >= 0.09  # small tolerance: Windows timers are not exact
 
 
 def test_error_is_raised():

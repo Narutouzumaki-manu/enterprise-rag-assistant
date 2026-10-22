@@ -22,6 +22,8 @@ class Settings(BaseSettings):
     # Agent runtime
     agent_max_concurrent: int = Field(default=2, ge=1)
     agent_wait_seconds: float = Field(default=20.0, gt=0)
+    retry_after_seconds: int = Field(default=5, ge=1)  # sent with AGENT_BUSY
+    agent_enabled: bool = True  # False: start without building the retriever and agent (dev only)
 
     # Streaming
     sse_heartbeat_seconds: float = Field(default=15.0, gt=0)

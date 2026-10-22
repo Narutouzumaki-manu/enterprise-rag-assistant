@@ -34,9 +34,9 @@ def test_duplicate_has_no_chunks():
 
 
 def test_delay_really_blocks():
-    start = time.monotonic()
+    start = time.perf_counter()
     MockIngestion(delay=0.1).ingest_document("a.pdf")
-    assert time.monotonic() - start >= 0.1
+    assert time.perf_counter() - start >= 0.09  # small tolerance: Windows timers are not exact
 
 
 def test_error_is_raised():
