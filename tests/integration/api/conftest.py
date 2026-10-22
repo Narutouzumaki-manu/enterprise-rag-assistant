@@ -35,3 +35,7 @@ async def session(engine):
 @pytest.fixture
 def database_url() -> str:
     return TEST_DATABASE_URL
+
+@pytest.fixture
+def database_url() -> str:
+    return TEST_DATABASE_URL
