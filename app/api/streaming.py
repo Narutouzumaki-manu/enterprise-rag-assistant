@@ -3,6 +3,7 @@ import re
 from collections.abc import AsyncIterator
 from dataclasses import dataclass
 from uuid import UUID
+import json
 
 from app.schemas.agent import AgentResponse, AgentStep
 from app.schemas.api import ApiCitation
@@ -100,3 +101,18 @@ async def build_chat_events(
             "latency_ms": round(final.latency_ms),
         },
     )
+
+def format_sse(event: str, data: dict) -> str:
+    return f"event: {event}\ndata: {json.dumps(data, ensure_ascii=False)}\n\n"
+
+
+def format_comment(text: str = "keep-alive") -> str:
+    return f": {text}\n\n"
+
+
+async def sse_lines(events: AsyncIterator[StreamEvent | Heartbeat]) -> AsyncIterator[str]:
+    async for item in events:
+        if item is HEARTBEAT:
+            yield format_comment()
+        else:
+            yield format_sse(item.event, item.data)

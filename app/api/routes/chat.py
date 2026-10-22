@@ -6,6 +6,9 @@ from app.api.dependencies import get_app_settings, get_runtime
 from app.api.runtime import AgentRuntime
 from app.core.config import Settings
 from app.schemas.api import ApiCitation, ChatRequest, ChatResponse
+from fastapi.sse import EventSourceResponse
+
+from app.api.streaming import build_chat_events, sse_lines
 
 router = APIRouter()
 
@@ -38,3 +41,21 @@ async def chat(
         confidence=response.confidence,
         latency_ms=round(response.latency_ms),
     )
+
+STREAM_HEADERS = {"Cache-Control": "no-cache", "X-Accel-Buffering": "no"}
+
+
+@router.post(
+    "/chat/stream",
+    response_model=None,
+    responses={200: {"description": "Server-Sent Events stream", "content": {"text/event-stream": {}}}},
+)
+async def chat_stream(
+    body: ChatRequest,
+    runtime: AgentRuntime = Depends(get_runtime),
+    settings: Settings = Depends(get_app_settings),
+) -> EventSourceResponse:
+    query = clean_query(body.query, settings)
+    agent_events = await runtime.stream(query, top_k=body.top_k)  # busy error is raised here, before any bytes
+    events = build_chat_events(agent_events, uuid4(), settings.sse_heartbeat_seconds)
+    return EventSourceResponse(sse_lines(events), headers=STREAM_HEADERS)

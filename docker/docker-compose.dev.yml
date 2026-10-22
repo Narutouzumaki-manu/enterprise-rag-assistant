@@ -1,6 +1,7 @@
 services:
   postgres:
     image: postgres:16
+    restart: unless-stopped
     environment:
       POSTGRES_USER: rag
       POSTGRES_PASSWORD: rag
@@ -13,6 +14,7 @@ services:
       retries: 10
   redis:
     image: redis:7-alpine
+    restart: unless-stopped
     ports: ["6379:6379"]
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
