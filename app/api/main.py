@@ -6,7 +6,7 @@ from starlette.concurrency import run_in_threadpool
 
 from app.api.bootstrap import build_real_components
 from app.api.errors import register_error_handlers
-from app.api.routes import auth, chat, health
+from app.api.routes import auth, chat, health, sessions
 from app.api.runtime import AgentRuntime
 from app.core.config import Settings, get_settings
 from app.db.session import create_engine, create_session_factory
@@ -54,6 +54,7 @@ def create_app(
     app.include_router(health.router)
     app.include_router(auth.router)
     app.include_router(chat.router)
+    app.include_router(sessions.router)
 
     return app
 

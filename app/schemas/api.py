@@ -3,7 +3,7 @@ from uuid import UUID
 from pydantic import BaseModel, Field
 
 from app.schemas.agent import Citation
-
+from datetime import datetime
 
 class ChatRequest(BaseModel):
     session_id: UUID
@@ -49,3 +49,31 @@ class TokenResponse(BaseModel):
     access_token: str
     token_type: str = "bearer"
     expires_in: int  # seconds
+
+class SessionSummary(BaseModel):
+    session_id: UUID
+    title: str | None = None
+    created_at: datetime
+    updated_at: datetime
+
+
+class TraceStepResponse(BaseModel):
+    step_type: str
+    content: str
+    metadata: dict = {}
+
+
+class MessageResponse(BaseModel):
+    message_id: UUID
+    role: str  # "user" or "assistant"
+    content: str
+    created_at: datetime
+    verification_status: str | None = None
+    confidence: float | None = None
+    latency_ms: int | None = None
+    citations: list[ApiCitation] = []
+    trace: list[TraceStepResponse] = []
+
+
+class SessionDetail(SessionSummary):
+    messages: list[MessageResponse]

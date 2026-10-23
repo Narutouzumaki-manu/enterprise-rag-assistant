@@ -1,3 +1,4 @@
+
 from collections import defaultdict
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
@@ -8,6 +9,18 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db import models
 from app.schemas.agent import AgentResponse
+
+TITLE_MAX_CHARS = 60
+
+
+def make_title(question: str) -> str:
+    text = " ".join(question.split())  # collapses spaces, tabs and newlines
+    if len(text) <= TITLE_MAX_CHARS:
+        return text
+    cut = text[:TITLE_MAX_CHARS]
+    if " " in cut[TITLE_MAX_CHARS // 2 :]:  # break at a word, unless that leaves a tiny title
+        cut = cut.rsplit(" ", 1)[0]
+    return cut.rstrip(" ,.;:-") + "…"
 
 
 @dataclass
@@ -85,7 +98,11 @@ async def save_exchange(
         await db.execute(
             update(models.ChatSession)
             .where(models.ChatSession.id == session_id)
-            .values(updated_at=func.now())
+            .values(
+                updated_at=func.now(),
+                # COALESCE keeps an existing title: only the first question names the session
+                title=func.coalesce(models.ChatSession.title, make_title(question) or None),
+            )
         )
         await db.commit()
     except Exception:
@@ -126,6 +143,7 @@ async def load_history(db: AsyncSession, session_id: UUID) -> list[StoredMessage
         StoredMessage(m, citations_by_message[m.id], traces_by_message[m.id]) for m in messages
     ]
 
+
 def normalize_email(email: str) -> str:
     return email.strip().lower()
 
@@ -146,3 +164,51 @@ async def create_user(db: AsyncSession, email: str, password_hash: str) -> model
         await db.rollback()
         raise
     return user
+
+
+async def get_user_by_id(db: AsyncSession, user_id: UUID) -> models.User | None:
+    return await db.get(models.User, user_id)
+
+
+async def create_session(db: AsyncSession, user_id: UUID) -> models.ChatSession:
+    chat = models.ChatSession(user_id=user_id)
+    db.add(chat)
+    try:
+        await db.commit()
+    except Exception:
+        await db.rollback()
+        raise
+    await db.refresh(chat)  # loads created_at / updated_at, which the database filled in
+    return chat
+
+
+async def list_sessions(
+    db: AsyncSession, user_id: UUID, limit: int = 50
+) -> list[models.ChatSession]:
+    result = await db.execute(
+        select(models.ChatSession)
+        .where(
+            models.ChatSession.user_id == user_id,
+            models.ChatSession.deleted_at.is_(None),
+        )
+        .order_by(
+            models.ChatSession.updated_at.desc(),
+            models.ChatSession.created_at.desc(),
+        )
+        .limit(limit)
+    )
+    return list(result.scalars().all())
+
+
+async def get_user_session(
+    db: AsyncSession, user_id: UUID, session_id: UUID
+) -> models.ChatSession | None:
+    """The session, only if it exists, is not deleted AND belongs to this user."""
+    result = await db.execute(
+        select(models.ChatSession).where(
+            models.ChatSession.id == session_id,
+            models.ChatSession.user_id == user_id,
+            models.ChatSession.deleted_at.is_(None),
+        )
+    )
+    return result.scalar_one_or_none()
