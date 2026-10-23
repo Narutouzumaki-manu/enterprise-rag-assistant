@@ -7,7 +7,11 @@ from app.schemas.agent import AgentResponse, AgentStep, AgentStepType, Citation
 from app.schemas.document import Chunk, ChunkMetadata,  IngestionResult ,SourceType
 from app.schemas.retrieval import RetrievalRequest, RetrievalResponse, RetrievedChunk
 from pathlib import Path
+from uuid import uuid4
 
+from app.api.dependencies import get_current_user
+from app.api.main import create_app
+from app.core.config import Settings
 def make_response(
     answer: str = "Mock answer.",
     status: str = "verified",
@@ -189,3 +193,43 @@ class MockIngestion:
             chunks=chunks,
             error_message=message,
         )
+
+class FakeUser:
+    def __init__(self):
+        self.id = uuid4()
+
+
+class MockChatStore:
+    """Stands in for ChatStore: no database, records what it is asked to do."""
+
+    def __init__(self, owns: bool = True, source_files: dict | None = None, save_ok: bool = True):
+        self.owns = owns
+        self.source_files = source_files or {}
+        self.save_ok = save_ok
+        self.ownership_checks: list[tuple] = []
+        self.saved: list[dict] = []
+
+    async def session_belongs_to(self, user_id, session_id) -> bool:
+        self.ownership_checks.append((user_id, session_id))
+        return self.owns
+
+    async def source_files_for(self, response) -> dict[str, str]:
+        return dict(self.source_files)
+
+    async def save(self, session_id, question, response, source_files) -> bool:
+        if self.save_ok:
+            self.saved.append(
+                {"session_id": session_id, "question": question, "answer": response.answer}
+            )
+        return self.save_ok
+
+
+def make_chat_app(agent=None, settings=None, store=None):
+    """An app whose login and database side are replaced by fakes (for fast unit tests)."""
+    app = create_app(
+        agent=agent,
+        settings=settings or Settings(_env_file=None),
+        chat_store=store if store is not None else MockChatStore(),
+    )
+    app.dependency_overrides[get_current_user] = lambda: FakeUser()
+    return app

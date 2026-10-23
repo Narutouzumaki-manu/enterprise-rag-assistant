@@ -62,9 +62,14 @@ def _error_event(message: str = GENERIC_ERROR, code: str = "INTERNAL_ERROR") -> 
 
 
 async def build_chat_events(
-    agent_events: AsyncIterator, request_id: UUID, heartbeat_seconds: float
+    agent_events: AsyncIterator,
+    request_id: UUID,
+    heartbeat_seconds: float,
+    source_files: dict[str, str] | None = None,
 ) -> AsyncIterator[StreamEvent | Heartbeat]:
     """Agent events in, API stream events out. Always ends with exactly one done or error."""
+    if source_files is None:
+        source_files = {}  # NOT "source_files or {}": a caller's empty dict is filled later, on purpose
     final: AgentResponse | None = None
     try:
         async for item in _with_heartbeat(agent_events, heartbeat_seconds):
@@ -85,7 +90,9 @@ async def build_chat_events(
         return
 
     for citation in final.citations:
-        api_citation = ApiCitation.model_validate(citation.model_dump())
+        api_citation = ApiCitation.model_validate(
+            {**citation.model_dump(), "source_file": source_files.get(citation.document_id)}
+        )
         yield StreamEvent("source", api_citation.model_dump())
     for word in split_words(final.answer):
         yield StreamEvent("token", {"text": word})

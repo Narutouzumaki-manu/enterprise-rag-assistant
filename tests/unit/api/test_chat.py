@@ -8,10 +8,15 @@ from app.api.main import create_app
 from app.core.config import Settings
 
 from .mocks import MockAgent, make_response
+from app.api.dependencies import get_current_user
+from app.api.main import create_app
+from app.core.config import Settings
+
+from .mocks import FakeUser, MockAgent, MockChatStore, make_chat_app, make_response
 
 
-def _client(agent=None, settings: Settings | None = None) -> AsyncClient:
-    app = create_app(agent=agent, settings=settings or Settings(_env_file=None))
+def _client(agent=None, settings: Settings | None = None, store=None) -> AsyncClient:
+    app = make_chat_app(agent=agent, settings=settings, store=store)
     transport = ASGITransport(app=app, raise_app_exceptions=False)
     return AsyncClient(transport=transport, base_url="http://test")
 
@@ -126,3 +131,53 @@ async def test_unexpected_agent_error_gives_generic_500():
     assert r.status_code == 500
     assert r.json()["code"] == "INTERNAL_ERROR"
     assert "secret detail" not in r.text
+
+@pytest.mark.asyncio
+async def test_the_session_is_checked_and_the_exchange_is_saved():
+    store = MockChatStore()
+    body = _body()
+    async with _client(MockAgent(), store=store) as client:
+        r = await client.post("/chat", json=body)
+    assert r.status_code == 200
+    assert [sid for _, sid in store.ownership_checks] == [UUID(body["session_id"])]
+    assert store.saved == [
+        {"session_id": UUID(body["session_id"]), "question": "hi", "answer": "Mock answer."}
+    ]
+
+
+@pytest.mark.asyncio
+async def test_someone_elses_session_gives_404_and_the_agent_is_never_called():
+    agent, store = MockAgent(), MockChatStore(owns=False)
+    async with _client(agent, store=store) as client:
+        r = await client.post("/chat", json=_body())
+    assert r.status_code == 404
+    assert r.json() == {"error": "Session not found.", "code": "NOT_FOUND"}
+    assert agent.calls == []
+    assert store.saved == []
+
+
+@pytest.mark.asyncio
+async def test_source_files_from_the_store_appear_in_the_citations():
+    store = MockChatStore(source_files={"doc_1": "annual_report.pdf"})
+    async with _client(MockAgent(), store=store) as client:
+        r = await client.post("/chat", json=_body())
+    assert r.json()["citations"][0]["source_file"] == "annual_report.pdf"
+
+
+@pytest.mark.asyncio
+async def test_a_failed_save_still_delivers_the_answer():
+    async with _client(MockAgent(), store=MockChatStore(save_ok=False)) as client:
+        r = await client.post("/chat", json=_body())
+    assert r.status_code == 200
+    assert r.json()["answer"] == "Mock answer."
+
+
+@pytest.mark.asyncio
+async def test_no_database_gives_503():
+    app = create_app(agent=MockAgent(), settings=Settings(_env_file=None))  # no factory, no store
+    app.dependency_overrides[get_current_user] = lambda: FakeUser()
+    transport = ASGITransport(app=app, raise_app_exceptions=False)
+    async with AsyncClient(transport=transport, base_url="http://test") as client:
+        r = await client.post("/chat", json=_body())
+    assert r.status_code == 503
+    assert r.json()["code"] == "DEPENDENCY_UNAVAILABLE"

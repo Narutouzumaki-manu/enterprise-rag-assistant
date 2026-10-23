@@ -125,3 +125,4 @@ async def test_saving_into_a_missing_session_stores_nothing(session):
     with pytest.raises(IntegrityError):
         await repository.save_exchange(session, uuid4(), "q", _response(), {})
     assert await _count(session, models.Message) == 0
+    

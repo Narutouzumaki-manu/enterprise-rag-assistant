@@ -5,6 +5,7 @@ from app.core.config import Settings
 from collections.abc import AsyncIterator
 from fastapi import Depends
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+from app.api.exchange import ChatStore
 
 from app.core.security import TokenError, decode_access_token
 from app.db import models, repository
@@ -54,4 +55,14 @@ async def get_current_user(
     user = await repository.get_user_by_id(db, user_id)
     if user is None:
         raise _not_authenticated()
+        user = await repository.get_user_by_id(db, user_id)
+    if user is None:
+        raise _not_authenticated()
+    await db.commit()  # end the read transaction: hand the connection back instead of holding it all request
     return user 
+
+def get_chat_store(request: Request) -> ChatStore:
+    store = request.app.state.chat_store
+    if store is None:
+        raise HTTPException(status_code=503, detail="The database is not available right now.")
+    return store
