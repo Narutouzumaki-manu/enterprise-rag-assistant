@@ -125,3 +125,24 @@ async def load_history(db: AsyncSession, session_id: UUID) -> list[StoredMessage
     return [
         StoredMessage(m, citations_by_message[m.id], traces_by_message[m.id]) for m in messages
     ]
+
+def normalize_email(email: str) -> str:
+    return email.strip().lower()
+
+
+async def get_user_by_email(db: AsyncSession, email: str) -> models.User | None:
+    result = await db.execute(
+        select(models.User).where(models.User.email == normalize_email(email))
+    )
+    return result.scalar_one_or_none()
+
+
+async def create_user(db: AsyncSession, email: str, password_hash: str) -> models.User:
+    user = models.User(email=normalize_email(email), password_hash=password_hash)
+    db.add(user)
+    try:
+        await db.commit()
+    except Exception:
+        await db.rollback()
+        raise
+    return user

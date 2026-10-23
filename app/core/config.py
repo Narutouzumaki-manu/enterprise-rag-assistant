@@ -1,11 +1,21 @@
+
 from functools import lru_cache
 
-from pydantic import Field
+from pydantic import Field, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
+DEV_JWT_SECRET = "dev-only-secret-change-me-before-deploying"
+
+
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        extra="ignore",
+        env_ignore_empty=True,
+    )
+
+    environment: str = "development"  # "development" or "production"
 
     # Connections
     database_url: str = "postgresql+asyncpg://rag:rag@localhost:5432/rag"
@@ -28,10 +38,20 @@ class Settings(BaseSettings):
     # Streaming
     sse_heartbeat_seconds: float = Field(default=15.0, gt=0)
 
-    # Auth (dev-only default secret; must be overridden outside development)
-    jwt_secret: str = "dev-only-change-me"
+    # Auth
+    jwt_secret: str = DEV_JWT_SECRET  # must be overridden in production
     jwt_algorithm: str = "HS256"
     jwt_expire_minutes: int = Field(default=60, ge=1)
+
+    @model_validator(mode="after")
+    def _refuse_a_weak_secret_in_production(self) -> "Settings":
+        if self.environment == "production" and (
+            self.jwt_secret == DEV_JWT_SECRET or len(self.jwt_secret) < 32
+        ):
+            raise ValueError(
+                "JWT_SECRET must be a random value of at least 32 characters in production."
+            )
+        return self
 
 
 @lru_cache

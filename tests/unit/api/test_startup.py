@@ -83,3 +83,16 @@ def test_startup_does_not_replace_an_injected_agent(monkeypatch):
     runtime_before = app.state.runtime
     with TestClient(app):
         assert app.state.runtime is runtime_before
+
+def test_startup_creates_a_database_session_factory_when_none_is_injected():
+    app = create_app(settings=_settings(agent_enabled=False))
+    assert app.state.db_session_factory is None
+    with TestClient(app):
+        assert app.state.db_session_factory is not None
+
+
+def test_startup_does_not_replace_an_injected_session_factory():
+    sentinel = object()
+    app = create_app(settings=_settings(agent_enabled=False), session_factory=sentinel)
+    with TestClient(app):
+        assert app.state.db_session_factory is sentinel

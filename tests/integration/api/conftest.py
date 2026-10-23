@@ -36,6 +36,6 @@ async def session(engine):
 def database_url() -> str:
     return TEST_DATABASE_URL
 
-@pytest.fixture
-def database_url() -> str:
-    return TEST_DATABASE_URL
+@pytest_asyncio.fixture
+async def session_factory(engine):
+    return async_sessionmaker(engine, expire_on_commit=False)
