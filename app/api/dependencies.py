@@ -11,6 +11,7 @@ from app.core.security import TokenError, decode_access_token
 from app.db import models, repository
 
 from sqlalchemy.ext.asyncio import AsyncSession
+from app.api.ingestion_service import IngestionRunner
 
 
 def get_runtime(request: Request) -> AgentRuntime:
@@ -66,3 +67,16 @@ def get_chat_store(request: Request) -> ChatStore:
     if store is None:
         raise HTTPException(status_code=503, detail="The database is not available right now.")
     return store
+
+def get_ingestion_runner(request: Request) -> IngestionRunner:
+    runner = request.app.state.ingestion_runner
+    if runner is None:
+        raise HTTPException(status_code=503, detail="Document processing is not available right now.")
+    return runner
+
+
+def get_retriever(request: Request):
+    retriever = request.app.state.retriever
+    if retriever is None:
+        raise HTTPException(status_code=503, detail="The search index is not available right now.")
+    return retriever

@@ -14,3 +14,13 @@ def build_real_components(settings: Settings):
     llm = OpenRouterLLM.from_env(retries=config.llm_retries)  # needs OPENROUTER_API_KEY; never CachingLLM here
     agent = build_agent(retriever, llm, config)
     return retriever, agent
+def real_ingest(path: str):
+    """Member 1's pipeline, without its in-memory duplicate list.
+
+    Our database is the authority on duplicates. Left alone, that list would call a re-upload
+    after a delete a 'duplicate' with no chunks (the list only forgets on a restart)."""
+    from app.ingestion.dedupe import clear_registry
+    from app.ingestion.pipeline import ingest_document
+
+    clear_registry()
+    return ingest_document(path)

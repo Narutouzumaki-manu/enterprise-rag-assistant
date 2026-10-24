@@ -6,6 +6,7 @@ from uuid import UUID
 
 from sqlalchemy import func, select, update
 from sqlalchemy.ext.asyncio import AsyncSession
+from app.schemas.document import Chunk
 
 from app.db import models
 from app.schemas.agent import AgentResponse
@@ -212,3 +213,117 @@ async def get_user_session(
         )
     )
     return result.scalar_one_or_none()
+
+async def get_active_document_by_hash(db: AsyncSession, content_hash: str) -> models.Document | None:
+    result = await db.execute(
+        select(models.Document).where(
+            models.Document.content_hash == content_hash,
+            models.Document.deleted_at.is_(None),
+        )
+    )
+    return result.scalar_one_or_none()
+
+
+async def create_document(
+    db: AsyncSession,
+    *,
+    document_id: str,
+    filename: str,
+    content_hash: str,
+    source_type: str,
+    status: str,
+    uploaded_by: UUID | None,
+) -> models.Document:
+    """Raises IntegrityError if a live document with the same content hash already exists."""
+    document = models.Document(
+        document_id=document_id,
+        filename=filename,
+        content_hash=content_hash,
+        source_type=source_type,
+        status=status,
+        uploaded_by=uploaded_by,
+    )
+    db.add(document)
+    try:
+        await db.commit()
+    except Exception:
+        await db.rollback()
+        raise
+    await db.refresh(document)  # loads the timestamps the database filled in
+    return document
+
+
+async def get_document(db: AsyncSession, document_id: str) -> models.Document | None:
+    result = await db.execute(
+        select(models.Document).where(
+            models.Document.document_id == document_id,
+            models.Document.deleted_at.is_(None),
+        )
+    )
+    return result.scalar_one_or_none()
+
+
+async def list_documents(db: AsyncSession, limit: int = 100) -> list[models.Document]:
+    result = await db.execute(
+        select(models.Document)
+        .where(models.Document.deleted_at.is_(None))
+        .order_by(models.Document.created_at.desc())
+        .limit(limit)
+    )
+    return list(result.scalars().all())
+
+
+async def set_document_status(
+    db: AsyncSession, document_id: str, status: str, error_message: str | None = None
+) -> None:
+    await db.execute(
+        update(models.Document)
+        .where(models.Document.document_id == document_id)
+        .values(status=status, error_message=error_message, updated_at=func.now())
+    )
+    await db.commit()
+
+
+async def soft_delete_document(db: AsyncSession, document_id: str) -> bool:
+    """True if a live document was deleted, False if there was none."""
+    result = await db.execute(
+        update(models.Document)
+        .where(models.Document.document_id == document_id, models.Document.deleted_at.is_(None))
+        .values(deleted_at=func.now(), updated_at=func.now())
+    )
+    await db.commit()
+    return result.rowcount > 0
+
+async def complete_document(
+    db: AsyncSession,
+    document_id: str,
+    chunks: list[Chunk],
+    status: str,
+    error_message: str | None = None,
+) -> None:
+    """Saves the chunk rows and the final status in ONE transaction."""
+    rows = [
+        models.DocumentChunk(
+            chunk_id=chunk.chunk_id,
+            document_id=chunk.document_id,
+            text=chunk.text,
+            token_count=chunk.token_count,
+            page_number=chunk.metadata.page_number,
+            section_title=chunk.metadata.section_title,
+            row_range_start=chunk.metadata.row_range[0] if chunk.metadata.row_range else None,
+            row_range_end=chunk.metadata.row_range[1] if chunk.metadata.row_range else None,
+            ingested_at=chunk.metadata.ingested_at,
+        )
+        for chunk in chunks
+    ]
+    try:
+        db.add_all(rows)
+        await db.execute(
+            update(models.Document)
+            .where(models.Document.document_id == document_id)
+            .values(status=status, error_message=error_message, updated_at=func.now())
+        )
+        await db.commit()
+    except Exception:
+        await db.rollback()
+        raise

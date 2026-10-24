@@ -76,4 +76,9 @@ class MessageResponse(BaseModel):
 
 
 class SessionDetail(SessionSummary):
-    messages: list[MessageResponse]
+    messages: list[MessageResponse] 
+
+class DocumentDetail(DocumentStatusResponse):
+    source_type: str
+    created_at: datetime
+    uploaded_by_me: bool

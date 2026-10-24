@@ -59,6 +59,9 @@ class Document(Base):
     version: Mapped[int] = mapped_column(Integer, default=1, server_default="1")
     status: Mapped[str] = mapped_column(String(32))
     error_message: Mapped[str | None] = mapped_column(Text)
+    uploaded_by: Mapped[uuid.UUID | None] = mapped_column(
+        ForeignKey("users.id", name="fk_documents_uploaded_by_users")
+    )  # nullable: documents ingested by script have no uploader
     created_at: Mapped[datetime] = _created_at()
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now(), onupdate=func.now()

@@ -1,4 +1,3 @@
-
 from functools import lru_cache
 
 from pydantic import Field, model_validator
@@ -28,6 +27,7 @@ class Settings(BaseSettings):
     # Limits (starting values, tune from real usage)
     max_upload_mb: int = Field(default=25, ge=1)
     max_query_chars: int = Field(default=2000, ge=1)
+    ingest_max_concurrent: int = Field(default=1, ge=1)
 
     # Agent runtime
     agent_max_concurrent: int = Field(default=2, ge=1)
