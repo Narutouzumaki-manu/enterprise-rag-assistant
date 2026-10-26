@@ -9,6 +9,7 @@ from app.api.errors import register_error_handlers
 from app.api.ingestion_service import IngestionRunner
 from app.api.routes import auth, chat, documents, health, sessions
 from app.api.runtime import AgentRuntime
+from app.api.startup import sweep_interrupted_documents
 from app.api.exchange import ChatStore
 from app.api.middleware import UploadSizeLimitMiddleware
 from app.api.uploads import MIB
@@ -71,6 +72,11 @@ def create_app(
                     app.state.retriever,
                     ingest,
                     settings,
+                )
+
+            if app.state.db_session_factory is not None:
+                await sweep_interrupted_documents(
+                    app.state.db_session_factory, app.state.retriever
                 )
 
             yield

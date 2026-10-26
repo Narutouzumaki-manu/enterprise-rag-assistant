@@ -284,6 +284,35 @@ async def set_document_status(
     await db.commit()
 
 
+IN_PROGRESS_STATUSES = ("queued", "parsing", "indexing")
+
+
+async def fail_interrupted_documents(db: AsyncSession, message: str) -> list[tuple[str, str]]:
+    """Marks every live document still in progress as failed.
+
+    Returns (document_id, previous_status) pairs. Only safe at the startup of a single API
+    process: with several processes it would fail another process's live work."""
+    try:
+        result = await db.execute(
+            select(models.Document.document_id, models.Document.status).where(
+                models.Document.status.in_(IN_PROGRESS_STATUSES),
+                models.Document.deleted_at.is_(None),
+            )
+        )
+        interrupted = [(row.document_id, row.status) for row in result.all()]
+        if interrupted:
+            await db.execute(
+                update(models.Document)
+                .where(models.Document.document_id.in_([doc_id for doc_id, _ in interrupted]))
+                .values(status="failed", error_message=message, updated_at=func.now())
+            )
+            await db.commit()
+        return interrupted
+    except Exception:
+        await db.rollback()
+        raise
+
+
 async def soft_delete_document(db: AsyncSession, document_id: str) -> bool:
     """True if a live document was deleted, False if there was none."""
     result = await db.execute(
