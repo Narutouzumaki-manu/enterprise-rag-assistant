@@ -31,8 +31,8 @@ class ChatStore:
         try:
             async with self._session_factory() as db:
                 return await repository.get_source_files(db, document_ids)
-        except Exception:
-            logger.exception("Could not look up source files")
+        except Exception as exc:
+            logger.error("Could not look up source files (%s)", type(exc).__name__)
             return {}
 
     async def save(
@@ -47,9 +47,14 @@ class ChatStore:
             async with self._session_factory() as db:
                 await repository.save_exchange(db, session_id, question, response, source_files)
             return True
-        except Exception:
-            logger.exception("Could not save the exchange for session %s", session_id)
+        except Exception as exc:
+            logger.error(
+                "Could not save the exchange for session %s (%s)",
+                session_id,
+                type(exc).__name__,
+            )
             return False
+
 
 _END = object()
 
