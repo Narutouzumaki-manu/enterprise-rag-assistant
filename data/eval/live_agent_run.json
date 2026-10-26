@@ -1,32 +1,26 @@
 {
-  "run_at": "2026-10-18T23:58:30.374554+00:00",
+  "run_at": "2026-10-26T03:25:10.024773+00:00",
   "model": "nvidia/nemotron-3-super-120b-a12b:free",
-  "replay": true,
+  "replay": false,
   "results": [
     {
-      "name": "q19",
-      "question": "What was the company's profit after tax in the October-to-December quarter of the year before FY26?",
-      "reference_answer": "₹123,800 million (₹12,380 crore), Q3 FY25.",
-      "model_calls_live": 0,
-      "model_calls_replayed": 5,
+      "name": "q_calc",
+      "question": "By how many employees did headcount fall between the end of Q1 FY26 and the end of Q3 FY26?",
+      "reference_answer": "30,906 (613,069 at end of Q1 FY26 minus 582,163 at end of Q3 FY26)",
+      "model_calls_live": 2,
+      "model_calls_replayed": 0,
       "response": {
-        "answer": "₹123,800 million",
-        "citations": [
-          {
-            "chunk_id": "a12690271a0131aa208eca944c8819340379ce87d52738315f6f2195f0dbfea7",
-            "document_id": "tcs_annual_report",
-            "page_number": 20,
-            "text_snippet": "...₹ million: Net income; Q1 FY25: 120,400; Q2 FY25: 119,090; Q3 FY25: 123,800; Q4 FY25: 122,240."
-          }
-        ],
+        "answer": "I couldn't write an answer right now. Please try again.",
+        "citations": [],
         "trace": [
           {
             "step_type": "plan",
-            "content": "Classified as simple; 1 sub-query",
+            "content": "Could not plan the question; searching with the original wording",
             "metadata": {
               "query_type": "simple",
               "subquery_count": 1,
-              "rewritten": false
+              "rewritten": false,
+              "fallback": true
             }
           },
           {
@@ -46,79 +40,18 @@
           },
           {
             "step_type": "synthesize",
-            "content": "The passages do not contain the answer; searching again",
+            "content": "Could not generate a draft answer",
             "metadata": {
               "citation_count": 0,
               "dropped_citations": 0,
               "generator_called": true,
-              "not_found": true,
-              "retry_search": true
-            }
-          },
-          {
-            "step_type": "retrieve",
-            "content": "Found 5 new passages (13 in total)",
-            "metadata": {
-              "search_query_count": 1,
-              "chunks_per_search": [
-                8
-              ],
-              "chunks_after_merge": 13,
-              "new_chunks": 5,
-              "attempt": 1,
-              "errors": 0,
-              "quarantined": 0
-            }
-          },
-          {
-            "step_type": "synthesize",
-            "content": "The passages do not contain the answer; searching again",
-            "metadata": {
-              "citation_count": 0,
-              "dropped_citations": 0,
-              "generator_called": true,
-              "not_found": true,
-              "retry_search": true
-            }
-          },
-          {
-            "step_type": "retrieve",
-            "content": "Found 6 new passages (19 in total)",
-            "metadata": {
-              "search_query_count": 1,
-              "chunks_per_search": [
-                15
-              ],
-              "chunks_after_merge": 19,
-              "new_chunks": 6,
-              "attempt": 2,
-              "errors": 0,
-              "quarantined": 0
-            }
-          },
-          {
-            "step_type": "synthesize",
-            "content": "Draft answer generated with 1 citation",
-            "metadata": {
-              "citation_count": 1,
-              "dropped_citations": 0,
-              "generator_called": true
-            }
-          },
-          {
-            "step_type": "fact_check",
-            "content": "1 of 1 claim verified",
-            "metadata": {
-              "claims_total": 1,
-              "claims_supported": 1,
-              "coverage": 1.0,
-              "retry": false
+              "reason": "llm_failed"
             }
           }
         ],
-        "verification_status": "verified",
-        "confidence": 0.95,
-        "latency_ms": 83.21879999130033
+        "verification_status": "unverified",
+        "confidence": 0.0,
+        "latency_ms": 1266.9659999955911
       }
     }
   ]

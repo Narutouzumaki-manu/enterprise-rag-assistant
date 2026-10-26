@@ -10,3 +10,4 @@ data/chroma/
 .env
 data/llm_cache/
 D:\enterprise-rag-assistant\check_openrouter_usage.py
+data/

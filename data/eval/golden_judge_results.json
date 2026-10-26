@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-10-20T09:18:21.674221+00:00",
+  "run_at": "2026-10-26T03:16:28.361611+00:00",
   "judge_model": "minimax/minimax-m3.1-flash:free",
   "results": {
     "tcs-gold-08|agent": {
