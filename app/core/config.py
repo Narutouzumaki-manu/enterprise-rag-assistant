@@ -38,6 +38,9 @@ class Settings(BaseSettings):
     # Streaming
     sse_heartbeat_seconds: float = Field(default=15.0, gt=0)
 
+    # Shutdown
+    shutdown_grace_seconds: float = Field(default=30.0, ge=0)  # starting value, tune from real use
+
     # Auth
     jwt_secret: str = DEV_JWT_SECRET  # must be overridden in production
     jwt_algorithm: str = "HS256"

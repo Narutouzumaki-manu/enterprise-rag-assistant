@@ -1,4 +1,3 @@
-
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
@@ -9,6 +8,7 @@ from app.api.errors import register_error_handlers
 from app.api.ingestion_service import IngestionRunner
 from app.api.routes import auth, chat, documents, health, sessions
 from app.api.runtime import AgentRuntime
+from app.api.shutdown import drain_background_tasks
 from app.api.startup import sweep_interrupted_documents
 from app.api.exchange import ChatStore
 from app.api.middleware import UploadSizeLimitMiddleware
@@ -81,6 +81,9 @@ def create_app(
 
             yield
         finally:
+            await drain_background_tasks(
+                app.state.background_tasks, settings.shutdown_grace_seconds
+            )
             if engine is not None:
                 await engine.dispose()
 
