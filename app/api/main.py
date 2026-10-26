@@ -6,7 +6,7 @@ from starlette.concurrency import run_in_threadpool
 from app.api.bootstrap import build_real_components, real_ingest
 from app.api.errors import register_error_handlers
 from app.api.ingestion_service import IngestionRunner
-from app.api.routes import auth, chat, documents, health, sessions
+from app.api.routes import auth, chat, documents, feedback, health, sessions  # change 1: feedback added
 from app.api.runtime import AgentRuntime
 from app.api.shutdown import drain_background_tasks
 from app.api.startup import sweep_interrupted_documents
@@ -114,6 +114,7 @@ def create_app(
     app.include_router(sessions.router)
     app.include_router(chat.router)
     app.include_router(documents.router)
+    app.include_router(feedback.router)  # change 2: registered after documents
 
     return app
 

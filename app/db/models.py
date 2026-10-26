@@ -11,6 +11,7 @@ from sqlalchemy import (
     SmallInteger,
     String,
     Text,
+    UniqueConstraint,
     Uuid,
     func,
     text,
@@ -149,7 +150,10 @@ class Feedback(Base):
     comment: Mapped[str | None] = mapped_column(Text)
     created_at: Mapped[datetime] = _created_at()
 
-    __table_args__ = (CheckConstraint("rating IN (-1, 1)", name="ck_feedback_rating"),)
+    __table_args__ = (
+        CheckConstraint("rating IN (-1, 1)", name="ck_feedback_rating"),
+        UniqueConstraint("message_id", "user_id", name="uq_feedback_message_user"),
+    )
 
 
 class AuditEvent(Base):

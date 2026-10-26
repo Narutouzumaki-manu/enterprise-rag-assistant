@@ -1,3 +1,4 @@
+from typing import Literal
 from uuid import UUID
 
 from pydantic import BaseModel, Field
@@ -82,3 +83,15 @@ class DocumentDetail(DocumentStatusResponse):
     source_type: str
     created_at: datetime
     uploaded_by_me: bool
+
+
+class FeedbackRequest(BaseModel):
+    message_id: UUID
+    rating: Literal[-1, 1]  # 1 = helpful, -1 = not helpful
+    comment: str | None = Field(default=None, max_length=1000)
+
+
+class FeedbackResponse(BaseModel):
+    message_id: UUID
+    rating: int
+    comment: str | None = None

@@ -5,6 +5,7 @@ from datetime import datetime, timedelta, timezone
 from uuid import UUID
 
 from sqlalchemy import func, select, update
+from sqlalchemy.dialects.postgresql import insert as pg_insert
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.schemas.document import Chunk
 
@@ -213,6 +214,43 @@ async def get_user_session(
         )
     )
     return result.scalar_one_or_none()
+
+
+async def get_rateable_message(
+    db: AsyncSession, user_id: UUID, message_id: UUID
+) -> models.Message | None:
+    """The assistant message, only if it is in one of this user's live sessions."""
+    result = await db.execute(
+        select(models.Message)
+        .join(models.ChatSession, models.Message.session_id == models.ChatSession.id)
+        .where(
+            models.Message.id == message_id,
+            models.Message.role == "assistant",
+            models.ChatSession.user_id == user_id,
+            models.ChatSession.deleted_at.is_(None),
+        )
+    )
+    return result.scalar_one_or_none()
+
+
+async def save_feedback(
+    db: AsyncSession, *, message_id: UUID, user_id: UUID, rating: int, comment: str | None
+) -> None:
+    """One rating per user per message: a new one replaces the old (and its time)."""
+    statement = pg_insert(models.Feedback).values(
+        message_id=message_id, user_id=user_id, rating=rating, comment=comment
+    )
+    statement = statement.on_conflict_do_update(
+        constraint="uq_feedback_message_user",
+        set_={"rating": statement.excluded.rating, "comment": statement.excluded.comment,
+              "created_at": func.now()},
+    )
+    try:
+        await db.execute(statement)
+        await db.commit()
+    except Exception:
+        await db.rollback()
+        raise
 
 async def get_active_document_by_hash(db: AsyncSession, content_hash: str) -> models.Document | None:
     result = await db.execute(
