@@ -9,6 +9,15 @@ from app.schemas.agent import AgentResponse, AgentStep
 from .mocks import MockAgent
 
 
+async def wait_until(condition, timeout: float = 2.0) -> None:
+    """Polls a condition instead of guessing how long a worker thread needs."""
+    deadline = time.monotonic() + timeout
+    while not condition():
+        if time.monotonic() > deadline:
+            raise AssertionError("condition not met within the timeout")
+        await asyncio.sleep(0.01)
+
+
 @pytest.mark.asyncio
 async def test_stream_yields_steps_then_one_final_response():
     agent = MockAgent()
@@ -65,5 +74,4 @@ async def test_agent_error_reaches_the_consumer_and_frees_the_slot():
     with pytest.raises(RuntimeError):
         async for _ in events:
             pass
-    await asyncio.sleep(0)
-    assert runtime.in_use == 0
+    await wait_until(lambda: runtime.in_use == 0)
