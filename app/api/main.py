@@ -14,6 +14,7 @@ from app.api.exchange import ChatStore
 from app.api.middleware import UploadSizeLimitMiddleware
 from app.api.uploads import MIB
 from app.core.config import Settings, get_settings
+from app.api.limits import limiter
 from app.db.session import create_engine, create_session_factory
 
 
@@ -96,6 +97,7 @@ def create_app(
     )
 
     app.state.settings = settings
+    app.state.limiter = limiter
     app.state.retriever = retriever
     app.state.runtime = make_runtime(agent, settings) if agent is not None else None
     app.state.db_session_factory = session_factory

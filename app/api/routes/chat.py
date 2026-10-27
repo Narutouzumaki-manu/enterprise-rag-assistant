@@ -1,4 +1,3 @@
-
 from uuid import uuid4
 
 from fastapi import APIRouter, Depends, HTTPException, Request
@@ -7,6 +6,7 @@ from fastapi.sse import EventSourceResponse
 from app.api.dependencies import get_app_settings, get_chat_store, get_current_user, get_runtime
 from app.api.runtime import AgentRuntime
 from app.api.exchange import ChatStore, open_saved_stream
+from app.api.limits import CHAT_LIMIT, limiter
 from app.api.streaming import build_chat_events, sse_lines
 from app.core.config import Settings
 from app.schemas.api import ApiCitation, ChatRequest, ChatResponse
@@ -29,7 +29,9 @@ def clean_query(raw: str, settings: Settings) -> str:
 
 
 @router.post("/chat", response_model=ChatResponse)
+@limiter.shared_limit(CHAT_LIMIT, scope="chat")
 async def chat(
+    request: Request,
     body: ChatRequest,
     user: models.User = Depends(get_current_user),  # first, so a missing token is a 401
     runtime: AgentRuntime = Depends(get_runtime),
@@ -69,6 +71,7 @@ async def chat(
         }
     },
 )
+@limiter.shared_limit(CHAT_LIMIT, scope="chat")
 async def chat_stream(
     request: Request,
     body: ChatRequest,

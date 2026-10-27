@@ -1,10 +1,10 @@
-
 import logging
 
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
+from slowapi.errors import RateLimitExceeded
 
 from app.api.runtime import AgentBusyError
 from app.core.config import get_settings
@@ -63,6 +63,16 @@ def _describe_validation_error(exc: RequestValidationError) -> str:
 
 
 def register_error_handlers(app: FastAPI) -> None:
+    @app.exception_handler(RateLimitExceeded)
+    async def rate_limit_handler(request: Request, exc: RateLimitExceeded) -> JSONResponse:
+        # 60 s is exact for the per-minute limits and a lower bound for the hourly upload limit
+        return error_response(
+            429,
+            "RATE_LIMITED",
+            "Too many requests. Please wait a moment and try again.",
+            {"Retry-After": "60"},
+        )
+
     @app.exception_handler(AgentBusyError)
     async def busy_handler(request: Request, exc: AgentBusyError) -> JSONResponse:
         retry_after = str(get_settings().retry_after_seconds)

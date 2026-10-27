@@ -24,12 +24,14 @@ def get_runtime(request: Request) -> AgentRuntime:
 def get_app_settings(request: Request) -> Settings:
     return request.app.state.settings
 
+
 async def get_db(request: Request) -> AsyncIterator[AsyncSession]:
     factory = request.app.state.db_session_factory
     if factory is None:
         raise HTTPException(status_code=503, detail="The database is not available right now.")
     async with factory() as session:
         yield session
+
 
 bearer_scheme = HTTPBearer(auto_error=False)  # we raise our own 401, in our own error shape
 
@@ -43,6 +45,7 @@ def _not_authenticated() -> HTTPException:
 
 
 async def get_current_user(
+    request: Request,
     credentials: HTTPAuthorizationCredentials | None = Depends(bearer_scheme),
     db: AsyncSession = Depends(get_db),
     settings: Settings = Depends(get_app_settings),
@@ -60,13 +63,16 @@ async def get_current_user(
     if user is None:
         raise _not_authenticated()
     await db.commit()  # end the read transaction: hand the connection back instead of holding it all request
-    return user 
+    request.state.user_id = user.id  # read by the rate limiter's key function
+    return user
+
 
 def get_chat_store(request: Request) -> ChatStore:
     store = request.app.state.chat_store
     if store is None:
         raise HTTPException(status_code=503, detail="The database is not available right now.")
     return store
+
 
 def get_ingestion_runner(request: Request) -> IngestionRunner:
     runner = request.app.state.ingestion_runner

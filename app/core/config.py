@@ -29,6 +29,12 @@ class Settings(BaseSettings):
     max_query_chars: int = Field(default=2000, ge=1)
     ingest_max_concurrent: int = Field(default=1, ge=1)
 
+    # Rate limits (starting values, tune from real usage)
+    rate_limit_enabled: bool = True
+    login_rate_limit: str = "5/minute"    # per client address
+    chat_rate_limit: str = "10/minute"    # per user, /chat and /chat/stream together
+    upload_rate_limit: str = "10/hour"    # per user
+
     # Agent runtime
     agent_max_concurrent: int = Field(default=2, ge=1)
     agent_wait_seconds: float = Field(default=20.0, gt=0)

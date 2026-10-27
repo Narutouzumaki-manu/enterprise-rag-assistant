@@ -15,6 +15,7 @@ from app.api.dependencies import (
     get_retriever,
 )
 from app.api.ingestion_service import IngestionRunner
+from app.api.limits import UPLOAD_LIMIT, limiter
 from app.api.uploads import MIB, receive_upload
 from app.core.config import Settings
 from app.db import models, repository
@@ -43,6 +44,7 @@ def _detail(document: models.Document, user: models.User) -> DocumentDetail:
 
 
 @router.post("/upload", response_model=DocumentStatusResponse, status_code=202)
+@limiter.shared_limit(UPLOAD_LIMIT, scope="upload")
 async def upload_document(
     request: Request,
     response: Response,
