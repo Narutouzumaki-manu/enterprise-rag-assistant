@@ -16,6 +16,8 @@ from app.api.uploads import MIB
 from app.core.config import Settings, get_settings
 from app.api.limits import limiter
 from app.db.session import create_engine, create_session_factory
+from app.api.request_id import RequestIdMiddleware
+from app.core.logging_setup import configure_logging
 
 
 def make_runtime(agent, settings: Settings) -> AgentRuntime:
@@ -46,6 +48,7 @@ def create_app(
     ingest=None,
 ) -> FastAPI:
     settings = settings or get_settings()
+    configure_logging(settings.log_level, settings.log_json)
     ingest = ingest or real_ingest
 
     @asynccontextmanager
@@ -95,6 +98,7 @@ def create_app(
         path="/documents/upload",
         max_bytes=settings.max_upload_mb * MIB,
     )
+    app.add_middleware(RequestIdMiddleware)
 
     app.state.settings = settings
     app.state.limiter = limiter

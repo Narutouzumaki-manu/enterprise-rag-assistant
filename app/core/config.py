@@ -52,6 +52,10 @@ class Settings(BaseSettings):
     jwt_algorithm: str = "HS256"
     jwt_expire_minutes: int = Field(default=60, ge=1)
 
+        # Logging
+    log_level: str = "INFO"
+    log_json: bool = False  # True in production: one JSON object per line
+
     @model_validator(mode="after")
     def _refuse_a_weak_secret_in_production(self) -> "Settings":
         if self.environment == "production" and (
