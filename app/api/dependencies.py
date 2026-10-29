@@ -1,5 +1,5 @@
-from fastapi import HTTPException, Request
 
+from fastapi import HTTPException, Request
 from app.api.runtime import AgentRuntime
 from app.core.config import Settings
 from collections.abc import AsyncIterator
@@ -56,12 +56,11 @@ async def get_current_user(
         user_id = decode_access_token(credentials.credentials, settings)
     except TokenError:
         raise _not_authenticated() from None
+
     user = await repository.get_user_by_id(db, user_id)
     if user is None:
         raise _not_authenticated()
-        user = await repository.get_user_by_id(db, user_id)
-    if user is None:
-        raise _not_authenticated()
+
     await db.commit()  # end the read transaction: hand the connection back instead of holding it all request
     request.state.user_id = user.id  # read by the rate limiter's key function
     return user
