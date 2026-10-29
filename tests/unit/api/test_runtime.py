@@ -1,3 +1,4 @@
+
 import asyncio
 import threading
 import time
@@ -7,6 +8,7 @@ from httpx import ASGITransport, AsyncClient
 
 from app.api.main import create_app
 from app.api.runtime import AgentBusyError, AgentRuntime
+from app.api.routes import health
 
 from .mocks import MockAgent
 
@@ -83,9 +85,16 @@ async def test_agent_error_propagates_and_frees_the_slot():
 
 
 @pytest.mark.asyncio
-async def test_health_stays_responsive_while_an_agent_run_is_in_progress():
+async def test_health_stays_responsive_while_an_agent_run_is_in_progress(monkeypatch):
     runtime = AgentRuntime(MockAgent(delay=0.5), max_concurrent=1, wait_seconds=1)
     transport = ASGITransport(app=create_app())
+
+    async def fake_ok(request):
+        return "ok"
+
+    monkeypatch.setattr(health, "check_postgres", fake_ok)
+    monkeypatch.setattr(health, "check_redis", fake_ok)
+
     async with AsyncClient(transport=transport, base_url="http://test") as client:
         running = asyncio.create_task(runtime.run("hi"))
         await asyncio.sleep(0.05)
