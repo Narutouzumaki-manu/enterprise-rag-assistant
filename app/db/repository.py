@@ -394,3 +394,13 @@ async def complete_document(
     except Exception:
         await db.rollback()
         raise
+
+async def record_audit_event(
+    db: AsyncSession, *, request_id: str, event_type: str, payload: dict
+) -> None:
+    db.add(models.AuditEvent(request_id=request_id, event_type=event_type, payload=payload))
+    try:
+        await db.commit()
+    except Exception:
+        await db.rollback()
+        raise

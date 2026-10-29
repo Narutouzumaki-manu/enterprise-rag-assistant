@@ -1,3 +1,4 @@
+
 import asyncio
 import logging
 from pathlib import Path
@@ -7,6 +8,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 from starlette.concurrency import run_in_threadpool
 
+from app.api.audit import DOCUMENT_DELETE, UPLOAD, record_audit
 from app.api.dependencies import (
     get_app_settings,
     get_current_user,
@@ -85,6 +87,13 @@ async def upload_document(
     if document is None:  # a duplicate: keep the first copy, drop this one
         stored.path.unlink(missing_ok=True)
         response.status_code = 200
+        await record_audit(
+            request,
+            UPLOAD,
+            user_id=user.id,
+            document_id=existing.document_id,
+            status="duplicate",
+        )
         return DocumentStatusResponse(
             document_id=existing.document_id, filename=existing.filename, status="duplicate"
         )
@@ -93,6 +102,13 @@ async def upload_document(
     tasks = request.app.state.background_tasks
     tasks.add(task)  # a task nobody refers to can be garbage-collected mid-run
     task.add_done_callback(tasks.discard)
+    await record_audit(
+        request,
+        UPLOAD,
+        user_id=user.id,
+        document_id=document.document_id,
+        status="queued",
+    )
     return DocumentStatusResponse(
         document_id=document.document_id, filename=document.filename, status="queued"
     )
@@ -120,6 +136,7 @@ async def get_document(
 
 @router.delete("/{document_id}", status_code=204)
 async def delete_document(
+    request: Request,
     document_id: str,
     user: models.User = Depends(get_current_user),
     retriever=Depends(get_retriever),
@@ -146,4 +163,7 @@ async def delete_document(
         ) from None
     await repository.soft_delete_document(db, document_id)
     _stored_path(document, settings).unlink(missing_ok=True)
+    await record_audit(
+        request, DOCUMENT_DELETE, user_id=user.id, document_id=document_id
+    )
     return Response(status_code=204)

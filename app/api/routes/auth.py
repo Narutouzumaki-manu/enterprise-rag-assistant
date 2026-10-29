@@ -8,6 +8,7 @@ from app.core.security import DUMMY_PASSWORD_HASH, create_access_token, verify_p
 from app.db import repository
 from app.schemas.api import LoginRequest, TokenResponse
 from app.api.limits import LOGIN_LIMIT, client_ip, limiter
+from app.api.audit import LOGIN_FAILED, record_audit
 
 router = APIRouter(prefix="/auth")
 
@@ -25,9 +26,10 @@ async def login(
     hash_to_check = user.password_hash if user is not None else DUMMY_PASSWORD_HASH
     password_ok = await run_in_threadpool(verify_password, body.password, hash_to_check)
     if user is None or not password_ok:
+        await record_audit(request, LOGIN_FAILED, client=client_ip(request))
         raise HTTPException(
             status_code=401,
-            detail="Incorrect email or password.",  # the same text for both cases
+            detail="Incorrect email or password.",
             headers={"WWW-Authenticate": "Bearer"},
         )
     return TokenResponse(
