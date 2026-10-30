@@ -6,7 +6,7 @@ from starlette.concurrency import run_in_threadpool
 from app.api.bootstrap import build_real_components, real_ingest
 from app.api.errors import register_error_handlers
 from app.api.ingestion_service import IngestionRunner
-from app.api.routes import auth, chat, documents, feedback, health, sessions  # change 1: feedback added
+from app.api.routes import auth, chat, documents, feedback, health, prometheus, sessions
 from app.api.runtime import AgentRuntime
 from app.api.shutdown import drain_background_tasks
 from app.api.startup import sweep_interrupted_documents
@@ -17,6 +17,7 @@ from app.core.config import Settings, get_settings
 from app.api.limits import limiter
 from app.db.session import create_engine, create_session_factory
 from app.api.request_id import RequestIdMiddleware
+from app.api.metrics import MetricsMiddleware
 from app.core.logging_setup import configure_logging
 
 
@@ -99,6 +100,7 @@ def create_app(
         max_bytes=settings.max_upload_mb * MIB,
     )
     app.add_middleware(RequestIdMiddleware)
+    app.add_middleware(MetricsMiddleware)
 
     app.state.settings = settings
     app.state.limiter = limiter
@@ -121,6 +123,7 @@ def create_app(
     app.include_router(chat.router)
     app.include_router(documents.router)
     app.include_router(feedback.router)  # change 2: registered after documents
+    app.include_router(prometheus.router)
 
     return app
 

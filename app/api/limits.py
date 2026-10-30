@@ -19,7 +19,7 @@ def user_or_ip(request: Request) -> str:
 # Redis down: swallow_errors skips the limit check instead of failing the request (degrade).
 limiter = Limiter(
     key_func=user_or_ip,
-    storage_uri=_settings.redis_url,
+    storage_uri=_settings.rate_limit_storage_url or _settings.redis_url,
     enabled=_settings.rate_limit_enabled,
     in_memory_fallback_enabled=True,   # count in memory while Redis is unreachable
 )

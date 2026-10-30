@@ -31,6 +31,7 @@ class Settings(BaseSettings):
 
     # Rate limits (starting values, tune from real usage)
     rate_limit_enabled: bool = True
+    rate_limit_storage_url: str | None = None  # None: use redis_url. Tests set "memory://"
     login_rate_limit: str = "5/minute"    # per client address
     chat_rate_limit: str = "10/minute"    # per user, /chat and /chat/stream together
     upload_rate_limit: str = "10/hour"    # per user
