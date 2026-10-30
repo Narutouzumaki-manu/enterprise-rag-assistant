@@ -1,8 +1,4 @@
-
 import os
-
-# Must run before app.api.limits is imported: the limiter reads this setting at import time.
-os.environ["RATE_LIMIT_ENABLED"] = "false"
 
 import pytest
 import pytest_asyncio
@@ -47,9 +43,11 @@ def database_url() -> str:
 async def session_factory(engine):
     return async_sessionmaker(engine, expire_on_commit=False)
 
+
 @pytest.fixture(autouse=True)
-def _limiter_off():
+def _limiter_off(monkeypatch):
+    """Integration tests make many login and chat calls, so the limiter is off for them.
+    monkeypatch puts it back after each test."""
     from app.api.limits import limiter
-    print("FIXTURE RAN, id:", id(limiter), "enabled before:", limiter.enabled)
-    limiter.enabled = False
-    
+
+    monkeypatch.setattr(limiter, "enabled", False)
