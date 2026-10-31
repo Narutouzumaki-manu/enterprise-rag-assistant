@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.env
+*.local
+coverage/
+
+
+test-output.txt
+sse-fail.txt
+test-report.json
