@@ -20,7 +20,7 @@ class AgentRuntime:
         self._in_use = 0
 
     @property
-    def in_use(self) -> int:
+    def in_use(self) -> int: 
         return self._in_use
 
     async def _acquire(self) -> None:
