@@ -12,3 +12,7 @@ export const EXAMPLE_QUESTIONS = [
   'Compare two figures in the document, for example this year against last year.',
 ] as const;
 
+export const CONNECTION_LOST_MESSAGE =
+  'Connection lost. Please check your connection and try again.';
+
+

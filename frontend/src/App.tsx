@@ -8,6 +8,7 @@ import { AuthProvider } from './hooks/useAuth';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { Login } from './pages/Login';
 import { Documents } from './pages/Documents';
+import { Chat } from './pages/Chat';
 
 // Single QueryClient instance for the app
 const queryClient = new QueryClient({
@@ -18,15 +19,6 @@ const queryClient = new QueryClient({
     },
   },
 });
-
-// Temporary placeholder for Chat until Phase C
-function ChatPlaceholder() {
-  return (
-    <div className="p-8 text-center text-gray-500">
-      Chat page will be built in Phase C.
-    </div>
-  );
-}
 
 export default function App() {
   return (
@@ -47,7 +39,7 @@ export default function App() {
               path="/chat"
               element={
                 <ProtectedRoute>
-                  <ChatPlaceholder />
+                  <Chat />
                 </ProtectedRoute>
               }
             />
@@ -55,7 +47,7 @@ export default function App() {
               path="/chat/:sessionId"
               element={
                 <ProtectedRoute>
-                  <ChatPlaceholder />
+                  <Chat />
                 </ProtectedRoute>
               }
             />
