@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import React from 'react';
 import { renderHook, act } from '@testing-library/react';
+import type { ReactNode } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider, useAuth } from '../hooks/useAuth';
@@ -21,7 +21,7 @@ describe('useAuth & Authentication lifecycle', () => {
     clearToken();
   });
 
-  const wrapper = ({ children }: { children: React.ReactNode }) => (
+  const wrapper = ({ children }: { children: ReactNode }) => (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <AuthProvider>{children}</AuthProvider>
@@ -81,6 +81,38 @@ describe('useAuth & Authentication lifecycle', () => {
     expect(sessionStorage.getItem('rag_token')).toBeNull();
     expect(abortSpy).toHaveBeenCalled();
     expect(clearQuerySpy).toHaveBeenCalled();
+  });
+
+  it('call the handler twice from /documents; the URL is /login?from=%2Fdocuments&expired=1 and the second call does not change it', () => {
+    let capturedHandler: (() => void) | null = null;
+    vi.spyOn(clientModule, 'registerUnauthorizedHandler').mockImplementation((handler) => {
+      capturedHandler = handler;
+    });
+
+    window.history.pushState({}, '', '/documents');
+
+    renderHook(() => useAuth(), { wrapper });
+
+    expect(capturedHandler).toBeDefined();
+
+    // First call from /documents
+    act(() => {
+      capturedHandler!();
+    });
+
+    expect(window.location.pathname + window.location.search).toBe(
+      '/login?from=%2Fdocuments&expired=1',
+    );
+
+    // Second call (now on /login)
+    act(() => {
+      capturedHandler!();
+    });
+
+    // The second call does not change the URL
+    expect(window.location.pathname + window.location.search).toBe(
+      '/login?from=%2Fdocuments&expired=1',
+    );
   });
 });
 

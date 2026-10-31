@@ -141,6 +141,19 @@ export async function apiFetch<T>(
   throw new ApiRequestError(apiError);
 }
 
+// ─── Stream 401 helper ────────────────────────────────────────────────────────
+
+/**
+ * Call this when a 401 is received inside a streaming fetch (where apiFetch is
+ * not used).  Mirrors the behaviour in apiFetch: clear the token then call the
+ * registered unauthorized handler so the React provider can abort streams,
+ * clear the query cache, and redirect to /login.
+ */
+export function handleUnauthorizedInStream(): void {
+  clearToken();
+  _unauthorizedHandler();
+}
+
 // ─── Convenience helpers ──────────────────────────────────────────────────────
 
 export async function apiGet<T>(

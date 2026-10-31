@@ -58,9 +58,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setTokenState(null);
 
       const path = window.location.pathname;
+      if (path.startsWith('/login')) {
+        return;
+      }
+
       const search = window.location.search;
       const current = path + search;
-      const fromParam = encodeURIComponent(current.startsWith('/login') ? '/chat' : current);
+      const fromParam = encodeURIComponent(current);
       navigate(`/login?from=${fromParam}&expired=1`, { replace: true });
     });
   }, [navigate, queryClient]);
