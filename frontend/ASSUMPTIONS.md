@@ -1,0 +1,33 @@
+# Assumptions and known limitations
+
+Status key: **VERIFIED in browser** (observed against the mock backend) |
+**UNIT-TESTED ONLY** (the mock backend cannot produce the case) |
+**DESIGN DECISION** | **PENDING MANUAL CHECK** | **NOT VERIFIED** (not built or never run)
+
+| # | Assumption or limitation | Why | Status |
+|---|---|---|---|
+| 1 | "Verified" means the answer's claims were found in the retrieved passages, not that the document is true. The UI says "Found in your documents". The server's `confidence` value is never shown. | The backend only checks faithfulness to the passages; confidence only took the values 0.95 and 0. | DESIGN DECISION (no rendered confidence confirmed by code search and tests) |
+| 2 | The answer appears in one burst after verification, with no typing effect. The steps panel fills the wait. | The backend verifies the whole answer before releasing it, so a retry never shows text that is later retracted. The mock agent takes about 8 s; Member 3 measured 22 to 158 s per question with the real model. | VERIFIED in browser (mock agent) |
+| 3 | The token lasts one hour, has no refresh, and is kept in memory and `sessionStorage` (per tab). A 401 sends the user to `/login?from=...&expired=1`, and a second concurrent 401 does not overwrite `from`. | Backend contract; no refresh endpoint exists. | VERIFIED in browser (a corrupted token and new-tab checks) |
+| 4 | Dark mode follows the operating system (`prefers-color-scheme`, Tailwind `darkMode: 'media'`). There is no theme toggle and no stored preference. | Simplicity; no `localStorage`. | Classes audited in code; visual check PENDING MANUAL CHECK |
+| 5 | All signed-in users search the same documents. Only the uploader sees the Delete button. | The agent sends no per-user filters. | DESIGN DECISION |
+| 6 | No OCR: scanned PDFs fail, and images inside DOCX files are ignored. | Not built in the ingestion module. | DESIGN DECISION |
+| 7 | Uploads accept PDF, DOCX and CSV up to 25 MB, checked in the browser before sending. Status is polled every 2 s while a document is queued, parsing or indexing. A repeat upload shows "This document was already uploaded". | Mirrors the backend limits. | VERIFIED in browser |
+| 8 | Retry resends the last question, which is held in React state, so it does not survive a page refresh. | Keeps the client simple. | DESIGN DECISION |
+| 9 | Leaving or switching a conversation mid-answer aborts the connection. The server still finishes and saves the answer, which appears after a reload. | The agent cannot be cancelled on the server. | VERIFIED in browser |
+| 10 | After an answer, rating needs the assistant `message_id`, fetched by reloading the session. If that fails twice, the UI shows "Rating is unavailable right now" with a "Reload to rate" button. | The `done` event carries no `message_id`. | Rating VERIFIED in browser; the fallback is UNIT-TESTED ONLY |
+| 11 | If the server cannot be reached, chat shows an inline "Connection lost. Please check your connection and try again." with a Retry button. The full-page "Service temporarily unavailable" screen appears only when loading a conversation fails with `DEPENDENCY_UNAVAILABLE`. | Keeps the question and the thread visible. | Chat case VERIFIED in browser; the others UNIT-TESTED ONLY |
+| 12 | When the service is busy (503 `AGENT_BUSY`) or rate-limited (429), an inline notice keeps the question in the input and shows a countdown from `Retry-After`. The retry button is enabled when the countdown ends; nothing is sent automatically. | Avoids retry storms. | Busy case VERIFIED in browser (with a temporary backend setting, reverted); the 429 countdown is UNIT-TESTED ONLY |
+| 13 | An unknown or malformed conversation id (404 or 422 on loading) returns to a clean `/chat`. | Stale links should not show an error screen. | VERIFIED in browser |
+| 14 | The amber and red trust badges, the "Try again" on a saved failed answer, and the all-documents-failed empty state exist and are unit-tested. | The mock backend cannot produce those cases. | UNIT-TESTED ONLY |
+| 15 | Citations are cards showing `source_file, p. N` and an excerpt of at most 200 characters (it may start with "..."). If the file was deleted, the card says "Document no longer available". They are not interactive. | Excerpts are not full passages. | VERIFIED in browser (display) |
+| 16 | All API text is rendered as plain text. There is no markdown rendering and no HTML. | Prevents injection from model or document text. | DESIGN DECISION (no `dangerouslySetInnerHTML`, confirmed by search) |
+| 17 | Questions are limited to 2000 characters. The counter turns red above that, a message appears, and Send is disabled. | Backend limit. | UNIT-TESTED ONLY; browser check PENDING MANUAL CHECK |
+| 18 | The `from` value after login is only accepted if it starts with a single `/` and contains no `//`, `\`, whitespace or control characters or scheme. | Mitigates an open redirect. | UNIT-TESTED ONLY |
+| 19 | `react-router-dom` 6.x has 2 moderate advisories (`npm audit --omit=dev`): an open redirect through `<Link>` and `navigate`, and an SSR hydration issue. The SSR one does not apply (no SSR). Upgrading to v7 is a breaking change and is deferred. | The upgrade needs its own branch and tests. | NOT FIXED (known) |
+| 20 | Accessibility: axe checks in jsdom (login, documents with the delete dialog, chat in four states) and keyboard behaviour tests (drawer, dialog, skip link, focus restoration). Touch targets use `min-h-[40px]`. Not checked: colour contrast, Lighthouse, screen readers, real devices. This is not a claim of WCAG compliance. | jsdom has no layout or colour. | Automated parts UNIT-TESTED ONLY; the rest PENDING MANUAL CHECK |
+| 21 | Layout at 360 px and the sidebar/drawer switch at 1024 px (JavaScript with a resize listener, plus Tailwind classes). | The unit tests have no viewport. | PENDING MANUAL CHECK |
+| 22 | Streaming reaches the browser progressively through the Vite dev proxy (direct spread 6421 ms, proxy spread 6416 ms, 5 distinct arrival times). | Measured with `scripts/stream-timing.mjs`. | VERIFIED |
+| 23 | Production needs Nginx to serve `index.html` for browser page loads on `/documents`, `/chat` and `/sessions`, `proxy_buffering off` and a read timeout of at least 5 minutes for `/chat/stream`, and `/metrics` kept private. | The frontend pages share names with API routes. | NOT VERIFIED (Nginx is not built) |
+| 24 | The free model tier allows about 50 requests a day, which limits live testing. | Member 3's measurements. | DESIGN DECISION |
+| 25 | `frontend/scripts/stream-timing.mjs` is a development tool. Credentials come only from environment variables. | Never store passwords in files. | VERIFIED |
