@@ -70,7 +70,7 @@ export function AnswerCard({
           <button
             type="button"
             onClick={onRetryQuestion}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/40 hover:bg-blue-100 dark:hover:bg-blue-900/60 border border-blue-200 dark:border-blue-800 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 min-h-[40px] text-xs font-medium rounded-lg text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/40 hover:bg-blue-100 dark:hover:bg-blue-900/60 border border-blue-200 dark:border-blue-800 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400"
           >
             <svg
               className="w-3.5 h-3.5"
@@ -94,15 +94,15 @@ export function AnswerCard({
       {/* Citations section */}
       {!isLive && citations && citations.length > 0 && (
         <section aria-labelledby={`citations-${messageId ?? 'live'}`} className="pt-2 space-y-2 border-t border-gray-100 dark:border-gray-800">
-          <h4
+          <h3
             id={`citations-${messageId ?? 'live'}`}
-            className="text-[11px] font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider"
+            className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider"
           >
             Sources ({citations.length})
-          </h4>
+          </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {citations.map((c) => (
-              <CitationCard key={c.chunk_id} citation={c} />
+            {citations.map((c, idx) => (
+              <CitationCard key={c.chunk_id || `${c.source_file}-${idx}`} citation={c} />
             ))}
           </div>
         </section>

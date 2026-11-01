@@ -38,8 +38,8 @@ describe('Message-ID Refetch & Rating Buttons Lifecycle', () => {
 
   it('keeps thumbs buttons disabled when messageId is null (pre-refetch)', () => {
     render(<RatingButtons messageId={null} />);
-    const thumbsUp = screen.getByLabelText('Thumbs up - answer was helpful');
-    const thumbsDown = screen.getByLabelText('Thumbs down - answer was not helpful');
+    const thumbsUp = screen.getByLabelText('Helpful');
+    const thumbsDown = screen.getByLabelText('Not helpful');
 
     expect(thumbsUp).toBeDisabled();
     expect(thumbsDown).toBeDisabled();
@@ -48,13 +48,13 @@ describe('Message-ID Refetch & Rating Buttons Lifecycle', () => {
   it('enables thumbs buttons once messageId arrives after session refetch', async () => {
     const { rerender } = render(<RatingButtons messageId={null} />);
 
-    expect(screen.getByLabelText('Thumbs up - answer was helpful')).toBeDisabled();
+    expect(screen.getByLabelText('Helpful')).toBeDisabled();
 
     // Rerender with resolved messageId from session refetch
     rerender(<RatingButtons messageId="msg-asst-refetched" />);
 
-    const thumbsUp = screen.getByLabelText('Thumbs up - answer was helpful');
-    const thumbsDown = screen.getByLabelText('Thumbs down - answer was not helpful');
+    const thumbsUp = screen.getByLabelText('Helpful');
+    const thumbsDown = screen.getByLabelText('Not helpful');
 
     expect(thumbsUp).not.toBeDisabled();
     expect(thumbsDown).not.toBeDisabled();
@@ -69,8 +69,8 @@ describe('Message-ID Refetch & Rating Buttons Lifecycle', () => {
     const user = userEvent.setup();
     render(<RatingButtons messageId="msg-123" />);
 
-    const thumbsUp = screen.getByLabelText('Thumbs up - answer was helpful');
-    const thumbsDown = screen.getByLabelText('Thumbs down - answer was not helpful');
+    const thumbsUp = screen.getByLabelText('Helpful');
+    const thumbsDown = screen.getByLabelText('Not helpful');
 
     // First: Thumbs Up
     await user.click(thumbsUp);
@@ -142,7 +142,7 @@ describe('Message-ID Refetch & Rating Buttons Lifecycle', () => {
     );
 
     // Initial state: thumbs buttons disabled, no error note
-    expect(screen.getByLabelText('Thumbs up - answer was helpful')).toBeDisabled();
+    expect(screen.getByLabelText('Helpful')).toBeDisabled();
     expect(screen.queryByText('Rating is unavailable right now')).not.toBeInTheDocument();
 
     // Trigger stream
@@ -155,14 +155,14 @@ describe('Message-ID Refetch & Rating Buttons Lifecycle', () => {
     expect(screen.getByText('Rating is unavailable right now')).toBeInTheDocument();
     const reloadBtn = screen.getByRole('button', { name: /reload to rate/i });
     expect(reloadBtn).toBeInTheDocument();
-    expect(screen.getByLabelText('Thumbs up - answer was helpful')).toBeDisabled();
+    expect(screen.getByLabelText('Helpful')).toBeDisabled();
 
     // Click "Reload to rate" button with successful refetch
     await user.click(reloadBtn);
 
     // Rating buttons must now be enabled and the error note removed
-    expect(screen.getByLabelText('Thumbs up - answer was helpful')).not.toBeDisabled();
-    expect(screen.getByLabelText('Thumbs down - answer was not helpful')).not.toBeDisabled();
+    expect(screen.getByLabelText('Helpful')).not.toBeDisabled();
+    expect(screen.getByLabelText('Not helpful')).not.toBeDisabled();
     expect(screen.queryByText('Rating is unavailable right now')).not.toBeInTheDocument();
   }, 10000);
 });

@@ -20,8 +20,11 @@ export function CitationCard({ citation }: CitationCardProps) {
     : 'Document no longer available';
 
   return (
-    <figure className="text-xs bg-gray-50 dark:bg-gray-800/70 border border-gray-200 dark:border-gray-700/80 rounded-lg p-3 space-y-1.5 transition-colors">
-      <figcaption className="flex items-center gap-1.5 font-medium text-gray-700 dark:text-gray-300">
+    <article
+      aria-label={`Source citation: ${sourceLabel}`}
+      className="text-xs bg-gray-50 dark:bg-gray-800/70 border border-gray-200 dark:border-gray-700/80 rounded-lg p-3 space-y-1.5 transition-colors"
+    >
+      <div className="flex items-center gap-1.5 font-medium text-gray-700 dark:text-gray-300">
         <svg
           className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400 shrink-0"
           fill="none"
@@ -39,14 +42,14 @@ export function CitationCard({ citation }: CitationCardProps) {
         <span className="truncate" title={sourceLabel}>
           {sourceLabel}
         </span>
-      </figcaption>
+      </div>
 
       {citation.text_snippet && (
         <blockquote className="text-gray-600 dark:text-gray-400 italic line-clamp-3 pl-2 border-l-2 border-gray-300 dark:border-gray-600">
           &ldquo;{citation.text_snippet}&rdquo;
         </blockquote>
       )}
-    </figure>
+    </article>
   );
 }
 

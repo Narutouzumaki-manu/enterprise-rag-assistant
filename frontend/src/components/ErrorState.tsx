@@ -22,6 +22,14 @@ export function ServiceUnavailablePage({
 }: ServiceUnavailablePageProps) {
   const [healthInfo, setHealthInfo] = useState<HealthResponse | null>(null);
 
+  useEffect(() => {
+    const prevTitle = document.title;
+    document.title = 'Service Unavailable - Enterprise RAG Assistant';
+    return () => {
+      document.title = prevTitle;
+    };
+  }, []);
+
   // Fetch /health once when screen opens (not polled)
   useEffect(() => {
     let active = true;
@@ -91,7 +99,7 @@ export function ServiceUnavailablePage({
         )}
 
         {requestId && (
-          <p className="text-[11px] text-gray-400 font-mono">
+          <p className="text-xs text-gray-600 dark:text-gray-400 font-mono">
             Request ID: {requestId}
           </p>
         )}
@@ -99,7 +107,7 @@ export function ServiceUnavailablePage({
         <button
           type="button"
           onClick={onRetry}
-          className="w-full py-2.5 px-4 text-sm font-semibold rounded-lg bg-blue-600 hover:bg-blue-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+          className="w-full py-2.5 px-4 min-h-[40px] text-sm font-semibold rounded-lg bg-blue-600 hover:bg-blue-700 text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400 transition-colors"
         >
           Try again
         </button>
@@ -156,7 +164,7 @@ export function InlineErrorNotice({
           </p>
         )}
         {requestId && (
-          <p className="text-[11px] font-mono text-gray-500 dark:text-gray-400">
+          <p className="text-xs font-mono text-gray-600 dark:text-gray-400">
             Request ID: {requestId}
           </p>
         )}
@@ -166,7 +174,7 @@ export function InlineErrorNotice({
         type="button"
         disabled={countdown !== null}
         onClick={onRetry}
-        className="px-3 py-1.5 font-semibold rounded bg-amber-600 hover:bg-amber-700 text-white focus:outline-none focus:ring-2 focus:ring-amber-500 disabled:opacity-50 disabled:cursor-not-allowed shrink-0 transition-colors"
+        className="px-3.5 py-2 min-h-[40px] font-semibold rounded-lg bg-amber-600 hover:bg-amber-700 text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 disabled:opacity-50 disabled:cursor-not-allowed shrink-0 transition-colors"
       >
         {countdown !== null ? `Wait ${countdown}s` : buttonLabel}
       </button>

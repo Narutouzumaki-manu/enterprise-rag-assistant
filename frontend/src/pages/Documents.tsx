@@ -2,11 +2,12 @@
 // Documents.tsx — Document management page: upload, polling list, delete.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { NavBar } from '../components/NavBar';
 import { UploadArea } from '../components/UploadArea';
 import { DocumentRow } from '../components/DocumentRow';
 import { useDocuments } from '../hooks/useDocuments';
+import { SkipLink } from '../components/SkipLink';
 
 export function Documents() {
   const {
@@ -19,6 +20,10 @@ export function Documents() {
     isDeleting,
     deleteError,
   } = useDocuments();
+
+  useEffect(() => {
+    document.title = 'Documents - Enterprise RAG Assistant';
+  }, []);
 
   // Retry-after countdown if 429 / 503 error occurs
   const [countdown, setCountdown] = useState<number | null>(null);
@@ -41,9 +46,10 @@ export function Documents() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100">
+      <SkipLink />
       <NavBar />
 
-      <main className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 space-y-8">
+      <main id="main-content" tabIndex={-1} className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 space-y-8 outline-none">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             Documents
@@ -86,7 +92,7 @@ export function Documents() {
               type="button"
               onClick={() => void refetch()}
               disabled={countdown !== null}
-              className="px-3 py-1.5 text-xs font-semibold rounded-md bg-amber-600 hover:bg-amber-700 text-white focus:outline-none focus:ring-2 focus:ring-amber-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="px-3.5 py-2 min-h-[40px] inline-flex items-center text-xs font-semibold rounded-md bg-amber-600 hover:bg-amber-700 text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               {countdown !== null ? `Wait ${countdown}s` : 'Try again'}
             </button>

@@ -74,16 +74,17 @@ export function RatingButtons({
   const isEnabled = messageId !== null && !isSubmitting;
 
   return (
-    <div className="pt-2 text-xs text-gray-500 dark:text-gray-400">
+    <div className="pt-2 text-xs text-gray-600 dark:text-gray-400">
       <div className="flex items-center gap-2">
-        <span className="text-[11px]">Was this helpful?</span>
+        <span className="text-xs">Was this helpful?</span>
 
         <button
           type="button"
           disabled={!isEnabled}
           onClick={() => handleRate(1)}
-          aria-label="Thumbs up - answer was helpful"
-          className={`p-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-40 disabled:cursor-not-allowed ${
+          aria-label="Helpful"
+          aria-pressed={currentRating === 1}
+          className={`p-2 min-h-[40px] min-w-[40px] inline-flex items-center justify-center rounded-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400 disabled:opacity-40 disabled:cursor-not-allowed ${
             currentRating === 1
               ? 'text-blue-600 bg-blue-50 dark:bg-blue-900/40 dark:text-blue-300 font-bold'
               : 'hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800'
@@ -109,8 +110,9 @@ export function RatingButtons({
           type="button"
           disabled={!isEnabled}
           onClick={() => handleRate(-1)}
-          aria-label="Thumbs down - answer was not helpful"
-          className={`p-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-40 disabled:cursor-not-allowed ${
+          aria-label="Not helpful"
+          aria-pressed={currentRating === -1}
+          className={`p-2 min-h-[40px] min-w-[40px] inline-flex items-center justify-center rounded-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400 disabled:opacity-40 disabled:cursor-not-allowed ${
             currentRating === -1
               ? 'text-rose-600 bg-rose-50 dark:bg-rose-900/40 dark:text-rose-300 font-bold'
               : 'hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800'
@@ -158,7 +160,7 @@ export function RatingButtons({
             className="w-full text-xs p-2 rounded border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
           <div className="flex items-center justify-between">
-            <span className="text-[10px] text-gray-400">
+            <span className="text-xs text-gray-600 dark:text-gray-400">
               {comment.length}/1000
             </span>
             <button
@@ -173,7 +175,7 @@ export function RatingButtons({
       )}
 
       {feedbackError && (
-        <p className="text-[11px] text-rose-600 dark:text-rose-400 mt-1">
+        <p className="text-xs text-rose-600 dark:text-rose-400 mt-1">
           {feedbackError}
         </p>
       )}

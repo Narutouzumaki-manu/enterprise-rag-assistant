@@ -8,3 +8,5 @@ coverage/
 test-output.txt
 sse-fail.txt
 test-report.json
+
+node_modules/

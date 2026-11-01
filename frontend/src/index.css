@@ -2,10 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
- * Phase D will add:
- *  - CSS custom properties for light/dark design tokens
- *  - Accessible focus-ring overrides
- *  - aria-live region styles
- */
+:root {
+  color-scheme: light dark;
+}
+
+/* Accessible focus outline for all interactive elements when navigated via keyboard */
+:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :focus-visible {
+    outline-color: #60a5fa;
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 

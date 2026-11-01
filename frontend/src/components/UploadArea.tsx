@@ -3,7 +3,7 @@
 // Multiple files supported concurrently and independently.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import React, { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, type DragEvent, type ChangeEvent } from 'react';
 import { validateFile, uploadFileXHR } from '../api/upload';
 
 interface FileUploadTask {
@@ -101,19 +101,19 @@ export function UploadArea({ onUploadSuccess }: UploadAreaProps) {
     [processFile],
   );
 
-  const handleDragOver = (e: React.DragEvent) => {
+  const handleDragOver = (e: DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
     setIsDragOver(true);
   };
 
-  const handleDragLeave = (e: React.DragEvent) => {
+  const handleDragLeave = (e: DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
     setIsDragOver(false);
   };
 
-  const handleDrop = (e: React.DragEvent) => {
+  const handleDrop = (e: DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
     setIsDragOver(false);
@@ -122,7 +122,7 @@ export function UploadArea({ onUploadSuccess }: UploadAreaProps) {
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       handleFiles(e.target.files);
       // Reset input so same file can be selected again if needed
@@ -136,6 +136,18 @@ export function UploadArea({ onUploadSuccess }: UploadAreaProps) {
 
   return (
     <div className="space-y-4">
+      <input
+        ref={fileInputRef}
+        type="file"
+        multiple
+        accept=".pdf,.docx,.csv"
+        onChange={handleInputChange}
+        className="hidden"
+        id="file-upload-input"
+        tabIndex={-1}
+        aria-hidden="true"
+      />
+
       {/* Drop zone */}
       <div
         onDragOver={handleDragOver}
@@ -151,23 +163,12 @@ export function UploadArea({ onUploadSuccess }: UploadAreaProps) {
         tabIndex={0}
         role="button"
         aria-label="Upload files by dragging and dropping or clicking to browse"
-        className={`border-2 border-dashed rounded-xl p-8 text-center cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+        className={`border-2 border-dashed rounded-xl p-6 sm:p-8 text-center cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400 ${
           isDragOver
             ? 'border-blue-500 bg-blue-50/50 dark:bg-blue-950/20'
             : 'border-gray-300 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-600 bg-gray-50/50 dark:bg-gray-900/50'
         }`}
       >
-        <input
-          ref={fileInputRef}
-          type="file"
-          multiple
-          accept=".pdf,.docx,.csv"
-          onChange={handleInputChange}
-          className="hidden"
-          id="file-upload-input"
-          aria-hidden="true"
-        />
-
         <div className="flex flex-col items-center justify-center space-y-2">
           <svg
             className="w-10 h-10 text-gray-400 dark:text-gray-500"
@@ -232,7 +233,7 @@ export function UploadArea({ onUploadSuccess }: UploadAreaProps) {
                     type="button"
                     onClick={() => removeTask(task.id)}
                     aria-label={`Dismiss ${task.file.name}`}
-                    className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 ml-2"
+                    className="p-2 min-h-[40px] min-w-[40px] inline-flex items-center justify-center rounded-md text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ml-2"
                   >
                     ✕
                   </button>

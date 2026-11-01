@@ -3,7 +3,7 @@
 // Keyboard reachable, responsive down to 360px with mobile drawer.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 
@@ -11,15 +11,26 @@ export function NavBar() {
   const { logout } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [mobileMenuOpen]);
+
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-    `px-3 py-2 rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+    `px-3 py-2 min-h-[40px] inline-flex items-center rounded-md text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900 ${
       isActive
         ? 'bg-blue-100 text-blue-900 dark:bg-blue-900/50 dark:text-blue-100 font-semibold'
         : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-white dark:hover:bg-gray-800'
     }`;
 
   const mobileNavLinkClass = ({ isActive }: { isActive: boolean }) =>
-    `block px-3 py-2 rounded-md text-base font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+    `block px-3 py-2.5 min-h-[40px] flex items-center rounded-md text-base font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400 ${
       isActive
         ? 'bg-blue-100 text-blue-900 dark:bg-blue-900/50 dark:text-blue-100 font-semibold'
         : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-white dark:hover:bg-gray-800'
@@ -50,7 +61,7 @@ export function NavBar() {
             <button
               type="button"
               onClick={logout}
-              className="px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+              className="px-3 py-2 min-h-[40px] inline-flex items-center border border-gray-300 dark:border-gray-700 rounded-md text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400 dark:focus-visible:ring-offset-gray-900 transition-colors"
             >
               Log out
             </button>
@@ -64,7 +75,7 @@ export function NavBar() {
               aria-controls="mobile-menu"
               aria-expanded={mobileMenuOpen}
               aria-label="Toggle navigation menu"
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="inline-flex items-center justify-center p-2 min-h-[40px] min-w-[40px] rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400"
             >
               <span className="sr-only">Open main menu</span>
               {mobileMenuOpen ? (
@@ -107,7 +118,7 @@ export function NavBar() {
 
       {/* Mobile menu drawer */}
       {mobileMenuOpen && (
-        <div className="sm:hidden border-t border-gray-200 dark:border-gray-800" id="mobile-menu">
+        <div className="sm:hidden border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900" id="mobile-menu">
           <div className="px-2 pt-2 pb-3 space-y-1">
             <NavLink
               to="/chat"
@@ -130,7 +141,7 @@ export function NavBar() {
                   setMobileMenuOpen(false);
                   logout();
                 }}
-                className="w-full text-left px-3 py-2 rounded-md text-base font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 focus:outline-none focus:ring-2 focus:ring-red-500"
+                className="w-full text-left px-3 py-2.5 min-h-[40px] flex items-center rounded-md text-base font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
               >
                 Log out
               </button>

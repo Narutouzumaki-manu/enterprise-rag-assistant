@@ -2,9 +2,36 @@
 // Login.tsx — User authentication page.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, type FormEvent } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import { SkipLink } from '../components/SkipLink';
+
+export function getSafeRedirect(fromParam: string | null): string {
+  if (!fromParam) return '/chat';
+  try {
+    const decoded = decodeURIComponent(fromParam);
+    // Reject any value containing whitespace (\s) or control characters (\u0000-\u001f)
+    if (/[\s\u0000-\u001f]/.test(decoded)) {
+      return '/chat';
+    }
+    // Safe redirect: starts with a single "/", contains no "//", no "\", and no ":" before the first "/"
+    const firstSlash = decoded.indexOf('/');
+    const colon = decoded.indexOf(':');
+    if (
+      !decoded.startsWith('/') ||
+      decoded.startsWith('//') ||
+      decoded.includes('//') ||
+      decoded.includes('\\') ||
+      (colon !== -1 && colon < firstSlash)
+    ) {
+      return '/chat';
+    }
+    return decoded;
+  } catch {
+    return '/chat';
+  }
+}
 
 export function Login() {
   const [email, setEmail] = useState('');
@@ -12,10 +39,14 @@ export function Login() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    document.title = 'Sign In - Enterprise RAG Assistant';
+  }, []);
+
   const { login, isLoggingIn, loginError, clearLoginError, isAuthenticated } = useAuth();
 
   const isExpired = searchParams.get('expired') === '1';
-  const from = searchParams.get('from') ? decodeURIComponent(searchParams.get('from')!) : '/chat';
+  const from = getSafeRedirect(searchParams.get('from'));
 
   // If already authenticated, redirect to the target page or /chat
   useEffect(() => {
@@ -43,7 +74,7 @@ export function Login() {
     }
   }, [loginError]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!email.trim() || !password || isLoggingIn || countdown !== null) {
       return;
@@ -59,7 +90,12 @@ export function Login() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8 bg-white dark:bg-gray-900 p-8 rounded-xl shadow-md border border-gray-200 dark:border-gray-800">
+      <SkipLink />
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="max-w-md w-full space-y-8 bg-white dark:bg-gray-900 p-6 sm:p-8 rounded-xl shadow-md border border-gray-200 dark:border-gray-800 outline-none"
+      >
         <div>
           <h1 className="text-center text-3xl font-extrabold text-gray-900 dark:text-white">
             Enterprise RAG Assistant
@@ -101,7 +137,7 @@ export function Login() {
                   if (loginError) clearLoginError();
                 }}
                 disabled={isLoggingIn}
-                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 text-sm disabled:opacity-50"
+                className="mt-1 appearance-none relative block w-full px-3 py-2.5 min-h-[40px] border border-gray-300 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400 focus:border-blue-500 dark:bg-gray-800 text-sm disabled:opacity-50"
                 placeholder="you@example.com"
               />
             </div>
@@ -125,7 +161,7 @@ export function Login() {
                   if (loginError) clearLoginError();
                 }}
                 disabled={isLoggingIn}
-                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 text-sm disabled:opacity-50"
+                className="mt-1 appearance-none relative block w-full px-3 py-2.5 min-h-[40px] border border-gray-300 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400 focus:border-blue-500 dark:bg-gray-800 text-sm disabled:opacity-50"
                 placeholder="••••••••"
               />
             </div>
@@ -154,7 +190,7 @@ export function Login() {
             <button
               type="submit"
               disabled={isLoggingIn || !email.trim() || !password || countdown !== null}
-              className="group relative w-full flex justify-center py-2.5 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="group relative w-full flex justify-center items-center py-2.5 px-4 min-h-[40px] border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400 dark:focus-visible:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               {isLoggingIn
                 ? 'Signing in...'
@@ -164,7 +200,7 @@ export function Login() {
             </button>
           </div>
         </form>
-      </div>
+      </main>
     </div>
   );
 }
