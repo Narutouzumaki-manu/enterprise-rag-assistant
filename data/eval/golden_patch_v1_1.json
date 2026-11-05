@@ -1,0 +1,28 @@
+{
+  "replace": [
+    {"question_id": "tcs-gold-11", "question": "How many TCS clients were in the $50 million and above revenue band at 31 March 2026, and how much had that number grown over the year?", "category": "table", "style": "paraphrase",
+     "evidence": ["$50 million and above; Clients at 31 March 2026: 139; Change vs prior year: +9"],
+     "alt_evidence": ["139 above $50 million"],
+     "reference_answer": "139 clients, up 9 from the prior year."},
+    {"question_id": "tcs-gold-22", "question": "What was TCS's total contract value in Q1 FY27 for North America, BFSI and Consumer Business?", "category": "table", "style": "paraphrase",
+     "evidence": ["North America TCV; Q1 FY27: $4.7 billion", "BFSI TCV; Q1 FY27: $2.5 billion", "Consumer Business TCV; Q1 FY27: $1.4 billion"],
+     "alt_evidence": [],
+     "reference_answer": "North America $4.7 billion, BFSI $2.5 billion and Consumer Business $1.4 billion."}
+  ],
+  "append": [
+    {"question_id": "tcs-gold-32", "question": "What was TCS's voluntary attrition rate for IT services in Q1 FY27, and how much total cash and investments did it hold at the end of that quarter?", "category": "multi_fact", "style": "paraphrase",
+     "evidence": ["Period: Q1 FY27; Voluntary attrition, IT services (LTM): 13.6%", "End of Q1 FY27 (30 Jun 2026); Total cash and investments, ₹ crore: 50,232"],
+     "alt_evidence": ["Total cash and investments; Q1 FY27: ₹50,232 crore"],
+     "reference_answer": "Voluntary attrition for IT services (last twelve months) was 13.6% in Q1 FY27, and total cash and investments were ₹50,232 crore at 30 June 2026."},
+    {"question_id": "tcs-gold-33", "question": "What revenue did TCS report for the January-to-March quarter of the financial year before FY26?", "category": "fact_lookup", "style": "paraphrase",
+     "evidence": ["Q4 (Jan to Mar); FY25, ₹ crore: 64,479"],
+     "alt_evidence": [],
+     "reference_answer": "₹64,479 crore (the Q4 FY25 revenue shown in the quarterly table).",
+     "notes": "Wording-mismatch case: a relative period instead of 'Q4 FY25'. Tests the planner."},
+    {"question_id": "tcs-gold-34", "question": "What share of TCS revenue came from North America and from BFSI in Q4 FY26?", "category": "multi_fact", "style": "paraphrase",
+     "evidence": ["North America; Q2 FY25: 47.6%; Q1 FY26: 48.7%; Q2 FY26: 48.8%; Q4 FY26: 48.5%; Q1 FY27: 48.3%", "BFSI; Q2 FY25: 30.8%; Q1 FY26: 32.0%; Q2 FY26: 32.2%; Q4 FY26: 31.6%; Q1 FY27: 32.1%"],
+     "alt_evidence": [],
+     "reference_answer": "North America was 48.5% of revenue and BFSI was 31.6% in Q4 FY26.",
+     "notes": "Two facts on two different pages (25 and 26)."}
+  ]
+}

@@ -1,0 +1,165 @@
+{
+  "tuned_pool": "data/eval/retrieval_questions.json (q01-q20; q17, q18, q20 unanswerable)",
+  "flagged_same_fact": [
+    {
+      "golden": "tcs-gold-04",
+      "tuned": "q16"
+    },
+    {
+      "golden": "tcs-gold-14",
+      "tuned": "q02"
+    },
+    {
+      "golden": "tcs-gold-16",
+      "tuned": "q08"
+    },
+    {
+      "golden": "tcs-gold-21",
+      "tuned": "q15"
+    }
+  ],
+  "shared_chunk": [
+    {
+      "golden": "tcs-gold-01",
+      "tuned": "q03",
+      "shared_chunk_ids": [
+        "50dd3ab00f95d36bbe6d6ba4d666fbc4d051c23183e1078638c47541b2d23514"
+      ]
+    },
+    {
+      "golden": "tcs-gold-02",
+      "tuned": "q09",
+      "shared_chunk_ids": [
+        "3077d12c7762b3cc212cc99b3b0cac19024e1d037631da1e168750dc0c7fcee5"
+      ]
+    },
+    {
+      "golden": "tcs-gold-03",
+      "tuned": "q08",
+      "shared_chunk_ids": [
+        "b50e44246a8348144eccd11ff01fcd8a13417328fbc345366b0f2e13f16b85c3"
+      ]
+    },
+    {
+      "golden": "tcs-gold-03",
+      "tuned": "q09",
+      "shared_chunk_ids": [
+        "3077d12c7762b3cc212cc99b3b0cac19024e1d037631da1e168750dc0c7fcee5"
+      ]
+    },
+    {
+      "golden": "tcs-gold-05",
+      "tuned": "q10",
+      "shared_chunk_ids": [
+        "15b39ec563daaa4ce29b053ed4b95a88647c0dfecb29308def3de498450830a0"
+      ]
+    },
+    {
+      "golden": "tcs-gold-07",
+      "tuned": "q09",
+      "shared_chunk_ids": [
+        "3077d12c7762b3cc212cc99b3b0cac19024e1d037631da1e168750dc0c7fcee5"
+      ]
+    },
+    {
+      "golden": "tcs-gold-08",
+      "tuned": "q03",
+      "shared_chunk_ids": [
+        "50dd3ab00f95d36bbe6d6ba4d666fbc4d051c23183e1078638c47541b2d23514"
+      ]
+    },
+    {
+      "golden": "tcs-gold-10",
+      "tuned": "q16",
+      "shared_chunk_ids": [
+        "8a6f15fdd950251340eb8467b98e541c2c366ea634ed6faa0b1495353f06fec8"
+      ]
+    },
+    {
+      "golden": "tcs-gold-11",
+      "tuned": "q09",
+      "shared_chunk_ids": [
+        "44d6441e0dbe53cbcbfde4b7d42e50c5997f28a4310e8593d5a79464edf34de2",
+        "b742c10bb55653b493e176ba5790f6bbfd8a523999787e0f71c7241caa313e55"
+      ]
+    },
+    {
+      "golden": "tcs-gold-13",
+      "tuned": "q12",
+      "shared_chunk_ids": [
+        "52d56c713a26a9b8df34db9e6c1b36cfaa8438286cd129157d0dad6cbc719e11"
+      ]
+    },
+    {
+      "golden": "tcs-gold-14",
+      "tuned": "q02",
+      "shared_chunk_ids": [
+        "f0037a1edb54c5999b13515ce2982d6ee2439ac3f808acd555377fa4f5f6f8e3"
+      ]
+    },
+    {
+      "golden": "tcs-gold-16",
+      "tuned": "q06",
+      "shared_chunk_ids": [
+        "d5b71070e29d7d334a6caa4dfa31ea108c838bdff9a99f84698ecbe7354ba19d"
+      ]
+    },
+    {
+      "golden": "tcs-gold-16",
+      "tuned": "q08",
+      "shared_chunk_ids": [
+        "a3392cc16d643abcdb5ba8b2236aa77d0269d2873d8e16f8a2d1b2b95e1583c0",
+        "d5b71070e29d7d334a6caa4dfa31ea108c838bdff9a99f84698ecbe7354ba19d"
+      ]
+    },
+    {
+      "golden": "tcs-gold-17",
+      "tuned": "q16",
+      "shared_chunk_ids": [
+        "8a6f15fdd950251340eb8467b98e541c2c366ea634ed6faa0b1495353f06fec8"
+      ]
+    },
+    {
+      "golden": "tcs-gold-20",
+      "tuned": "q12",
+      "shared_chunk_ids": [
+        "52d56c713a26a9b8df34db9e6c1b36cfaa8438286cd129157d0dad6cbc719e11"
+      ]
+    },
+    {
+      "golden": "tcs-gold-20",
+      "tuned": "q15",
+      "shared_chunk_ids": [
+        "0fb5349acef4b39f9f0d73a893002c43f16129dbce7a53b57f0ef8e23512e6ac"
+      ]
+    },
+    {
+      "golden": "tcs-gold-21",
+      "tuned": "q15",
+      "shared_chunk_ids": [
+        "fc47d94718294a3990f150643a1f9a3cb57e8c1eb822b2015f2543546527e8f4"
+      ]
+    },
+    {
+      "golden": "tcs-gold-32",
+      "tuned": "q14",
+      "shared_chunk_ids": [
+        "cc54b7b276e079c0f0d1c6480375761de095dfee50410c651e9577838f805bc7"
+      ]
+    },
+    {
+      "golden": "tcs-gold-33",
+      "tuned": "q10",
+      "shared_chunk_ids": [
+        "15b39ec563daaa4ce29b053ed4b95a88647c0dfecb29308def3de498450830a0"
+      ]
+    },
+    {
+      "golden": "tcs-gold-34",
+      "tuned": "q13",
+      "shared_chunk_ids": [
+        "7c326f579b679d6004e9c7ef086315e0f2888926b084474d42558320544bf261"
+      ]
+    }
+  ]
+}

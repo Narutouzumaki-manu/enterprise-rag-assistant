@@ -1,0 +1,159 @@
+﻿Consider using the pymupdf_layout package for a greatly improved page layout analysis.
+Loaded 118 chunks from data/eval/documents/tcs_annual_report.pdf
+
+================================================================================
+SEARCH TERM: "women"
+Matches found: 1 chunk(s)
+--------------------------------------------------------------------------------
+  1. [id: bb091f2a599d... | page 30]
+     "in the trailing twelve months. Diversity As of March 2025, women made up 35.2% of the TCS workforce. A figure for March"
+
+================================================================================
+SEARCH TERM: "35.2%"
+Matches found: 1 chunk(s)
+--------------------------------------------------------------------------------
+  1. [id: bb091f2a599d... | page 30]
+     "ng twelve months. Diversity As of March 2025, women made up 35.2% of the TCS workforce. A figure for March 2026 was not"
+
+================================================================================
+SEARCH TERM: "emissions"
+Matches found: 1 chunk(s)
+--------------------------------------------------------------------------------
+  1. [id: e50e19997e38... | page 36]
+     "TCS and its peers. Quantitative FY26 ESG data (energy use, emissions, water, diversity metrics) is not included in the"
+
+================================================================================
+SEARCH TERM: "carbon"
+Matches found: 0 chunk(s)
+--------------------------------------------------------------------------------
+  [ABSENT] 0 chunks contain 'carbon'. This topic is absent from the report.
+
+================================================================================
+SEARCH TERM: "Chief Financial Officer"
+Matches found: 1 chunk(s)
+--------------------------------------------------------------------------------
+  1. [id: 832c59249bac... | page 35]
+     "sources used. Other directors and executives, including the Chief Financial Officer, are intentionally omitted; consult"
+
+================================================================================
+SEARCH TERM: "CFO"
+Matches found: 0 chunk(s)
+--------------------------------------------------------------------------------
+  [ABSENT] 0 chunks contain 'CFO'. This topic is absent from the report.
+
+================================================================================
+SEARCH TERM: "guidance"
+Matches found: 1 chunk(s)
+--------------------------------------------------------------------------------
+  1. [id: e38be39a23c9... | page 39]
+     "s outlook is the compiler's analytical view and is not company guidance. Forward-looking statements involve uncertainty."
+
+================================================================================
+SEARCH TERM: "independent director"
+Matches found: 1 chunk(s)
+--------------------------------------------------------------------------------
+  1. [id: 95294c03e7a6... | page 34]
+     "ard of directors with a mix of executive, non-executive and independent directors, chaired by N. Chandrasekaran. ΓÇó Board"
+
+================================================================================
+SEARCH TERM: "number of directors"
+Matches found: 0 chunk(s)
+--------------------------------------------------------------------------------
+  [ABSENT] 0 chunks contain 'number of directors'. This topic is absent from the report.
+
+================================================================================
+SEARCH TERM: "operating margin"
+Matches found: 7 chunk(s)
+--------------------------------------------------------------------------------
+  1. [id: 4275a701d913... | page 1]
+     "6 Revenue Γé╣267,021 crore | $30.0 billion Net margin 19.8% | Operating margin 25% TCV $40.7 billion | 584,519 employees U"
+  2. [id: 3077d12c7762... | page 4]
+     "rore; Comment: Up 1.35% from Γé╣48,553 crore in FY25. Metric: Operating margin; FY26: 25%; Comment: Up 70 bp; highest in f"
+  3. [id: 7c6edd4d5562... | page 5]
+     "cy. Profitability improved even as growth stayed muted. The operating margin reached 25%, the highest in four years, and"
+  4. [id: 89dfc165fcc9... | page 7]
+     "delivery.. Period: FY26; Milestone: Annualised AI revenue crosses $2.3 billion; record TCV in Q4; operating margin at a."
+  5. [id: 50dd3ab00f95... | page 10]
+     "viders. ΓÇó Protect margins while investing. Delivering a 25% operating margin while funding new capabilities. The strateg"
+  ... and 2 more chunk(s).
+
+================================================================================
+SEARCH TERM: "Q4 FY26"
+Matches found: 17 chunk(s)
+--------------------------------------------------------------------------------
+  1. [id: ada932ef23ed... | page 2]
+     "res that TCS published in its quarterly fact sheets and its Q4 FY26 results press release dated 9 April 2026, together w"
+  2. [id: ff6586f3df5e... | page 12]
+     "In Q4 FY26, rupee revenue of Γé╣70,698 crore was up 5.4% from Q3 and 9.6% from Q4 FY25. US dollar revenue of $7,621 millio"
+  3. [id: c894c9d8ec93... | page 14]
+     ". exceptional, Γé╣ crore: 13,438; Net margin: 20.0%. Quarter: Q4 FY26; Net income excl. exceptional, Γé╣ crore: 13,718; Net"
+  4. [id: 6d4dc98b16d8... | page 17]
+     "h flow from operations as % of net profit: 130.4%. Quarter: Q4 FY26; Cash flow from operations as % of net profit: 106.7"
+  5. [id: cc54b7b276e0... | page 18]
+     "; Total cash and investments, Γé╣ crore: 55,950. Date: End of Q4 FY26 (31 Mar 2026); Total cash and investments, Γé╣ crore:"
+  ... and 12 more chunk(s).
+
+================================================================================
+SEARCH TERM: "India"
+Matches found: 13 chunk(s)
+--------------------------------------------------------------------------------
+  1. [id: ada932ef23ed... | page 2]
+     "rted profit after tax is shown separately. ΓÇó Amounts are in Indian rupees (Γé╣) unless marked US$. One crore equals ten mi"
+  2. [id: 345cf96c675a... | page 6]
+     "a member of the Tata group. It is headquartered in Mumbai, India, and its shares are listed on the BSE (code 532540) an"
+  3. [id: af75026d8de8... | page 6]
+     "ica, Latin America, the United Kingdom, Continental Europe, India, Asia Pacific, and the Middle East and Africa. North A"
+  4. [id: 5d1394fae474... | page 6]
+     "offering. Item: Headquarters; Detail: Mumbai, Maharashtra, India. Item: Listings; Detail: BSE: 532540; NSE: TCS. Item:"
+  5. [id: 89dfc165fcc9... | page 7]
+     "software to Indian and overseas clients. helped define the Indian IT services model. Chairman of Tata Sons and of the TC"
+  ... and 8 more chunk(s).
+
+================================================================================
+SEARCH TERM: "Q1 FY27"
+Matches found: 8 chunk(s)
+--------------------------------------------------------------------------------
+  1. [id: 64cafb4259ec... | page 3]
+     "Shareholder returns; Page: 19; Section: Subsequent period: Q1 FY27; Page: 38. Section: Condensed income statement; Page"
+  2. [id: cc54b7b276e0... | page 18]
+     "; Total cash and investments, Γé╣ crore: 50,020. Date: End of Q1 FY27 (30 Jun 2026); Total cash and investments, Γé╣ crore:"
+  3. [id: 876dfeed72d6... | page 25]
+     "other markets weakened, then eased slightly in Q4 FY26 and Q1 FY27. Latin America is small but has been the steadiest g"
+  4. [id: 7c326f579b67... | page 25]
+     "Y25: 47.6%; Q1 FY26: 48.7%; Q2 FY26: 48.8%; Q4 FY26: 48.5%; Q1 FY27: 48.3%. revenue: Latin America; Q2 FY25: 1.8%; Q1 FY"
+  5. [id: bf8c4bb045fe... | page 26]
+     "BFSI share of revenue: BFSI; Q2 FY25: 30.8%; Q1 FY26: 32.0%; Q2 FY26: 32.2%; Q4 FY26: 31.6%; Q1 FY27: 32.1%."
+  ... and 3 more chunk(s).
+
+================================================================================
+SEARCH TERM: "revenue"
+Matches found: 41 chunk(s)
+--------------------------------------------------------------------------------
+  1. [id: 4275a701d913... | page 1]
+     "For the financial year ended 31 March 2026 Revenue Γé╣267,021 crore | $30.0 billion Net margin 19.8% | Operating margin 25"
+  2. [id: 64cafb4259ec... | page 3]
+     "e: 11; Section: Attrition and diversity; Page: 30. Section: Revenue performance; Page: 12; Section: Workforce transition"
+  3. [id: 3077d12c7762... | page 4]
+     "currency Net income excl. exceptional Metric: Revenue (Γé╣); FY26: Γé╣267,021 crore; Comment: Up 4.6% year on year. Metric:"
+  4. [id: 7c6edd4d5562... | page 5]
+     "and financial services and in North America. In rupee terms revenue still grew 4.6% to Γé╣267,021 crore, helped by currenc"
+  5. [id: b50e44246a83... | page 5]
+     "ΓÇó Demand recovery in stages. Constant-currency revenue fell year on year in the first three quarters but turned sequenti"
+  ... and 36 more chunk(s).
+
+================================================================================
+SEARCH TERM: "profit"
+Matches found: 15 chunk(s)
+--------------------------------------------------------------------------------
+  1. [id: ada932ef23ed... | page 2]
+     "basis (Q2 and Q3 FY26 carried exceptional items). Reported profit after tax is shown separately. ΓÇó Amounts are in India"
+  2. [id: 64cafb4259ec... | page 3]
+     "enue; Page: 13; Section: Risk landscape; Page: 32. Section: Profitability; Page: 14; Section: Risk summary matrix; Page:"
+  3. [id: 3077d12c7762... | page 4]
+     "rore; Comment: Net margin 19.8%, up 80 bp. Metric: Reported profit after tax; FY26: Γé╣49,210 crore; Comment: Up 1.35% fro"
+  4. [id: 7c6edd4d5562... | page 5]
+     "enue still grew 4.6% to Γé╣267,021 crore, helped by currency. Profitability improved even as growth stayed muted. The oper"
+  5. [id: 44d6441e0dbe... | page 9]
+     "ow capital intensity. Operating cash flow was 111.0% of net profit in FY26, meaning profits converted fully to cash. Sou"
+  ... and 10 more chunk(s).
+

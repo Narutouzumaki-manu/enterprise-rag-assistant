@@ -1,0 +1,431 @@
+[
+  {
+    "question_id": "tcs-gold-01",
+    "question": "What were TCS's two stated FY26 AI-related priorities: one focused on changing internal delivery and one focused on clients?",
+    "category": "fact_lookup",
+    "style": "paraphrase",
+    "evidence": [
+      "Embed AI in delivery. Using AI tools to improve developer productivity, testing, operations and support.",
+      "Sell AI-led transformation. Helping clients redesign processes, build data foundations and deploy AI at scale."
+    ],
+    "alt_evidence": [],
+    "reference_answer": "TCS aimed to embed AI in internal delivery to improve productivity, testing, operations and support, while selling AI-led transformation services to help clients redesign processes, build data foundations and deploy AI at scale.",
+    "notes": null
+  },
+  {
+    "question_id": "tcs-gold-02",
+    "question": "What were TCS's FY26 operating margin and net margin?",
+    "category": "table",
+    "style": "exact",
+    "evidence": [
+      "Net margin 19.8%",
+      "Operating margin 25%"
+    ],
+    "alt_evidence": [
+      "Metric: Operating margin; FY26: 25%",
+      "the net margin excluding exceptional items rose to 19.8%"
+    ],
+    "reference_answer": "FY26 operating margin was 25% and net margin was 19.8%.",
+    "notes": null
+  },
+  {
+    "question_id": "tcs-gold-03",
+    "question": "What did TCS's annualised AI revenue exceed in FY26?",
+    "category": "fact_lookup",
+    "style": "paraphrase",
+    "evidence": [
+      "annualised AI revenue above $2.3 billion"
+    ],
+    "alt_evidence": [
+      "Annualised AI revenue; FY26: Above $2.3 billion"
+    ],
+    "reference_answer": "TCS's annualised AI revenue exceeded $2.3 billion in FY26.",
+    "notes": null
+  },
+  {
+    "question_id": "tcs-gold-04",
+    "question": "In the TCV-by-market-and-vertical table, what were FY26 total TCV, North America TCV, and Consumer Business TCV?",
+    "category": "table",
+    "style": "paraphrase",
+    "evidence": [
+      "Total TCV; FY25: 39.4; FY26: 40.7; Q4 FY26: 12.0",
+      "North America; FY25: 21.6; FY26: 19.0; Q4 FY26: 5.4",
+      "Consumer Business; FY25: 5.3; FY26: 7.6; Q4 FY26: 2.8"
+    ],
+    "alt_evidence": [],
+    "reference_answer": "FY26 total TCV was $40.7 billion, North America TCV was $19.0 billion, and Consumer Business TCV was $7.6 billion.",
+    "notes": null
+  },
+  {
+    "question_id": "tcs-gold-05",
+    "question": "By how much did quarterly rupee revenue increase from Q1 FY26 to Q4 FY26?",
+    "category": "numerical_comparison",
+    "style": "paraphrase",
+    "evidence": [
+      "Q1 (Apr to Jun); FY25, ₹ crore: 62,613; FY26, ₹ crore: 63,437",
+      "Q4 (Jan to Mar); FY25, ₹ crore: 64,479; FY26, ₹ crore: 70,698"
+    ],
+    "alt_evidence": [],
+    "reference_answer": "Revenue increased by ₹7,261 crore, from ₹63,437 crore in Q1 FY26 to ₹70,698 crore in Q4 FY26.",
+    "notes": "The difference is computed from two table values."
+  },
+  {
+    "question_id": "tcs-gold-06",
+    "question": "What was TCS's total deal value (TCV) in Q4 FY26?",
+    "category": "table",
+    "style": "exact",
+    "evidence": [
+      "Period: Q4 FY26; TCV, US$ billion: 12.0"
+    ],
+    "alt_evidence": [
+      "Q4 FY26 TCV of $12 billion"
+    ],
+    "reference_answer": "TCS's total TCV in Q4 FY26 was $12.0 billion.",
+    "notes": null
+  },
+  {
+    "question_id": "tcs-gold-07",
+    "question": "What was TCS's FY26 revenue in US dollars?",
+    "category": "fact_lookup",
+    "style": "exact",
+    "evidence": [
+      "Revenue (US$); FY26: $30,017 million"
+    ],
+    "alt_evidence": [
+      "Revenue, US$ million; FY26: 30,017"
+    ],
+    "reference_answer": "TCS's FY26 revenue was US$30,017 million.",
+    "notes": null
+  },
+  {
+    "question_id": "tcs-gold-08",
+    "question": "How does the report connect TCS's AI strategy with employee development, and what two FY26 training figures support that connection?",
+    "category": "cross_section",
+    "style": "paraphrase",
+    "evidence": [
+      "Reskill the workforce. More than 270,000 employees have higher proficiency in AI and machine learning, and the company logged 69 million learning hours in the year.",
+      "Learning hours; Value: 69 million, up 23% year on year",
+      "Employees with higher proficiency in AI/ML; Value: 270,000+"
+    ],
+    "alt_evidence": [],
+    "reference_answer": "The report says TCS's AI-first strategy includes reskilling employees. In FY26, it recorded 69 million learning hours (up 23% year on year) and more than 270,000 employees with higher proficiency in AI/ML.",
+    "notes": null
+  },
+  {
+    "question_id": "tcs-gold-09",
+    "question": "What was TCS's exact cash-and-investments balance at the end of Q3 FY26?",
+    "category": "unanswerable",
+    "style": "paraphrase",
+    "evidence": [],
+    "alt_evidence": [],
+    "reference_answer": "",
+    "notes": "Unanswerable from this report: it explicitly says the Q3 balance was not captured in the sources used for the compilation. Do not infer the value from Q2 and Q4."
+  },
+  {
+    "question_id": "tcs-gold-10",
+    "question": "What was the FY26 total contract value for TCS's Banking, Financial Services and Insurance (BFSI) vertical?",
+    "category": "table",
+    "style": "exact",
+    "evidence": [
+      "BFSI; FY25: 12.8; FY26: 13.4; Q4 FY26: 3.9"
+    ],
+    "alt_evidence": [
+      "BFSI bookings rose to $13.4 billion"
+    ],
+    "reference_answer": "FY26 TCV for the BFSI vertical was $13.4 billion.",
+    "notes": null
+  },
+  {
+    "question_id": "tcs-gold-11",
+    "question": "How many TCS clients were in the $50 million and above revenue band at 31 March 2026, and how much had that number grown over the year?",
+    "category": "table",
+    "style": "paraphrase",
+    "evidence": [
+      "$50 million and above; Clients at 31 March 2026: 139; Change vs prior year: +9"
+    ],
+    "alt_evidence": [
+      "139 above $50 million"
+    ],
+    "reference_answer": "139 clients, up 9 from the prior year.",
+    "notes": null
+  },
+  {
+    "question_id": "tcs-gold-12",
+    "question": "What was TCS's voluntary attrition rate for IT services in Q4 FY26?",
+    "category": "table",
+    "style": "exact",
+    "evidence": [
+      "Q4 FY26; Voluntary attrition, IT services (LTM): 13.7%"
+    ],
+    "alt_evidence": [],
+    "reference_answer": "13.7% on a last-twelve-months basis.",
+    "notes": null
+  },
+  {
+    "question_id": "tcs-gold-13",
+    "question": "By how much was TCS's closing headcount at the end of Q4 FY26 lower than at the end of Q1 FY26?",
+    "category": "numerical_comparison",
+    "style": "paraphrase",
+    "evidence": [
+      "Q1 FY26 (30 Jun 2025); Closing headcount: 613,069",
+      "Q4 FY26 (31 Mar 2026); Closing headcount: 584,519"
+    ],
+    "alt_evidence": [],
+    "reference_answer": "About 28,550 lower: 613,069 at the end of Q1 FY26 against 584,519 at the end of Q4 FY26.",
+    "notes": "The difference is computed from two table values. The report says 'about 28,500 lower'."
+  },
+  {
+    "question_id": "tcs-gold-14",
+    "question": "Why did reported profit after tax differ from net income excluding exceptional items in FY26, and by how much?",
+    "category": "cross_section",
+    "style": "paraphrase",
+    "evidence": [
+      "restructuring costs linked to the workforce reduction announced in 2025",
+      "a one-time statutory impact from the implementation of",
+      "Difference; FY26, ₹ crore: 3,610"
+    ],
+    "alt_evidence": [],
+    "reference_answer": "Two exceptional items: restructuring costs linked to the 2025 workforce reduction and a one-time statutory impact from the new labour codes recorded in Q3. The difference is ₹3,610 crore (₹52,820 crore excluding exceptional items against ₹49,210 crore reported).",
+    "notes": null
+  },
+  {
+    "question_id": "tcs-gold-15",
+    "question": "What was TCS's net margin in each quarter of FY26?",
+    "category": "table",
+    "style": "paraphrase",
+    "evidence": [
+      "Q1 FY26; Net income excl. exceptional, ₹ crore: 12,760; Net margin: 20.1%",
+      "Q2 FY26; Net income excl. exceptional, ₹ crore: 12,904; Net margin: 19.6%",
+      "Q3 FY26; Net income excl. exceptional, ₹ crore: 13,438; Net margin: 20.0%",
+      "Q4 FY26; Net income excl. exceptional, ₹ crore: 13,718; Net margin: 19.4%"
+    ],
+    "alt_evidence": [],
+    "reference_answer": "Excluding exceptional items: Q1 20.1%, Q2 19.6%, Q3 20.0% and Q4 19.4%.",
+    "notes": null
+  },
+  {
+    "question_id": "tcs-gold-16",
+    "question": "What was the total dividend per share for FY26 and what components made it up?",
+    "category": "multi_fact",
+    "style": "paraphrase",
+    "evidence": [
+      "Total for FY26; Per share: ₹110",
+      "three interim dividends of ₹11 each (₹33), a special dividend of ₹46 and a proposed final dividend of ₹31"
+    ],
+    "alt_evidence": [],
+    "reference_answer": "₹110 per share: three interim dividends of ₹11 each (₹33), a special dividend of ₹46 and a proposed final dividend of ₹31.",
+    "notes": null
+  },
+  {
+    "question_id": "tcs-gold-17",
+    "question": "Which vertical grew its TCV the fastest in FY26, and from what level to what level?",
+    "category": "comparison",
+    "style": "paraphrase",
+    "evidence": [
+      "Consumer Business bookings grew the fastest, from $5.3 billion to $7.6 billion"
+    ],
+    "alt_evidence": [
+      "Consumer Business; FY25: 5.3; FY26: 7.6"
+    ],
+    "reference_answer": "Consumer Business, from $5.3 billion to $7.6 billion.",
+    "notes": null
+  },
+  {
+    "question_id": "tcs-gold-18",
+    "question": "What was cash flow from operations as a share of net profit in Q3 FY26, and why was it so high?",
+    "category": "fact_lookup",
+    "style": "paraphrase",
+    "evidence": [
+      "The Q3 figure of 130.4% reflects the effect of non-cash exceptional charges in that quarter, which reduced reported profit but not cash"
+    ],
+    "alt_evidence": [
+      "Q3 FY26; Cash flow from operations as % of net profit: 130.4%"
+    ],
+    "reference_answer": "130.4%, because non-cash exceptional charges in Q3 reduced reported profit but not cash.",
+    "notes": null
+  },
+  {
+    "question_id": "tcs-gold-19",
+    "question": "By how many percentage points did cost of revenue as a share of revenue fall between Q1 and Q4 of FY26?",
+    "category": "numerical_comparison",
+    "style": "paraphrase",
+    "evidence": [
+      "Cost of revenue fell from 60.9% of revenue in Q1 to 59.3% in Q4",
+      "The decline of roughly 1.6 percentage points between Q1 and Q4"
+    ],
+    "alt_evidence": [],
+    "reference_answer": "About 1.6 percentage points, from 60.9% of revenue in Q1 to 59.3% in Q4.",
+    "notes": null
+  },
+  {
+    "question_id": "tcs-gold-20",
+    "question": "Did TCS's headcount rise or fall in Q4 FY26, and how did that compare with the previous two quarters?",
+    "category": "fact_lookup",
+    "style": "paraphrase",
+    "evidence": [
+      "Q4 FY26 (31 Mar 2026); Closing headcount: 584,519; Change in quarter: +2,356",
+      "The Q4 increase was the first net addition after two consecutive quarterly declines"
+    ],
+    "alt_evidence": [],
+    "reference_answer": "It rose by 2,356 to 584,519, the first net addition after two consecutive quarterly declines.",
+    "notes": null
+  },
+  {
+    "question_id": "tcs-gold-21",
+    "question": "How many employees did TCS plan to cut in its 2025 restructuring, and roughly what share of the workforce was that?",
+    "category": "fact_lookup",
+    "style": "exact",
+    "evidence": [
+      "TCS announced plans to reduce its workforce by about 12,000 employees, roughly 2% of the total"
+    ],
+    "alt_evidence": [],
+    "reference_answer": "About 12,000 employees, roughly 2% of the total workforce.",
+    "notes": null
+  },
+  {
+    "question_id": "tcs-gold-22",
+    "question": "What was TCS's total contract value in Q1 FY27 for North America, BFSI and Consumer Business?",
+    "category": "table",
+    "style": "paraphrase",
+    "evidence": [
+      "North America TCV; Q1 FY27: $4.7 billion",
+      "BFSI TCV; Q1 FY27: $2.5 billion",
+      "Consumer Business TCV; Q1 FY27: $1.4 billion"
+    ],
+    "alt_evidence": [],
+    "reference_answer": "North America $4.7 billion, BFSI $2.5 billion and Consumer Business $1.4 billion.",
+    "notes": null
+  },
+  {
+    "question_id": "tcs-gold-23",
+    "question": "How many mega deals did TCS sign in Q4 FY26 and over the whole year?",
+    "category": "fact_lookup",
+    "style": "exact",
+    "evidence": [
+      "The company signed three mega deals in Q4 and five over the year"
+    ],
+    "alt_evidence": [],
+    "reference_answer": "Three in Q4 and five over the year.",
+    "notes": null
+  },
+  {
+    "question_id": "tcs-gold-24",
+    "question": "What share of the TCS workforce were women at the end of March 2026?",
+    "category": "unanswerable",
+    "style": "paraphrase",
+    "evidence": [],
+    "alt_evidence": [],
+    "reference_answer": "",
+    "notes": "Hard case. Chunk #88 gives 35.2% for March 2025 and says the March 2026 figure was not available. The 35.2% must not be offered as the March 2026 value."
+  },
+  {
+    "question_id": "tcs-gold-25",
+    "question": "What were TCS's total carbon emissions in FY26?",
+    "category": "unanswerable",
+    "style": "paraphrase",
+    "evidence": [],
+    "alt_evidence": [],
+    "reference_answer": "",
+    "notes": "Chunk #106 states that quantitative FY26 ESG data (energy, emissions, water) is not included."
+  },
+  {
+    "question_id": "tcs-gold-26",
+    "question": "What were TCS's revenue and net profit for Q1 FY27?",
+    "category": "unanswerable",
+    "style": "paraphrase",
+    "evidence": [],
+    "alt_evidence": [],
+    "reference_answer": "",
+    "notes": "Hard case. Chunk #110 says Q1 FY27 revenue and profit are not shown; only order book, attrition, market shares and cash appear (chunk #111)."
+  },
+  {
+    "question_id": "tcs-gold-27",
+    "question": "Who is the Chief Financial Officer of TCS?",
+    "category": "unanswerable",
+    "style": "exact",
+    "evidence": [],
+    "alt_evidence": [],
+    "reference_answer": "",
+    "notes": "Chunk #103 says the CFO and other executives are intentionally omitted."
+  },
+  {
+    "question_id": "tcs-gold-28",
+    "question": "What revenue growth guidance did TCS give for FY27?",
+    "category": "unanswerable",
+    "style": "paraphrase",
+    "evidence": [],
+    "alt_evidence": [],
+    "reference_answer": "",
+    "notes": "Hard case. The outlook pages (#113 to #115) are the compiler's view and state they are not company guidance; no numerical guidance appears."
+  },
+  {
+    "question_id": "tcs-gold-29",
+    "question": "How many directors sit on the TCS board, and how many of them are independent?",
+    "category": "unanswerable",
+    "style": "paraphrase",
+    "evidence": [],
+    "alt_evidence": [],
+    "reference_answer": "",
+    "notes": "Chunks #100 and #101 give only a generic description and refer to the official annual report for composition."
+  },
+  {
+    "question_id": "tcs-gold-30",
+    "question": "What was TCS's operating margin in Q4 FY26?",
+    "category": "unanswerable",
+    "style": "exact",
+    "evidence": [],
+    "alt_evidence": [],
+    "reference_answer": "",
+    "notes": "Hard case. The report gives FY26 (25%) and Q3 (25.2%, chunk #41) but no Q4 operating margin. It must not be derived or guessed."
+  },
+  {
+    "question_id": "tcs-gold-31",
+    "question": "What was TCS's revenue from India in FY26?",
+    "category": "unanswerable",
+    "style": "paraphrase",
+    "evidence": [],
+    "alt_evidence": [],
+    "reference_answer": "",
+    "notes": "Hard case. Chunk #74 gives only the India share for Q1 FY26 (5.8%) and the Q1 decline; no full-year India figure."
+  },
+  {
+    "question_id": "tcs-gold-32",
+    "question": "What was TCS's voluntary attrition rate for IT services in Q1 FY27, and how much total cash and investments did it hold at the end of that quarter?",
+    "category": "multi_fact",
+    "style": "paraphrase",
+    "evidence": [
+      "Period: Q1 FY27; Voluntary attrition, IT services (LTM): 13.6%",
+      "End of Q1 FY27 (30 Jun 2026); Total cash and investments, ₹ crore: 50,232"
+    ],
+    "alt_evidence": [
+      "Total cash and investments; Q1 FY27: ₹50,232 crore"
+    ],
+    "reference_answer": "Voluntary attrition for IT services (last twelve months) was 13.6% in Q1 FY27, and total cash and investments were ₹50,232 crore at 30 June 2026.",
+    "notes": null
+  },
+  {
+    "question_id": "tcs-gold-33",
+    "question": "What revenue did TCS report for the January-to-March quarter of the financial year before FY26?",
+    "category": "fact_lookup",
+    "style": "paraphrase",
+    "evidence": [
+      "Q4 (Jan to Mar); FY25, ₹ crore: 64,479"
+    ],
+    "alt_evidence": [],
+    "reference_answer": "₹64,479 crore (the Q4 FY25 revenue shown in the quarterly table).",
+    "notes": "Wording-mismatch case: a relative period instead of 'Q4 FY25'. Tests the planner."
+  },
+  {
+    "question_id": "tcs-gold-34",
+    "question": "What share of TCS revenue came from North America and from BFSI in Q4 FY26?",
+    "category": "multi_fact",
+    "style": "paraphrase",
+    "evidence": [
+      "North America; Q2 FY25: 47.6%; Q1 FY26: 48.7%; Q2 FY26: 48.8%; Q4 FY26: 48.5%; Q1 FY27: 48.3%",
+      "BFSI; Q2 FY25: 30.8%; Q1 FY26: 32.0%; Q2 FY26: 32.2%; Q4 FY26: 31.6%; Q1 FY27: 32.1%"
+    ],
+    "alt_evidence": [],
+    "reference_answer": "North America was 48.5% of revenue and BFSI was 31.6% in Q4 FY26.",
+    "notes": "Two facts on two different pages (25 and 26)."
+  }
+]
