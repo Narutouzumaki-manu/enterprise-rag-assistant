@@ -17,6 +17,7 @@
 | 5 | Persistent tables: **unchanged**; the full list of `agent_traces.metadata` keys is now documented | 7 |
 | 6 | Data flow redrawn: the "not found" search, the early stop and the step guard | 8 |
 | 7 | Open items updated | 9 |
+| 8 | Evaluation switch: `use_fact_checker` added to `AgentConfig` | 5 |
 
 The frozen output contract (`AgentResponse`, `AgentStep`, `Citation`) is **unchanged**. The code blocks in Sections 3 to 5 are checked against the real code by `scripts/check_docs_against_code.py`.
 
@@ -190,6 +191,7 @@ class AgentConfig:
     use_rewrites: bool = False         # also search the planner's rewrites (no measured benefit)
     quarantine_instructions: bool = True   # remove passages that address the AI
     use_similarity_hint: bool = False  # reserved; unused
+    use_fact_checker: bool = True   # evaluation switch: False skips the fact-checker (status unverified, confidence 0)
     llm_retries: int = 1               # retry a failed LLM call once, with backoff
 ```
 

@@ -27,6 +27,7 @@ class AgentConfig:
     use_rewrites: bool = False         # also search the planner's rewrites (no measured benefit)
     quarantine_instructions: bool = True  # remove passages that address the AI
     use_similarity_hint: bool = False  # pass top-1 dense_score to the fact-checker
+    use_fact_checker: bool = True      # evaluation switch: run without the fact-checker
     llm_retries: int = 1               # retry a failed LLM call once, with backoff
 
     def __post_init__(self) -> None:

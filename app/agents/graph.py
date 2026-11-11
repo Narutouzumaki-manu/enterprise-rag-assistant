@@ -48,7 +48,7 @@ def route_after_retrieve(state: AgentState, agent_config: AgentConfig) -> str:
 
 
 def route_after_synthesize(state: AgentState, agent_config: AgentConfig) -> str:
-    """end | retry_search | fact_check | step_limit"""
+    """end | retry_search | fact_check | skip_fact_check | step_limit"""
     if state["final_answer"] is not None:
         return "end"
     step = _latest_step(state, AgentStepType.SYNTHESIZE)
@@ -57,6 +57,8 @@ def route_after_synthesize(state: AgentState, agent_config: AgentConfig) -> str:
         return "retry_search"
     if state["step_count"] + 1 > agent_config.max_steps:
         return "step_limit"
+    if not agent_config.use_fact_checker:
+        return "skip_fact_check"
     return "fact_check"
 
 def route_after_fact_check(state: AgentState) -> str:
@@ -98,6 +100,27 @@ def make_step_limit_node() -> Callable[[AgentState], dict]:
     return step_limit_node
 
 
+def make_skip_fact_check_node() -> Callable[[AgentState], dict]:
+    """Evaluation switch: skip fact-checking and return the draft as final."""
+
+    def skip_fact_check_node(state: AgentState) -> dict:
+        step = AgentStep(
+            step_type=AgentStepType.FACT_CHECK,
+            content="Fact-check skipped (evaluation mode)",
+            metadata={"fact_check_skipped": True},
+        )
+        return {
+            "final_answer": state["draft_answer"],
+            "citations": list(state["citations"]),
+            "verification_status": "unverified",
+            "confidence": 0.0,
+            "step_count": state["step_count"] + 1,
+            "trace": [step],
+        }
+
+    return skip_fact_check_node
+
+
 def run_config(agent_config: AgentConfig) -> dict:
     """Settings for graph.invoke(): a hard stop above max_steps as a last safety net."""
     return {"recursion_limit": agent_config.max_steps + RECURSION_MARGIN}
@@ -119,6 +142,7 @@ def build_graph(retriever: Retriever, llm: LLMClient, config: AgentConfig):
     graph.add_node("fact_checker", make_fact_checker_node(llm, config))
     graph.add_node("finalize", make_finalize_node(config))
     graph.add_node("step_limit", make_step_limit_node())
+    graph.add_node("skip_fact_check", make_skip_fact_check_node())
 
     graph.add_edge(START, "planner")
     graph.add_edge("planner", "retriever")
@@ -136,6 +160,7 @@ def build_graph(retriever: Retriever, llm: LLMClient, config: AgentConfig):
         after_synthesize,
         {
             "fact_check": "fact_checker",
+            "skip_fact_check": "skip_fact_check",
             "retry_search": "retriever",
             "end": END,
             "step_limit": "step_limit",
@@ -148,4 +173,5 @@ def build_graph(retriever: Retriever, llm: LLMClient, config: AgentConfig):
     )
     graph.add_edge("finalize", END)
     graph.add_edge("step_limit", END)
+    graph.add_edge("skip_fact_check", END)
     return graph.compile()

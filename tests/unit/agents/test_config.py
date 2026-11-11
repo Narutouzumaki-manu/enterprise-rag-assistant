@@ -93,3 +93,8 @@ def test_negative_llm_retries_is_rejected():
 def test_max_confidence_outside_range_is_rejected(bad_confidence):
     with pytest.raises(ValueError, match="max_confidence"):
         AgentConfig(max_confidence=bad_confidence)
+
+
+def test_use_fact_checker_defaults_to_true_and_can_be_disabled():
+    assert AgentConfig().use_fact_checker is True
+    assert AgentConfig(use_fact_checker=False).use_fact_checker is False

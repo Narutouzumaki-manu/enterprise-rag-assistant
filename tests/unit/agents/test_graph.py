@@ -2,6 +2,7 @@ from app.agents.config import AgentConfig
 from app.agents.fact_checker import ClaimVerdict, Verification
 from app.agents.graph import (
     build_graph,
+    make_skip_fact_check_node,
     make_step_limit_node,
     route_after_fact_check,
     route_after_retrieve,
@@ -465,3 +466,114 @@ def test_a_repeated_search_hint_triggers_a_wider_search_of_the_question():
     assert final["final_answer"] == NO_EVIDENCE_ANSWER
     assert final["step_count"] == 7
     assert final["tried_queries"] == [Q, "h1"]
+
+
+# ---- evaluation switch: running without the fact-checker --------------
+
+def test_synthesizer_draft_skips_fact_check_when_disabled():
+    config = AgentConfig(use_fact_checker=False)
+    state = state_with(step_count=3)
+    assert route_after_synthesize(state, config) == "skip_fact_check"
+
+
+def test_skip_fact_check_node_returns_unverified_draft_with_trace_step():
+    from app.schemas.agent import Citation
+
+    cit = Citation(chunk_id="a", document_id="doc1", text_snippet="Revenue was 5.")
+    state = state_with(
+        draft_answer="Revenue was 5.",
+        citations=[cit],
+        step_count=3,
+    )
+    update = make_skip_fact_check_node()(state)
+    assert update["final_answer"] == "Revenue was 5."
+    assert update["verification_status"] == "unverified"
+    assert update["confidence"] == 0.0
+    assert update["citations"] == [cit]
+    assert update["step_count"] == 4
+    assert len(update["trace"]) == 1
+    step = update["trace"][0]
+    assert step.step_type == AgentStepType.FACT_CHECK
+    assert step.content == "Fact-check skipped (evaluation mode)"
+    assert step.metadata == {"fact_check_skipped": True}
+
+
+def test_switch_off_checker_llm_never_called_and_returns_unverified_draft():
+    config = AgentConfig(use_fact_checker=False)
+    # Even if verification verdicts are provided, they should never be consumed
+    llm = scripted_llm(
+        drafts=[Draft(answer="Revenue was 5.", cited_chunk_ids=["a"])],
+        checks=[Verification(verdicts=[verdict("Revenue was 5", True, ["a"])])],
+    )
+    final = run(llm, MockRetriever(responses={Q: [REV]}), config=config)
+
+    # Checker LLM was NEVER called
+    assert llm.structured_calls(Verification) == []
+    # Only Plan and Draft were called
+    assert len(llm.calls) == 2
+
+    # Answer = draft, status = "unverified", confidence = 0
+    assert final["final_answer"] == "Revenue was 5."
+    assert final["verification_status"] == "unverified"
+    assert final["confidence"] == 0.0
+
+    # Citations present
+    assert [c.chunk_id for c in final["citations"]] == ["a"]
+
+    # Skip trace step present
+    assert final["step_count"] == 4
+    skip_steps = [s for s in final["trace"] if s.metadata.get("fact_check_skipped") is True]
+    assert len(skip_steps) == 1
+    assert skip_steps[0].step_type == AgentStepType.FACT_CHECK
+    assert skip_steps[0].content == "Fact-check skipped (evaluation mode)"
+    assert skip_steps[0].metadata == {"fact_check_skipped": True}
+
+    assert types(final) == [
+        AgentStepType.PLAN,
+        AgentStepType.RETRIEVE,
+        AgentStepType.SYNTHESIZE,
+        AgentStepType.FACT_CHECK,
+    ]
+
+
+def test_switch_off_not_found_draft_searches_again_and_ends_with_insufficient_evidence():
+    config = AgentConfig(use_fact_checker=False)
+
+    def missing(hint):
+        return Draft(answer="Not in the passages.", answer_found=False, search_query=hint)
+
+    llm = scripted_llm(drafts=[missing("h1"), missing("h2"), missing("h3")])
+    retriever = MockRetriever(
+        responses={Q: [REV], "h1": [make_chunk("b")], "h2": [make_chunk("c")]}
+    )
+    final = run(llm, retriever, config=config)
+
+    # Still searches again
+    assert len(retriever.calls) > 1
+    # Still ends with the insufficient-evidence answer when searches run out
+    assert final["final_answer"] == NO_EVIDENCE_ANSWER
+    assert final["verification_status"] == "unverified"
+    assert final["confidence"] == 0.0
+    # Checker LLM was never called
+    assert llm.structured_calls(Verification) == []
+
+
+def test_switch_off_no_passages_generator_not_called_insufficient_evidence():
+    config = AgentConfig(use_fact_checker=False)
+    llm = scripted_llm()
+    retriever = MockRetriever()  # No chunks for Q
+
+    final = run(llm, retriever, config=config)
+
+    assert final["final_answer"] == NO_EVIDENCE_ANSWER
+    assert final["verification_status"] == "unverified"
+    assert final["confidence"] == 0.0
+    # Generator not called
+    assert llm.structured_calls(Draft) == []
+    # Checker not called
+    assert llm.structured_calls(Verification) == []
+    assert types(final) == [
+        AgentStepType.PLAN,
+        AgentStepType.RETRIEVE,
+        AgentStepType.SYNTHESIZE,
+    ]

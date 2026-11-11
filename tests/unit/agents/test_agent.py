@@ -357,3 +357,23 @@ def test_graph_receives_the_recursion_limit_and_values_mode():
     graph = FakeGraph([final])
     Agent(graph, AgentConfig()).run(Q)
     assert graph.calls == [({"recursion_limit": 17}, "values")]
+
+
+def test_evaluation_mode_without_fact_checker():
+    config = AgentConfig(use_fact_checker=False)
+    retriever = MockRetriever(responses={Q: [REV]})
+    llm = clean_llm()
+    agent = build_agent(retriever, llm, config)
+    response = agent.run(Q)
+
+    assert isinstance(response, AgentResponse)
+    assert response.answer == "Revenue was 5."
+    assert response.verification_status == "unverified"
+    assert response.confidence == 0.0
+    assert [c.chunk_id for c in response.citations] == ["a"]
+    assert llm.structured_calls(Verification) == []
+
+    skip_step = response.trace[-1]
+    assert skip_step.step_type == AgentStepType.FACT_CHECK
+    assert skip_step.content == "Fact-check skipped (evaluation mode)"
+    assert skip_step.metadata == {"fact_check_skipped": True}
