@@ -77,6 +77,24 @@ def get_cache_namespace(variant: str) -> str:
     return f"answers-{variant}-v1"
 
 
+def get_cache_path(variant: str, base_dir: Path | str = "data/llm_cache") -> Path:
+    """Return the default LLM cache file Path for a given variant.
+
+    The two agent variants share the planner call and the first draft, so they must
+    share both namespace AND file. single_draft keeps its own file.
+    """
+    directory = Path(base_dir)
+    # The two agent variants share the planner call and the first draft,
+    # so they must share both namespace AND file.
+    if variant in ("full_agent", "agent_no_checker"):
+        return directory / "answers_full_agent.json"
+    return directory / f"answers_{variant}.json"
+
+
+get_default_cache_path = get_cache_path
+get_cache_file = get_cache_path
+
+
 def show_result(result: Any) -> None:
     if isinstance(result, Plan):
         print(f"   llm plan: {result.query_type}; sub-queries: {result.subqueries}")
@@ -284,7 +302,7 @@ def run_answers(
     # Build CachingLLM if not provided
     if llm is None:
         if cache_path is None:
-            cache_file = Path("data/llm_cache") / f"answers_{variant}.json"
+            cache_file = get_cache_path(variant)
         else:
             cache_file = Path(cache_path)
 

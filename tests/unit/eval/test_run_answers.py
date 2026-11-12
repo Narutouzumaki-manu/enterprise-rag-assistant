@@ -15,6 +15,7 @@ from unittest.mock import patch
 import pytest
 
 from app.agents.fact_checker import ClaimVerdict, Verification
+from app.agents.llm_cache import CachingLLM
 from app.agents.planner import Plan
 from app.agents.synthesizer import NO_EVIDENCE_ANSWER, Draft
 from app.eval.golden_schema import GoldenQuestion
@@ -22,6 +23,8 @@ from scripts.run_answers import (
     REFUSAL_STRING,
     compute_sha256,
     get_cache_namespace,
+    get_cache_path,
+    get_default_cache_path,
     main as run_answers_main,
     run_answers,
 )
@@ -310,3 +313,82 @@ def test_caching_llm_namespaces_shared_for_agent_variants():
     assert ns_full == ns_no_checker
     assert ns_single == "answers-single_draft-v1"
     assert ns_single != ns_full
+
+
+def test_cache_file_shared_for_agent_variants():
+    """Default cache file for full_agent equals agent_no_checker, and single_draft's differs."""
+    cache_full = get_cache_path("full_agent")
+    cache_no_checker = get_cache_path("agent_no_checker")
+    cache_single = get_cache_path("single_draft")
+
+    assert cache_full == cache_no_checker
+    assert cache_full.name == "answers_full_agent.json"
+    assert cache_single.name == "answers_single_draft.json"
+    assert cache_single != cache_full
+
+
+def test_shared_cache_prefill_and_no_checker_replay(tmp_path: Path):
+    """Pre-fill a temp cache via full_agent with MockLLM, then run agent_no_checker against same cache in replay-only: 0 misses, 0 requests."""
+    q_file = tmp_path / "golden_questions.json"
+    q_data = [make_sample_question("tcs-gold-01")]
+    q_file.write_text(json.dumps(q_data), encoding="utf-8")
+    h = compute_sha256(q_file)
+
+    temp_cache_file = tmp_path / "shared_cache.json"
+    out_dir_full = tmp_path / "results_full"
+    out_dir_no_checker = tmp_path / "results_no_checker"
+
+    mock_ret = MockRetriever(default=[make_chunk("c1", text="TCS reported revenue of $30 billion.")])
+    mock_llm = make_clean_mock_llm(copies=5, answer="TCS reported revenue of $30 billion.")
+
+    # 1. Pre-fill a temp cache file via a CachingLLM run for variant full_agent with MockLLM
+    caching_llm = CachingLLM(
+        temp_cache_file,
+        mock_llm,
+        namespace=get_cache_namespace("full_agent"),
+        replay_only=False,
+    )
+
+    exit_code_full = run_answers(
+        expect_hash=h,
+        variant="full_agent",
+        golden_file=q_file,
+        output_dir=out_dir_full,
+        retriever=mock_ret,
+        llm=caching_llm,
+        verbose=False,
+    )
+    assert exit_code_full == 0
+    assert caching_llm.misses > 0
+    assert temp_cache_file.exists()
+
+    # 2. Run agent_no_checker against the SAME temp cache in replay-only mode
+    replay_caching_llm = CachingLLM(
+        temp_cache_file,
+        None,
+        namespace=get_cache_namespace("agent_no_checker"),
+        replay_only=True,
+    )
+
+    exit_code_nc = run_answers(
+        expect_hash=h,
+        variant="agent_no_checker",
+        golden_file=q_file,
+        output_dir=out_dir_no_checker,
+        retriever=mock_ret,
+        llm=replay_caching_llm,
+        live=False,
+        verbose=False,
+    )
+    assert exit_code_nc == 0
+    # 0 cache misses, 0 live requests
+    assert replay_caching_llm.misses == 0
+    assert replay_caching_llm.hits > 0
+
+    results_file = out_dir_no_checker / "answers_agent_no_checker.json"
+    assert results_file.exists()
+    records = json.loads(results_file.read_text(encoding="utf-8"))
+    assert len(records) == 1
+    assert records[0]["error"] is None
+    assert records[0]["answer"] == "TCS reported revenue of $30 billion."
+    assert records[0]["verification_status"] == "unverified"
