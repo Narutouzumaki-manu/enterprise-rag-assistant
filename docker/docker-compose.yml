@@ -1,0 +1,95 @@
+# Docker Compose configuration.
+# Environment variables:
+#   - Core application settings: see .env.example
+#   - Compose-only database variables (POSTGRES_*): see docker/.env.compose.example
+# Required variables without defaults:
+#   - JWT_SECRET
+#   - POSTGRES_PASSWORD
+#   - OPENROUTER_API_KEY
+
+services:
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-rag}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+      POSTGRES_DB: ${POSTGRES_DB:-rag}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-rag}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.api
+    restart: unless-stopped
+    environment:
+      ENVIRONMENT: production
+      LOG_JSON: "true"
+      LOG_LEVEL: INFO
+      DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-rag}:${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}@postgres:5432/${POSTGRES_DB:-rag}
+      REDIS_URL: redis://redis:6379/0
+      CHROMA_PATH: /app/data/chroma
+      UPLOAD_DIR: /app/data/uploads
+      JWT_SECRET: ${JWT_SECRET:?JWT_SECRET is required}
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:?OPENROUTER_API_KEY is required}
+      OPENROUTER_MODEL: ${OPENROUTER_MODEL:-nvidia/nemotron-3-ultra-550b-a55b:free}
+      OPENROUTER_FALLBACK_MODELS: ${OPENROUTER_FALLBACK_MODELS:-}
+      MAX_UPLOAD_MB: "25"
+      MAX_QUERY_CHARS: "2000"
+      RATE_LIMIT_ENABLED: "true"
+      LOGIN_RATE_LIMIT: "5/minute"
+      CHAT_RATE_LIMIT: "10/minute"
+      UPLOAD_RATE_LIMIT: "10/hour"
+      AGENT_MAX_CONCURRENT: "2"
+      AGENT_WAIT_SECONDS: "20.0"
+      RETRY_AFTER_SECONDS: "5"
+      AGENT_ENABLED: "true"
+      SSE_HEARTBEAT_SECONDS: "15.0"
+      SHUTDOWN_GRACE_SECONDS: "30.0"
+    volumes:
+      - chroma_data:/app/data/chroma
+      - upload_data:/app/data/uploads
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    expose:
+      - "8000"
+
+  frontend:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      api:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+  chroma_data:
+  upload_data:

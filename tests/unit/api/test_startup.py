@@ -4,6 +4,7 @@ from fastapi.testclient import TestClient
 from httpx import ASGITransport, AsyncClient
 
 import app.api.main as main_module
+import app.api.routes.health as health_module
 from app.api.dependencies import get_runtime
 from app.api.main import create_app
 from app.api.runtime import AgentRuntime
@@ -15,6 +16,8 @@ from .mocks import MockAgent, MockRetriever
 def _settings(**overrides) -> Settings:
     return Settings(_env_file=None, **overrides)
 
+async def _health_ok(request) -> str:
+    return "ok"
 
 def _probe_app(**kwargs):
     app = create_app(**kwargs)
@@ -56,6 +59,8 @@ async def test_dependency_gives_503_when_no_agent_is_available():
 def test_startup_builds_real_components_when_none_are_injected(monkeypatch):
     fake_retriever, fake_agent = MockRetriever(), MockAgent()
     monkeypatch.setattr(main_module, "build_real_components", lambda settings: (fake_retriever, fake_agent))
+    monkeypatch.setattr(health_module, "check_postgres", _health_ok)
+    monkeypatch.setattr(health_module, "check_redis", _health_ok)
     app = create_app(settings=_settings(agent_enabled=True))
     with TestClient(app) as client:
         assert isinstance(app.state.runtime, AgentRuntime)
@@ -68,6 +73,8 @@ def test_startup_skips_the_build_when_the_agent_is_disabled(monkeypatch):
         raise AssertionError("build_real_components should not be called")
 
     monkeypatch.setattr(main_module, "build_real_components", must_not_run)
+    monkeypatch.setattr(health_module, "check_postgres", _health_ok)
+    monkeypatch.setattr(health_module, "check_redis", _health_ok)
     app = create_app(settings=_settings(agent_enabled=False))
     with TestClient(app) as client:
         assert app.state.runtime is None

@@ -1,0 +1,158 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+jobs:
+  backend:
+    name: Backend (Lint, Typecheck, Unit, Integration)
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: rag
+          POSTGRES_PASSWORD: rag
+          POSTGRES_DB: rag_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt ruff==0.17.5 mypy==2.4.1
+
+      - name: Check critical syntax and undefined names
+        run: ruff check . --select E9,F63,F7,F82
+
+      - name: Lint and type ratchet
+        run: python -m scripts.lint_ratchet
+
+      - name: Run unit tests (first pass)
+        run: pytest tests/unit -q
+
+      - name: Run unit tests (second pass for leak detection)
+        run: pytest tests/unit -q
+
+      - name: Run integration tests
+        env:
+          TEST_DATABASE_URL: postgresql+asyncpg://rag:rag@localhost:5432/rag_test
+        run: |
+          pytest tests/integration -q --junitxml=integration-results.xml
+          python -c "import xml.etree.ElementTree as ET, sys; tree = ET.parse('integration-results.xml'); skips = sum(int(s.attrib.get('skipped', 0)) for s in tree.findall('.//testsuite')); sys.exit(f'FAIL: {skips} integration test(s) was skipped' if skips > 0 else 0)"
+
+  migrations:
+    name: Database Migrations Round-Trip
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: rag
+          POSTGRES_PASSWORD: rag
+          POSTGRES_DB: rag_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run migrations round-trip
+        env:
+          DATABASE_URL: postgresql+asyncpg://rag:rag@localhost:5432/rag_test
+        run: |
+          alembic upgrade head
+          alembic downgrade base
+          alembic upgrade head
+
+  frontend:
+    name: Frontend (CI, Lint, Test, Build)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      # No linter step: there is no lint script in frontend/package.json
+
+      - name: Run Vitest tests
+        run: npx vitest run
+
+      - name: Build frontend
+        run: npm run build
+
+  eval-gate:
+    name: Retrieval Evaluation Gate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Cache Hugging Face models
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: hf-model-BAAI-bge-small-en-v1.5
+
+      - name: Run evaluation gate
+        run: python -m scripts.eval_gate
