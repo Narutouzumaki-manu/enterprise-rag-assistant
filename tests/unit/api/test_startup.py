@@ -4,11 +4,11 @@ from fastapi.testclient import TestClient
 from httpx import ASGITransport, AsyncClient
 
 import app.api.main as main_module
+import app.api.routes.health as health_module
 from app.api.dependencies import get_runtime
 from app.api.main import create_app
 from app.api.runtime import AgentRuntime
 from app.core.config import Settings
-import app.api.routes.health as health_module
 
 from .mocks import MockAgent, MockRetriever
 
