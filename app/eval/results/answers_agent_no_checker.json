@@ -1,0 +1,1189 @@
+[
+  {
+    "question_id": "tcs-gold-09",
+    "category": "unanswerable",
+    "style": "paraphrase",
+    "answer": "I don't have sufficient evidence in the provided documents.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 3,
+        "synthesize": 3
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "retrieve",
+        "synthesize",
+        "retrieve",
+        "synthesize"
+      ]
+    },
+    "llm_calls": 4,
+    "latency_ms": 87.7,
+    "refused": true,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-24",
+    "category": "unanswerable",
+    "style": "paraphrase",
+    "answer": "I don't have sufficient evidence in the provided documents.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 3,
+        "synthesize": 3
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "retrieve",
+        "synthesize",
+        "retrieve",
+        "synthesize"
+      ]
+    },
+    "llm_calls": 4,
+    "latency_ms": 77.0,
+    "refused": true,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-25",
+    "category": "unanswerable",
+    "style": "paraphrase",
+    "answer": "I don't have sufficient evidence in the provided documents.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 3,
+        "synthesize": 3
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "retrieve",
+        "synthesize",
+        "retrieve",
+        "synthesize"
+      ]
+    },
+    "llm_calls": 4,
+    "latency_ms": 72.4,
+    "refused": true,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-26",
+    "category": "unanswerable",
+    "style": "paraphrase",
+    "answer": "I don't have sufficient evidence in the provided documents.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 2,
+        "synthesize": 1,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "retrieve",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 2,
+    "latency_ms": 50.5,
+    "refused": true,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-27",
+    "category": "unanswerable",
+    "style": "exact",
+    "answer": "I don't have sufficient evidence in the provided documents.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 3,
+        "synthesize": 3
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "retrieve",
+        "synthesize",
+        "retrieve",
+        "synthesize"
+      ]
+    },
+    "llm_calls": 4,
+    "latency_ms": 69.1,
+    "refused": true,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-28",
+    "category": "unanswerable",
+    "style": "paraphrase",
+    "answer": "I don't have sufficient evidence in the provided documents.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 3,
+        "synthesize": 3
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "retrieve",
+        "synthesize",
+        "retrieve",
+        "synthesize"
+      ]
+    },
+    "llm_calls": 4,
+    "latency_ms": 74.0,
+    "refused": true,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-29",
+    "category": "unanswerable",
+    "style": "paraphrase",
+    "answer": "I don't have sufficient evidence in the provided documents.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 3,
+        "synthesize": 3
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "retrieve",
+        "synthesize",
+        "retrieve",
+        "synthesize"
+      ]
+    },
+    "llm_calls": 4,
+    "latency_ms": 109.9,
+    "refused": true,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-30",
+    "category": "unanswerable",
+    "style": "exact",
+    "answer": "I don't have sufficient evidence in the provided documents.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 3,
+        "synthesize": 3
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "retrieve",
+        "synthesize",
+        "retrieve",
+        "synthesize"
+      ]
+    },
+    "llm_calls": 4,
+    "latency_ms": 73.5,
+    "refused": true,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-31",
+    "category": "unanswerable",
+    "style": "paraphrase",
+    "answer": "I don't have sufficient evidence in the provided documents.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 3,
+        "synthesize": 3
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "retrieve",
+        "synthesize",
+        "retrieve",
+        "synthesize"
+      ]
+    },
+    "llm_calls": 4,
+    "latency_ms": 69.7,
+    "refused": true,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-01",
+    "category": "fact_lookup",
+    "style": "paraphrase",
+    "answer": "TCS's FY26 AI-related priorities were: 1) \"Embed AI in delivery\" – using AI tools to improve internal developer productivity, testing, operations and support; and 2) \"Sell AI-led transformation\" – helping clients redesign processes, build data foundations and deploy AI at scale.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [
+      {
+        "chunk_id": "50dd3ab00f95d36bbe6d6ba4d666fbc4d051c23183e1078638c47541b2d23514",
+        "page_number": 10,
+        "source_snippet": "...Helping clients redesign processes, build data foundations and deploy AI at scale."
+      }
+    ],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 1,
+        "synthesize": 1,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 2,
+    "latency_ms": 76.5,
+    "refused": false,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-02",
+    "category": "table",
+    "style": "exact",
+    "answer": "TCS's FY26 operating margin was 25% and its net margin (excluding exceptional items) was 19.8%.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [
+      {
+        "chunk_id": "d8a1ab3b42c6f43a6aed221b870ad64fd3cf836860d0855549b59cd367b51cb9",
+        "page_number": 15,
+        "source_snippet": "Operating and net margin trends TCS reported an operating margin of 25% for FY26, up 70 basis points year on year and the highest in four years."
+      },
+      {
+        "chunk_id": "4275a701d913a7a3460d00a2c6fac6fb1026186cfa24a6c51b4952b57c81cf35",
+        "page_number": 1,
+        "source_snippet": "For the financial year ended 31 March 2026 Revenue ₹267,021 crore | $30.0 billion Net margin 19.8% | Operating margin 25% TCV $40.7 billion | 584,519 employees Unofficial compilation prepared from TCS..."
+      }
+    ],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 1,
+        "synthesize": 1,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 2,
+    "latency_ms": 74.1,
+    "refused": false,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-03",
+    "category": "fact_lookup",
+    "style": "paraphrase",
+    "answer": "TCS's annualised AI revenue exceeded $2.3 billion in FY26.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [
+      {
+        "chunk_id": "77df90f599f4d571fe5f3297b82fef861c29800fbb8496924da49cb111cf2485",
+        "page_number": 27,
+        "source_snippet": "...By Q4, the company reported annualised AI-related revenue above $2.3 billion, equal to more than 6% of total revenue."
+      },
+      {
+        "chunk_id": "add61afb3c3b7efaa3ca1a2f001dbd1161748c726a4527dfa2efb75d1cab9573",
+        "page_number": 10,
+        "source_snippet": "...Management stated that the company had moved from building capabilities to executing on revenue, citing annualised AI revenue above $2.3 billion in Q4."
+      },
+      {
+        "chunk_id": "1832a868cd8d4779ddd90c1901cfe3ef0692dfbf54cd19aade471e761e88a4ed",
+        "page_number": 39,
+        "source_snippet": "...• AI revenue above a $2.3 billion annualised run rate. • Broader client base, with 66 clients above $100 million."
+      },
+      {
+        "chunk_id": "b50e44246a8348144eccd11ff01fcd8a13417328fbc345366b0f2e13f16b85c3",
+        "page_number": 5,
+        "source_snippet": "...TCS disclosed annualised AI revenue above $2.3 billion by Q4. • Workforce restructuring."
+      }
+    ],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 1,
+        "synthesize": 1,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 2,
+    "latency_ms": 30.1,
+    "refused": false,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-04",
+    "category": "table",
+    "style": "paraphrase",
+    "answer": "According to the TCV-by-market-and-vertical table (Table 1 on page 23), FY26 values were: Total TCV $40.7 billion, North America TCV $19.0 billion, and Consumer Business TCV $7.6 billion.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [
+      {
+        "chunk_id": "a02985505213ccc504b1cb6476b05fa21c39dd8648e85f953daf5b7a1b864f76",
+        "page_number": 23,
+        "source_snippet": "...US$ billion: North America; FY25: 21.6; FY26: 19.0; Q4 FY26: 5.4. US$ billion: BFSI; FY25: 12.8; FY26: 13.4; Q4 FY26: 3.9."
+      }
+    ],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 1,
+        "synthesize": 1,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 2,
+    "latency_ms": 118.9,
+    "refused": false,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-05",
+    "category": "numerical_comparison",
+    "style": "paraphrase",
+    "answer": "I don't have sufficient evidence in the provided documents.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 2,
+        "synthesize": 1,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "retrieve",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 2,
+    "latency_ms": 108.8,
+    "refused": true,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-06",
+    "category": "table",
+    "style": "exact",
+    "answer": "TCS's total contract value (TCV) in Q4 FY26 was $12 billion.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [
+      {
+        "chunk_id": "b88ccce8cd90a10e3b7b92b80ad05f6429443441ad4571b5f5432eebc839cac1",
+        "page_number": 22,
+        "source_snippet": "...Q4 FY26 TCV of $12 billion was among the highest the company has recorded. The company signed three mega deals in Q4 and five over the year."
+      },
+      {
+        "chunk_id": "a02985505213ccc504b1cb6476b05fa21c39dd8648e85f953daf5b7a1b864f76",
+        "page_number": 23,
+        "source_snippet": "US$ billion: Total TCV; FY25: 39.4; FY26: 40.7; Q4 FY26: 12.0. US$ billion: North America; FY25: 21.6; FY26: 19.0; Q4 FY26: 5.4."
+      }
+    ],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 1,
+        "synthesize": 1,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 2,
+    "latency_ms": 30.1,
+    "refused": false,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-07",
+    "category": "fact_lookup",
+    "style": "exact",
+    "answer": "$30.0 billion",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [
+      {
+        "chunk_id": "4275a701d913a7a3460d00a2c6fac6fb1026186cfa24a6c51b4952b57c81cf35",
+        "page_number": 1,
+        "source_snippet": "For the financial year ended 31 March 2026 Revenue ₹267,021 crore | $30.0 billion Net margin 19.8% | Operating margin 25% TCV $40.7 billion | 584,519 employees Unofficial compilation prepared from TCS..."
+      }
+    ],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 1,
+        "synthesize": 1,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 2,
+    "latency_ms": 27.4,
+    "refused": false,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-08",
+    "category": "cross_section",
+    "style": "paraphrase",
+    "answer": "The report links TCS's AI strategy to employee development by making workforce reskilling a core strategic priority. It states that the company is reskilling its workforce, with more than 270,000 employees having higher proficiency in AI and machine learning, and that it logged 69 million learning hours during FY26. The two FY26 training figures that support this connection are: 69 million learning hours (up 23% year on year) and 270,000+ employees with higher proficiency in AI/ML.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [
+      {
+        "chunk_id": "50dd3ab00f95d36bbe6d6ba4d666fbc4d051c23183e1078638c47541b2d23514",
+        "page_number": 10,
+        "source_snippet": "...More than 270,000 employees have higher proficiency in AI and machine learning, and the company logged 69 million learning hours in the year."
+      },
+      {
+        "chunk_id": "bfed04b886f0bc93a03aa1633f88399e2a19b8d02903b0522fb3955cac9600ea",
+        "page_number": 29,
+        "source_snippet": "Indicator (FY26): Learning hours; Value: 69 million, up 23% year on year. Indicator (FY26): Competencies acquired; Value: 5.2 million."
+      },
+      {
+        "chunk_id": "77df90f599f4d571fe5f3297b82fef861c29800fbb8496924da49cb111cf2485",
+        "page_number": 27,
+        "source_snippet": "...More than 270,000 employees have higher proficiency in AI and machine learning."
+      }
+    ],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 1,
+        "synthesize": 1,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 2,
+    "latency_ms": 108.6,
+    "refused": false,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-10",
+    "category": "table",
+    "style": "exact",
+    "answer": "The FY26 total contract value for TCS's Banking, Financial Services and Insurance (BFSI) vertical was $13.4 billion.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [
+      {
+        "chunk_id": "a02985505213ccc504b1cb6476b05fa21c39dd8648e85f953daf5b7a1b864f76",
+        "page_number": 23,
+        "source_snippet": "...US$ billion: BFSI; FY25: 12.8; FY26: 13.4; Q4 FY26: 3.9. US$ billion: Consumer Business; FY25: 5.3; FY26: 7.6; Q4 FY26: 2.8."
+      }
+    ],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 2,
+        "synthesize": 2,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "retrieve",
+        "synthesize",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 3,
+    "latency_ms": 65.6,
+    "refused": false,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-11",
+    "category": "table",
+    "style": "paraphrase",
+    "answer": "At 31 March 2026, TCS had 139 clients in the $50 million and above revenue band, an increase of 9 clients over the prior year.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [
+      {
+        "chunk_id": "b742c10bb55653b493e176ba5790f6bbfd8a523999787e0f71c7241caa313e55",
+        "page_number": 24,
+        "source_snippet": "...Revenue band (trailing twelve months): $50 million and above; Clients at 31 March 2026: 139; Change vs prior year: +9."
+      }
+    ],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 1,
+        "synthesize": 1,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 2,
+    "latency_ms": 105.9,
+    "refused": false,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-12",
+    "category": "table",
+    "style": "exact",
+    "answer": "13.7%",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [
+      {
+        "chunk_id": "94763f8b16973043959448b89163449eebfc083680235a55c7d33b18a8b0bfe8",
+        "page_number": 30,
+        "source_snippet": "...Period: Q4 FY26; Voluntary attrition, IT services (LTM): 13.7%. Period: Q1 FY27; Voluntary attrition, IT services (LTM): 13.6%."
+      }
+    ],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 1,
+        "synthesize": 1,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 2,
+    "latency_ms": 24.8,
+    "refused": false,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-13",
+    "category": "numerical_comparison",
+    "style": "paraphrase",
+    "answer": "About 28,500 lower (headcount ended about 28,500 lower than at the end of Q1 FY26).",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [
+      {
+        "chunk_id": "0fb5349acef4b39f9f0d73a893002c43f16129dbce7a53b57f0ef8e23512e6ac",
+        "page_number": 28,
+        "source_snippet": "...Over the full year, headcount ended about 28,500 lower than at the end of Q1, reflecting the restructuring programme and subdued demand."
+      }
+    ],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 1,
+        "synthesize": 1,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 2,
+    "latency_ms": 71.3,
+    "refused": false,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-14",
+    "category": "cross_section",
+    "style": "paraphrase",
+    "answer": "Reported profit after tax in FY26 was ₹49,210 crore, while net income excluding exceptional items was ₹52,820 crore, a difference of ₹3,610 crore. The gap is due to exceptional charges net of tax, specifically restructuring costs from the workforce reduction announced in 2025 and a one-time statutory charge from the implementation of India’s new labour codes recorded in Q3.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [
+      {
+        "chunk_id": "5b9f90f03b8e7c8cf76bae242e251bda7b198b7c24f9c004483854a65e7c582f",
+        "page_number": 21,
+        "source_snippet": "Basis: Reported profit after tax; FY26, ₹ crore: 49,210; Comment: +1.35% vs FY25 (₹48,553 crore)."
+      },
+      {
+        "chunk_id": "90b6479bfc23fbdafd4a4102e5763fcdfe7e657d75b5f636f168ca192fce7c76",
+        "page_number": 31,
+        "source_snippet": "...• Together they account for the gap between reported profit (₹49,210 crore) and profit excluding exceptional items (₹52,820 crore)."
+      },
+      {
+        "chunk_id": "f0037a1edb54c5999b13515ce2982d6ee2439ac3f808acd555377fa4f5f6f8e3",
+        "page_number": 21,
+        "source_snippet": "...Second, a one-time statutory impact from the implementation of India's new labour codes, recorded in Q3."
+      }
+    ],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 1,
+        "synthesize": 1,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 2,
+    "latency_ms": 97.6,
+    "refused": false,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-15",
+    "category": "table",
+    "style": "paraphrase",
+    "answer": "TCS's net margin in each quarter of FY26 was: Q1 FY26: 20.1%; Q2 FY26: 19.6%; Q3 FY26: 20.0%; Q4 FY26: 19.4%.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [
+      {
+        "chunk_id": "c894c9d8ec933d86f6eda602705b7c14fc83c0e998ee6d9f2fc0438cc85782ff",
+        "page_number": 14,
+        "source_snippet": "Quarter: Q1 FY26; Net income excl. exceptional, ₹ crore: 12,760; Net margin: 20.1%."
+      }
+    ],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 3,
+        "synthesize": 3,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "retrieve",
+        "synthesize",
+        "retrieve",
+        "synthesize",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 4,
+    "latency_ms": 178.1,
+    "refused": false,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-16",
+    "category": "multi_fact",
+    "style": "paraphrase",
+    "answer": "The total dividend per share for FY26 was ₹110. It consisted of three interim dividends of ₹11 each (₹33 total), a special dividend of ₹46, and a proposed final dividend of ₹31.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [
+      {
+        "chunk_id": "d5b71070e29d7d334a6caa4dfa31ea108c838bdff9a99f84698ecbe7354ba19d",
+        "page_number": 19,
+        "source_snippet": "Dividends declared for FY26 The total of ₹110 per share is made up of three interim dividends of ₹11 each (₹33), a special dividend of ₹46 and a proposed final dividend of ₹31."
+      },
+      {
+        "chunk_id": "a3392cc16d643abcdb5ba8b2236aa77d0269d2873d8e16f8a2d1b2b95e1583c0",
+        "page_number": 19,
+        "source_snippet": "...Dividend: Total for FY26; Per share: ₹110."
+      }
+    ],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 1,
+        "synthesize": 1,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 2,
+    "latency_ms": 74.7,
+    "refused": false,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-17",
+    "category": "comparison",
+    "style": "paraphrase",
+    "answer": "I don't have sufficient evidence in the provided documents.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 3,
+        "synthesize": 3
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "retrieve",
+        "synthesize",
+        "retrieve",
+        "synthesize"
+      ]
+    },
+    "llm_calls": 4,
+    "latency_ms": 156.8,
+    "refused": true,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-18",
+    "category": "fact_lookup",
+    "style": "paraphrase",
+    "answer": "In Q3 FY26, cash flow from operations was 130.4% of net profit. The ratio was unusually high because non-cash exceptional charges reduced reported profit but did not affect cash generation, so cash collections and working-capital management outpaced accounting profit.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [
+      {
+        "chunk_id": "6d4dc98b16d8aff5832f3b7983a91179270f8c85c5e4603777fe64fca9b690aa",
+        "page_number": 17,
+        "source_snippet": "...Quarter: Q3 FY26; Cash flow from operations as % of net profit: 130.4%. Quarter: Q4 FY26; Cash flow from operations as % of net profit: 106.7%."
+      },
+      {
+        "chunk_id": "f445707ef6a7c7a50908fdeecd94136d312ee8a9ba16e9623b817de5fa0b52a9",
+        "page_number": 17,
+        "source_snippet": "...The Q3 figure of 130.4% reflects the effect of non-cash exceptional charges in that quarter, which reduced reported profit but not cash."
+      }
+    ],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 1,
+        "synthesize": 1,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 2,
+    "latency_ms": 96.5,
+    "refused": false,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-19",
+    "category": "numerical_comparison",
+    "style": "paraphrase",
+    "answer": "Cost of revenue as a share of revenue fell by 1.6 percentage points between Q1 (60.9%) and Q4 (59.3%) of FY26.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [
+      {
+        "chunk_id": "7c9c886a9ef3c7f0b8138113160638610a824bae61e7e9e9fdb15586e6abacc4",
+        "page_number": 16,
+        "source_snippet": "...The decline of roughly 1.6 percentage points between Q1 and Q4 is the main driver of margin expansion."
+      },
+      {
+        "chunk_id": "643ecf8b8c27c84d285aa6aefae14320cf3cd2c1ed501514d10ec7e8d17cbc33",
+        "page_number": 16,
+        "source_snippet": "...₹ million: of revenue; Q1: 60.9%; Q2: 60.4%; Q3: 59.2%; Q4: 59.3%. ₹ million: Other income, net; Q1: 14,650; Q2: 6,380; Q3: 9,220; Q4: 4,920."
+      }
+    ],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 1,
+        "synthesize": 1,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 2,
+    "latency_ms": 107.4,
+    "refused": false,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-20",
+    "category": "fact_lookup",
+    "style": "paraphrase",
+    "answer": "TCS's headcount rose in Q4 FY26, with a net addition of 2,356 employees. This was the first quarterly increase after two consecutive quarters of decline (Q2 and Q3 FY26), during which headcount fell by roughly 28,500.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [
+      {
+        "chunk_id": "0fb5349acef4b39f9f0d73a893002c43f16129dbce7a53b57f0ef8e23512e6ac",
+        "page_number": 28,
+        "source_snippet": "Headcount through the year Headcount peaked at 613,069 in June 2025, fell by roughly 28,500 over the next two quarters, and then returned to growth in March 2026 with a net addition of 2,356."
+      }
+    ],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 1,
+        "synthesize": 1,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 2,
+    "latency_ms": 92.6,
+    "refused": false,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-21",
+    "category": "fact_lookup",
+    "style": "exact",
+    "answer": "TCS planned to cut about 12,000 employees, roughly 2% of the total workforce.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [
+      {
+        "chunk_id": "fc47d94718294a3990f150643a1f9a3cb57e8c1eb822b2015f2543546527e8f4",
+        "page_number": 31,
+        "source_snippet": "Restructuring in FY26 In 2025 TCS announced plans to reduce its workforce by about 12,000 employees, roughly 2% of the total, as part of a programme to realign skills with AI-led delivery and changing..."
+      }
+    ],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 1,
+        "synthesize": 1,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 2,
+    "latency_ms": 69.3,
+    "refused": false,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-22",
+    "category": "table",
+    "style": "paraphrase",
+    "answer": "In Q1 FY27, TCS's total contract value (TCV) was $4.7 billion for North America, $2.5 billion for BFSI, and $1.4 billion for Consumer Business. The overall order book TCV for the quarter was $9.5 billion.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [
+      {
+        "chunk_id": "6c16a69e84aa3cf38296f9f869ac65c520566330abdf2984423af24a0c0a6ed5",
+        "page_number": 38,
+        "source_snippet": "Indicator: Order book TCV; Q1 FY27: $9.5 billion. Indicator: North America TCV; Q1 FY27: $4.7 billion."
+      }
+    ],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 1,
+        "synthesize": 1,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 2,
+    "latency_ms": 91.5,
+    "refused": false,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-23",
+    "category": "fact_lookup",
+    "style": "exact",
+    "answer": "TCS signed three mega deals in Q4 FY26 and five mega deals over the whole year FY26.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [
+      {
+        "chunk_id": "b88ccce8cd90a10e3b7b92b80ad05f6429443441ad4571b5f5432eebc839cac1",
+        "page_number": 22,
+        "source_snippet": "...The company signed three mega deals in Q4 and five over the year. TCV is the total value of contracts signed in a period and is not the same as revenue; deals are delivered over several years."
+      },
+      {
+        "chunk_id": "8bffb4a9d6c43c73eca7b4f4e67a8fe48145172cad010600ec4a154e6bb30fc1",
+        "page_number": 40,
+        "source_snippet": "...• Press coverage of the Q1, Q3 and Q4 FY26 results (Outlook Business, The Quint, PTI via TaxTMI, and market commentary on dividends and attrition)."
+      }
+    ],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 1,
+        "synthesize": 1,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 2,
+    "latency_ms": 66.8,
+    "refused": false,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-32",
+    "category": "multi_fact",
+    "style": "paraphrase",
+    "answer": "TCS's voluntary attrition rate for IT services in Q1 FY27 was 13.6%, and total cash and investments at the end of that quarter were ₹50,232 crore.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [
+      {
+        "chunk_id": "94763f8b16973043959448b89163449eebfc083680235a55c7d33b18a8b0bfe8",
+        "page_number": 30,
+        "source_snippet": "...Period: Q1 FY27; Voluntary attrition, IT services (LTM): 13.6%."
+      },
+      {
+        "chunk_id": "6c16a69e84aa3cf38296f9f869ac65c520566330abdf2984423af24a0c0a6ed5",
+        "page_number": 38,
+        "source_snippet": "...Indicator: Total cash and investments; Q1 FY27: ₹50,232 crore."
+      }
+    ],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 1,
+        "synthesize": 1,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 2,
+    "latency_ms": 72.8,
+    "refused": false,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-33",
+    "category": "fact_lookup",
+    "style": "paraphrase",
+    "answer": "I don't have sufficient evidence in the provided documents.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 3,
+        "synthesize": 3
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "retrieve",
+        "synthesize",
+        "retrieve",
+        "synthesize"
+      ]
+    },
+    "llm_calls": 4,
+    "latency_ms": 76.2,
+    "refused": true,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-34",
+    "category": "multi_fact",
+    "style": "paraphrase",
+    "answer": "In Q4 FY26, North America accounted for 48.5% of TCS revenue, and BFSI accounted for 31.6%.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [
+      {
+        "chunk_id": "7c326f579b679d6004e9c7ef086315e0f2888926b084474d42558320544bf261",
+        "page_number": 25,
+        "source_snippet": "Share of revenue: North America; Q2 FY25: 47.6%; Q1 FY26: 48.7%; Q2 FY26: 48.8%; Q4 FY26: 48.5%; Q1 FY27: 48.3%. revenue: Latin America; Q2 FY25: 1.8%; Q1 FY26: 1.9%; Q2 FY26: 1.9%; Q4 FY26: 1.9%; Q1..."
+      },
+      {
+        "chunk_id": "bf8c4bb045fe05b2337d35048edc1863be18c76c947154701c99d200ba2b17c8",
+        "page_number": 26,
+        "source_snippet": "BFSI share of revenue: BFSI; Q2 FY25: 30.8%; Q1 FY26: 32.0%; Q2 FY26: 32.2%; Q4 FY26: 31.6%; Q1 FY27: 32.1%."
+      }
+    ],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 1,
+        "synthesize": 1,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 2,
+    "latency_ms": 69.7,
+    "refused": false,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  }
+]
