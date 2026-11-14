@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from uuid import uuid4
 
 import pytest
@@ -48,7 +48,7 @@ async def test_a_valid_token_gives_the_user(session_factory, user):
 
 @pytest.mark.asyncio
 async def test_every_kind_of_bad_credentials_gets_the_same_401(session_factory, user):
-    long_ago = datetime.now(timezone.utc) - timedelta(minutes=SETTINGS.jwt_expire_minutes + 5)
+    long_ago = datetime.now(UTC) - timedelta(minutes=SETTINGS.jwt_expire_minutes + 5)
     cases = {
         "no header": {},
         "wrong scheme": {"Authorization": "Basic dXNlcjpwYXNz"},

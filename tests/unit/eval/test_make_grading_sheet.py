@@ -14,9 +14,6 @@ import pytest
 
 from scripts.make_grading_sheet import (
     COLUMNS,
-    build_grading_rows,
-    load_existing_grading_sheet,
-    load_golden_questions,
     make_grading_sheet,
     parse_answer_file,
 )

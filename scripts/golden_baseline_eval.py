@@ -11,7 +11,7 @@ import json
 import os
 import sys
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -134,7 +134,7 @@ def main() -> int:
 
     print(f"\nTOTAL: {cache.misses} live model calls, {cache.hits} replayed")
     RESULTS_PATH.write_text(json.dumps({
-        "run_at": datetime.now(timezone.utc).isoformat(),
+        "run_at": datetime.now(UTC).isoformat(),
         "model": model,
         "namespace": NAMESPACE,
         "replay": args.replay,

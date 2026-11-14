@@ -1,6 +1,7 @@
 import pytest
-from app.ingestion.pipeline import ingest_document
+
 from app.ingestion.dedupe import clear_registry
+from app.ingestion.pipeline import ingest_document
 from app.schemas.document import IngestionResult
 
 

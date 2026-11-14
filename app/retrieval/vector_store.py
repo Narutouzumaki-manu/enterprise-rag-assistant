@@ -1,9 +1,9 @@
 import chromadb
 
 from app.retrieval.embeddings import EmbeddingService
+from app.retrieval.filters import to_chroma_where
 from app.schemas.document import Chunk
 from app.schemas.retrieval import RetrievedChunk
-from app.retrieval.filters import to_chroma_where
 
 DEFAULT_COLLECTION = "chunks"
 

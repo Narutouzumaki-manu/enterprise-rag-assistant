@@ -2,7 +2,7 @@ import json
 import sys
 import time
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from app.ingestion.pipeline import ingest_document
@@ -154,7 +154,7 @@ def main() -> None:
     }
     RESULTS_PATH.write_text(
         json.dumps({
-            "run_at": datetime.now(timezone.utc).isoformat(),
+            "run_at": datetime.now(UTC).isoformat(),
             "document_id": labels["document_id"],
             "chunk_count": len(chunks),
             "embedding_model": embedding.model_name,

@@ -3,14 +3,19 @@ from uuid import uuid4
 from fastapi import APIRouter, Depends, HTTPException, Request
 from fastapi.sse import EventSourceResponse
 
-from app.api.dependencies import get_app_settings, get_chat_store, get_current_user, get_runtime
-from app.api.runtime import AgentRuntime
+from app.api.dependencies import (
+    get_app_settings,
+    get_chat_store,
+    get_current_user,
+    get_runtime,
+)
 from app.api.exchange import ChatStore, open_saved_stream
 from app.api.limits import CHAT_LIMIT, limiter
+from app.api.runtime import AgentRuntime
 from app.api.streaming import build_chat_events, sse_lines
 from app.core.config import Settings
-from app.schemas.api import ApiCitation, ChatRequest, ChatResponse
 from app.db import models
+from app.schemas.api import ApiCitation, ChatRequest, ChatResponse
 
 router = APIRouter()
 STREAM_HEADERS = {"Cache-Control": "no-cache", "X-Accel-Buffering": "no"}

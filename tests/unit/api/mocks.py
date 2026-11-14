@@ -1,17 +1,17 @@
 import time
 from collections.abc import Iterator
-from datetime import datetime, timezone
-
-import app
-from app.schemas.agent import AgentResponse, AgentStep, AgentStepType, Citation
-from app.schemas.document import Chunk, ChunkMetadata,  IngestionResult ,SourceType
-from app.schemas.retrieval import RetrievalRequest, RetrievalResponse, RetrievedChunk
+from datetime import UTC, datetime
 from pathlib import Path
 from uuid import uuid4
 
 from app.api.dependencies import get_current_user
 from app.api.main import create_app
 from app.core.config import Settings
+from app.schemas.agent import AgentResponse, AgentStep, AgentStepType, Citation
+from app.schemas.document import Chunk, ChunkMetadata, IngestionResult, SourceType
+from app.schemas.retrieval import RetrievalRequest, RetrievalResponse, RetrievedChunk
+
+
 def make_response(
     answer: str = "Mock answer.",
     status: str = "verified",
@@ -85,7 +85,7 @@ def make_chunk(document_id: str = "doc_1", index: int = 0, text: str = "Mock chu
             page_number=index + 1,
             section_title=None,
             content_hash=f"hash_{document_id}",
-            ingested_at=datetime.now(timezone.utc),
+            ingested_at=datetime.now(UTC),
         ),
     )
 

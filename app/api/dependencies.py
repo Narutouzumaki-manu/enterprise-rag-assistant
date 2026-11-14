@@ -1,17 +1,16 @@
 
-from fastapi import HTTPException, Request
+from collections.abc import AsyncIterator
+
+from fastapi import Depends, HTTPException, Request
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.api.exchange import ChatStore
+from app.api.ingestion_service import IngestionRunner
 from app.api.runtime import AgentRuntime
 from app.core.config import Settings
-from collections.abc import AsyncIterator
-from fastapi import Depends
-from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
-from app.api.exchange import ChatStore
-
 from app.core.security import TokenError, decode_access_token
 from app.db import models, repository
-
-from sqlalchemy.ext.asyncio import AsyncSession
-from app.api.ingestion_service import IngestionRunner
 
 
 def get_runtime(request: Request) -> AgentRuntime:

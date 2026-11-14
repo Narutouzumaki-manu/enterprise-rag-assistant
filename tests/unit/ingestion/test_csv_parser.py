@@ -1,7 +1,6 @@
 from app.ingestion.parsers.csv_parser import parse_csv
 from app.schemas.document import IngestionResult, SourceType
 
-
 SAMPLE_CSV_PATH = "tests/fixtures/sample.csv"
 
 

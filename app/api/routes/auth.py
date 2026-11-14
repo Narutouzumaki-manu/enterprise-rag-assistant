@@ -2,13 +2,13 @@ from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 from starlette.concurrency import run_in_threadpool
 
+from app.api.audit import LOGIN_FAILED, record_audit
 from app.api.dependencies import get_app_settings, get_db
+from app.api.limits import LOGIN_LIMIT, client_ip, limiter
 from app.core.config import Settings
 from app.core.security import DUMMY_PASSWORD_HASH, create_access_token, verify_password
 from app.db import repository
 from app.schemas.api import LoginRequest, TokenResponse
-from app.api.limits import LOGIN_LIMIT, client_ip, limiter
-from app.api.audit import LOGIN_FAILED, record_audit
 
 router = APIRouter(prefix="/auth")
 

@@ -1,6 +1,6 @@
 import json
 from dataclasses import dataclass, field
-from pathlib import Path
+
 import pytest
 from pydantic import ValidationError
 
@@ -8,15 +8,18 @@ from app.eval.golden_schema import (
     GoldenQuestion,
     validate_golden_questions,
 )
-from app.eval.validate_golden import (
-    normalize_text,
-    validate_question_phrases,
-    validate_golden_file,
-    check_duplicates,
-)
 from app.eval.search_chunks import search_term_in_chunks
+from app.eval.validate_golden import (
+    check_duplicates,
+    normalize_text,
+    validate_golden_file,
+    validate_question_phrases,
+)
 from scripts.merge_golden_v1 import merge_golden
-from scripts.merge_golden_v1_1 import merge_golden_v1_1, generate_overlap_file, compute_shared_chunks
+from scripts.merge_golden_v1_1 import (
+    generate_overlap_file,
+    merge_golden_v1_1,
+)
 
 
 @dataclass

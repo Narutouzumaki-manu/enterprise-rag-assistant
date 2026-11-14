@@ -7,8 +7,8 @@ import pytest
 from httpx import ASGITransport, AsyncClient
 
 from app.api.main import create_app
-from app.api.runtime import AgentBusyError, AgentRuntime
 from app.api.routes import health
+from app.api.runtime import AgentBusyError, AgentRuntime
 
 from .mocks import MockAgent
 

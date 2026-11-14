@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import pytest
 from sqlalchemy import delete, func, inspect, select
@@ -102,7 +102,7 @@ async def test_same_content_hash_is_rejected_until_the_first_document_is_deleted
     await session.rollback()
 
     first = await session.get(models.Document, "d1")
-    first.deleted_at = datetime.now(timezone.utc)
+    first.deleted_at = datetime.now(UTC)
     await session.commit()
 
     session.add(_doc("d3"))  # re-upload after a soft delete is allowed
@@ -111,7 +111,7 @@ async def test_same_content_hash_is_rejected_until_the_first_document_is_deleted
 
 @pytest.mark.asyncio
 async def test_a_chunk_needs_an_existing_document(session):
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     session.add(models.DocumentChunk(
         chunk_id="c1", document_id="missing", text="t", token_count=1, ingested_at=now,
     ))

@@ -32,7 +32,7 @@ def show(response, last_step=False):
 
 
 print("--- A: run() on a clean question")
-from app.agents.synthesizer import Draft  # noqa: E402
+from app.agents.synthesizer import Draft
 
 llm = MockLLM(
     structured={

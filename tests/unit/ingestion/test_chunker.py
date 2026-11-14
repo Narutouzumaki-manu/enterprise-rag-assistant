@@ -1,4 +1,4 @@
-from app.ingestion.chunker import chunk_text, _count_tokens
+from app.ingestion.chunker import _count_tokens, chunk_text
 
 
 def test_chunk_text_returns_list_of_strings():

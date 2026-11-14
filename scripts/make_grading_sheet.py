@@ -19,9 +19,9 @@ import argparse
 import csv
 import json
 import logging
-from pathlib import Path
 import re
 import sys
+from pathlib import Path
 from typing import Any
 
 if sys.stdout and hasattr(sys.stdout, "reconfigure"):
@@ -216,7 +216,7 @@ def build_grading_rows(
         answers_by_key[(ans["question_id"], v)] = ans
 
     # Include any variants already present in the existing CSV
-    for (_, v) in existing_sheet.keys():
+    for (_, v) in existing_sheet:
         if v not in variants:
             variants.append(v)
 

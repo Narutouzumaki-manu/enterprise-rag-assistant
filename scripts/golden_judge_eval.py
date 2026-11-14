@@ -12,7 +12,7 @@ import argparse
 import json
 import os
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -165,7 +165,7 @@ def main() -> int:
             print(f"{variant:<9} judged {len(scores)} answers, mean faithfulness {sum(scores) / len(scores):.3f}")
 
     RESULTS_PATH.write_text(json.dumps(
-        {"run_at": datetime.now(timezone.utc).isoformat(), "judge_model": JUDGE_MODEL, "results": saved},
+        {"run_at": datetime.now(UTC).isoformat(), "judge_model": JUDGE_MODEL, "results": saved},
         ensure_ascii=False, indent=2), encoding="utf-8")
     print("saved to", RESULTS_PATH)
     return 1 if stopped else 0

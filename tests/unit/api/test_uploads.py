@@ -7,7 +7,11 @@ from fastapi import HTTPException
 from starlette.datastructures import UploadFile
 
 from app.api import uploads
-from app.api.uploads import clean_display_name, receive_upload, reject_if_declared_too_large
+from app.api.uploads import (
+    clean_display_name,
+    receive_upload,
+    reject_if_declared_too_large,
+)
 
 LIMIT = 1024 * 1024
 PDF = b"%PDF-1.4\nsome content"

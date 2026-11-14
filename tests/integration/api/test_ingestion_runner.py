@@ -5,8 +5,14 @@ from pathlib import Path
 import pytest
 from sqlalchemy import func, select
 
-from app.api.ingestion_service import FAILED_GENERIC, INDEXING_FAILED, NO_TEXT, IngestionRunner
+from app.api.ingestion_service import (
+    FAILED_GENERIC,
+    INDEXING_FAILED,
+    NO_TEXT,
+    IngestionRunner,
+)
 from app.db import models, repository
+
 from .stubs import StubIngestion, StubRetriever
 
 

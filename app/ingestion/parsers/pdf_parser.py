@@ -1,10 +1,12 @@
 import hashlib
+from datetime import UTC, datetime
 from pathlib import Path
-from datetime import datetime, timezone
-import tiktoken
+
 import pymupdf
-from app.schemas.document import Chunk, ChunkMetadata, SourceType, IngestionResult
+import tiktoken
+
 from app.ingestion.chunker import chunk_text
+from app.schemas.document import Chunk, ChunkMetadata, IngestionResult, SourceType
 
 
 def _extract_tables_pdf(page) -> tuple[list[str], list[tuple]]:
@@ -97,7 +99,7 @@ def parse_pdf(path: str) -> IngestionResult:
     pdf = pymupdf.open(path)
     document_id = Path(path).stem
     content_hash = hashlib.sha256(Path(path).read_bytes()).hexdigest()
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     encoding = tiktoken.get_encoding("cl100k_base")
 
     chunks = []

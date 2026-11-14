@@ -4,10 +4,6 @@ from uuid import UUID, uuid4
 import pytest
 from httpx import ASGITransport, AsyncClient
 
-from app.api.main import create_app
-from app.core.config import Settings
-
-from .mocks import MockAgent, make_response
 from app.api.dependencies import get_current_user
 from app.api.main import create_app
 from app.core.config import Settings

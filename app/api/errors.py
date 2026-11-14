@@ -3,16 +3,14 @@ import logging
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
-from starlette.exceptions import HTTPException as StarletteHTTPException
 from slowapi.errors import RateLimitExceeded
+from sqlalchemy.exc import InterfaceError, OperationalError
+from sqlalchemy.exc import TimeoutError as PoolTimeoutError
+from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from app.api.runtime import AgentBusyError
 from app.core.config import get_settings
 from app.schemas.api import ErrorResponse
-
-from sqlalchemy.exc import InterfaceError, OperationalError
-from sqlalchemy.exc import TimeoutError as PoolTimeoutError
-
 
 HTTP_STATUS_CODES = {
     401: "UNAUTHENTICATED",

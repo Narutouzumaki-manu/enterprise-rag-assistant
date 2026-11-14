@@ -1,6 +1,6 @@
 import threading
 import time
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from app.schemas.document import Chunk, ChunkMetadata, IngestionResult, SourceType
@@ -18,7 +18,7 @@ def make_chunk(document_id: str, index: int) -> Chunk:
             page_number=index + 1,
             section_title="Intro",
             content_hash="h",
-            ingested_at=datetime.now(timezone.utc),
+            ingested_at=datetime.now(UTC),
         ),
     )
 

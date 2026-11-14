@@ -1,5 +1,4 @@
-from datetime import datetime, timezone
-
+from datetime import UTC, datetime
 
 # In-memory registry: maps content_hash -> document info
 # This is temporary scaffolding — will be replaced by a real
@@ -22,7 +21,7 @@ def register_document(content_hash: str, document_id: str, filename: str) -> Non
     _document_registry[content_hash] = {
         "document_id": document_id,
         "filename": filename,
-        "registered_at": datetime.now(timezone.utc),
+        "registered_at": datetime.now(UTC),
     }
 
 

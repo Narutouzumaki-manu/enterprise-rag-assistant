@@ -5,20 +5,20 @@ from starlette.concurrency import run_in_threadpool
 
 from app.api.bootstrap import build_real_components, real_ingest
 from app.api.errors import register_error_handlers
+from app.api.exchange import ChatStore
 from app.api.ingestion_service import IngestionRunner
+from app.api.limits import limiter
+from app.api.metrics import MetricsMiddleware
+from app.api.middleware import UploadSizeLimitMiddleware
+from app.api.request_id import RequestIdMiddleware
 from app.api.routes import auth, chat, documents, feedback, health, prometheus, sessions
 from app.api.runtime import AgentRuntime
 from app.api.shutdown import drain_background_tasks
 from app.api.startup import sweep_interrupted_documents
-from app.api.exchange import ChatStore
-from app.api.middleware import UploadSizeLimitMiddleware
 from app.api.uploads import MIB
 from app.core.config import Settings, get_settings
-from app.api.limits import limiter
-from app.db.session import create_engine, create_session_factory
-from app.api.request_id import RequestIdMiddleware
-from app.api.metrics import MetricsMiddleware
 from app.core.logging_setup import configure_logging
+from app.db.session import create_engine, create_session_factory
 
 
 def make_runtime(agent, settings: Settings) -> AgentRuntime:

@@ -122,7 +122,7 @@ def test_namespace_separates_entries(tmp_path):
 
 def test_default_key_matches_the_old_throwaway_cache(tmp_path):
     system, prompt = "sys", "q"
-    key = hashlib.sha256(f"Answer\n{system}\n{prompt}".encode("utf-8")).hexdigest()
+    key = hashlib.sha256(f"Answer\n{system}\n{prompt}".encode()).hexdigest()
     path = tmp_path / "cache.json"
     path.write_text(json.dumps({key: {"text": "old"}}), encoding="utf-8")
     empty = MockLLM()
@@ -156,7 +156,7 @@ def test_lazy_inner_factory_is_only_called_on_a_miss(tmp_path):
 
 
 def test_stale_entry_for_an_older_schema_is_a_miss(tmp_path):
-    key = hashlib.sha256("Answer\nsys\nq".encode("utf-8")).hexdigest()
+    key = hashlib.sha256(b"Answer\nsys\nq").hexdigest()
     path = tmp_path / "cache.json"
     path.write_text(json.dumps({key: {"wrong": 1}}), encoding="utf-8")
     inner = MockLLM(structured={Answer: [Answer(text="fresh")]})
@@ -214,7 +214,7 @@ def test_concurrent_calls_keep_the_cache_file_valid(tmp_path):
     def worker(i):
         try:
             llm.complete_structured("sys", f"question {i}", Answer)
-        except Exception as error:  # noqa: BLE001
+        except Exception as error:
             errors.append(error)
 
     threads = [threading.Thread(target=worker, args=(i,)) for i in range(20)]

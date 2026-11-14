@@ -12,11 +12,7 @@ docs
 __pycache__
 .env
 data/
-dataevaldocuments/
-body*.json
-full_run.txt
-check_openrouter_usage.py
-cripts.resolve_labels
 frontend/node_modules
 frontend/dist
 frontend/coverage
+*.env

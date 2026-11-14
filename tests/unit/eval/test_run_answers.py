@@ -12,21 +12,21 @@ Tests:
 import json
 from pathlib import Path
 from unittest.mock import patch
-import pytest
+
 
 from app.agents.fact_checker import ClaimVerdict, Verification
 from app.agents.llm_cache import CachingLLM
 from app.agents.planner import Plan
-from app.agents.synthesizer import NO_EVIDENCE_ANSWER, Draft
-from app.eval.golden_schema import GoldenQuestion
+from app.agents.synthesizer import Draft
 from scripts.run_answers import (
     REFUSAL_STRING,
     compute_sha256,
     get_cache_namespace,
     get_cache_path,
-    get_default_cache_path,
-    main as run_answers_main,
     run_answers,
+)
+from scripts.run_answers import (
+    main as run_answers_main,
 )
 from tests.unit.agents.mocks import MockLLM, MockRetriever, make_chunk
 

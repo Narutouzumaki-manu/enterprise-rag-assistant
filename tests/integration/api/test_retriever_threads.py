@@ -1,5 +1,5 @@
 import threading
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import pytest
 
@@ -9,7 +9,7 @@ from app.schemas.retrieval import RetrievalRequest
 
 
 def _chunks(document_id: str, count: int) -> list[Chunk]:
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     return [
         Chunk(
             chunk_id=f"{document_id}_chunk_{n}",

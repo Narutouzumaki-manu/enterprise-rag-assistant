@@ -1,5 +1,5 @@
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import pytest
 
@@ -24,7 +24,7 @@ def make_chunk(text, position, doc_id, page):
             source_type=SourceType.PDF,
             page_number=page,
             content_hash="fakehash",
-            ingested_at=datetime.now(timezone.utc),
+            ingested_at=datetime.now(UTC),
         ),
     )
 
@@ -79,7 +79,7 @@ def test_end_to_end_with_the_default_retriever():
     assert response.reranker_model == "none"
 
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import pytest
 
@@ -104,7 +104,7 @@ def make_chunk(text, position, doc_id, page):
             source_type=SourceType.PDF,
             page_number=page,
             content_hash="fakehash",
-            ingested_at=datetime.now(timezone.utc),
+            ingested_at=datetime.now(UTC),
         ),
     )
 

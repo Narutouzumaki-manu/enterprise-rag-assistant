@@ -46,7 +46,7 @@ EXTRA_PHRASES = [
 
 
 def python_blocks(text: str) -> list[str]:
-    return re.findall(r"```python\n(.*?)```", text, re.S)
+    return re.findall(r"```python\n(.*?)```", text, re.DOTALL)
 
 
 def class_body(text: str, class_name: str) -> list[str] | None:

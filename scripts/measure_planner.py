@@ -11,11 +11,12 @@ import argparse
 import json
 import sys
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from app.agents.config import AgentConfig
 from app.agents.llm import OpenRouterLLM
+from app.agents.llm_cache import CachingLLM
 from app.agents.planner import make_planner_node
 from app.agents.retriever_agent import make_retriever_node
 from app.agents.state import initial_state
@@ -23,7 +24,6 @@ from app.retrieval.factory import build_default_retriever
 from app.retrieval.metrics import mean, score_against_needs
 from app.schemas.retrieval import RetrievalRequest
 from scripts.run_comparison import load_labels_and_chunks
-from app.agents.llm_cache import CachingLLM
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -176,7 +176,7 @@ def main():
     RESULTS_PATH.write_text(
         json.dumps(
             {
-                "run_at": datetime.now(timezone.utc).isoformat(),
+                "run_at": datetime.now(UTC).isoformat(),
                 "top_k": TOP_K,
                 "questions": len(rows),
                 "llm_calls_made": llm.calls,

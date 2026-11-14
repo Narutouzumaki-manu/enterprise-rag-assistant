@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from app.retrieval.embeddings import EmbeddingService
 from app.retrieval.vector_store import VectorStore
@@ -16,7 +16,7 @@ def make_chunk(text, position, doc_id, page):
             source_type=SourceType.PDF,
             page_number=page,
             content_hash="fakehash",
-            ingested_at=datetime.now(timezone.utc),
+            ingested_at=datetime.now(UTC),
         ),
     )
 

@@ -1,9 +1,11 @@
+import hashlib
+from datetime import UTC, datetime
+from pathlib import Path
+
 import pandas as pd
 import tiktoken
-import hashlib
-from pathlib import Path
-from datetime import datetime, timezone
-from app.schemas.document import Chunk, ChunkMetadata, SourceType, IngestionResult
+
+from app.schemas.document import Chunk, ChunkMetadata, IngestionResult, SourceType
 
 
 def parse_csv(path: str) -> IngestionResult:
@@ -14,7 +16,7 @@ def parse_csv(path: str) -> IngestionResult:
     df = pd.read_csv(path)
     document_id = Path(path).stem
     content_hash = hashlib.sha256(Path(path).read_bytes()).hexdigest()
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
 
     chunks = []
     encoding = tiktoken.get_encoding("cl100k_base")

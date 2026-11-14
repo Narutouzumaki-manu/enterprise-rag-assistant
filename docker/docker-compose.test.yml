@@ -1,0 +1,7 @@
+services:
+  api:
+    command: ["python", "-m", "scripts.dev_mock_server"]
+    environment:
+      MOCK_HOST: "0.0.0.0"
+    volumes:
+      - ../tests:/app/tests:ro

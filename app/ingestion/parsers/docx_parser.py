@@ -1,10 +1,12 @@
 import hashlib
+from datetime import UTC, datetime
 from pathlib import Path
-from datetime import datetime, timezone
+
 import tiktoken
 from docx import Document
-from app.schemas.document import Chunk, ChunkMetadata, SourceType, IngestionResult
+
 from app.ingestion.chunker import chunk_text
+from app.schemas.document import Chunk, ChunkMetadata, IngestionResult, SourceType
 
 
 def _extract_sections(doc: Document) -> list[tuple[str | None, str]]:
@@ -62,7 +64,7 @@ def parse_docx(path: str) -> IngestionResult:
     doc = Document(path)
     document_id = Path(path).stem
     content_hash = hashlib.sha256(Path(path).read_bytes()).hexdigest()
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     encoding = tiktoken.get_encoding("cl100k_base")
 
     chunks = []

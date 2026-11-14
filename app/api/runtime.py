@@ -29,7 +29,7 @@ class AgentRuntime:
                 self._semaphore.acquire(),
                 timeout=self._wait_seconds,
             )
-        except asyncio.TimeoutError:
+        except TimeoutError:
             raise AgentBusyError(
                 "The service is busy. Please try again shortly."
             ) from None

@@ -1,9 +1,4 @@
 """Fake collaborators for testing the agent without a model or network."""
-from app.schemas.retrieval import (
-    RetrievalRequest,
-    RetrievalResponse,
-    RetrievedChunk,
-)
 from collections import deque
 from dataclasses import dataclass
 from typing import Any, TypeVar
@@ -11,6 +6,11 @@ from typing import Any, TypeVar
 from pydantic import BaseModel, ValidationError
 
 from app.agents.llm import LLMError
+from app.schemas.retrieval import (
+    RetrievalRequest,
+    RetrievalResponse,
+    RetrievedChunk,
+)
 
 T = TypeVar("T", bound=BaseModel)
 

@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from uuid import UUID, uuid4
 
 import pytest
@@ -121,7 +121,7 @@ async def test_a_session_comes_back_with_messages_citations_and_trace(client, se
 async def test_someone_elses_unknown_and_deleted_sessions_all_look_the_same(client, session, alice, bob):
     bobs_chat = await repository.create_session(session, bob.id)
     deleted = await repository.create_session(session, alice.id)
-    deleted.deleted_at = datetime.now(timezone.utc)
+    deleted.deleted_at = datetime.now(UTC)
     await session.commit()
 
     responses = [

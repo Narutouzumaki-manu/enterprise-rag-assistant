@@ -1,7 +1,6 @@
 from app.ingestion.parsers.docx_parser import parse_docx
 from app.schemas.document import IngestionResult, SourceType
 
-
 SAMPLE_DOCX_PATH = "tests/fixtures/sample.docx"
 
 

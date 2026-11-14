@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from uuid import uuid4
 
 import pytest
@@ -80,7 +80,7 @@ async def test_citations_get_their_source_file_from_the_documents_table(session)
 async def test_a_soft_deleted_document_still_resolves_to_its_filename(session):
     session.add(models.Document(
         document_id="d1", filename="old.pdf", content_hash="h1", source_type="pdf",
-        status="success", deleted_at=datetime.now(timezone.utc),
+        status="success", deleted_at=datetime.now(UTC),
     ))
     await session.commit()
     assert await repository.get_source_files(session, {"d1"}) == {"d1": "old.pdf"}

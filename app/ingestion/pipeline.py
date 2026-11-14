@@ -1,13 +1,16 @@
 import hashlib
 from pathlib import Path
-from app.schemas.document import IngestionResult, SourceType
+
+from app.ingestion.dedupe import (
+    get_registered_document,
+    is_duplicate,
+    register_document,
+)
 from app.ingestion.parsers.csv_parser import parse_csv
 from app.ingestion.parsers.docx_parser import parse_docx
 from app.ingestion.parsers.pdf_parser import parse_pdf
-from app.ingestion.dedupe import is_duplicate, register_document, get_registered_document
 from app.ingestion.table_format import convert_table_chunks
-
-
+from app.schemas.document import IngestionResult, SourceType
 
 _PARSERS = {
     SourceType.CSV: parse_csv,

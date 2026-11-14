@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from uuid import uuid4
 
 import jwt
@@ -44,7 +44,7 @@ def test_a_token_round_trips_to_the_same_user_id():
 
 
 def test_an_expired_token_is_rejected():
-    long_ago = datetime.now(timezone.utc) - timedelta(minutes=SETTINGS.jwt_expire_minutes + 5)
+    long_ago = datetime.now(UTC) - timedelta(minutes=SETTINGS.jwt_expire_minutes + 5)
     token = create_access_token(uuid4(), SETTINGS, now=long_ago)
     with pytest.raises(TokenError):
         decode_access_token(token, SETTINGS)
@@ -65,7 +65,7 @@ def test_a_token_signed_with_another_secret_is_rejected():
 
 
 def test_an_unsigned_none_algorithm_token_is_rejected():
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     payload = {"sub": str(uuid4()), "iat": now, "exp": now + timedelta(minutes=5)}
     forged = jwt.encode(payload, key=None, algorithm="none")
     with pytest.raises(TokenError):
@@ -79,7 +79,7 @@ def test_a_token_missing_required_claims_is_rejected():
 
 
 def test_a_subject_that_is_not_a_uuid_is_rejected():
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     payload = {"sub": "not-a-uuid", "iat": now, "exp": now + timedelta(minutes=5)}
     token = jwt.encode(payload, SETTINGS.jwt_secret, algorithm=SETTINGS.jwt_algorithm)
     with pytest.raises(TokenError):
