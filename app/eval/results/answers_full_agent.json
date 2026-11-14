@@ -807,8 +807,8 @@
     "category": "table",
     "style": "paraphrase",
     "answer": "TCS's net margin in each quarter of FY26 was: Q1 FY26: 20.1%; Q2 FY26: 19.6%; Q3 FY26: 20.0%; Q4 FY26: 19.4%.",
-    "verification_status": "unverified",
-    "confidence": 0.0,
+    "verification_status": "verified",
+    "confidence": 0.95,
     "citations": [
       {
         "chunk_id": "c894c9d8ec933d86f6eda602705b7c14fc83c0e998ee6d9f2fc0438cc85782ff",
@@ -835,9 +835,415 @@
       ]
     },
     "llm_calls": 5,
-    "latency_ms": 3269.1,
+    "latency_ms": 19227.9,
     "refused": false,
-    "error": "All models failed; last error: Error code: 429 - {'error': {'message': 'Rate limit exceeded: free-models-per-day. Add 10 credits to unlock 1000 free model requests per day', 'code': 429, 'metadata': {'headers': {'X-RateLimit-Limit': '50', 'X-RateLimit-Remaining': '0', 'X-RateLimit-Reset': '1794528000000'}, 'limit_source': 'openrouter_free_tier_daily', 'remedy_hint': 'Wait for the daily reset (see X-RateLimit-Reset), or purchase credits to raise your free-model daily limit.', 'provider_name': None}}, 'user_id': 'user_3KY9KxjsC8uRbrZBi9nMr7xua4Y'}",
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-16",
+    "category": "multi_fact",
+    "style": "paraphrase",
+    "answer": "The total dividend per share for FY26 was ₹110. It consisted of three interim dividends of ₹11 each (₹33 total), a special dividend of ₹46, and a proposed final dividend of ₹31.",
+    "verification_status": "verified",
+    "confidence": 0.95,
+    "citations": [
+      {
+        "chunk_id": "d5b71070e29d7d334a6caa4dfa31ea108c838bdff9a99f84698ecbe7354ba19d",
+        "page_number": 19,
+        "source_snippet": "Dividends declared for FY26 The total of ₹110 per share is made up of three interim dividends of ₹11 each (₹33), a special dividend of ₹46 and a proposed final dividend of ₹31."
+      },
+      {
+        "chunk_id": "a3392cc16d643abcdb5ba8b2236aa77d0269d2873d8e16f8a2d1b2b95e1583c0",
+        "page_number": 19,
+        "source_snippet": "...Dividend: Total for FY26; Per share: ₹110."
+      }
+    ],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 1,
+        "synthesize": 1,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 3,
+    "latency_ms": 32343.6,
+    "refused": false,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-17",
+    "category": "comparison",
+    "style": "paraphrase",
+    "answer": "I don't have sufficient evidence in the provided documents.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 3,
+        "synthesize": 3
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "retrieve",
+        "synthesize",
+        "retrieve",
+        "synthesize"
+      ]
+    },
+    "llm_calls": 4,
+    "latency_ms": 106226.0,
+    "refused": true,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-18",
+    "category": "fact_lookup",
+    "style": "paraphrase",
+    "answer": "In Q3 FY26, cash flow from operations was 130.4% of net profit. The ratio was unusually high because non-cash exceptional charges reduced reported profit but did not affect cash generation, so cash collections and working-capital management outpaced accounting profit.",
+    "verification_status": "verified",
+    "confidence": 0.95,
+    "citations": [
+      {
+        "chunk_id": "6d4dc98b16d8aff5832f3b7983a91179270f8c85c5e4603777fe64fca9b690aa",
+        "page_number": 17,
+        "source_snippet": "...Quarter: Q3 FY26; Cash flow from operations as % of net profit: 130.4%. Quarter: Q4 FY26; Cash flow from operations as % of net profit: 106.7%."
+      },
+      {
+        "chunk_id": "f445707ef6a7c7a50908fdeecd94136d312ee8a9ba16e9623b817de5fa0b52a9",
+        "page_number": 17,
+        "source_snippet": "...The Q3 figure of 130.4% reflects the effect of non-cash exceptional charges in that quarter, which reduced reported profit but not cash."
+      },
+      {
+        "chunk_id": "7830bcee5cb0f12bf1bb40eba24d32381ba523f54dfa6cfddc62f66eee0001a5",
+        "page_number": 21,
+        "source_snippet": "...Analysts generally focus on profit before exceptional items to judge underlying performance, while reported profit remains the figure that flows into statutory accounts and dividends."
+      }
+    ],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 1,
+        "synthesize": 1,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 3,
+    "latency_ms": 34098.7,
+    "refused": false,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-19",
+    "category": "numerical_comparison",
+    "style": "paraphrase",
+    "answer": "Cost of revenue as a share of revenue fell by 1.6 percentage points between Q1 (60.9%) and Q4 (59.3%) of FY26.",
+    "verification_status": "verified",
+    "confidence": 0.95,
+    "citations": [
+      {
+        "chunk_id": "643ecf8b8c27c84d285aa6aefae14320cf3cd2c1ed501514d10ec7e8d17cbc33",
+        "page_number": 16,
+        "source_snippet": "...₹ million: of revenue; Q1: 60.9%; Q2: 60.4%; Q3: 59.2%; Q4: 59.3%. ₹ million: Other income, net; Q1: 14,650; Q2: 6,380; Q3: 9,220; Q4: 4,920."
+      },
+      {
+        "chunk_id": "7c9c886a9ef3c7f0b8138113160638610a824bae61e7e9e9fdb15586e6abacc4",
+        "page_number": 16,
+        "source_snippet": "...The decline of roughly 1.6 percentage points between Q1 and Q4 is the main driver of margin expansion."
+      }
+    ],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 1,
+        "synthesize": 1,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 3,
+    "latency_ms": 45926.6,
+    "refused": false,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-20",
+    "category": "fact_lookup",
+    "style": "paraphrase",
+    "answer": "TCS's headcount rose in Q4 FY26, with a net addition of 2,356 employees. This was the first quarterly increase after two consecutive quarters of decline (Q2 and Q3 FY26), during which headcount fell by roughly 28,500.",
+    "verification_status": "verified",
+    "confidence": 0.95,
+    "citations": [
+      {
+        "chunk_id": "0fb5349acef4b39f9f0d73a893002c43f16129dbce7a53b57f0ef8e23512e6ac",
+        "page_number": 28,
+        "source_snippet": "Headcount through the year Headcount peaked at 613,069 in June 2025, fell by roughly 28,500 over the next two quarters, and then returned to growth in March 2026 with a net addition of 2,356."
+      }
+    ],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 1,
+        "synthesize": 1,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 3,
+    "latency_ms": 41227.5,
+    "refused": false,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-21",
+    "category": "fact_lookup",
+    "style": "exact",
+    "answer": "TCS planned to cut about 12,000 employees, roughly 2% of the total workforce.",
+    "verification_status": "verified",
+    "confidence": 0.95,
+    "citations": [
+      {
+        "chunk_id": "fc47d94718294a3990f150643a1f9a3cb57e8c1eb822b2015f2543546527e8f4",
+        "page_number": 31,
+        "source_snippet": "Restructuring in FY26 In 2025 TCS announced plans to reduce its workforce by about 12,000 employees, roughly 2% of the total, as part of a programme to realign skills with AI-led delivery and changing..."
+      }
+    ],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 1,
+        "synthesize": 1,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 3,
+    "latency_ms": 40428.6,
+    "refused": false,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-22",
+    "category": "table",
+    "style": "paraphrase",
+    "answer": "In Q1 FY27, TCS's total contract value (TCV) was $4.7 billion for North America, $2.5 billion for BFSI, and $1.4 billion for Consumer Business. The overall order book TCV for the quarter was $9.5 billion.",
+    "verification_status": "verified",
+    "confidence": 0.95,
+    "citations": [
+      {
+        "chunk_id": "6c16a69e84aa3cf38296f9f869ac65c520566330abdf2984423af24a0c0a6ed5",
+        "page_number": 38,
+        "source_snippet": "Indicator: Order book TCV; Q1 FY27: $9.5 billion. Indicator: North America TCV; Q1 FY27: $4.7 billion."
+      },
+      {
+        "chunk_id": "5ce13dfb4ce9901078a1e63788a34b987963a7900f846c3fb4ecd12845a0ee01",
+        "page_number": 38,
+        "source_snippet": "...Order intake of $9.5 billion is lower than Q4 FY26's exceptional $12 billion but comparable to the $9.3 to $10.0 billion range of the first three quarters of FY26."
+      }
+    ],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 1,
+        "synthesize": 1,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 3,
+    "latency_ms": 58773.2,
+    "refused": false,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-23",
+    "category": "fact_lookup",
+    "style": "exact",
+    "answer": "TCS signed three mega deals in Q4 FY26 and five mega deals over the whole year FY26.",
+    "verification_status": "verified",
+    "confidence": 0.95,
+    "citations": [
+      {
+        "chunk_id": "b88ccce8cd90a10e3b7b92b80ad05f6429443441ad4571b5f5432eebc839cac1",
+        "page_number": 22,
+        "source_snippet": "...The company signed three mega deals in Q4 and five over the year. TCV is the total value of contracts signed in a period and is not the same as revenue; deals are delivered over several years."
+      },
+      {
+        "chunk_id": "8bffb4a9d6c43c73eca7b4f4e67a8fe48145172cad010600ec4a154e6bb30fc1",
+        "page_number": 40,
+        "source_snippet": "...• Mega deal: a very large contract; TCS reported five in FY26. • BFSI: Banking, Financial Services and Insurance."
+      }
+    ],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 1,
+        "synthesize": 1,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 3,
+    "latency_ms": 24081.7,
+    "refused": false,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-32",
+    "category": "multi_fact",
+    "style": "paraphrase",
+    "answer": "TCS's voluntary attrition rate for IT services in Q1 FY27 was 13.6%, and total cash and investments at the end of that quarter were ₹50,232 crore.",
+    "verification_status": "verified",
+    "confidence": 0.95,
+    "citations": [
+      {
+        "chunk_id": "94763f8b16973043959448b89163449eebfc083680235a55c7d33b18a8b0bfe8",
+        "page_number": 30,
+        "source_snippet": "...Period: Q1 FY27; Voluntary attrition, IT services (LTM): 13.6%."
+      },
+      {
+        "chunk_id": "6c16a69e84aa3cf38296f9f869ac65c520566330abdf2984423af24a0c0a6ed5",
+        "page_number": 38,
+        "source_snippet": "...Indicator: Total cash and investments; Q1 FY27: ₹50,232 crore."
+      }
+    ],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 1,
+        "synthesize": 1,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 3,
+    "latency_ms": 34804.5,
+    "refused": false,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-33",
+    "category": "fact_lookup",
+    "style": "paraphrase",
+    "answer": "I don't have sufficient evidence in the provided documents.",
+    "verification_status": "unverified",
+    "confidence": 0.0,
+    "citations": [],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 3,
+        "synthesize": 3
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "retrieve",
+        "synthesize",
+        "retrieve",
+        "synthesize"
+      ]
+    },
+    "llm_calls": 4,
+    "latency_ms": 54581.3,
+    "refused": true,
+    "error": null,
+    "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
+  },
+  {
+    "question_id": "tcs-gold-34",
+    "category": "multi_fact",
+    "style": "paraphrase",
+    "answer": "In Q4 FY26, North America accounted for 48.5% of TCS revenue, and BFSI accounted for 31.6%.",
+    "verification_status": "verified",
+    "confidence": 0.95,
+    "citations": [
+      {
+        "chunk_id": "7c326f579b679d6004e9c7ef086315e0f2888926b084474d42558320544bf261",
+        "page_number": 25,
+        "source_snippet": "Share of revenue: North America; Q2 FY25: 47.6%; Q1 FY26: 48.7%; Q2 FY26: 48.8%; Q4 FY26: 48.5%; Q1 FY27: 48.3%. revenue: Latin America; Q2 FY25: 1.8%; Q1 FY26: 1.9%; Q2 FY26: 1.9%; Q4 FY26: 1.9%; Q1..."
+      },
+      {
+        "chunk_id": "bf8c4bb045fe05b2337d35048edc1863be18c76c947154701c99d200ba2b17c8",
+        "page_number": 26,
+        "source_snippet": "BFSI share of revenue: BFSI; Q2 FY25: 30.8%; Q1 FY26: 32.0%; Q2 FY26: 32.2%; Q4 FY26: 31.6%; Q1 FY27: 32.1%."
+      }
+    ],
+    "trace": {
+      "counts": {
+        "plan": 1,
+        "retrieve": 1,
+        "synthesize": 1,
+        "fact_check": 1
+      },
+      "labels": [
+        "plan",
+        "retrieve",
+        "synthesize",
+        "fact_check"
+      ]
+    },
+    "llm_calls": 3,
+    "latency_ms": 58930.1,
+    "refused": false,
+    "error": null,
     "golden_hash": "9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc"
   }
 ]
