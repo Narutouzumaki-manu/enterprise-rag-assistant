@@ -9,7 +9,7 @@ instead of calling the model.
 import json
 import sys
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from app.agents.config import AgentConfig
@@ -223,7 +223,7 @@ def main():
     RESULTS_PATH.write_text(
         json.dumps(
             {
-                "run_at": datetime.now(timezone.utc).isoformat(),
+                "run_at": datetime.now(UTC).isoformat(),
                 "top_k": TOP_K,
                 "evidence_cap": cap,
                 "llm_requests_made": 0,

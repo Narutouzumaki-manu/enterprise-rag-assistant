@@ -10,9 +10,9 @@ from app.agents.synthesizer import (
     NO_EVIDENCE_ANSWER,
     SEARCH_FAILED_ANSWER,
     Draft,
-    make_synthesizer_node,
     best_snippet,
     make_snippet,
+    make_synthesizer_node,
 )
 from app.schemas.agent import AgentStep, AgentStepType, Citation
 from tests.unit.agents.mocks import MockLLM, MockRetriever, make_chunk

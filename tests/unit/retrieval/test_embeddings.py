@@ -1,5 +1,5 @@
 import math
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import pytest
 
@@ -25,7 +25,7 @@ def make_chunk(text: str, position: int = 0) -> Chunk:
             source_type=SourceType.PDF,
             page_number=1,
             content_hash="fakehash",
-            ingested_at=datetime.now(timezone.utc),
+            ingested_at=datetime.now(UTC),
         ),
     )
 

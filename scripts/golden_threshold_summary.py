@@ -26,7 +26,7 @@ def main() -> None:
             retried += 1
         confidences.append(response["confidence"])
         print(f"{r['question_id']:<13}{response['verification_status']:<10}{response['confidence']:>6}  "
-              f"{len(retrieves):>6}  {str(sizes):<22}{coverages}")
+              f"{len(retrieves):>6}  {sizes!s:<22}{coverages}")
 
     print(f"\nquestions with more than one search pass: {retried} of {len(data['results'])}")
     print("confidence values seen:", sorted(set(confidences)))

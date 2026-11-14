@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from uuid import uuid4
 
 import pytest
@@ -49,7 +49,7 @@ async def test_list_shows_only_own_live_sessions_most_recently_active_first(sess
     second = await repository.create_session(session, me.id)
     await repository.create_session(session, someone_else.id)
     deleted = await repository.create_session(session, me.id)
-    deleted.deleted_at = datetime.now(timezone.utc)
+    deleted.deleted_at = datetime.now(UTC)
     await session.commit()
 
     await repository.save_exchange(session, first.id, "q", _response(), {})  # now the most recent
@@ -68,6 +68,6 @@ async def test_a_session_is_found_only_by_its_owner_and_only_while_it_is_live(se
     assert await repository.get_user_session(session, someone_else.id, mine.id) is None
     assert await repository.get_user_session(session, me.id, uuid4()) is None
 
-    mine.deleted_at = datetime.now(timezone.utc)
+    mine.deleted_at = datetime.now(UTC)
     await session.commit()
     assert await repository.get_user_session(session, me.id, mine.id) is None

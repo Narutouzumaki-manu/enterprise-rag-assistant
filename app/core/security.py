@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from uuid import UUID
 
 import jwt
@@ -27,7 +27,7 @@ def verify_password(password: str, password_hash: str) -> bool:
 
 
 def create_access_token(user_id: UUID, settings: Settings, now: datetime | None = None) -> str:
-    issued_at = now or datetime.now(timezone.utc)
+    issued_at = now or datetime.now(UTC)
     payload = {
         "sub": str(user_id),
         "iat": issued_at,

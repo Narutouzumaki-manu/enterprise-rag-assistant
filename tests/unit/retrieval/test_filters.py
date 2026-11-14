@@ -1,5 +1,5 @@
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import pytest
 
@@ -8,7 +8,6 @@ from app.retrieval.embeddings import EmbeddingService
 from app.retrieval.filters import to_chroma_where, validate_filters
 from app.retrieval.vector_store import VectorStore
 from app.schemas.document import Chunk, ChunkMetadata, SourceType
-
 
 # ---- the helper functions on their own ----
 
@@ -60,7 +59,7 @@ def make_chunk(text, position, doc_id, page, content_hash):
             source_type=SourceType.PDF,
             page_number=page,
             content_hash=content_hash,
-            ingested_at=datetime.now(timezone.utc),
+            ingested_at=datetime.now(UTC),
         ),
     )
 

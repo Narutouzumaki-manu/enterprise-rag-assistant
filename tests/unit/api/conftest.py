@@ -1,5 +1,6 @@
 import pytest
 
+
 @pytest.fixture(autouse=True)
 def _reset_rate_limits():
     from app.api.limits import limiter

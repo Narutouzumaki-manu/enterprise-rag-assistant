@@ -1,7 +1,6 @@
 from app.ingestion.parsers.pdf_parser import parse_pdf
 from app.schemas.document import IngestionResult, SourceType
 
-
 SAMPLE_PDF_PATH = "tests/fixtures/sample.pdf"
 
 

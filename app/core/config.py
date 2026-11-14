@@ -3,7 +3,6 @@ from functools import lru_cache
 from pydantic import Field, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-
 DEV_JWT_SECRET = "dev-only-secret-change-me-before-deploying"
 
 

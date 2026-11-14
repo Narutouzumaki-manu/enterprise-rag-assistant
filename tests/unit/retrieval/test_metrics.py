@@ -4,7 +4,6 @@ import pytest
 
 from app.retrieval.metrics import mean, ndcg_at_k, recall_at_k, reciprocal_rank
 
-
 # ---- recall@k ----
 
 def test_recall_all_found():

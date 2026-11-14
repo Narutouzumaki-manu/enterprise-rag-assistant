@@ -2,8 +2,11 @@ import math
 
 import pytest
 
-from app.retrieval.metrics import merge_identical_needs, needs_ranking, score_against_needs
-
+from app.retrieval.metrics import (
+    merge_identical_needs,
+    needs_ranking,
+    score_against_needs,
+)
 
 # ---- merge_identical_needs ----
 

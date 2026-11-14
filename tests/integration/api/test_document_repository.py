@@ -1,6 +1,6 @@
-import pytest
 from uuid import uuid4
 
+import pytest
 from sqlalchemy.exc import IntegrityError
 
 from app.db import repository

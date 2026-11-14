@@ -1,8 +1,12 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import tiktoken
 
-from app.ingestion.table_format import convert_table_chunks, linearize_table, looks_like_table
+from app.ingestion.table_format import (
+    convert_table_chunks,
+    linearize_table,
+    looks_like_table,
+)
 from app.schemas.document import Chunk, ChunkMetadata, SourceType
 
 TABLE = (
@@ -29,7 +33,7 @@ def make_chunk(text, source_type=SourceType.PDF, position=1):
             page_number=3,
             section_title="Table 1",
             content_hash="filehash",
-            ingested_at=datetime.now(timezone.utc),
+            ingested_at=datetime.now(UTC),
         ),
     )
 

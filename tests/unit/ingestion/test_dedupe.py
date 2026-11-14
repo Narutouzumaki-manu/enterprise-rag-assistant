@@ -1,9 +1,10 @@
 import pytest
+
 from app.ingestion.dedupe import (
+    clear_registry,
+    get_registered_document,
     is_duplicate,
     register_document,
-    get_registered_document,
-    clear_registry,
 )
 
 

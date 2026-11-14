@@ -2,8 +2,7 @@
 
 import math
 from dataclasses import dataclass
-from pathlib import Path
-from typing import Any
+
 import pytest
 
 from app.eval.golden_schema import GoldenQuestion
@@ -11,6 +10,8 @@ from scripts.run_retrieval_eval import (
     compute_sha256,
     get_fact_phrases,
     score_retrieval,
+)
+from scripts.run_retrieval_eval import (
     main as eval_main,
 )
 

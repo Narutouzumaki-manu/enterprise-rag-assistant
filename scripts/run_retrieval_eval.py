@@ -12,7 +12,7 @@ import math
 import sys
 import time
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from statistics import median
 from typing import Any
@@ -477,7 +477,7 @@ def main() -> int:
     print("All 3 retrievers built and warmed up.\n")
 
     # 5. Run evaluation
-    timestamp = datetime.now(timezone.utc).isoformat()
+    timestamp = datetime.now(UTC).isoformat()
     per_question_records: list[dict[str, Any]] = []
     results_by_variant: dict[str, dict[str, Any]] = {}
     eval_run_results: list[dict[str, Any]] = []
@@ -676,7 +676,7 @@ def main() -> int:
 
     # 7. Print summary tables to stdout
     print("=" * 110)
-    print(f"OVERALL RESULTS: ALL 25 ANSWERABLE QUESTIONS (top_k=20)")
+    print("OVERALL RESULTS: ALL 25 ANSWERABLE QUESTIONS (top_k=20)")
     print(f"{'Variant':<20} | {'Recall@5':>9} | {'Recall@10':>9} | {'Recall@15':>9} | {'Recall@20':>9} | {'MRR':>9} | {'NDCG@10':>9} | {'Avg ms':>8} | {'P95 ms':>8}")
     print("-" * 110)
     for vname, data in results_by_variant.items():
@@ -685,7 +685,7 @@ def main() -> int:
     print("-" * 110)
 
     print("\n" + "=" * 110)
-    print(f"INDEPENDENT SUBSET: 21 ANSWERABLE QUESTIONS (not in flagged_same_fact)")
+    print("INDEPENDENT SUBSET: 21 ANSWERABLE QUESTIONS (not in flagged_same_fact)")
     print(f"{'Variant':<20} | {'Recall@5':>9} | {'Recall@10':>9} | {'Recall@15':>9} | {'Recall@20':>9} | {'MRR':>9} | {'NDCG@10':>9} | {'Avg ms':>8} | {'P95 ms':>8}")
     print("-" * 110)
     for vname, data in results_by_variant.items():

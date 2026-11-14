@@ -22,7 +22,6 @@ from app.agents.synthesizer import (
 from app.schemas.agent import AgentStep, AgentStepType
 from app.schemas.retrieval import RetrievedChunk
 
-
 SYSTEM_PROMPT = """You check whether a draft answer is supported by passages from the user's documents.
 
 Steps:

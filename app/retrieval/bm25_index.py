@@ -1,7 +1,8 @@
 import re
-from app.retrieval.filters import validate_filters  
+
 from rank_bm25 import BM25Okapi
 
+from app.retrieval.filters import validate_filters
 from app.schemas.document import Chunk
 from app.schemas.retrieval import RetrievedChunk
 

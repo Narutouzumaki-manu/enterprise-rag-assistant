@@ -1,16 +1,16 @@
 
 from collections import defaultdict
 from dataclasses import dataclass
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from uuid import UUID
 
 from sqlalchemy import func, select, update
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 from sqlalchemy.ext.asyncio import AsyncSession
-from app.schemas.document import Chunk
 
 from app.db import models
 from app.schemas.agent import AgentResponse
+from app.schemas.document import Chunk
 
 TITLE_MAX_CHARS = 60
 
@@ -54,7 +54,7 @@ async def save_exchange(
     """Saves the question, the answer, its citations and its trace in ONE transaction."""
     # Set in Python, not by the database: Postgres now() is the transaction's start time,
     # so both messages would get the same time and their order would be unclear.
-    answered_at = datetime.now(timezone.utc)
+    answered_at = datetime.now(UTC)
     asked_at = answered_at - timedelta(milliseconds=max(round(response.latency_ms), 1))
 
     user_message = models.Message(

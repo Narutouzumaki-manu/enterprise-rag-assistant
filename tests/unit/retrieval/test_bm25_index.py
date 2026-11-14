@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import pytest
 
@@ -18,7 +18,7 @@ def make_chunk(text, position, doc_id="doc1", page=1, section=None):
             page_number=page,
             section_title=section,
             content_hash="fakehash",
-            ingested_at=datetime.now(timezone.utc),
+            ingested_at=datetime.now(UTC),
         ),
     )
 

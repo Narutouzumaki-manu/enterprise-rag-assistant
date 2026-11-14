@@ -10,12 +10,9 @@ Tests:
 import json
 from pathlib import Path
 
-import pytest
 
 from scripts.eval_gate import (
-    DEFAULT_TOLERANCE,
     compare_metrics,
-    compute_sha256,
     run_eval_gate,
 )
 from tests.unit.agents.mocks import MockRetriever, make_chunk

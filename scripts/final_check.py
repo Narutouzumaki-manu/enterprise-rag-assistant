@@ -2,7 +2,7 @@ import json
 import sys
 import time
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from statistics import median
 
@@ -139,7 +139,7 @@ def main() -> None:
         }
 
     RESULTS_PATH.write_text(json.dumps({
-        "run_at": datetime.now(timezone.utc).isoformat(),
+        "run_at": datetime.now(UTC).isoformat(),
         "configuration": {
             "embedding_model": factory.EMBEDDING_MODEL, "use_keyword": shipped.use_keyword,
             "reranker": shipped.reranker.model_name if shipped.reranker else None,

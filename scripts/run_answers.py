@@ -7,7 +7,6 @@ import argparse
 import dataclasses
 import hashlib
 import json
-import os
 import sys
 import time
 import uuid
@@ -21,7 +20,7 @@ from app.agents.agent import build_agent
 from app.agents.config import AgentConfig
 from app.agents.fact_checker import Verification
 from app.agents.guard import quarantine
-from app.agents.llm import DEFAULT_MODEL, LLMError, OpenRouterLLM
+from app.agents.llm import OpenRouterLLM
 from app.agents.llm_cache import CachingLLM
 from app.agents.planner import Plan
 from app.agents.synthesizer import (
@@ -35,7 +34,6 @@ from app.agents.synthesizer import (
 from app.eval.golden_schema import validate_golden_questions
 from app.eval.validate_golden import load_chunks
 from app.retrieval.factory import build_default_retriever
-from app.schemas.agent import AgentResponse
 from app.schemas.retrieval import RetrievalRequest
 
 # Ensure UTF-8 output on Windows
