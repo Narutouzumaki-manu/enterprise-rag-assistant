@@ -25,3 +25,5 @@ Notes
 - Model: nvidia/nemotron-3-ultra-550b-a55b:free, same for all runs per the operator
   (not stored per record).
 - Corrections: none so far.
+- 2026-11-15: 2 cells (tcs-gold-20, full_agent and agent_no_checker) normalised from `correct` to `CORRECT` (casing only).
+- Teammate blind check: 4 answers graded without seeing our grades, 4 of 4 agreed.
