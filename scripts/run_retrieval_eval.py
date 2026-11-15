@@ -399,7 +399,7 @@ def write_summary_markdown(
         "",
         "1. **PDF Format Only**: Chunks are ingested solely from the formatted PDF (`tcs_annual_report.pdf`) using PyMuPDF; DOCX/HTML parsers were not exercised.",
         "2. **Single Document**: Evaluated exclusively against the TCS Annual Report 2025-26 (118 chunks). Cross-document scaling and interference remain untested.",
-        "3. **Small Query Sample**: 34 questions total (25 answerable, 9 unanswerable), of which 21 answerable questions are fully independent of the tuning set.",
+        "3. **Small Query Sample**: 34 questions total (25 answerable, 9 unanswerable), of which 21 answerable questions remain after excluding the four that repeat a tuning fact (some still share source chunks with tuning questions, so this subset is not fully independent).",
         "4. **Retrieval-Only Scope**: Evaluates search ranking and evidence discovery only. Downstream LLM generation, grounding faithfulness, and refusal behavior were not evaluated in this run.",
         "5. **Simple Keyword Tokenizer**: The BM25 keyword index uses simple punctuation/whitespace regex tokenization without stemming, lemmatization, or financial acronym expansion.",
         "",
