@@ -1,0 +1,9 @@
+question_id,category,grade_from_sheet,faithfulness,context_recall,judge_model,ragas_version,contexts_chunk_ids
+tcs-gold-04,table,UNSUPPORTED_EXTRA,0.7500,1.0000,nvidia/nemotron-3.5-super-vl:free,0.2.14,a02985505213ccc504b1cb6476b05fa21c39dd8648e85f953daf5b7a1b864f76
+tcs-gold-06,table,CORRECT,1.0000,1.0000,nvidia/nemotron-3.5-super-vl:free,0.2.14,b88ccce8cd90a10e3b7b92b80ad05f6429443441ad4571b5f5432eebc839cac1;a02985505213ccc504b1cb6476b05fa21c39dd8648e85f953daf5b7a1b864f76;5ce13dfb4ce9901078a1e63788a34b987963a7900f846c3fb4ecd12845a0ee01
+tcs-gold-15,table,CORRECT,1.0000,1.0000,nvidia/nemotron-3.5-super-vl:free,0.2.14,c894c9d8ec933d86f6eda602705b7c14fc83c0e998ee6d9f2fc0438cc85782ff
+tcs-gold-34,multi_fact,CORRECT,1.0000,1.0000,nvidia/nemotron-3.5-super-vl:free,0.2.14,7c326f579b679d6004e9c7ef086315e0f2888926b084474d42558320544bf261;bf8c4bb045fe05b2337d35048edc1863be18c76c947154701c99d200ba2b17c8
+tcs-gold-22,table,CORRECT,1.0000,1.0000,nvidia/nemotron-3.5-super-vl:free,0.2.14,6c16a69e84aa3cf38296f9f869ac65c520566330abdf2984423af24a0c0a6ed5;5ce13dfb4ce9901078a1e63788a34b987963a7900f846c3fb4ecd12845a0ee01
+tcs-gold-23,fact_lookup,CORRECT,1.0000,1.0000,nvidia/nemotron-3.5-super-vl:free,0.2.14,b88ccce8cd90a10e3b7b92b80ad05f6429443441ad4571b5f5432eebc839cac1;8bffb4a9d6c43c73eca7b4f4e67a8fe48145172cad010600ec4a154e6bb30fc1
+tcs-gold-13,numerical_comparison,ROUNDED,1.0000,1.0000,nvidia/nemotron-3.5-super-vl:free,0.2.14,52d56c713a26a9b8df34db9e6c1b36cfaa8438286cd129157d0dad6cbc719e11;0fb5349acef4b39f9f0d73a893002c43f16129dbce7a53b57f0ef8e23512e6ac
+tcs-gold-19,numerical_comparison,CORRECT,1.0000,1.0000,nvidia/nemotron-3.5-super-vl:free,0.2.14,643ecf8b8c27c84d285aa6aefae14320cf3cd2c1ed501514d10ec7e8d17cbc33;7c9c886a9ef3c7f0b8138113160638610a824bae61e7e9e9fdb15586e6abacc4
