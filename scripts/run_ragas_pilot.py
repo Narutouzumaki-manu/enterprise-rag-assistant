@@ -8,19 +8,19 @@ through CachingLLM with judge-model-specific cache files and namespaces.
 import argparse
 import asyncio
 import csv
-from dataclasses import dataclass, field
-from datetime import datetime, timezone
 import hashlib
 import json
 import math
 import os
-from pathlib import Path
 import random
 import re
 import socket
 import sys
 import types
-from typing import Any, Optional
+from dataclasses import dataclass, field
+from datetime import UTC, datetime
+from pathlib import Path
+from typing import Any
 
 from dotenv import load_dotenv
 
@@ -132,7 +132,7 @@ def load_excluded_overlap_ids(path: Path | str = DEFAULT_OVERLAP_JSON) -> list[s
     data = json.loads(p.read_text(encoding="utf-8"))
     flagged = data.get("flagged_same_fact", [])
     ids = [item["golden"] for item in flagged if isinstance(item, dict) and "golden" in item]
-    return sorted(list(set(ids)))
+    return sorted(set(ids))
 
 
 def select_sample_questions(
@@ -170,11 +170,11 @@ def select_sample_questions(
     return [gold_04] + sampled_7
 
 
-def compute_mean(scores: list[Optional[float]]) -> tuple[str, int]:
+def compute_mean(scores: list[float | None]) -> tuple[str, int]:
     """Compute mean over non-missing scores only. Returns (formatted_mean, n)."""
     valid = [
         s for s in scores
-        if s is not None and not (isinstance(s, float) and (math.isnan(s) or s != s))
+        if s is not None and not (isinstance(s, float) and (math.isnan(s) ))
     ]
     if not valid:
         return "", 0
@@ -193,9 +193,7 @@ def load_grades_from_sheet(grading_sheet_path: Path | str) -> dict[str, str]:
             qid = row.get("question_id", "")
             variant = row.get("variant", "")
             grade = row.get("grade", "")
-            if variant == "full_agent" and qid:
-                grades[qid] = grade
-            elif qid not in grades and qid:
+            if qid and (variant == "full_agent" or qid not in grades):
                 grades[qid] = grade
     return grades
 
@@ -254,7 +252,7 @@ def extract_float_scores(rows: list[dict[str, str]], field_name: str) -> list[fl
 @dataclass
 class RagasCachingLLM(BaseRagasLLM):
     """Bridges Ragas metric evaluation to project CachingLLM."""
-    caching_llm: Optional[CachingLLM] = None
+    caching_llm: CachingLLM | None = None
     judge_model: str = DEFAULT_JUDGE_MODEL
     planned_requests: int = 0
     cache_misses: int = 0
@@ -267,8 +265,8 @@ class RagasCachingLLM(BaseRagasLLM):
         self,
         prompt: PromptValue,
         n: int = 1,
-        temperature: Optional[float] = None,
-        stop: Optional[list[str]] = None,
+        temperature: float | None = None,
+        stop: list[str] | None = None,
         callbacks: Any = None,
     ) -> LLMResult:
         prompt_text = prompt.to_string()
@@ -294,8 +292,8 @@ class RagasCachingLLM(BaseRagasLLM):
         self,
         prompt: PromptValue,
         n: int = 1,
-        temperature: Optional[float] = None,
-        stop: Optional[list[str]] = None,
+        temperature: float | None = None,
+        stop: list[str] | None = None,
         callbacks: Any = None,
     ) -> LLMResult:
         return self.generate_text(prompt, n=n, temperature=temperature, stop=stop, callbacks=callbacks)
@@ -312,8 +310,8 @@ def update_eval_results_row(
     n_questions: int,
     judge_model: str,
     generator_model: str,
-    faithfulness_scores: list[Optional[float]],
-    context_recall_scores: list[Optional[float]],
+    faithfulness_scores: list[float | None],
+    context_recall_scores: list[float | None],
 ) -> bool:
     """Update eval_results.csv with ONE row for (ragas_pilot_full_agent, judge_model).
 
@@ -343,8 +341,8 @@ def update_eval_results_row(
         r = next(csv.DictReader([existing_lines[0], line]))
         rows.append(r)
 
-    run_id = f"run_{hashlib.md5(f'ragas_pilot_{datetime.now(timezone.utc).isoformat()}'.encode()).hexdigest()[:12]}"
-    timestamp = datetime.now(timezone.utc).isoformat()
+    run_id = f"run_{hashlib.md5(f'ragas_pilot_{datetime.now(UTC).isoformat()}'.encode()).hexdigest()[:12]}"
+    timestamp = datetime.now(UTC).isoformat()
     notes = get_summary_notes(judge_model)
 
     new_row = {
@@ -387,20 +385,20 @@ def update_eval_results_row(
 
 
 def run_ragas_pilot(
-    expect_hash: Optional[str] = None,
+    expect_hash: str | None = None,
     judge_model: str = DEFAULT_JUDGE_MODEL,
-    only: Optional[str] = None,
-    limit: Optional[int] = None,
+    only: str | None = None,
+    limit: int | None = None,
     live: bool = False,
     golden_path: Path | str = "app/eval/golden_questions.json",
     overlap_path: Path | str = DEFAULT_OVERLAP_JSON,
     answers_path: Path | str = "app/eval/results/answers_full_agent.json",
     grading_sheet_path: Path | str = "app/eval/results/grading_sheet.csv",
-    cache_path: Optional[Path | str] = None,
+    cache_path: Path | str | None = None,
     output_path: Path | str = DEFAULT_OUTPUT_CSV,
     eval_results_path: Path | str = DEFAULT_EVAL_RESULTS_CSV,
-    chunks: Optional[list[Any]] = None,
-    caching_llm: Optional[CachingLLM] = None,
+    chunks: list[Any] | None = None,
+    caching_llm: CachingLLM | None = None,
     verbose: bool = True,
 ) -> int:
     load_dotenv(".env")
@@ -512,7 +510,7 @@ def run_ragas_pilot(
     results: list[dict[str, Any]] = []
     faithfulness_valid: list[float] = []
     context_recall_valid: list[float] = []
-    aborted_reason: Optional[str] = None
+    aborted_reason: str | None = None
     question_raw_responses: dict[str, list[str]] = {}
 
     for idx, ans in enumerate(sample_answers, 1):
@@ -542,7 +540,7 @@ def run_ragas_pilot(
                 retrieved_contexts=contexts,
             )
             score_f = faithfulness_metric.single_turn_score(sample_f)
-            if score_f is not None and not (isinstance(score_f, float) and (math.isnan(score_f) or score_f != score_f)):
+            if score_f is not None and not (isinstance(score_f, float) and (math.isnan(score_f) )):
                 f_val = f"{score_f:.4f}"
                 faithfulness_valid.append(score_f)
             if verbose:
@@ -568,7 +566,7 @@ def run_ragas_pilot(
                 reference=reference,
             )
             score_cr = context_recall_metric.single_turn_score(sample_cr)
-            if score_cr is not None and not (isinstance(score_cr, float) and (math.isnan(score_cr) or score_cr != score_cr)):
+            if score_cr is not None and not (isinstance(score_cr, float) and (math.isnan(score_cr) )):
                 cr_val = f"{score_cr:.4f}"
                 context_recall_valid.append(score_cr)
             if verbose:
@@ -624,7 +622,7 @@ def run_ragas_pilot(
     all_avg_cr, all_n_cr = compute_mean(all_cr_scores)
 
     # Check for multiple judge models
-    distinct_judges = sorted(list({r.get("judge_model") for r in merged_rows if r.get("judge_model")}))
+    distinct_judges = sorted({r.get("judge_model") for r in merged_rows if r.get("judge_model")})
     has_mixed_judges = len(distinct_judges) > 1
 
     generator_model = "nvidia/nemotron-3-ultra-550b-a55b:free"
@@ -671,7 +669,7 @@ def run_ragas_pilot(
                 print(f"No scores to write to {eval_results_path}")
     else:
         # Dry Run: print what it would write
-        print(f"\n[DRY RUN] No files written (--live not specified).")
+        print("\n[DRY RUN] No files written (--live not specified).")
         print(f"[DRY RUN] Would update/write {len(merged_rows)} rows in {output_path}:")
         for r in merged_rows:
             print(
@@ -713,7 +711,7 @@ def run_ragas_pilot(
     return 0
 
 
-def main(argv: Optional[list[str]] = None) -> int:
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Run Ragas pilot evaluation on full_agent answers.")
     parser.add_argument("--expect-hash", type=str, default=None, help="Expected golden file SHA-256 hash")
     parser.add_argument("--judge-model", type=str, default=DEFAULT_JUDGE_MODEL, help="Judge model identifier")

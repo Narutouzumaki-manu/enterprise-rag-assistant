@@ -10,11 +10,10 @@ Tests (tmp paths, stub judge, no network):
 - a dry run writes no files
 """
 
-import csv
 import json
-from pathlib import Path
 import sys
 import types
+from pathlib import Path
 from typing import Any
 
 import pytest
@@ -27,27 +26,21 @@ if "langchain_community.chat_models.vertexai" not in sys.modules:
 
 pytest.importorskip("ragas")
 
+
 from scripts.run_ragas_pilot import (
-    DEFAULT_JUDGE_MODEL,
     REFUSAL_STRING,
-    RagasCachingLLM,
     compute_mean,
-    extract_float_scores,
     get_judge_cache_file,
     get_judge_cache_namespace,
     get_summary_notes,
-    load_excluded_overlap_ids,
     merge_pilot_rows,
     run_ragas_pilot,
     sanitize_model_id,
     select_sample_questions,
-    update_eval_results_row,
 )
-from app.agents.llm_cache import CachingLLM
-from langchain_core.prompt_values import StringPromptValue
 
 
-def make_dummy_answer(qid: str, refused: bool = False, citations: list[str] = None) -> dict[str, Any]:
+def make_dummy_answer(qid: str, refused: bool = False, citations: list[str] | None = None) -> dict[str, Any]:
     return {
         "question_id": qid,
         "category": "table" if "table" in qid else "fact_lookup",
