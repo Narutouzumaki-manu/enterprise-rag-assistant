@@ -1,927 +1,363 @@
-# Enterprise RAG Assistant — Ingestion Module
+# Enterprise RAG Assistant
 
-> **Member 1 — Document Ingestion & Preprocessing**
+## 1. Problem Statement & Architecture
 
-This section documents the development and implementation of the **Ingestion Module** for the Enterprise RAG Assistant.
+Enterprise knowledge discovery across heterogeneous corporate documentation (such as financial annual reports, PDFs, DOCX files, and tabular CSVs) is frequently impaired by LLM hallucinations, lost context, and ungrounded generation. The Enterprise RAG Assistant provides an end-to-end question-answering system designed for verifiable corporate document search. It parses source files into token-bounded, structure-aware chunks, executes dense semantic retrieval, and orchestrates an agentic reasoning cycle featuring query planning, iterative retrieval retries, and strict claim-level citation fact-checking to yield grounded answers with exact passage citations or explicit refusals when evidence is insufficient.
 
-The ingestion layer is responsible for accepting source documents, extracting their content, preserving important metadata, creating retrieval-ready chunks, detecting duplicates, and returning a consistent `IngestionResult` to downstream components.
+### System Architecture
+
+```text
++-----------------------------------------------------------------------------------+
+|                                  Client Browser                                   |
++-----------------------------------------------------------------------------------+
+                                          |
+                                          | HTTP (Port 80)
+                                          v
++-----------------------------------------------------------------------------------+
+|                        Frontend Service (Docker / Nginx)                          |
+|  - Serves compiled React SPA static assets                                        |
+|  - Overwrites X-Forwarded-For with $remote_addr (single trusted proxy)            |
+|  - Reverse-proxies API routes (/auth, /chat, /sessions, /documents, /feedback,    |
+|    /health, /docs, /redoc, /openapi.json) to the API service (internal port 8000) |
+|  - Blocks /metrics (404); metrics are internal to the stack                       |
++-----------------------------------------------------------------------------------+
+                                          |
+                                          | Internal HTTP (Port 8000)
+                                          v
++-----------------------------------------------------------------------------------+
+|                         API Service (FastAPI / Uvicorn)                           |
+|                                                                                   |
+|  +-----------------------------------------------------------------------------+  |
+|  |                             FastAPI Web Layer                               |  |
+|  |  - Auth, Sessions, Documents, Chat, Streaming (SSE), Feedback, Health,      |  |
+|  |    Prometheus metrics                                                       |  |
+|  +-----------------------------------------------------------------------------+  |
+|                                         |                                         |
+|  +-----------------------------------------------------------------------------+  |
+|  |                        Agent Orchestrator & Logic                           |  |
+|  |  - Plan-and-solve agent loop, retrieval query formulation                   |  |
+|  |  - Fact-checker & citation verification against retrieved passages          |  |
+|  |  - CachingLLM wrapper / token budgeting                                     |  |
+|  +-----------------------------------------------------------------------------+  |
+|                                         |                                         |
+|  +-----------------------------------------------------------------------------+  |
+|  |                     Embedded Chroma Vector Store (In-Process)               |  |
+|  |  - Persisted at /app/data/chroma (chroma_data volume)                       |  |
+|  |  - BAAI/bge-small-en-v1.5 embeddings (no standalone vector DB server)       |  |
+|  |  - BM25 keyword search & cross-encoder reranker in-process                  |  |
+|  +-----------------------------------------------------------------------------+  |
++-----------------------------------------------------------------------------------+
+        |                                   |                               |
+        | SQL / asyncpg                     | redis-py                      | HTTPS
+        v                                   v                               v
++-----------------------+       +-----------------------+       +-------------------+
+|      PostgreSQL       |       |         Redis         |       |    OpenRouter     |
+|   (postgres:5432)     |       |     (redis:6379)      |       |  External LLM API |
+| - Users & Auth        |       | - Rate Limiter State  |       | (nemotron models) |
+| - Chat Sessions       |       | - Temporary Caches    |       +-------------------+
+| - Messages & Exchanges|       +-----------------------+
+| - Document Metadata   |
+| - Audit Logs          |
++-----------------------+
+```
+
+*(Note: The system runs entirely within these services. There is no separate asynchronous worker service and no external vector database server; Chroma runs embedded directly within the API process).*
+
+Detailed documentation of the ingestion module: [docs/ingestion-module.md](docs/ingestion-module.md)
 
 ---
 
-## 📌 Current Status
+## 2. Results
 
-**Status: ✅ Core Ingestion Module Complete**
+### Setup
 
-**Development period:** September 10–18, 2026
+The assistant was evaluated on 34 frozen golden questions about one document (the TCS annual report PDF): 25 answerable and 9 unanswerable. The golden file’s SHA-256 (9f78d9b8…) matched three recorded copies and did not change. All answers came from one model, nvidia/nemotron-3-ultra-550b-a55b:free (not stored per record; same model according to the operator).
 
-### Supported formats
+Variants:
+- **single_draft**: one search, one draft, no planner, no retries, no fact-check.
+- **full_agent**: plan, retrieve, draft, fact-check, with retries.
+- **agent_no_checker**: replayed on all 34 questions from the cache (0 live requests).
 
-- ✅ CSV
-- ✅ DOCX
-- ✅ PDF
+Grading rubric (app/eval/grading_rules.md): CORRECT, ROUNDED, PARTIAL, WRONG_FIGURE, REFUSED_ANSWERABLE and UNSUPPORTED_EXTRA for answerable questions; REFUSED_GOOD and ANSWERED_BAD for unanswerable ones. Answers were graded against the reference answers and the PDF, with AI assistance (see provenance).
 
-### Core capabilities
+### Results (34 questions)
 
-- ✅ Source-type detection
-- ✅ Format-specific parsing
-- ✅ Token-aware chunking
-- ✅ Sentence-aware overlap
-- ✅ Section-title extraction
-- ✅ Structured table extraction
-- ✅ Page metadata for PDFs
-- ✅ Row metadata for CSV/table content
-- ✅ Deterministic SHA-256 hashing
-- ✅ Duplicate detection
-- ✅ Unified ingestion pipeline
-- ✅ Unit tests
-- ✅ Integration tests
+| Grade | full_agent | single_draft | agent_no_checker |
+|---|:---:|:---:|:---:|
+| CORRECT | 19 | 18 | 19 |
+| ROUNDED | 2 | 2 | 2 |
+| PARTIAL | 0 | 0 | 0 |
+| WRONG_FIGURE | 0 | 0 | 0 |
+| UNSUPPORTED_EXTRA | 1 | 0 | 1 |
+| REFUSED_ANSWERABLE | 3 | 5 | 3 |
+| REFUSED_GOOD | 9 | 9 | 9 |
+| ANSWERED_BAD | 0 | 0 | 0 |
 
-### Intentionally deferred
+The agent_no_checker column equals full_agent because all 34 answers were identical; its 25 newer grades are mechanical copies.
 
-- 🟡 OCR for scanned PDFs
-- 🟡 OCR/extraction of embedded DOCX images
-- 🟡 Persistent Postgres-backed deduplication
+### Subset without repeated tuning facts (n=21)
 
----
+Four golden questions (gold-04, gold-14, gold-16, gold-21) repeat a fact that was used while tuning the system, so they are excluded here. The overlap is recorded in app/eval/golden_tuned_overlap.json, and the retrieval evaluation already excludes them (25 − 4 = 21). Results on the remaining 21 answerable questions:
 
-# 🏗️ Ingestion Architecture
+| Variant | CORRECT | ROUNDED | REFUSED_ANSWERABLE |
+|---|:---:|:---:|:---:|
+| full_agent | 16 | 2 | 3 |
+| agent_no_checker | 16 | 2 | 3 |
+| single_draft | 14 | 2 | 5 |
 
-```text
-                    ┌─────────────────┐
-                    │ Input Document  │
-                    └────────┬────────┘
-                             │
-                             ▼
-                   ┌──────────────────┐
-                   │ Source Detection  │
-                   └────────┬─────────┘
-                            │
-           ┌────────────────┼────────────────┐
-           ▼                ▼                ▼
-      CSV Parser       DOCX Parser      PDF Parser
-           │                │                │
-           │                ├─ Sections      ├─ Sections
-           │                ├─ Tables        ├─ Tables
-           │                │                └─ Page metadata
-           ▼                ▼                ▼
-       Row chunks      Text/Table chunks  Page chunks
-           │                │                │
-           │                └───────┬────────┘
-           │                        ▼
-           │                 ┌──────────────┐
-           │                 │   Chunker    │
-           │                 │ token-aware  │
-           │                 │ + overlap    │
-           │                 └──────┬───────┘
-           │                        │
-           └────────────────────────┘
-                            │
-                            ▼
-                     ┌──────────────┐
-                     │ SHA-256 Hash │
-                     └──────┬───────┘
-                            │
-                            ▼
-                     ┌──────────────┐
-                     │ Deduplication│
-                     └──────┬───────┘
-                            │
-                            ▼
-                   ┌──────────────────┐
-                   │ IngestionResult  │
-                   │    + Chunk[]     │
-                   └────────┬─────────┘
-                            │
-                            ▼
-                     Member 2 Retrieval
-```
+The pattern is the same as on the full set. The overlap does not appear to drive the difference. This subset removes repeated facts but not shared source chunks, so it is not fully independent.
 
----
+### Findings
 
-# 📂 Module Structure
+**Refusals.** On the 25 answerable questions, full_agent wrongly refused 3 (12%) and single_draft 5 (20%). With n=25 and one run each, this is within noise; the variants should not be ranked. gold-05 was answered in an earlier run (different date, probably a different model version) and refused now.
 
-```text
-app/
-├── ingestion/
-│   ├── parsers/
-│   │   ├── csv_parser.py
-│   │   ├── docx_parser.py
-│   │   └── pdf_parser.py
-│   ├── chunker.py
-│   ├── dedupe.py
-│   └── pipeline.py
-│
-├── schemas/
-│   └── document.py
-│
-├── core/
-│
-tests/
-├── unit/
-│   └── ingestion/
-│       ├── test_csv_parser.py
-│       ├── test_docx_parser.py
-│       ├── test_pdf_parser.py
-│       ├── test_chunker.py
-│       ├── test_dedupe.py
-│       └── test_pipeline.py
-│
-└── integration/
-    └── test_ingestion_integration.py
-```
+**Likely causes of the 3 remaining wrong refusals.** These are hypotheses from retrieval ranks and the single-draft text. The full_agent traces were not re-read.
+- **gold-05**: the single draft saw both quarterly figures but likely declined to subtract them, because the prompt forbids calculated values.
+- **gold-17**: the vertical TCV table ranks 19th in dense search and 8th in hybrid search, so it was likely retrieved too late.
+- **gold-33**: likely a wording mismatch on a relative period, which points to a planner problem.
 
----
+**No wrong figures.** Neither variant gave a wrong figure in its substantive answers: 0 wrong figures in 42 substantive answers (22 from full_agent, 20 from single_draft). Neither variant answered an unanswerable question: 0 of 18 attempts (9 per variant) were answered. Most of the 9 unanswerable questions are cases where the report states the data is omitted, so this is the easy case. The closest ones (gold-30, gold-31) were refused too.
 
-# 🧱 Shared Data Contract
+**Fact-checker.** Replaying without the checker changed 0 of 34 answers, so on this set the checker neither helped nor hurt. There were no wrong figures for it to catch; the one unsupported detail (gold-04) passed. That answer, one of the 22 that could reach the checker, was marked verified with an unsupported “Table 1” label. This is the pipeline’s default section label for table chunks. The model copied it, and the checker passed it because it was in the retrieved passage. The figures were right. One case is not a rate.
 
-The ingestion module is built around the shared schema defined in:
+**Cost.** single_draft used 1 model call per question (median 1, max 1); full_agent a median of 3 (max 5). The fact-checker added 1 call per answered question and changed 0 of 34 answers, so on this set it cost extra calls and changed nothing.
 
-```text
-app/schemas/document.py
-```
+**Source inconsistency (gold-20).** The PDF text on p28 says headcount fell “roughly 28,500” over two quarters, but its table gives 30,906 to Q3. The grade is a judgment call.
 
-The schema contains:
+### RAGAS pilot (n=8)
 
-### `SourceType`
+Faithfulness and ContextRecall, ragas 0.2.14, computed on the text of the cited chunks only. Per-question scores: app/eval/results/ragas_pilot.csv. The sample was gold-04, forced in on purpose (it is also in the tuning-overlap set), plus seven answered full_agent questions drawn with seed 2026 from outside that set: gold-06, 15, 34, 22, 23, 13 and 19. Their grades are 6 CORRECT, 1 ROUNDED (gold-13) and 1 UNSUPPORTED_EXTRA (gold-04). gold-34 shares source chunks with a tuning question.
 
-Identifies the source format:
+| Sample | Faithfulness | ContextRecall |
+|---|:---:|:---:|
+| Mean over 8 questions | 0.97 | 1.00 |
+| gold-04 | 0.75 | 1.00 |
+| The other seven | 1.00 each | 1.00 each |
 
-- `PDF`
-- `DOCX`
-- `CSV`
+The judge was nvidia/nemotron-3.5-super-vl:free. It is a different model from the generator, but from the same NVIDIA Nemotron family, so independence is limited and a lenient judge is possible. gold-04 scored 0.75 on Faithfulness because the judge accepted all three figures but marked the “Table 1 on page 23” label as unsupported by the chunk text. This matches the unsupported detail found in the manual grading. On this one case, RAGAS and the pipeline’s own fact-checker disagreed because they saw different inputs: RAGAS saw only the chunk text, while the checker’s passage also carried the section label as metadata.
 
-### `ChunkMetadata`
+With one negative case and seven top scores, the pilot shows that the harness runs and that RAGAS flagged the one known flaw. It does not show that RAGAS discriminates between good and bad answers in general. ContextRecall here measures the cited chunks, not retrieval quality. No RAGAS target is claimed.
 
-Contains metadata such as:
+gold-04’s first run scored 0.0. That run was discarded because the judge cache did not include the judge model, so responses from an earlier judge were probably replayed (1 live request, 2 cache hits). The re-score with judge-specific caching gave 0.75.
 
-- `document_id`
-- `source_type`
-- `page_number`
-- `section_title`
-- `content_hash`
-- `row_range`
-- `ingested_at`
+### Grading provenance
 
-### `Chunk`
+Grades are AI-assisted, not hand graded. The first 22 full_agent grades (gold-01 to 14, 24 to 31) came from a Claude review entered by script. The other 12 full_agent grades, all 34 single_draft grades and the 9 original agent_no_checker grades were a first pass by an AI coding agent from the PDF.
 
-Represents a retrieval-ready piece of source content:
+The author checked all 13 non-CORRECT answerable rows and a random sample of 10 CORRECT rows (seed 2026) against the PDF, with 0 disagreements, plus spot checks on gold-04, 09, 18, 30 and 31.
 
-- `chunk_id`
-- `document_id`
-- `text`
-- `token_count`
-- `metadata`
+A teammate also graded 4 answers blind, without seeing our grades, and agreed on 4 of 4. This is the only independent human check, and 4 answers is a small sample. Details are in app/eval/grading_log.md.
 
-### `IngestionResult`
+### Limits
 
-Provides a consistent result contract for the ingestion pipeline.
+- One document, 34 questions, one run per variant, one free-tier model, one set of AI-assisted grades.
+- The independent human check covers only 4 answers.
+- A RAGAS pilot (n=8, judge nvidia/nemotron-3.5-super-vl:free, same family as the generator) was run on cited chunks. It is not a full evaluation, and no RAGAS target is claimed. One judge pass per row, no variance estimate.
+- The model name is not stored per record.
+- The real-stack test (K2) used curl and one easy question: it is a smoke test, not a quality check, and it did not exercise the React UI.
+
+### Retrieval Evaluation Performance
+
+From `app/eval/results/retrieval_summary.md` (Corpus: `data/eval/documents/tcs_annual_report.pdf`, 118 chunks; Golden SHA-256: `9f78d9b82e4a7ccb2f2449cc28f45ea0a324e0c0507cb38938745ea8914bf5fc`):
+
+#### 1. Overall Performance (All 25 Answerable Questions)
+
+| Pipeline Variant | Recall@5 | Recall@10 | Recall@15 | Recall@20 | MRR | NDCG@10 | Avg Latency (ms) | P95 Latency (ms) |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| `retrieval_dense` | 0.6133 | 0.7200 | 0.8600 | 0.9200 | 0.5230 | 0.5552 | 23.8 | 27.8 |
+| `retrieval_keyword` | 0.6667 | 0.8200 | 0.8800 | 0.8800 | 0.6088 | 0.6437 | 24.8 | 27.9 |
+| `retrieval_rerank` | 0.6533 | 0.7733 | 0.9200 | 0.9200 | 0.5564 | 0.6107 | 1124.5 | 1269.6 |
+
+#### 2. Independent Subset Performance (21 Questions Not Flagged SAME_FACT)
+
+| Pipeline Variant | Recall@5 | Recall@10 | Recall@15 | Recall@20 | MRR | NDCG@10 | Avg Latency (ms) | P95 Latency (ms) |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| `retrieval_dense` | 0.5635 | 0.6667 | 0.8333 | 0.9048 | 0.4321 | 0.4871 | 23.7 | 25.7 |
+| `retrieval_keyword` | 0.6349 | 0.7857 | 0.8571 | 0.8571 | 0.5343 | 0.5856 | 24.8 | 27.9 |
+| `retrieval_rerank` | 0.6190 | 0.7302 | 0.9048 | 0.9048 | 0.4958 | 0.5556 | 1107.5 | 1269.6 |
+
+### Manual Browser Test
+
+The React interface was tested by hand in a browser on a fresh clone of the repository, using the Docker quickstart below, one user, one document (the TCS annual report) and the free model. This is a manual check, not an automated test suite.
+
+| Check | Result |
+|---|---|
+| Login; wrong password shows a clear message; an invalid token returns to the login page | Verified |
+| Upload shows progress (reading, making it searchable, ready); a duplicate upload is rejected | Verified |
+| Processing steps appear one by one; the answer shows sources and the "Found in your documents" badge | Verified |
+| Blank question is not sent; an unknown conversation address returns 404 and opens a new chat | Verified |
+| Busy state shows a countdown and a "Try again" button (tested with `AGENT_MAX_CONCURRENT=1`) | Verified |
+| Closing the tab during an answer: the saved answer is there when the conversation is reopened | Verified |
+| Rating an answer works right after it appears; a second rating replaces the first | Verified |
+| An unanswerable question is refused calmly with the red "Unverified in documents" badge | Verified |
+| Keyboard-only use of login, navigation, upload area, chat and rating | Verified |
+| Backend stopped | Partial: the upload shows "Upload failed (HTTP 502)"; the other views show no error |
+
+Not tested in the browser: deleting only your own files (needs a second user) and the `partially_verified` badge (covered by unit tests only).
 
 ---
 
-# 📄 Format Support
+## 3. Quickstart
 
-## CSV
+**Requirements:** Docker Desktop (Compose v2), an OpenRouter API key, and about 15 GB of free disk. Tested on Windows with Docker Desktop.
 
-CSV files are treated as **structured records** rather than flowing prose.
-
-The current design intentionally uses:
-
-```text
-1 CSV row → 1 Chunk
-```
-
-Each chunk contains:
-
-- Row data formatted as readable text
-- Source type
-- Row range
-- Content hash
-- Ingestion timestamp
-- Deterministic chunk ID
-- Real tokenizer-based token count
-
-### Why CSV is different
-
-Applying prose-oriented chunking across unrelated CSV rows could combine independent records and reduce retrieval quality.
-
-A future refinement may support chunking of exceptionally long text cells, such as a `notes` column.
-
----
-
-## DOCX
-
-DOCX ingestion supports:
-
-- Paragraph extraction
-- Heading-based section detection
-- Structured table extraction
-- Token-aware chunking
-- Sentence-level overlap
-
-### Section extraction
-
-Paragraphs are grouped according to DOCX heading styles such as:
-
-```text
-Heading 1
-Heading 2
-...
-```
-
-Each section is then independently processed by the chunker.
-
-### Table extraction
-
-Tables are extracted separately from prose.
-
-Example representation:
-
-```text
-Category | Amount
-Revenue  | 100000
-Costs    | 75000
-Profit   | 25000
-```
-
-Tables receive:
-
-```text
-section_title = "Table N"
-```
-
-and appropriate `row_range` metadata.
-
-This prevents table content from being silently flattened into normal prose.
-
----
-
-## PDF
-
-PDF ingestion supports:
-
-- Page-by-page extraction
-- Human-readable page numbers
-- Section detection
-- Structured table extraction
-- Token-aware chunking
-- Table/prose duplication prevention
-
-### Page preservation
-
-PyMuPDF internally uses zero-based page indexes.
-
-The ingestion layer converts these to human-readable page numbers:
-
-```text
-page_index + 1
-```
-
-Therefore:
-
-```text
-Internal page 0 → page_number = 1
-Internal page 1 → page_number = 2
-```
-
-### Page-aware chunking
-
-PDFs are chunked **per page**, rather than across the entire document.
-
-This preserves accurate:
-
-```text
-page_number
-```
-
-metadata even when a single page produces multiple chunks.
-
-### Section detection
-
-PDF headings are detected using font-size information.
-
-The current heuristic considers lines that are:
-
-- Approximately 1.15× or more than the page's average font size
-- Under 100 characters
-
-as heading candidates.
-
-### Table extraction
-
-PyMuPDF's table detection functionality is used to identify ruled table grids.
-
-A bounding-box exclusion mechanism prevents table-cell text from being extracted a second time as normal prose.
-
-This avoids duplicated retrieval content.
-
----
-
-# ✂️ Token-Aware Chunking
-
-The chunker lives in:
-
-```text
-app/ingestion/chunker.py
-```
-
-The chunker was intentionally implemented as a separate module rather than embedding complex splitting logic inside each parser.
-
-### Features
-
-- Token-aware chunk limits
-- Configurable `max_tokens`
-- Configurable overlap
-- Sentence-aware splitting
-- Sentence-level overlap
-- Avoids intentionally splitting in the middle of sentences
-
-Default configuration established during development:
-
-```text
-max_tokens = 400
-overlap_tokens ≈ 50
-```
-
-The implementation uses `tiktoken` with:
-
-```text
-cl100k_base
-```
-
-for token counting.
-
-### Example flow
-
-```text
-Long document
-     ↓
-Sentence extraction
-     ↓
-Token-aware packing
-     ↓
-Chunk 1
-     ↓
-Overlap
-     ↓
-Chunk 2
-     ↓
-Overlap
-     ↓
-Chunk 3
-```
-
-The overlap exists to preserve context between adjacent chunks.
-
----
-
-# 🔐 Hashing & Deduplication
-
-Deduplication is implemented in:
-
-```text
-app/ingestion/dedupe.py
-```
-
-The current implementation uses SHA-256 content hashes.
-
-Functions include:
-
-```text
-is_duplicate(content_hash, registry)
-register_document(content_hash, document_id, registry)
-```
-
-A registry reset/clear mechanism is also provided for test isolation.
-
-## Current implementation
-
-The registry is intentionally **in-memory**.
-
-This is temporary scaffolding.
-
-## Planned implementation
-
-The in-memory registry will eventually be replaced by the shared Postgres-backed document registry.
-
-This allows the ingestion layer to integrate with the persistent document registry once the database component is available.
-
----
-
-# 🔄 Unified Ingestion Pipeline
-
-The unified entry point is:
-
-```text
-app/ingestion/pipeline.py
-```
-
-with:
-
-```text
-ingest_document()
-```
-
-The pipeline provides a single entry point regardless of source format.
-
-Conceptually:
-
-```text
-Input file
-    ↓
-Detect extension
-    ↓
-Select parser
-    ↓
-Extract content
-    ↓
-Chunk where appropriate
-    ↓
-Generate hashes
-    ↓
-Check duplicates
-    ↓
-Return IngestionResult
-```
-
-The pipeline also handles:
-
-- Missing files
-- Unsupported extensions
-- Invalid input
-- Duplicate documents
-
-Failures are returned through `IngestionResult` rather than producing unhandled exceptions.
-
----
-
-# 🧪 Testing
-
-The ingestion module was developed with unit and integration tests throughout the implementation.
-
-## Final test breakdown
-
-| Component | Tests |
-|---|---:|
-| CSV parser | 7 |
-| DOCX parser | 12 |
-| PDF parser | 12 |
-| Chunker | 7 |
-| Deduplication | 6 |
-| Pipeline | 11 |
-| Integration | 3 |
-| **Total** | **58** |
-
-The complete test suite was run after the final PRD/TRD gap review and reported green.
-
-## Integration coverage
-
-The integration suite verifies:
-
-1. Full multi-format ingestion.
-2. Duplicate detection during re-ingestion.
-3. Isolation of invalid files from valid files in the same batch.
-
----
-
-# 🐛 Engineering Lessons & Debugging History
-
-The ingestion module was developed incrementally, and several real implementation issues were encountered and resolved.
-
-### PowerShell execution policy
-
-The initial environment required:
-
-```powershell
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-```
-
-before the virtual environment could be activated normally.
-
-### Python module imports
-
-Running parser files directly caused:
-
-```text
-ModuleNotFoundError
-```
-
-The project was correctly executed as a package module:
+**1. Clone the repository**
 
 ```bash
-python -m app.ingestion.parsers.csv_parser
+git clone https://github.com/Narutouzumaki-manu/enterprise-rag-assistant.git
+cd enterprise-rag-assistant
 ```
 
-A project-level `pytest.ini` with:
+**2. Create the environment file.** Docker reads only `docker/.env`. The `.env.example` in the repository root is for running the API outside Docker and is not used here.
 
-```text
-pythonpath = .
+```bash
+# macOS / Linux / Git Bash
+cp docker/.env.compose.example docker/.env
+```
+```powershell
+# Windows PowerShell
+Copy-Item docker/.env.compose.example docker/.env
 ```
 
-was also added to resolve pytest import behavior.
+**3. Fill in three values in `docker/.env`.** Compose refuses to start if any of them is empty.
 
-### CSV formatting
+| Variable | What to put there |
+|---|---|
+| `POSTGRES_PASSWORD` | A random password using letters and digits only (it is placed inside a database URL): `python -c "import secrets; print(secrets.token_hex(16))"` |
+| `JWT_SECRET` | A random secret of at least 32 characters. **Replace the placeholder with a unique value**; never run with a published secret: `python -c "import secrets; print(secrets.token_urlsafe(48))"` |
+| `OPENROUTER_API_KEY` | Your OpenRouter API key |
 
-An initial sample CSV contained tabs rather than commas.
+Optional: the default model is the free `nvidia/nemotron-3-ultra-550b-a55b:free`. Free models can disappear without notice. To use another model, add `OPENROUTER_MODEL=<model id>` to `docker/.env`.
 
-The fixture was corrected before parser validation continued.
+`docker/.env` is git-ignored. Never commit it.
 
-### Early return indentation bug
+**4. Build and start**
 
-The CSV parser initially returned from inside the row-processing loop.
-
-Result:
-
-```text
-Only first row processed
+```bash
+docker compose --env-file docker/.env -f docker/docker-compose.yml up -d --build
 ```
 
-The return statement was moved outside the loop.
+The first build downloads Python packages, the embedding model and frontend dependencies, and takes several minutes. When it finishes, check that `api` shows `healthy` and `frontend` is up (the `migrate` container exits on purpose):
 
-This became an important reminder that seemingly small indentation errors can alter the entire control flow of a parser.
-
-### Invalid DOCX fixture
-
-An initial DOCX test file was invalid and only 168 bytes.
-
-Rather than debugging the parser against a malformed fixture, a valid DOCX was generated programmatically using `python-docx`.
-
-### PDF binary structure
-
-Opening a PDF in a text editor initially produced apparently unreadable object/stream syntax.
-
-This was confirmed to be normal PDF internal structure rather than evidence of corruption.
-
-### PyMuPDF deprecation warning
-
-The older:
-
-```python
-import fitz
+```bash
+docker compose --env-file docker/.env -f docker/docker-compose.yml ps
 ```
 
-usage was replaced with:
+**5. Create a user.** The command asks for a password twice (at least 8 characters).
 
-```python
-import pymupdf
+```bash
+docker compose --env-file docker/.env -f docker/docker-compose.yml exec api python scripts/create_user.py --email you@example.com
 ```
 
-and corresponding API calls were updated.
-
-### Brittle test versus invariant-based test
-
-When DOCX chunking changed from one chunk per paragraph to real token-aware chunking, an old test expected exactly three chunks.
-
-That test was tied to an implementation detail rather than a system requirement.
-
-It was replaced with an invariant-based test checking the actual requirement:
-
-```text
-chunk token count stays within the configured limit
-```
-
-This distinction became an important engineering lesson during development.
-
----
-
-# 🎯 Important Design Decisions
-
-## 1. Start simple, then add sophistication
-
-The initial parsers deliberately used a walking-skeleton approach.
-
-The first goal was:
-
-```text
-Input → parser → valid Chunk
-```
-
-Once that baseline was working, more advanced functionality was added independently:
-
-```text
-sections
-tables
-token-aware chunking
-overlap
-deduplication
-pipeline orchestration
-```
-
-This kept the implementation testable while allowing complexity to be introduced incrementally.
-
----
-
-## 2. CSV rows remain discrete chunks
-
-CSV is treated differently from prose documents.
-
-```text
-1 row → 1 chunk
-```
-
-This preserves record boundaries.
-
----
-
-## 3. PDF chunking is page-aware
-
-PDF content is chunked independently per page so that every resulting chunk can retain accurate page metadata.
-
----
-
-## 4. Tables are extracted separately
-
-Tables should not simply disappear into prose extraction.
-
-Both DOCX and PDF table content therefore receive dedicated extraction paths.
-
----
-
-## 5. Deterministic identifiers
-
-Content hashing is used to make chunk/document identity deterministic.
-
-This supports:
-
-- Repeatable processing
-- Duplicate detection
-- Idempotency testing
-
----
-
-## 6. Separate chunking from parsing
-
-Parsers are responsible for understanding the source format.
-
-The chunker is responsible for token-aware segmentation.
-
-This separation allows parsing and chunking strategies to evolve independently.
-
----
-
-# 🔎 Final PRD/TRD Gap Review
-
-Before declaring the module complete, the implementation was audited against the documented PRD/TRD requirements.
-
-Two previously undocumented-as-deferred gaps were discovered:
-
-### `section_title`
-
-The field existed in the frozen schema but was not populated.
-
-**Resolution:** implemented section detection for DOCX and PDF.
-
-### Structured table preservation
-
-The PRD required detected tables to be preserved rather than flattened into prose.
-
-**Resolution:** implemented dedicated table extraction for DOCX and PDF.
-
-Both gaps were fixed before completion.
-
----
-
-# ⚠️ Deferred Work
-
-## OCR
-
-OCR remains intentionally deferred.
-
-Planned scope:
-
-```text
-Scanned PDF
-    ↓
-OCR
-    ↓
-Extracted text
-    ↓
-Normal ingestion flow
-```
-
-The same capability is expected to eventually support embedded images inside DOCX documents.
-
-The DOCX embedded-image limitation is explicitly tracked in PRD Section 8.
-
----
-
-## Persistent Deduplication
-
-Current:
-
-```text
-In-memory registry
-```
-
-Future:
-
-```text
-Postgres documents table
-```
-
-The temporary implementation exists so the ingestion pipeline can be developed and tested independently of the database layer.
-
----
-
-## Advanced PDF Layout Analysis
-
-PyMuPDF surfaced an informational suggestion regarding the optional:
-
-```text
-pymupdf_layout
-```
-
-package.
-
-This is considered a potential future enhancement for more sophisticated layout analysis rather than a current requirement.
-
----
-
-# 📅 Development History
-
-## September 10 — Session 1
-
-### Environment & Foundation
-
-- Set up VS Code, Python, and Git.
-- Created the project structure.
-- Created and activated the virtual environment.
-- Installed core dependencies.
-- Built the shared document schema.
-- Created the initial CSV parser.
-- Resolved CSV fixture formatting.
-- Resolved Python package import behavior.
-- Verified the first CSV chunks.
-
-**Milestone:** basic ingestion foundation established.
-
----
-
-## September 13 — Session 2
-
-### Schema Hardening & DOCX
-
-- Closed missing schema fields:
-  - `row_range`
-  - `ingested_at`
-- Added real `tiktoken` tokenization.
-- Added deterministic SHA-256 chunk IDs.
-- Changed parser output to `IngestionResult`.
-- Fixed the CSV early-return indentation bug.
-- Added seven CSV tests.
-- Built the DOCX parser.
-- Created a valid DOCX test fixture.
-- Added eight DOCX tests.
-
-**Milestone:** CSV and DOCX ingestion working against the shared contract.
-
----
-
-## September 14 — Session 3
-
-### PDF & Initial Chunker
-
-- Recovered project state after accidentally closing the terminal.
-- Built the PDF parser.
-- Created a real PDF test fixture.
-- Added page-number metadata.
-- Updated PyMuPDF imports.
-- Added eight PDF tests.
-- Completed the initial three-format parser baseline.
-- Started the token-aware chunker.
-
-**Milestone:** CSV, DOCX, and PDF parsers complete.
-
----
-
-## September 16 — Session 4
-
-### Real Chunking
-
-- Verified token-aware chunking.
-- Confirmed sentence-level overlap.
-- Added seven chunker tests.
-- Integrated chunking into DOCX.
-- Integrated chunking into PDF.
-- Preserved PDF page metadata during chunking.
-- Confirmed CSV should remain row-based.
-- Identified and documented the DOCX embedded-image gap.
-
-**Milestone:** real chunking is now part of DOCX/PDF ingestion.
-
----
-
-## September 17 — Session 5
-
-### Deduplication & Pipeline
-
-- Built SHA-256-based deduplication.
-- Added six deduplication tests.
-- Built the unified ingestion pipeline.
-- Added source detection.
-- Added graceful failure handling.
-- Added duplicate detection.
-- Added eleven pipeline tests.
-- Ran integration tests across CSV, DOCX, and PDF.
-- Confirmed duplicate re-ingestion behavior.
-- Confirmed one bad file does not break a valid batch.
-
-**Milestone:** core ingestion flow end-to-end verified.
-
-**Test baseline:** 50 tests.
-
----
-
-## September 18 — Session 5.5
-
-### Final Gap Review & Completion
-
-A final audit against the PRD/TRD identified two genuine gaps:
-
-1. Missing `section_title` population.
-2. Missing structured table preservation.
-
-Both were implemented.
-
-### DOCX
-
-- Added heading-based section detection.
-- Added separate table extraction.
-- Added row metadata.
-- Added four additional tests.
-
-### PDF
-
-- Added font-size-based section detection.
-- Added PyMuPDF table extraction.
-- Added bounding-box exclusion.
-- Added four additional tests.
-
-The complete test suite was run after the changes and reported green.
-
-**Final test breakdown:** 58 tests.
-
-**Milestone: Member 1 — Ingestion Core Complete.**
-
----
-
-# 🚀 Handoff to Member 2
-
-The ingestion module's downstream contract is now:
-
-```text
-Validated Chunk objects
-        ↓
-IngestionResult
-        ↓
-Member 2 — Retrieval
-```
-
-Member 1's core responsibility ends at producing validated, metadata-rich `Chunk` objects through the ingestion pipeline.
-
-The retrieval module can therefore consume a consistent output regardless of whether the original source was:
-
-```text
-CSV
-DOCX
-PDF
+**6. Open the app** at http://localhost and log in with that email and password.
+
+**Stop and clean up**
+
+```bash
+# stop, keep your data
+docker compose --env-file docker/.env -f docker/docker-compose.yml down
+# stop and delete all data (database, uploads, vector index)
+docker compose --env-file docker/.env -f docker/docker-compose.yml down -v
 ```
 
 ---
 
-# 🏁 Completion Summary
+## 4. API Reference
 
-As of **September 18, 2026**, Member 1's core ingestion workstream is complete.
+In the Docker setup only port 80 is published. Nginx forwards the API routes below to the API service, so every URL uses `http://localhost` with no extra prefix and no port 8000.
 
-The module evolved from a simple parser baseline into a tested ingestion pipeline supporting:
+Interactive API documentation is available at:
+- **Swagger UI**: [http://localhost/docs](http://localhost/docs)
+- **ReDoc**: [http://localhost/redoc](http://localhost/redoc)
+- **OpenAPI Schema**: [http://localhost/openapi.json](http://localhost/openapi.json)
 
-```text
-CSV / DOCX / PDF
-        ↓
-Source Detection
-        ↓
-Format-Specific Parsing
-        ↓
-Section + Table Extraction
-        ↓
-Token-Aware Chunking
-        ↓
-SHA-256 Hashing
-        ↓
-Duplicate Detection
-        ↓
-IngestionResult
-        ↓
-Member 2 Retrieval
+### Route List
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `POST` | `/auth/login` | Authenticate user credentials and issue JWT bearer token |
+| `POST` | `/sessions` | Create a new chat session |
+| `GET` | `/sessions` | List chat sessions for the authenticated user |
+| `GET` | `/sessions/{session_id}` | Retrieve specific session history and metadata |
+| `POST` | `/chat` | Submit a question and receive blocking agent response |
+| `POST` | `/chat/stream` | Submit a question and stream progress & answer via SSE |
+| `POST` | `/documents/upload` | Upload and ingest document (PDF, DOCX, CSV) |
+| `GET` | `/documents` | List all ingested documents |
+| `GET` | `/documents/{document_id}` | Get metadata and status for a specific document |
+| `DELETE` | `/documents/{document_id}` | Delete document record and purge vector chunks from Chroma |
+| `POST` | `/feedback` | Submit quality feedback (rating/comments) on an answer |
+| `GET` | `/health` | Health check endpoint (probes PostgreSQL, Redis, Agent) |
+
+`/metrics` (Prometheus) exists inside the stack but is blocked by nginx and returns 404 from outside.
+
+### cURL Examples
+
+#### 1. User Login (`/auth/login`)
+
+```bash
+curl -X POST "http://localhost/auth/login" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "user@example.com",
+    "password": "yourpassword"
+  }'
 ```
 
-The implementation is backed by **58 unit and integration tests** according to the final test breakdown.
+*Response:*
+```json
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIsIn...",
+  "token_type": "bearer",
+  "expires_in": 3600
+}
+```
 
-The remaining OCR functionality is intentionally deferred and documented as an open item rather than treated as an incomplete core ingestion requirement.
+#### 2. Streaming Chat (`/chat/stream`)
+
+```bash
+curl -N -X POST "http://localhost/chat/stream" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <YOUR_ACCESS_TOKEN>" \
+  -d '{
+    "session_id": "00000000-0000-0000-0000-000000000000",
+    "query": "What was TCS revenue in FY26?",
+    "top_k": 8
+  }'
+```
 
 ---
 
-## 📌 Member 1 Status
+## 5. Team and Ownership
 
-**✅ COMPLETE — Ready for Retrieval Integration**
+- **Member 1 (Document Ingestion & Preprocessing — `app/ingestion/`) : [Manoj.S]
+- **Member 2 (Retrieval & Hybrid Search — `app/retrieval/`) : [Manoj.S,yashwanth.G]
+- **Member 3 (Agentic Orchestration & Verification — `app/agents/`) : [Manoj,nitin]
+- **Member 4 (Backend API, Database & Security — `app/api/`, `app/db/`) : [manoj,prajwal]
+- **Member 5 (Evaluation, Frontend & DevOps — `app/eval/`, `frontend/`, `docker/`) : [manoj,niranjan]
 
-**Last updated:** September 18, 2026
+---
+
+## 6. Known Limitations
+
+- no OCR, so scanned PDFs fail;
+- images embedded in DOCX files are ignored;
+- one shared corpus, so all signed-in users search the same documents;
+- one API replica with an embedded Chroma index;
+- a question takes about 36 to 175 seconds on the free model;
+- when the backend is unavailable the app shows no error, except on upload ("Upload failed (HTTP 502)");
+- a saved rating is not shown again after the page is reloaded (the API does not return it);
+- opening an unknown conversation address silently opens a new chat, with no message;
+- "verified" means supported by the retrieved passage and its metadata, not true;
+- table chunks are all named "Table 1" and the model can repeat it;
+- the instruction filter is a heuristic;
+- grades are AI-assisted;
+- one document and 34 questions;
+- RAGAS was only a pilot;
+- no frontend linter;
+- lint baseline is ruff 75 and mypy 47.
+
+---
+
+## 7. Demo
+
+![Demo](docs/demo.gif)
