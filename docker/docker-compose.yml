@@ -1,8 +1,8 @@
 # Docker Compose configuration.
 # Environment variables:
-#   - Core application settings: see .env.example
-#   - Compose-only database variables (POSTGRES_*): see docker/.env.compose.example
-# Required variables without defaults:
+#   - Docker reads only docker/.env (see docker/.env.compose.example).
+#   - The root .env.example is for running the API outside Docker and is not used here.
+# Required variables without defaults: 
 #   - JWT_SECRET
 #   - POSTGRES_PASSWORD
 #   - OPENROUTER_API_KEY
