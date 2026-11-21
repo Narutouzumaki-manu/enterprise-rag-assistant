@@ -378,6 +378,7 @@ curl -N -X POST "http://localhost/chat/stream" \
 - Closing the browser tab does not stop a running question; the answer is still saved.
 - The free model has a daily request limit.
 - Tested on Windows only.
+-Two moderate npm advisories in react-router-dom; the v7 upgrade is deferred. 
 
 ---
 

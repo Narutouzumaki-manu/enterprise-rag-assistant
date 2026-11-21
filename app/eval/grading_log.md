@@ -10,12 +10,13 @@ Sources of the grades
 - agent_no_checker, the other 25 rows: copied mechanically from full_agent, because the
   answer text is identical (replay with 0 live requests, 0 differing answers).
 
-Human checks (by the author)
-- All 13 non-CORRECT answerable rows (6 full_agent, 7 single_draft) checked against the PDF.
-- Random sample of 10 CORRECT rows (seed 2026): tcs-gold-02, 03, 16, 18, 20, 22, 23, 34
+Human checks
+- By the author: all 13 non-CORRECT answerable rows (6 full_agent, 7 single_draft) checked against the PDF.
+- By the author: random sample of 10 CORRECT rows (seed 2026): tcs-gold-02, 03, 16, 18, 20, 22, 23, 34
   (single_draft), 11 and 12 (full_agent). Disagreements: 0 of 10.
-- Spot checks: tcs-gold-04, 09, 18, 30, 31.
-- [Teammate blind grading of gold-04, 07, 12, 13: include only if you have the record.]
+- By the author: spot checks of tcs-gold-04, 09, 18, 30, 31.
+- By a teammate (independent, blind): tcs-gold-04, 07, 12, 13 graded without seeing our grades.
+  4 of 4 agreed. The teammate's sheet is in the evidence archive.
 
 Notes
 - gold-04 (full_agent): UNSUPPORTED_EXTRA. "Table 1" is a pipeline default section label
@@ -24,6 +25,6 @@ Notes
   disagree; the grade is a judgment call.
 - Model: nvidia/nemotron-3-ultra-550b-a55b:free, same for all runs per the operator
   (not stored per record).
+- RAGAS pilot judge: nvidia/nemotron-3.5-super-vl:free (RAGAS 0.2.14, from ragas_pilot.csv).
 - Corrections: none so far.
 - 2026-11-15: 2 cells (tcs-gold-20, full_agent and agent_no_checker) normalised from `correct` to `CORRECT` (casing only).
-- Teammate blind check: 4 answers graded without seeing our grades, 4 of 4 agreed.
