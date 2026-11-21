@@ -2,7 +2,7 @@
 
 ## 1. Problem Statement & Architecture
 
-Enterprise knowledge discovery across heterogeneous corporate documentation (such as financial annual reports, PDFs, DOCX files, and tabular CSVs) is frequently impaired by LLM hallucinations, lost context, and ungrounded generation. The Enterprise RAG Assistant provides an end-to-end question-answering system designed for verifiable corporate document search. It parses source files into token-bounded, structure-aware chunks, executes dense semantic retrieval, and orchestrates an agentic reasoning cycle featuring query planning, iterative retrieval retries, and strict claim-level citation fact-checking to yield grounded answers with exact passage citations or explicit refusals when evidence is insufficient.
+Enterprise knowledge discovery across heterogeneous corporate documentation (such as financial annual reports, PDFs, DOCX files, and tabular CSVs) is frequently impaired by LLM hallucinations, lost context, and ungrounded generation. The Enterprise RAG Assistant provides an end-to-end question-answering system designed for verifiable corporate document search. It parses source files into token-bounded, structure-aware chunks, executes dense semantic retrieval, and orchestrates an agentic reasoning cycle featuring query planning, iterative retrieval retries, and claim-level fact-checking against the retrieved passages, to yield grounded answers with page-level citations and a short excerpt, or an explicit refusal when evidence is insufficient.
 
 ### System Architecture
 
@@ -35,16 +35,17 @@ Enterprise knowledge discovery across heterogeneous corporate documentation (suc
 |                                         |                                         |
 |  +-----------------------------------------------------------------------------+  |
 |  |                        Agent Orchestrator & Logic                           |  |
-|  |  - Plan-and-solve agent loop, retrieval query formulation                   |  |
+|  |  - Planner, retriever, drafter and fact-checker with bounded retries        |  |
 |  |  - Fact-checker & citation verification against retrieved passages          |  |
-|  |  - CachingLLM wrapper / token budgeting                                     |  |
+|  |  - OpenRouter client with retries                                           |  |
 |  +-----------------------------------------------------------------------------+  |
 |                                         |                                         |
 |  +-----------------------------------------------------------------------------+  |
 |  |                     Embedded Chroma Vector Store (In-Process)               |  |
 |  |  - Persisted at /app/data/chroma (chroma_data volume)                       |  |
 |  |  - BAAI/bge-small-en-v1.5 embeddings (no standalone vector DB server)       |  |
-|  |  - BM25 keyword search & cross-encoder reranker in-process                  |  |
+|  |  - Dense semantic search is the base retriever                              |  |
+|  |  - Optional: BM25 keyword fusion (off by default), cross-encoder reranker   |  |
 |  +-----------------------------------------------------------------------------+  |
 +-----------------------------------------------------------------------------------+
         |                                   |                               |
@@ -54,7 +55,7 @@ Enterprise knowledge discovery across heterogeneous corporate documentation (suc
 |      PostgreSQL       |       |         Redis         |       |    OpenRouter     |
 |   (postgres:5432)     |       |     (redis:6379)      |       |  External LLM API |
 | - Users & Auth        |       | - Rate Limiter State  |       | (nemotron models) |
-| - Chat Sessions       |       | - Temporary Caches    |       +-------------------+
+| - Chat Sessions       |       | - Health-check ping   |       +-------------------+
 | - Messages & Exchanges|       +-----------------------+
 | - Document Metadata   |
 | - Audit Logs          |
@@ -118,7 +119,7 @@ The pattern is the same as on the full set. The overlap does not appear to drive
 
 **No wrong figures.** Neither variant gave a wrong figure in its substantive answers: 0 wrong figures in 42 substantive answers (22 from full_agent, 20 from single_draft). Neither variant answered an unanswerable question: 0 of 18 attempts (9 per variant) were answered. Most of the 9 unanswerable questions are cases where the report states the data is omitted, so this is the easy case. The closest ones (gold-30, gold-31) were refused too.
 
-**Fact-checker.** Replaying without the checker changed 0 of 34 answers, so on this set the checker neither helped nor hurt. There were no wrong figures for it to catch; the one unsupported detail (gold-04) passed. That answer, one of the 22 that could reach the checker, was marked verified with an unsupported “Table 1” label. This is the pipeline’s default section label for table chunks. The model copied it, and the checker passed it because it was in the retrieved passage. The figures were right. One case is not a rate.
+**Fact-checker.** Replaying without the checker changed 0 of 34 answers, so on this set the checker neither helped nor hurt. There were no wrong figures for it to catch; the one unsupported detail (gold-04) passed. That answer, one of the 22 that could reach the checker, was marked verified with an unsupported “Table 1” label. This is the pipeline’s default section label for table chunks. The model copied it, and the checker passed it because it was in the retrieved passage. The figures were right. One case is not a rate. Outside the 34 questions, one answer in the manual browser test was marked verified although it listed quarterly headcounts implying a 30,906 drop next to the “roughly 28,500” figure. “Neither helped nor hurt” applies to the 34 questions only.
 
 **Cost.** single_draft used 1 model call per question (median 1, max 1); full_agent a median of 3 (max 5). The fact-checker added 1 call per answered question and changed 0 of 34 answers, so on this set it cost extra calls and changed nothing.
 
@@ -154,7 +155,7 @@ A teammate also graded 4 answers blind, without seeing our grades, and agreed on
 - The independent human check covers only 4 answers.
 - A RAGAS pilot (n=8, judge nvidia/nemotron-3.5-super-vl:free, same family as the generator) was run on cited chunks. It is not a full evaluation, and no RAGAS target is claimed. One judge pass per row, no variance estimate.
 - The model name is not stored per record.
-- The real-stack test (K2) used curl and one easy question: it is a smoke test, not a quality check, and it did not exercise the React UI.
+- A curl smoke test of the real stack used one easy question. The React interface was checked by hand (see Manual Browser Test): one user, one document.
 
 ### Retrieval Evaluation Performance
 
@@ -168,13 +169,15 @@ From `app/eval/results/retrieval_summary.md` (Corpus: `data/eval/documents/tcs_a
 | `retrieval_keyword` | 0.6667 | 0.8200 | 0.8800 | 0.8800 | 0.6088 | 0.6437 | 24.8 | 27.9 |
 | `retrieval_rerank` | 0.6533 | 0.7733 | 0.9200 | 0.9200 | 0.5564 | 0.6107 | 1124.5 | 1269.6 |
 
-#### 2. Independent Subset Performance (21 Questions Not Flagged SAME_FACT)
+#### 2. Subset Without Repeated Tuning Facts (21 Questions)
 
 | Pipeline Variant | Recall@5 | Recall@10 | Recall@15 | Recall@20 | MRR | NDCG@10 | Avg Latency (ms) | P95 Latency (ms) |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | `retrieval_dense` | 0.5635 | 0.6667 | 0.8333 | 0.9048 | 0.4321 | 0.4871 | 23.7 | 25.7 |
 | `retrieval_keyword` | 0.6349 | 0.7857 | 0.8571 | 0.8571 | 0.5343 | 0.5856 | 24.8 | 27.9 |
 | `retrieval_rerank` | 0.6190 | 0.7302 | 0.9048 | 0.9048 | 0.4958 | 0.5556 | 1107.5 | 1269.6 |
+
+`retrieval_dense` is the plain dense retriever. `retrieval_keyword` is dense search plus BM25 keyword search, fused with reciprocal rank fusion (RRF), with no reranker. `retrieval_rerank` is dense search plus the cross-encoder `cross-encoder/ms-marco-MiniLM-L-6-v2` (about 1.1 seconds per query). The keyword search is off by default in the application. Latency was measured on one machine with 118 chunks.
 
 ### Manual Browser Test
 
@@ -194,6 +197,8 @@ The React interface was tested by hand in a browser on a fresh clone of the repo
 | Backend stopped | Partial: the upload shows "Upload failed (HTTP 502)"; the other views show no error |
 
 Not tested in the browser: deleting only your own files (needs a second user) and the `partially_verified` badge (covered by unit tests only).
+
+One answer about employees repeated the "Table 1" section label and gave a "roughly 28,500" headcount decline next to quarterly closings implying 30,906 (the PDF contains both), while showing the verified badge.
 
 ---
 
@@ -251,6 +256,8 @@ docker compose --env-file docker/.env -f docker/docker-compose.yml exec api pyth
 
 **6. Open the app** at http://localhost and log in with that email and password.
 
+**7. Try it.** Open Documents, upload a PDF (the evaluation document is `data/eval/documents/tcs_annual_report.pdf`), wait for Ready, then ask a question in Chat. Port 80 must be free.
+
 **Stop and clean up**
 
 ```bash
@@ -290,6 +297,8 @@ Interactive API documentation is available at:
 
 `/metrics` (Prometheus) exists inside the stack but is blocked by nginx and returns 404 from outside.
 
+Opening `/documents`, `/chat` or `/sessions` in the browser address bar shows the app, because Nginx serves the page for browser navigation. API calls with curl reach the API.
+
 ### cURL Examples
 
 #### 1. User Login (`/auth/login`)
@@ -314,12 +323,21 @@ curl -X POST "http://localhost/auth/login" \
 
 #### 2. Streaming Chat (`/chat/stream`)
 
+First create a chat session. This call needs the Bearer token and no request body. It returns `201` with the new session in the response:
+
+```bash
+curl -X POST "http://localhost/sessions" \
+  -H "Authorization: Bearer <YOUR_ACCESS_TOKEN>"
+```
+
+Copy the session id from the response and use it below.
+
 ```bash
 curl -N -X POST "http://localhost/chat/stream" \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer <YOUR_ACCESS_TOKEN>" \
   -d '{
-    "session_id": "00000000-0000-0000-0000-000000000000",
+    "session_id": "<SESSION_ID_FROM_ABOVE>",
     "query": "What was TCS revenue in FY26?",
     "top_k": 8
   }'
@@ -329,11 +347,11 @@ curl -N -X POST "http://localhost/chat/stream" \
 
 ## 5. Team and Ownership
 
-- **Member 1 (Document Ingestion & Preprocessing — `app/ingestion/`) : [Manoj.S]
-- **Member 2 (Retrieval & Hybrid Search — `app/retrieval/`) : [Manoj.S,yashwanth.G]
-- **Member 3 (Agentic Orchestration & Verification — `app/agents/`) : [Manoj,nitin]
-- **Member 4 (Backend API, Database & Security — `app/api/`, `app/db/`) : [manoj,prajwal]
-- **Member 5 (Evaluation, Frontend & DevOps — `app/eval/`, `frontend/`, `docker/`) : [manoj,niranjan]
+- **Member 1, Document Ingestion** (`app/ingestion/`): Manoj S
+- **Member 2, Retrieval** (`app/retrieval/`): Manoj S, Yashwanth G
+- **Member 3, Agents** (`app/agents/`): Manoj S, Nitin
+- **Member 4, Backend** (`app/api/`, `app/db/`): Manoj S, Prajwal
+- **Member 5, Evaluation, Frontend and DevOps** (`app/eval/`, `frontend/`, `docker/`): Manoj S, Niranjan
 
 ---
 
@@ -355,6 +373,11 @@ curl -N -X POST "http://localhost/chat/stream" \
 - RAGAS was only a pilot;
 - no frontend linter;
 - lint baseline is ruff 75 and mypy 47.
+- No HTTPS: Nginx listens on port 80 only.
+- The API docs (`/docs`, `/redoc`, `/openapi.json`) are reachable through Nginx.
+- Closing the browser tab does not stop a running question; the answer is still saved.
+- The free model has a daily request limit.
+- Tested on Windows only.
 
 ---
 
