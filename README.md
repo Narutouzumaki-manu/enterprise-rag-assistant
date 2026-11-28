@@ -213,7 +213,7 @@ git clone https://github.com/Narutouzumaki-manu/enterprise-rag-assistant.git
 cd enterprise-rag-assistant
 ```
 
-**2. Create the environment file.** Docker reads only `docker/.env`. The `.env.example` in the repository root is for running the API outside Docker and is not used here.
+**2. Create the environment file.** (make sure you have installed docker windows)Docker reads only `docker/.env`. The `.env.example` in the repository root is for running the API outside Docker and is not used here.
 
 ```bash
 # macOS / Linux / Git Bash
